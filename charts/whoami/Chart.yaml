@@ -7,8 +7,8 @@ keywords:
 - go
 - whoami
 maintainers:
-- email: helm@gavinmogan.com
-  name: Gavin Mogan
+- email: admin@josa.ngo
+  name: Jordan Open Source Association
 name: whoami
 sources:
 - https://github.com/containous/whoami
