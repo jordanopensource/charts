@@ -1,0 +1,15 @@
+apiVersion: v1
+appVersion: v1.4.0
+description: Tiny Go webserver that prints os information and HTTP request to output
+home: https://github.com/containous/whoami
+keywords:
+- golang
+- go
+- whoami
+maintainers:
+- email: helm@gavinmogan.com
+  name: Gavin Mogan
+name: whoami
+sources:
+- https://github.com/containous/whoami
+version: 0.3.2
