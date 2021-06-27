@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ template "whoami.fullname" . }}
+  name: {{ include "whoami.fullname" . }}
   labels:
-{{ include "whoami.labels" . | indent 4 }}
+    {{- include "whoami.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,5 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app.kubernetes.io/name: {{ include "whoami.name" . }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
+    {{- include "whoami.selectorLabels" . | nindent 4 }}
