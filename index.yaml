@@ -2,6 +2,19 @@ apiVersion: v1
 entries:
   status:
   - apiVersion: v2
+    appVersion: v0.90.74
+    created: "2021-06-28T14:44:15.727097651Z"
+    description: An easy to use Status Page for your websites and applications.
+    digest: 8f364beed514d4c75a7f72222b6643f15e6347aca32919d16e98d1357160c3f8
+    home: https://github.com/statping/statping
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: status
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/status-0.90.74/status-0.90.74.tgz
+    version: 0.90.74
+  - apiVersion: v2
     appVersion: 1.16.0
     created: "2021-06-20T12:35:30.487845892Z"
     description: A Helm chart for Kubernetes
@@ -50,4 +63,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-06-27T13:13:37.730157222Z"
+generated: "2021-06-28T14:44:15.727108551Z"
