@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "status.fullname" . }}
+  name: {{ include "statping.fullname" . }}
   labels:
-    {{- include "status.labels" . | nindent 4 }}
+    {{- include "statping.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "status.selectorLabels" . | nindent 4 }}
+    {{- include "statping.selectorLabels" . | nindent 4 }}
