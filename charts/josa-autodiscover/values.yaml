@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: monogramm/autodiscover-email-settings:1.4.0
+  repository: monogramm/autodiscover-email-settings
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
