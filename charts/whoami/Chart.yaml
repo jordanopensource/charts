@@ -11,3 +11,4 @@ maintainers:
     name: Jordan Open Source Association
 name: whoami
 version: 1.0.0
+icon: https://raw.githubusercontent.com/stackrox/kube-linter/main/images/logo/KubeLinter-vertical.svg
