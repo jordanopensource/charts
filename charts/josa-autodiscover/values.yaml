@@ -83,3 +83,7 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+secretNamesForEnvFrom: []
+
+env: {}
