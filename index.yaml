@@ -35,6 +35,27 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/status-0.1.0/status-0.1.0.tgz
     version: 0.1.0
+  strapi:
+  - apiVersion: v2
+    appVersion: 3.6.5
+    created: "2021-08-04T15:39:43.341442426Z"
+    description: An open-source headless CMS to build powerful APIs.
+    digest: 88b9255bc16d1a259ef24b2b6e83b06750b26fb0f5c04dfc9c77d2c517530236
+    home: https://github.com/strapi/strapi
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - strapi
+    - javascript
+    - api
+    - cms
+    - headless
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: strapi
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/strapi-1.0.0/strapi-1.0.0.tgz
+    version: 1.0.0
   whoami:
   - apiVersion: v2
     appVersion: v1.5.0
@@ -74,4 +95,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-07-16T09:37:59.243244123Z"
+generated: "2021-08-04T15:39:43.341460026Z"
