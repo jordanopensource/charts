@@ -1,0 +1,16 @@
+apiVersion: v2
+appVersion: 3.6.5
+description: An open-source headless CMS to build powerful APIs. 
+home: https://github.com/strapi/strapi
+keywords:
+  - strapi
+  - javascript
+  - api
+  - cms
+  - headless
+maintainers:
+  - email: admin@josa.ngo
+    name: Jordan Open Source Association
+name: strapi
+version: 1.0.0
+icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
