@@ -84,3 +84,4 @@ spec:
           claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "drone.fullname" . }}{{- end }}
         {{- else }}
         emptyDir: {}
+        {{- end }}
