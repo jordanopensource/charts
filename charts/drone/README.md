@@ -1,6 +1,6 @@
 # Drone
 
- Drone is a Container-Native, Continuous Delivery Platform.
+Drone is a Container-Native, Continuous Delivery Platform.
 
 Chart version : 1.0.0
 
