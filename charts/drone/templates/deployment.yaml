@@ -58,10 +58,10 @@ spec:
           volumeMounts:
             - name: storage-volume
               mountPath: {{ .Values.persistence.mountPath }}
-              subPath: {{ .Values.persistence.subPath | quote }}
-          {{- with .Values.extraVolumeMounts }}
-              {{ toYaml . | nindent 12 }}
-          {{- end }}
+              subPath: "{{ .Values.persistence.subPath }}"
+        {{- with .Values.extraVolumeMounts }}
+            {{ toYaml . | nindent 12 }}
+        {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -79,9 +79,9 @@ spec:
         {{ toYaml .Values.extraVolumes | nindent 8}}
       {{- end }}
         - name: storage-volume
-        {{- if .Values.persistence.enabled }}
-        persistentVolumeClaim:
-          claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "drone.fullname" . }}{{- end }}
-        {{- else }}
-        emptyDir: {}
-        {{- end }}
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "drone.fullname" . }}{{- end }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
