@@ -3,9 +3,9 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  {{- if .Values.persistent.annotations }}
+  {{- if .Values.persistence.annotations }}
   annotations:
-{{ toYaml .Values.persistent.annotations | indent 4 }}
+{{ toYaml .Values.persistence.annotations | indent 4 }}
   {{- end }}
   labels:
     {{- include "drone.labels" . | nindent 4 }}
@@ -13,11 +13,11 @@ metadata:
 spec:
   accessModes:
 {{ toYaml .Values.persistence.accessModes | indent 4 }}
-  {{- if .Values.persistent.storageClass }}
-  {{- if (eq "-" .Values.persistent.storageClass) }}
+  {{- if .Values.persistence.storageClass }}
+  {{- if (eq "-" .Values.persistence.storageClass) }}
   storageClassName: ""
   {{- else }}
-  storageClassName: {{ .Values.persistent.storageClass | quote }}
+  storageClassName: {{ .Values.persistence.storageClass | quote }}
   {{- end }}
   {{- end }}
   resources:
