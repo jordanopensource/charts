@@ -1,0 +1,23 @@
+apiVersion: v2
+name: drone
+version: 0.1.0
+appVersion: 1.9.0
+description: Drone is a Container-Native, Continuous Delivery Platform. The Drone Kubernetes runner launches builds in Kubernetes Jobs.
+home: https://drone.io/
+keywords:
+  - continuous-delivery
+  - continuous-deployment
+  - continuous-integration
+  - docker
+  - drone
+  - drone.io
+  - go
+  - drone-server
+  - drone-runner
+maintainers:
+  - email: admin@josa.ngo
+    name: Jordan Open Source Association
+icon: https://github.com/drone/brand/blob/master/logos/png/dark/drone-logo-png-dark-64.png
+sources:
+  - https://github.com/drone-runners/drone-runner-kube
+  - https://github.com/drone/drone

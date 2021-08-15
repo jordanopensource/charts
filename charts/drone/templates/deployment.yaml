@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "drone.fullname" . }}
+  labels:
+    {{- include "drone.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "drone.selectorLabels" . | nindent 6 }}
+  strategy:
+    {{ toYaml .Values.updateStrategy | indent 4 }}
+  template:
+    metadata:
+      annotations:
+        checksum/secrets: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+      {{- if .Values.podAnnotations }}
+        {{ toYaml .Values.podAnnotations | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "drone.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "drone.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}-server
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "drone.fullname" . }}-config
+          {{- range .Values.extraSecretNamesForEnvFrom }}
+            - secretRef:
+                name: {{ . }}
+          {{- end }}
+          volumeMounts:
+            - name: storage-volume
+              mountPath: {{ .Values.persistence.mountPath }}
+              subPath: {{ .Values.persistence.subPath | quote }}
+          {{- with .Values.extraVolumeMounts }}
+              {{ toYaml . | nindent 12 }}
+          {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+      {{- if .Values.extraVolumes }}
+        {{ toYaml .Values.extraVolumes | nindent 8}}
+      {{- end }}
+        - name: storage-volume
+        {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "drone.fullname" . }}{{- end }}
+        {{- else }}
+        emptyDir: {}

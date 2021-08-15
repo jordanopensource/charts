@@ -1,0 +1,202 @@
+# Default values for drone.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: drone/drone
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+updateStrategy: {}
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext: {}
+  # fsGroup: 2000
+
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: drone.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+## If you'd like to make additional files or volumes available to Drone, declare additional
+## Volumes here per the Pod spec's "volumes" section.
+## Ref: https://kubernetes.io/docs/concepts/storage/volumes/
+##
+extraVolumes: []
+## If you have declared extra volumes, mount them here, per the Pod Container's
+## "volumeMounts" section.
+##
+extraVolumeMounts: []
+
+persistence:
+  ## If you are using SQLite as your DB for Drone, it is recommended to enable persistence. If
+  ## enabled, the Chart will create a PersistentVolumeClaim to store its state in. If you are
+  ## using a DB other than SQLite, set this to false to avoid allocating unused storage.
+  ## If set to false, Drone will use an emptyDir instead, which is ephemeral.
+  ##
+  enabled: true
+  accessModes:
+    - ReadWriteOnce
+  size: 1Gi
+  storageClass: "-"
+  existingClaim: ""
+  ## Drone server data Persistent Volume annotations
+  annotations: {}
+  ## Drone server data Persistent Volume mount root path
+  mountPath: /data
+  ## Subdirectory of Drone server data Persistent Volume to mount
+  ## Useful if the volume's root directory is not empty
+  subPath: ""
+
+## If you'd like to provide your own Kubernetes Secret object instead of passing your values
+## in un-encrypted, pass in the name of a created + populated Secret in the same Namespace
+## as the Drone server. All secrets within this configmap will be mounted as environment
+## variables, with each key/value mapping to a corresponding environment variable on the
+## Drone server.
+##
+extraSecretNamesForEnvFrom: []
+# - my-drone-secrets
+
+## The keys within the "env" map are mounted as environment variables on the Drone server pod.
+## See the full reference of Drone server environment variables here:
+## Ref: https://docs.drone.io/installation/reference/
+##
+env:
+  ## REQUIRED: Set the user-visible Drone hostname, sans protocol.
+  ## Ref: https://docs.drone.io/installation/reference/drone-server-host/
+  ##
+  DRONE_SERVER_HOST: ""
+  ## The protocol to pair with the value in DRONE_SERVER_HOST (http or https).
+  ## Ref: https://docs.drone.io/installation/reference/drone-server-proto/
+  ##
+  DRONE_SERVER_PROTO: http
+
+  ## REQUIRED: Set the secret secret token that the Drone server and its Runners will use
+  ## to authenticate. This is commented out in order to leave you the ability to set the
+  ## key via a separately provisioned secret (see existingSecretName above).
+  ## Ref: https://docs.drone.io/installation/reference/drone-rpc-secret/
+  ##
+  # DRONE_RPC_SECRET:
+
+  ## If you'd like to use a DB other than SQLite (the default), set a driver + DSN here.
+  ## Ref: https://docs.drone.io/installation/storage/database/
+  ##
+  # DRONE_DATABASE_DRIVER:
+  # DRONE_DATABASE_DATASOURCE:
+
+  ## If you are going to store build secrets in the Drone database, it is suggested that
+  ## you set a database encryption secret. This must be set before any secrets are stored
+  ## in the database.
+  ## Ref: https://docs.drone.io/installation/storage/encryption/
+  ##
+  # DRONE_DATABASE_SECRET:
+
+  ## If you are using self-hosted GitHub or GitLab, you'll need to set this to true.
+  ## Ref: https://docs.drone.io/installation/reference/drone-git-always-auth/
+  ##
+  # DRONE_GIT_ALWAYS_AUTH: false
+
+  ## ===================================================================================
+  ##                         Provider Directives (select ONE)
+  ## -----------------------------------------------------------------------------------
+  ## Select one provider (and only one). Refer to the corresponding documentation link
+  ## before filling the values in. Also note that you can use the 'secretMounts' value
+  ## if you'd rather not have secrets in Kubernetes Secret instead of a ConfigMap.
+  ## ===================================================================================
+
+  ## GitHub-specific variables. See the provider docs here:
+  ## Ref: https://docs.drone.io/installation/providers/github/
+  ##
+  # DRONE_GITHUB_CLIENT_ID:
+  # DRONE_GITHUB_CLIENT_SECRET:
+
+  ## GitLab-specific variables. See the provider docs here:
+  ## Ref: https://docs.drone.io/installation/providers/gitlab/
+  ##
+  # DRONE_GITLAB_CLIENT_ID:
+  # DRONE_GITLAB_CLIENT_SECRET:
+  # DRONE_GITLAB_SERVER:
+
+  ## Bitbucket Cloud-specific variables. See the provider docs here:
+  ## Ref: https://docs.drone.io/installation/providers/bitbucket-cloud/
+  ##
+  # DRONE_BITBUCKET_CLIENT_ID:
+  # DRONE_BITBUCKET_CLIENT_SECRET:
+
+  ## Bitbucket-specific variables. See the provider docs here:
+  ## Ref: https://docs.drone.io/installation/providers/bitbucket-server/
+  ##
+  # DRONE_GIT_USERNAME:
+  # DRONE_GIT_PASSWORD:
+  # DRONE_STASH_CONSUMER_KEY:
+  # DRONE_STASH_PRIVATE_KEY:
+  # DRONE_STASH_SERVER:
+
+  ## Gitea-specific variables. See the provider docs here:
+  ## Ref: https://docs.drone.io/installation/providers/gitea/
+  ##
+  # DRONE_GITEA_CLIENT_ID:
+  # DRONE_GITEA_CLIENT_SECRET:
+  # DRONE_GITEA_SERVER:
+
+  ## Gogs-specific variables. See the provider docs here:
+  ## Ref: https://docs.drone.io/installation/providers/gogs/
+  ##
+  # DRONE_GOGS_SERVER:

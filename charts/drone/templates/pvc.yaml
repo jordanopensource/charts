@@ -1,0 +1,27 @@
+{{- if .Values.persistence.enabled }}
+{{- if not .Values.persistence.existingClaim -}}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  {{- if .Values.persistent.annotations }}
+  annotations:
+{{ toYaml .Values.persistent.annotations | indent 4 }}
+  {{- end }}
+  labels:
+    {{- include "drone.labels" . | nindent 4 }}
+  name: {{ template "drone.fullname" . }}
+spec:
+  accessModes:
+{{ toYaml .Values.persistence.accessModes | indent 4 }}
+  {{- if .Values.persistent.storageClass }}
+  {{- if (eq "-" .Values.persistent.storageClass) }}
+  storageClassName: ""
+  {{- else }}
+  storageClassName: {{ .Values.persistent.storageClass | quote }}
+  {{- end }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size | quote }}
+{{- end -}}
+{{- end }}
