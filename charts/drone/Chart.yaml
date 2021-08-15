@@ -1,6 +1,6 @@
 apiVersion: v2
 name: drone
-version: 1.0.0
+version: 1.0.1
 appVersion: 1.10.1
 description: Drone is a Container-Native, Continuous Delivery Platform.
 home: https://drone.io/
