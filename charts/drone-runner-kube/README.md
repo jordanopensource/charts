@@ -78,7 +78,7 @@ The following tables lists the configurable parameters of the Drone-Runner-Kube 
 | Parameter                             | Description                                      | Default                        |
 |---------------------------------------|--------------------------------------------------|------------------------------- |
 | `service.type`                        | Kubernetes service type                          | `ClusterIP`                    |
-| `service.port`                        | Service HTTP port                                | `80`                           |
+| `service.port`                        | Service HTTP port                                | `3000`                         |
 | `ingress.enabled`                     | Enable ingress controller resource               | `false`                        |
 | `ingress.annotations`                 | Ingress annotations                              | `{}` (evaluated as a template) |
 | `ingress.className`                   | Ingress className                                | `""`                           |
