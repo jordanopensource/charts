@@ -103,15 +103,15 @@ The following tables lists the configurable parameters of the Drone chart and th
 | `persistence.annotations`       | Annotations for Drone PVC                                                                                 | `{}`              |
 | `persistence.mountPath`         | Drone server data Persistent Volume mount root path                                                       | `/data`           |
 | `persistence.subPath`           | Subdirectory of Drone server data Persistent Volume to mount                                              | `""`              |
-| `persistence.extraVolumes`      | Declare additional volumes per Pod spec's "volumes" section                                               | `[]`              |
-| `persistence.extraVolumeMounts` | If you have declared extra volumes, mount them here, per the Pod Container's "volumeMounts" section.      | `[]`              |
+| `extraVolumes`                  | Declare additional volumes per Pod spec's "volumes" section                                               | `[]`              |
+| `extraVolumeMounts`             | If you have declared extra volumes, mount them here, per the Pod Container's "volumeMounts" section.      | `[]`              |
 
 
 ### RBAC values
 
-| Parameter               | Description                                               | Default                                         |
-|-------------------------|-----------------------------------------------------------|-------------------------------------------------|
-| `serviceAccount.create` | Enable the creation of a ServiceAccount for Drone pods    | `true`                                          |
-| `serviceAccount.name`   | Name of the created ServiceAccount                        | Generated using the `drone.fullname` template   |
-| `annotations`           | Annotations to add to the service account                 | `{}` (evaluated as a template)                  |
+| Parameter                     | Description                                               | Default                                         |
+|-------------------------------|-----------------------------------------------------------|-------------------------------------------------|
+| `serviceAccount.create`       | Enable the creation of a ServiceAccount for Drone pods    | `true`                                          |
+| `serviceAccount.name`         | Name of the created ServiceAccount                        | Generated using the `drone.fullname` template   |
+| `serviceAccount.annotations`  | Annotations to add to the service account                 | `{}` (evaluated as a template)                  |
 
