@@ -92,11 +92,11 @@ affinity: {}
 ## Volumes here per the Pod spec's "volumes" section.
 ## Ref: https://kubernetes.io/docs/concepts/storage/volumes/
 ##
-extraVolumes: []
+volumes: []
 ## If you have declared extra volumes, mount them here, per the Pod Container's
 ## "volumeMounts" section.
 ##
-extraVolumeMounts: []
+volumeMounts: []
 
 ## If you'd like to provide your own Kubernetes Secret object instead of passing your values
 ## in un-encrypted, pass in the name of a created + populated Secret in the same Namespace
@@ -104,7 +104,7 @@ extraVolumeMounts: []
 ## variables, with each key/value mapping to a corresponding environment variable on the
 ## Kubernetes runner.
 ##
-extraSecretNamesForEnvFrom: []
+secretNamesForEnv: []
 # - my-drone-secrets
 
 ## Each namespace listed below will be configured such that the runner can run build Pods in

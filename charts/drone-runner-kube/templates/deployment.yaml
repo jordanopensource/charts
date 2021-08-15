@@ -52,17 +52,17 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ include "drone-runner-kube.fullname" . }}-config
-          {{- range .Values.extraSecretNamesForEnvFrom }}
+          {{- range .Values.secretNamesForEnv }}
             - secretRef:
                 name: {{ . }}
           {{- end }}
-          {{- with .Values.extraVolumeMounts }}
+          {{- with .Values.volumeMounts }}
           volumeMounts:
             {{ toYaml . | nindent 12 }}
           {{- end }}
-      {{- if .Values.extraVolumes }}
+      {{- if .Values.volumes }}
       volumes:
-        {{ toYaml .Values.extraVolumes | nindent 8}}
+        {{ toYaml .Values.volumes | nindent 8}}
       {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
