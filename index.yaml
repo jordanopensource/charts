@@ -3,6 +3,31 @@ entries:
   drone:
   - apiVersion: v2
     appVersion: 1.10.1
+    created: "2021-08-15T22:43:12.940177025Z"
+    description: Drone is a Container-Native, Continuous Delivery Platform.
+    digest: d4a3cb932cb47b6574533ffbf67bcb3dc3350f122457ddb358a7c5e67ccdf52f
+    home: https://drone.io/
+    icon: https://github.com/drone/brand/blob/master/logos/png/dark/drone-logo-png-dark-64.png
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - drone
+    - drone.io
+    - go
+    - drone-server
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: drone
+    sources:
+    - https://github.com/drone/drone
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/drone-1.0.1/drone-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.10.1
     created: "2021-08-15T13:11:34.27772083Z"
     description: Drone is a Container-Native, Continuous Delivery Platform.
     digest: b1fda715fc49bc9a394d1c1e2eb483782fe37d7c562e2085c31feb45b61d82c2
@@ -168,4 +193,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-08-15T13:11:34.454143737Z"
+generated: "2021-08-15T22:43:12.940191425Z"
