@@ -54,6 +54,32 @@ entries:
   drone-runner-kube:
   - apiVersion: v2
     appVersion: 1.0.0-beta.8
+    created: "2021-08-15T23:22:57.633410892Z"
+    description: The Drone Kubernetes runner launches builds in Kubernetes Jobs.
+    digest: 3ee830c504d15e16dd1c72879277246b89366018688501848a03d999678bd8b0
+    home: https://drone.io/
+    icon: https://github.com/drone/brand/blob/master/logos/png/dark/drone-logo-png-dark-64.png
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - drone
+    - drone.io
+    - go
+    - drone-server
+    - drone-runner
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: drone-runner-kube
+    sources:
+    - https://github.com/drone-runners/drone-runner-kube
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/drone-runner-kube-1.0.1/drone-runner-kube-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.0.0-beta.8
     created: "2021-08-15T13:11:34.454125037Z"
     description: The Drone Kubernetes runner launches builds in Kubernetes Jobs.
     digest: ba5b009d24305db59f54922c1c51a7821bf343fe39e21245cf3e95a531e0009a
@@ -193,4 +219,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-08-15T22:43:12.940191425Z"
+generated: "2021-08-15T23:22:57.633439594Z"
