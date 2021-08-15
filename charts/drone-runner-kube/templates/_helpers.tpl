@@ -55,6 +55,4 @@ Create the name of the service account to use
 */}}
 {{- define "drone-runner-kube.serviceAccountName" -}}
 {{- default (include "drone-runner-kube.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
 {{- end }}
