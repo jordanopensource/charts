@@ -51,7 +51,7 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ include "drone.fullname" . }}-config
-          {{- range .Values.extraSecretNamesForEnvFrom }}
+          {{- range .Values.secretNamesForEnv }}
             - secretRef:
                 name: {{ . }}
           {{- end }}
