@@ -71,6 +71,10 @@ The following tables lists the configurable parameters of the Drone-Runner-Kube 
 | `env`                           | Environment variables to configure Drone-Runner-Kube container        | `{}` (evaluated as a configMap)               |
 | `secretNamesForEnv`             | Array of secrets names contaning extra env vars                       | `[]`                                          |
 | `terminationGracePeriodSeconds` | Time is seconds to wait after a runner pod receives a SIGTERM/SIGINT  | `3600`                                        |
+| `readinessProbe.initialDelaySeconds` |  Initial delay seconds for readinessProbe                        | `5`                                           |
+| `readinessProbe.periodSeconds`       |  Period seconds for readinessProbe                               | `10`                                          |
+| `livenessProbe.initialDelaySeconds`  |  Initial delay seconds for livenessProbe                         | `15`                                          |
+| `livenessProbe.periodSeconds`        | Period seconds for livenessProbe                                 | `20`                                          |  
 
 
 ### Exposure values

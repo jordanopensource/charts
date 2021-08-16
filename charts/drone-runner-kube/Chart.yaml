@@ -1,6 +1,6 @@
 apiVersion: v2
 name: drone-runner-kube
-version: 1.0.1
+version: 1.0.2
 appVersion: 1.0.0-beta.8
 description: The Drone Kubernetes runner launches builds in Kubernetes Jobs.
 home: https://drone.io/

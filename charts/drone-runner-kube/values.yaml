@@ -86,6 +86,14 @@ tolerations: []
 
 affinity: {}
 
+## Probes
+readinessProbe:
+  initialDelaySeconds: 5
+  periodSeconds: 10
+livenessProbe:
+  initialDelaySeconds: 15
+  periodSeconds: 20
+
 ## If you'd like to make additional files or volumes available to the runner, declare additional
 ## Volumes here per the Pod spec's "volumes" section.
 ## Ref: https://kubernetes.io/docs/concepts/storage/volumes/
