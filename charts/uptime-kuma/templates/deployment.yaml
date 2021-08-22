@@ -56,9 +56,8 @@ spec:
               path: /
               port: http
           startupProbe:
-            httpGet:
-              path: /
-              port: http
+            tcpSocket:
+              port: 3001
             failureThreshold: 30
             periodSeconds: 10
           resources:
