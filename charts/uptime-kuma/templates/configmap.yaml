@@ -1,0 +1,12 @@
+{{- if .Values.env }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "uptime-kuma.fullname" . }}-config
+  labels:
+    {{- include "uptime-kuma.labels" . | nindent 4 }}
+data:
+{{- range $envKey, $envVal := .Values.env }}
+  {{ $envKey | upper }}: {{ $envVal | quote }}
+{{- end }}
+{{- end }}
