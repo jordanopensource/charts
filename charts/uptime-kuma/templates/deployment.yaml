@@ -49,8 +49,8 @@ spec:
           livenessProbe:
             exec:
               command:
-                - node
-                - extra/healthcheck.js
+                - "node"
+                - "extra/healthcheck.js"
           readinessProbe:
             httpGet:
               path: /
@@ -58,8 +58,8 @@ spec:
           startupProbe:
             exec:
               command:
-                - node
-                - extra/healthcheck.js
+                - "node"
+                - "extra/healthcheck.js"
             failureThreshold: 40
             periodSeconds: 10
           resources:
