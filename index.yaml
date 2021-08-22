@@ -206,6 +206,28 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/strapi-1.0.0/strapi-1.0.0.tgz
     version: 1.0.0
+  uptime-kuma:
+  - apiVersion: v2
+    appVersion: 1.3.2
+    created: "2021-08-22T18:11:42.183960718Z"
+    description: A fancy self-hosted monitoring tool.
+    digest: b40b69a973705408c68350e3df458078ac095d85f1589b8ca8e6939938282225
+    home: https://github.com/louislam/uptime-kuma
+    icon: https://github.com/louislam/uptime-kuma/blob/master/public/icon.png
+    keywords:
+    - monitoring
+    - uptime
+    - uptime-kuma
+    - healthcheck
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: uptime-kuma
+    sources:
+    - https://github.com/louislam/uptime-kuma
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/uptime-kuma-1.0.0/uptime-kuma-1.0.0.tgz
+    version: 1.0.0
   whoami:
   - apiVersion: v2
     appVersion: v1.5.0
@@ -245,4 +267,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-08-16T00:26:50.410346512Z"
+generated: "2021-08-22T18:11:42.183994818Z"
