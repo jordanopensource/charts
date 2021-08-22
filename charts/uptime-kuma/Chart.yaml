@@ -1,0 +1,17 @@
+apiVersion: v2
+name: uptime-kuma
+appVersion: 1.3.2
+description: A fancy self-hosted monitoring tool.
+home: https://github.com/louislam/uptime-kuma
+maintainers:
+  - email: admin@josa.ngo
+    name: Jordan Open Source Association
+version: 1.0.0
+keywords:
+  - monitoring
+  - uptime
+  - uptime-kuma
+  - healthcheck
+icon: https://github.com/louislam/uptime-kuma/blob/master/public/icon.png
+sources:
+  - https://github.com/louislam/uptime-kuma
