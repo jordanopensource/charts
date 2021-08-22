@@ -6,7 +6,7 @@ home: https://github.com/louislam/uptime-kuma
 maintainers:
   - email: admin@josa.ngo
     name: Jordan Open Source Association
-version: 1.0.0
+version: 1.0.1
 keywords:
   - monitoring
   - uptime

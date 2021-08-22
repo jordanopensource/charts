@@ -2,7 +2,7 @@
 
 A fancy self-hosted monitoring tool.
 
-Chart version : 1.0.0
+Chart version : 1.0.1
 
 Default Uptime-Kuma image [here](https://github.com/louislam/uptime-kuma)
 
