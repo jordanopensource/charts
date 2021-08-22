@@ -56,9 +56,11 @@ spec:
               path: /
               port: http
           startupProbe:
-            tcpSocket:
-              port: 3001
-            failureThreshold: 30
+            exec:
+              command:
+                - node
+                - extra/healthcheck.js
+            failureThreshold: 40
             periodSeconds: 10
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
