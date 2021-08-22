@@ -82,8 +82,8 @@ tolerations: []
 affinity: {}
 
 persistence:
-  enabled: true
-  accessMode: 
+  enabled: false
+  accessModes: 
     - ReadWriteOnce
   size: 4Gi
   storageClass: ""
