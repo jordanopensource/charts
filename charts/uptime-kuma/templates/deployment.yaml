@@ -47,6 +47,8 @@ spec:
               containerPort: 3001
               protocol: TCP
           livenessProbe:
+            initialDelaySeconds: 120
+            periodSeconds: 10
             exec:
               command:
                 - "node"
