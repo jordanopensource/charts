@@ -1,6 +1,6 @@
 apiVersion: v2
 name: statping
-version: 1.0.0
+version: 1.0.1
 appVersion: v0.90.74
 description: Status Page for monitoring your websites and applications with beautiful graphs, analytics, and plugins.
 home: https://github.com/statping/statping
