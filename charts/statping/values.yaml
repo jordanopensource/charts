@@ -87,6 +87,7 @@ affinity: {}
 
 persistence:
   enabled: false
+  annotations: {}
   accessMode: ReadWriteOnce
   size: 1Gi
   storageClass: ""

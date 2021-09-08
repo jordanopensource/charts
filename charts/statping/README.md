@@ -93,7 +93,7 @@ The following tables lists the configurable parameters of the Statping chart and
 | --------------------------------|-----------------------------------------------------------------------------------------------------------|-------------------|
 | `persistence.enabled`           | Enable persistence                                                                                        | `true`            |
 | `persistence.accessMode`        | Access mode to the PV                                                                                     | `[ReadWriteOnce]` |
-| `persistence.storageClass`      | Storage class to use with the PVC                                                                         | `"-"`             |
+| `persistence.storageClass`      | Storage class to use with the PVC                                                                         | `""`             |
 | `persistence.existingClaim`     | If you want to reuse an existing claim, you can pass the name of the PVC using the existingClaim variable | `""`              |
 | `persistence.size`              | Size for the PV                                                                                           | `1Gi`             |
 | `persistence.annotations`       | Annotations for Statping PVC                                                                              | `{}`              |
