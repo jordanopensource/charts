@@ -3,17 +3,23 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ template "statping.fullname" . }}
+  {{- if .Values.persistence.annotations }}
+  annotations:
+{{ toYaml .Values.persistence.annotations | indent 4 }}
+  {{- end }}
   labels:
-    app: {{ template "statping.fullname" . }}
+    {{- include "statping.labels" . | nindent 4 }}
+  name: {{ template "statping.fullname" . }}
 spec:
   accessModes:
-    - {{ .Values.persistence.accessMode | quote }}
-{{- if .Values.persistence.storageClass }}
-  storageClassName: "{{ .Values.persistence.storageClass }}"
-{{- else }}
+{{ toYaml .Values.persistence.accessModes | indent 4 }}
+  {{- if .Values.persistence.storageClass }}
+  {{- if (eq "-" .Values.persistence.storageClass) }}
   storageClassName: ""
-{{- end }}
+  {{- else }}
+  storageClassName: {{ .Values.persistence.storageClass | quote }}
+  {{- end }}
+  {{- end }}
   resources:
     requests:
       storage: {{ .Values.persistence.size | quote }}

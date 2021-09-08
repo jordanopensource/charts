@@ -41,8 +41,8 @@ spec:
                 name: {{ . }}
           {{- end }}
           volumeMounts:
-          - name: app
-            mountPath: /app
+            - name: app
+              mountPath: /app
           ports:
             - name: http
               containerPort: 8080
@@ -70,10 +70,10 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       volumes:
-      - name: app
-        {{- if .Values.persistence.enabled }}
-        persistentVolumeClaim:
-          claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "statping.fullname" . }}{{- end }}
-        {{- else }}
-        emptyDir: {}
-        {{- end }}
+        - name: app
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "statping.fullname" . }}{{- end }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}

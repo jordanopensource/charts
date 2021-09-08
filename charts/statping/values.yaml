@@ -87,6 +87,8 @@ affinity: {}
 
 persistence:
   enabled: false
-  accessMode: ReadWriteOnce
+  accessModes:
+    - ReadWriteOnce
   size: 1Gi
-  storageClass: ""
+  storageClass: "-"
+  existingClaim: ""
