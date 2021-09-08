@@ -52,7 +52,9 @@ ingress:
     # kubernetes.io/tls-acme: "true"
   hosts:
     - host: statping.local
-      paths: []
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
