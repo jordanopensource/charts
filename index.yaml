@@ -141,6 +141,29 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/josa-autodiscover-0.1.0/josa-autodiscover-0.1.0.tgz
     version: 0.1.0
+  statping:
+  - apiVersion: v2
+    appVersion: v0.90.74
+    created: "2021-09-08T14:47:26.357972535Z"
+    description: Status Page for monitoring your websites and applications with beautiful
+      graphs, analytics, and plugins.
+    digest: a4c0a2b368f93e21c4a1832bb7f1fe421f0b3210959532de17993be12291d64e
+    home: https://github.com/statping/statping
+    icon: https://s3-us-west-2.amazonaws.com/gitimgs/statping.png
+    keywords:
+    - monitoring
+    - notifier
+    - statping
+    - status
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: statping
+    sources:
+    - https://github.com/statping/statping
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/statping-1.0.0/statping-1.0.0.tgz
+    version: 1.0.0
   status:
   - apiVersion: v2
     appVersion: v0.90.74
@@ -288,4 +311,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-08-22T18:36:53.570245268Z"
+generated: "2021-09-08T14:47:26.358000237Z"
