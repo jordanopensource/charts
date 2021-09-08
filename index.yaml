@@ -144,6 +144,28 @@ entries:
   statping:
   - apiVersion: v2
     appVersion: v0.90.74
+    created: "2021-09-08T15:40:26.76763391Z"
+    description: Status Page for monitoring your websites and applications with beautiful
+      graphs, analytics, and plugins.
+    digest: bd73c62fd5d44794cb5039c724a0b209a7d78f573e99f0af22eb1167d5e30096
+    home: https://github.com/statping/statping
+    icon: https://s3-us-west-2.amazonaws.com/gitimgs/statping.png
+    keywords:
+    - monitoring
+    - notifier
+    - statping
+    - status
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: statping
+    sources:
+    - https://github.com/statping/statping
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/statping-1.0.1/statping-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: v0.90.74
     created: "2021-09-08T14:47:26.357972535Z"
     description: Status Page for monitoring your websites and applications with beautiful
       graphs, analytics, and plugins.
@@ -311,4 +333,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-09-08T14:47:26.358000237Z"
+generated: "2021-09-08T15:40:26.767669012Z"
