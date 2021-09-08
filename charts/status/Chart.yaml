@@ -1,9 +1,0 @@
-apiVersion: v2
-appVersion: v0.90.74
-description: An easy to use Status Page for your websites and applications.
-home: https://github.com/statping/statping
-maintainers:
-  - email: admin@josa.ngo
-    name: Jordan Open Source Association
-name: status
-version: 0.90.74

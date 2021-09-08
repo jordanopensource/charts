@@ -1,0 +1,17 @@
+apiVersion: v2
+name: statping
+version: 1.0.0
+appVersion: v0.90.74
+description: Status Page for monitoring your websites and applications with beautiful graphs, analytics, and plugins.
+home: https://github.com/statping/statping
+maintainers:
+  - email: admin@josa.ngo
+    name: Jordan Open Source Association
+icon: https://s3-us-west-2.amazonaws.com/gitimgs/statping.png
+sources:
+  - https://github.com/statping/statping
+keywords:
+  - monitoring
+  - notifier
+  - statping
+  - status
