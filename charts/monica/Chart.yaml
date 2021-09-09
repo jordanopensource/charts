@@ -13,3 +13,8 @@ sources:
 keywords:
   - social
   - crm
+dependencies:
+- name: mysql
+  version: 8.8.6
+  repository: https://charts.bitnami.com/bitnami
+  condition: mysql.enabled

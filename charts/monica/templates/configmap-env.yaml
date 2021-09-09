@@ -5,6 +5,9 @@ metadata:
   labels:
     {{- include "monica.labels" . | nindent 4 }}
 data:
+{{- if .Values.mysql.enabled }}
+  DB_HOST: {{- inclue "monica.mysql.fullname" -}}
+{{- end }}
 {{- range $envKey, $envVal := .Values.env }}
   {{ $envKey | upper }}: {{ $envVal | quote }}
 {{- end }}

@@ -14,7 +14,10 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-env: {}
+env:
+  DB_DATABASE: monica
+  DB_USERNAME: monica
+  DB_PASSWORD: secret
 
 secretNamesForEnv: []
 
@@ -92,3 +95,12 @@ persistence:
     - ReadWriteOnce
   size: 1Gi
   storageClass: ""
+
+# MySQL Database
+mysql:
+  enabled: true
+  auth:
+    rootPassword: ""
+    database: monica
+    username: monica
+    password: secret

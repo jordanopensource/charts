@@ -60,3 +60,10 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create the name for the MySQL service to use.
+*/}}
+{{- define "monica.mysql.fullname" -}}
+{{- printf "%s-%s" .Release.Name "mysql" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
