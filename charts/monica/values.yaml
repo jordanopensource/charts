@@ -15,6 +15,15 @@ nameOverride: ""
 fullnameOverride: ""
 
 env:
+  # For available enviroment variables see: https://github.com/monicahq/monica/blob/master/.env.example
+  APP_ENV: production # Use local if you want to install Monica as a development version. Use production otherwise.
+  APP_DEBUG: false
+  APP_KEY: ChangeMeBy32KeyLengthOrGenerated
+  APP_URL: http://monica.local # The URL of your application.
+
+  # Database connection
+  # Set DB_HOST and DB_PORT to use an external database
+  DB_CONNECTION: mysql
   DB_DATABASE: monica
   DB_USERNAME: monica
   DB_PASSWORD: secret
