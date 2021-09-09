@@ -141,6 +141,33 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/josa-autodiscover-0.1.0/josa-autodiscover-0.1.0.tgz
     version: 0.1.0
+  monica:
+  - apiVersion: v2
+    appVersion: "3.2"
+    created: "2021-09-09T14:32:35.557813682Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.8.6
+    description: Personal CRM. Remember everything about your friends, family and
+      business relationships.
+    digest: 8cc2db79b3172f2c56736321d54e02e08b86728dea218ac2a8a4b409a764d248
+    home: https://www.monicahq.com
+    icon: https://www.monicahq.com/img/logo_vertical.png
+    keywords:
+    - social
+    - crm
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: monica
+    sources:
+    - https://github.com/monicahq/monica
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/monica-1.0.0/monica-1.0.0.tgz
+    version: 1.0.0
   statping:
   - apiVersion: v2
     appVersion: v0.90.74
@@ -333,4 +360,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-09-08T15:40:26.767669012Z"
+generated: "2021-09-09T14:32:35.557837483Z"
