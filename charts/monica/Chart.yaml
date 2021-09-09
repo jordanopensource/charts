@@ -1,0 +1,15 @@
+apiVersion: v2
+name: monica
+version: 0.1.0
+appVersion: 3.2
+description: Personal CRM. Remember everything about your friends, family and business relationships.
+home: https://www.monicahq.com
+maintainers:
+  - email: admin@josa.ngo
+    name: Jordan Open Source Association
+icon: https://www.monicahq.com/img/logo_vertical.png
+sources:
+  - https://github.com/monicahq/monica
+keywords:
+  - social
+  - crm
