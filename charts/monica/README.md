@@ -58,7 +58,7 @@ The following tables lists the configurable parameters of the Monica chart and t
 | `imagePullSecrets`    | Docker registry secret names as an array             | `[]`                                                 |
 | `nameOverride`        | String to partially override monica.fullname         | `nil`                                                |
 | `fullnameOverride`    | String to fully override monica.fullname             | `nil`                                                |
-| `image.repository`    | Monica image                                         | `monica/monica`                                      |
+| `image.repository`    | Monica image                                         | `monica`                                             |
 | `image.tag`           | Monica image tag                                     | `3.2-apache` (defaults to chart appVersion if empty) |
 | `image.pullPolicy`    | Monica image pull policy                             | `IfNotPresent`                                       |
 | `replicaCount`        | Number of Monica replicas to deploy                  | `1`                                                  |
