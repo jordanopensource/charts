@@ -84,3 +84,11 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+persistence:
+  enabled: false
+  annotations: {}
+  accessModes: 
+    - ReadWriteOnce
+  size: 1Gi
+  storageClass: ""

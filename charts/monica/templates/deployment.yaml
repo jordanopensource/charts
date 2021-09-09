@@ -40,6 +40,9 @@ spec:
             - secretRef:
                 name: {{ . }}
           {{- end }}
+          volumeMounts:
+          - name: data
+            mountPath: /var/www/html/storage
           ports:
             - name: http
               containerPort: 80
@@ -66,3 +69,11 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      volumes:
+      - name: data
+        {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: {{ if .Values.persistence.existingClaim }}{{ .Values.persistence.existingClaim }}{{- else }}{{ template "monica.fullname" . }}{{- end }}
+        {{- else }}
+        emptyDir: {}
+        {{- end }}
