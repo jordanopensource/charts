@@ -67,3 +67,11 @@ Create the name for the MySQL service to use.
 {{- define "monica.mysql.fullname" -}}
 {{- printf "%s-%s" .Release.Name "mysql" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{/*
+Define MySQL host and port env vars.
+*/}}
+{{- define "monica.mysql.env" -}}
+DB_HOST: {{- include "monica.mysql.fullname" . }}
+DB_PORT: {{ 3306 | quote }}
+{{- end }}
