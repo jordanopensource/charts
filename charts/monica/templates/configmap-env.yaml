@@ -6,7 +6,7 @@ metadata:
     {{- include "monica.labels" . | nindent 4 }}
 data:
 {{- if .Values.mysql.enabled }}
-  DB_HOST: {{- inclue "monica.mysql.fullname" -}}
+  DB_HOST: {{- include "monica.mysql.fullname" -}}
   DB_PORT: 3306
 {{- end }}
 {{- range $envKey, $envVal := .Values.env }}
