@@ -72,6 +72,6 @@ Create the name for the MySQL service to use.
 Define MySQL host and port env vars.
 */}}
 {{- define "monica.mysql.env" -}}
-DB_HOST: {{ include "monica.mysql.fullname" . }}
+DB_HOST: {{ include "monica.mysql.fullname" . }}-headless
 DB_PORT: {{ 3306 | quote }}
 {{- end }}
