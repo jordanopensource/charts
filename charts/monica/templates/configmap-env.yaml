@@ -8,6 +8,3 @@ data:
 {{- range $envKey, $envVal := .Values.env }}
   {{ $envKey | upper }}: {{ $envVal | quote }}
 {{- end }}
-{{- if .Values.mysql.enabled }}
-{{- include "monica.mysql.env" . | nindent 2 }}
-{{- end }}
