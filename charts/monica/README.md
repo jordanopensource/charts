@@ -2,7 +2,7 @@
 
 Personal CRM. Remember everything about your friends, family and business relationships.
 
-Chart version : 1.0.0
+Chart version : 1.0.2
 
 Default Monica image [here](https://github.com/monicahq/docker/tree/master/apache)
 
