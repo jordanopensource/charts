@@ -265,30 +265,6 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/statping-1.0.0/statping-1.0.0.tgz
     version: 1.0.0
-  status:
-  - apiVersion: v2
-    appVersion: v0.90.74
-    created: "2021-06-28T14:44:15.727097651Z"
-    description: An easy to use Status Page for your websites and applications.
-    digest: 8f364beed514d4c75a7f72222b6643f15e6347aca32919d16e98d1357160c3f8
-    home: https://github.com/statping/statping
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: status
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/status-0.90.74/status-0.90.74.tgz
-    version: 0.90.74
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2021-06-20T12:35:30.487845892Z"
-    description: A Helm chart for Kubernetes
-    digest: a131530b69fe08ed0c4a0013e6b1b03d7047185d980e334e58ce6fc9ee19c2e8
-    name: status
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/status-0.1.0/status-0.1.0.tgz
-    version: 0.1.0
   strapi:
   - apiVersion: v2
     appVersion: 3.6.5
