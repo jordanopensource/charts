@@ -113,3 +113,20 @@ mysql:
     database: monica
     username: monica
     password: secret
+
+
+livenessProbe:
+  enabled: true
+  initialDelaySeconds: 60
+  successThreshold: 1
+  failureThreshold: 3
+  timeoutSeconds: 1
+  periodSeconds: 10
+
+readinessProbe:
+  enabled: true
+  initialDelaySeconds: 60
+  successThreshold: 1
+  failureThreshold: 3
+  timeoutSeconds: 1
+  periodSeconds: 10

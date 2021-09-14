@@ -71,6 +71,18 @@ The following tables lists the configurable parameters of the Monica chart and t
 | `resources`           | The resources for the Monica container               | `{}` (evaluated as a template)                       |
 | `env`                 | Environment variables to configure Monica container  | `{}` (evaluated as a configMap)                      |
 | `secretNamesForEnv`   | Array of secrets names contaning extra env vars      | `[]`                                                 |
+| `livenessProbe.enabled`             | Enable/disable the liveness probe                                                           | `true` |
+| `livenessProbe.initialDelaySeconds` | Delay before liveness probe is initiated                                                    | `60`   |
+| `livenessProbe.periodSeconds`       | How often to perform the probe                                                              | `10`   |
+| `livenessProbe.timeoutSeconds`      | When the probe times out                                                                    | `1`    |
+| `livenessProbe.successThreshold `   |	Minimum consecutive successes for the probe to be considered successful after having failed |	`1`    |
+| `livenessProbe.failureThreshold`    | Minimum consecutive failures for the probe to be considered failed after having succeeded   | `3`    |
+| `readinessProbe.enabled`            | Enable/disable the readiness probe                                                          | `true` |
+| `readinessProbe.initialDelaySeconds`| Delay before readiness probe is initiated                                                   | `60`   |
+| `readinessProbe.periodSeconds`      | How often to perform the probe                                                              | `10`   |
+| `readinessProbe.timeoutSeconds`     | When the probe times out                                                                    | `1`    |
+| `readinessProbe.successThreshold`   | Minimum consecutive successes for the probe to be considered successful after having failed | `1`    |
+| `readinessProbe.failureThreshold`   | Minimum consecutive failures for the probe to be considered failed after having succeeded   | `3`    |
 
 
 ### Exposure values
