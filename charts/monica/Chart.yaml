@@ -1,6 +1,6 @@
 apiVersion: v2
 name: monica
-version: 1.0.1
+version: 1.0.2
 appVersion: 3.2
 description: Personal CRM. Remember everything about your friends, family and business relationships.
 home: https://www.monicahq.com
