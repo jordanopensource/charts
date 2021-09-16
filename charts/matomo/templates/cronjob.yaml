@@ -1,0 +1,67 @@
+{{- if .Values.cronjob.enabled }}
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: {{ template "matomo.fullname" . }}-cron
+  labels:
+    {{- include "matomo.labels" . | nindent 4 }}
+  annotations:
+{{ toYaml .Values.cronjob.annotations | indent 4 }}
+spec:
+  schedule: "{{ .Values.cronjob.schedule }}"
+  concurrencyPolicy: Forbid
+  {{- with .Values.cronjob.failedJobsHistoryLimit }}
+  failedJobsHistoryLimit: {{ . }}
+  {{- end }}
+  {{- with .Values.cronjob.successfulJobsHistoryLimit }}
+  successfulJobsHistoryLimit: {{ . }}
+  {{- end }}
+  jobTemplate:
+    metadata:
+      labels:
+        {{- include "matomo.selectorLabels" . | nindent 8 }}
+    spec:
+      template:
+        metadata:
+          labels:
+            {{- include "matomo.selectorLabels" . | nindent 12 }}
+        spec:
+          restartPolicy: Never
+          {{- if (default .Values.image.pullSecrets .Values.cronjob.image.pullSecrets) }}
+          imagePullSecrets:
+          {{- range (default .Values.image.pullSecrets .Values.cronjob.image.pullSecrets) }}
+            - name: {{ . }}
+          {{- end }}
+          {{- end }}
+          containers:
+            - name: {{ .Chart.Name }}-cronjob
+              image: "{{ default .Values.image.repository .Values.cronjob.image.repository }}:{{ default .Values.image.tag .Values.cronjob.image.tag }}"
+              imagePullPolicy: {{ default .Values.image.pullPolicy .Values.cronjob.image.pullPolicy }}
+              command: [ "curl" ]
+              args:
+              {{- if .Values.ingress.enabled }}
+                - "--fail"
+                - "-L"
+              {{- if .Values.ingress.tls }}
+                - "https://{{ .Values.cronjob.url }}/?module=API&method=CoreAdminHome.runCronArchiving&url={{ .Values.cronjob.url }}&token_auth={{ .Values.cronjob.token }}"
+              {{- else }}
+                - "http://{{ .Values.cronjob.url }}/?module=API&method=CoreAdminHome.runCronArchiving&url={{ .Values.cronjob.url }}&token_auth={{ .Values.cronjob.token }}"
+              {{- end }}
+              {{- else }}
+                - "http://{{ template "matomo.fullname" . }}:{{ .Values.service.port }}/?module=API&method=CoreAdminHome.runCronArchiving&url={{ .Values.cronjob.url }}&token_auth={{ .Values.cronjob.token }}"
+              {{- end }}
+              resources:
+{{ toYaml (default .Values.resources .Values.cronjob.resources) | indent 16 }}
+    {{- with (default .Values.nodeSelector .Values.cronjob.nodeSelector) }}
+          nodeSelector:
+{{ toYaml . | indent 12 }}
+    {{- end }}
+    {{- with (default .Values.affinity .Values.cronjob.affinity) }}
+          affinity:
+{{ toYaml . | indent 12 }}
+    {{- end }}
+    {{- with (default .Values.tolerations .Values.cronjob.tolerations) }}
+          tolerations:
+{{ toYaml . | indent 12 }}
+    {{- end }}
+{{- end }}

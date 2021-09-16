@@ -91,6 +91,7 @@ tolerations: []
 
 affinity: {}
 
+# Persistence
 persistence:
   enabled: false
   annotations: {}
@@ -109,6 +110,7 @@ mysql:
     password: secret
 
 
+# Liveness Probe
 livenessProbe:
   enabled: true
   initialDelaySeconds: 0
@@ -117,6 +119,7 @@ livenessProbe:
   timeoutSeconds: 1
   periodSeconds: 10
 
+# Readiness Probe
 readinessProbe:
   enabled: true
   initialDelaySeconds: 0
@@ -124,3 +127,18 @@ readinessProbe:
   failureThreshold: 3
   timeoutSeconds: 1
   periodSeconds: 10
+
+
+# Cronjob
+cronjob:
+  enabled: false
+  image:
+    repository: curlimages/curl
+    tag: 7.78.0
+  schedule: "5 * * * *"
+  annotations: {}
+  failedJobsHistoryLimit: 5
+  successfulJobsHistoryLimit: 2
+  url: ""
+  token: ""
+  resources: {}
