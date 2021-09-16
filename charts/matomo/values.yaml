@@ -20,7 +20,7 @@ env:
   MATOMO_DATABASE_NAME: matomo
   MATOMO_DATABASE_USER: matomo
   MATOMO_DATABASE_PASSWORD: secret
-  MATOMO_ENABLE_DATABASE_SSL: false  
+  MATOMO_ENABLE_DATABASE_SSL: true  
 
 secretNamesForEnv: []
 
