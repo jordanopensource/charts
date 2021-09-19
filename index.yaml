@@ -141,6 +141,38 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/josa-autodiscover-0.1.0/josa-autodiscover-0.1.0.tgz
     version: 0.1.0
+  matomo:
+  - apiVersion: v2
+    appVersion: 4.4.1
+    created: "2021-09-19T16:02:50.42160358Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.8.6
+    description: Matomo (formerly Piwik) is the leading open alternative to Google
+      Analytics that gives you full control over your data.
+    digest: 77ff047a35835497471c56c4e016d211c94851d786eafe86913af65c03500e04
+    home: https://matomo.org
+    icon: https://static.matomo.org/wp-content/uploads/2018/10/matomo-logo-final-1-340x50.png
+    keywords:
+    - matomo
+    - web-analytics
+    - analytics
+    - piwik
+    - privacy
+    - security
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: matomo
+    sources:
+    - https://github.com/matomo-org/matomo
+    - https://github.com/bitnami/bitnami-docker-matomo
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/matomo-1.0.0/matomo-1.0.0.tgz
+    version: 1.0.0
   monica:
   - apiVersion: v2
     appVersion: "3.2"
@@ -388,4 +420,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-09-14T18:57:25.266189685Z"
+generated: "2021-09-19T16:02:50.421641682Z"
