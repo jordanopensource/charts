@@ -43,7 +43,7 @@ $ helm delete my-release
 
 ## Enviroment Variables
 
-See https://github.com/monicahq/matomo/blob/master/.env.example for available enviroment variables. 
+See https://github.com/bitnami/bitnami-docker-matomo#environment-variables for available enviroment variables. 
 
 
 ## Values
@@ -72,13 +72,13 @@ The following tables lists the configurable parameters of the Matomo chart and t
 | `env`                 | Environment variables to configure Matomo container  | `{}` (evaluated as a configMap)                      |
 | `secretNamesForEnv`   | Array of secrets names contaning extra env vars      | `[]`                                                 |
 | `livenessProbe.enabled`             | Enable/disable the liveness probe                                                           | `true` |
-| `livenessProbe.initialDelaySeconds` | Delay before liveness probe is initiated                                                    | `60`   |
+| `livenessProbe.initialDelaySeconds` | Delay before liveness probe is initiated                                                    | `0`   |
 | `livenessProbe.periodSeconds`       | How often to perform the probe                                                              | `10`   |
 | `livenessProbe.timeoutSeconds`      | When the probe times out                                                                    | `1`    |
 | `livenessProbe.successThreshold `   |	Minimum consecutive successes for the probe to be considered successful after having failed |	`1`    |
 | `livenessProbe.failureThreshold`    | Minimum consecutive failures for the probe to be considered failed after having succeeded   | `3`    |
 | `readinessProbe.enabled`            | Enable/disable the readiness probe                                                          | `true` |
-| `readinessProbe.initialDelaySeconds`| Delay before readiness probe is initiated                                                   | `60`   |
+| `readinessProbe.initialDelaySeconds`| Delay before readiness probe is initiated                                                   | `0`   |
 | `readinessProbe.periodSeconds`      | How often to perform the probe                                                              | `10`   |
 | `readinessProbe.timeoutSeconds`     | When the probe times out                                                                    | `1`    |
 | `readinessProbe.successThreshold`   | Minimum consecutive successes for the probe to be considered successful after having failed | `1`    |
@@ -125,13 +125,31 @@ The following tables lists the configurable parameters of the Matomo chart and t
 | `serviceAccount.annotations`  | Annotations to add to the service account                 | `{}` (evaluated as a template)                    |
 
 
+### Cron Job values
+
+| Parameter                             | Description                                               | Default                                |
+|---------------------------------------|-----------------------------------------------------------|----------------------------------------|
+| `cronjob.enabled`                     | Enable cron job for Matomo                                | `false`                                |
+| `cronjob.image.repository`            | Cron job image                                            | `curlimages/curl`                      |
+| `cronjob.image.tag`                   | Cron job image tag                                        | `7.78.0`                               |
+| `cronjob.image.pullSecrets`           | Cron job image pull secrets array                         | `[]`                                   |
+| `cronjob.image.pullPolicy`            | Cron job image pull policy                                | `IfNotPresent (defaults as image.tag)` |
+| `cronjob.schedule`                    | Schedule of cron job                                      | `"5 * * * *"`                          |
+| `cronjob.annotations`                 | Annotations for cron job pod                              | `false`                                |
+| `cronjob.failedJobsHistoryLimit`      | failedJobsHistoryLimit                                    | `5`                                    |
+| `cronjob.successfulJobsHistoryLimit`  | successfulJobsHistoryLimitmo                              | `2`                                    |
+| `cronjob.url`                         | Url for cron job curl command                             | `""`                                   |
+| `cronjob.token`                       | Authentication token for Matomo api used in curl command  | `""`                                   |
+| `cronjob.resources`                   | The resources for the cron job container                  | `{}`                                   |
+
+
 ### Other values
 
 | Parameter                                       | Description                          | Default    |
 |-------------------------------------------------|--------------------------------------|------------|
-| `autoscaling.enabled`                           | Enable autoscaling for Strapi        | `false`    |
-| `autoscaling.minReplicas`                       | Minimum number of Strapi replicas    | `1`        |
-| `autoscaling.maxReplicas`                       | Maximum number of Strapi replicas    | `100`      |
+| `autoscaling.enabled`                           | Enable autoscaling for Matomo        | `false`    |
+| `autoscaling.minReplicas`                       | Minimum number of Matomo replicas    | `1`        |
+| `autoscaling.maxReplicas`                       | Maximum number of Matomo replicas    | `100`      |
 | `autoscaling.targetCPUUtilizationPercentage`    | Target CPU utilization percentage    | `80`       |
 | `autoscaling.targetMemoryUtilizationPercentage` | Target Memory utilization percentage | `80`       |
 
