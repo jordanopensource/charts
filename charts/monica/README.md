@@ -129,9 +129,9 @@ The following tables lists the configurable parameters of the Monica chart and t
 
 | Parameter                                       | Description                          | Default    |
 |-------------------------------------------------|--------------------------------------|------------|
-| `autoscaling.enabled`                           | Enable autoscaling for Strapi        | `false`    |
-| `autoscaling.minReplicas`                       | Minimum number of Strapi replicas    | `1`        |
-| `autoscaling.maxReplicas`                       | Maximum number of Strapi replicas    | `100`      |
+| `autoscaling.enabled`                           | Enable autoscaling for Monica        | `false`    |
+| `autoscaling.minReplicas`                       | Minimum number of Monica replicas    | `1`        |
+| `autoscaling.maxReplicas`                       | Maximum number of Monica replicas    | `100`      |
 | `autoscaling.targetCPUUtilizationPercentage`    | Target CPU utilization percentage    | `80`       |
 | `autoscaling.targetMemoryUtilizationPercentage` | Target Memory utilization percentage | `80`       |
 
