@@ -1,0 +1,23 @@
+{{- if and .Values.core.persistence.enabled (not .Values.core.persistence.existingClaim) }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  {{- if .Values.core.persistence.annotations }}
+  annotations:
+{{ toYaml .Values.core.persistence.annotations | indent 4 }}
+  {{- end }}
+  name: {{ template "mailman.core.fullname" . }}
+  labels:
+    {{- include "mailman.labels" . | nindent 4 }}
+spec:
+  accessModes:
+{{ toYaml .Values.core.persistence.accessModes | indent 4 }}
+{{- if .Values.core.persistence.storageClass }}
+  storageClassName: {{ .Values.core.persistence.storageClass | quote }}
+{{- else }}
+  storageClassName: ""
+{{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.core.persistence.size | quote }}
+{{- end }}

@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mailman.core.fullname" . }}
+  labels:
+    {{- include "mailman.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.core.service.type }}
+  ports:
+    - port: {{ .Values.core.service.ports.api }}
+      targetPort: api
+      protocol: TCP
+      name: api
+    - port: {{ .Values.core.service.ports.postfixExtender }}
+      targetPort: postfix-extender
+      protocol: TCP
+      name: postfix-extender
+  selector:
+    {{- include "mailman.core.selectorLabels" . | nindent 4 }}

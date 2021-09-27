@@ -1,0 +1,125 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "mailman.core.fullname" . }}
+  labels:
+    {{- include "mailman.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.core.autoscaling.enabled }}
+  replicas: {{ .Values.core.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "mailman.core.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.core.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "mailman.core.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "mailman.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.core.podSecurityContext | nindent 8 }}
+      initContainers:
+      - name: {{ .Chart.Name }}-core-init
+        image: busybox
+        imagePullPolicy: IfNotPresent
+        command: ['sh', '-c', 'cp /mailman-core-config/mailman-extra.cfg /opt/mailman/']
+        volumeMounts:
+          - name: mailman-core-config
+            mountPath: /mailman-core-config
+          - name: mailman-core
+            mountPath: /opt/mailman
+      containers:
+        - name: {{ .Chart.Name }}-core-postfix-extender
+          securityContext:
+            {{- toYaml .Values.core.postfixExtender.securityContext | nindent 12 }}
+          image: "{{ .Values.core.postfixExtender.image.repository }}:{{ .Values.core.postfixExtender.image.tag }}"
+          imagePullPolicy: {{ .Values.core.postfixExtender.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "mailman.core.fullname" . }}-postfix-extender-env
+          {{- range .Values.core.postfixExtender.secretNamesForEnv }}
+            - secretRef:
+                name: {{ . }}
+          {{- end }}
+          volumeMounts:
+            - name: mailman-core
+              mountPath: /opt/mailman
+              readOnly: true
+          ports:
+            - name: postfix-extender
+              containerPort: 5000
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          resources:
+            {{- toYaml .Values.core.postfixExtender.resources | nindent 12 }}
+        - name: {{ .Chart.Name }}-core
+          securityContext:
+            {{- toYaml .Values.core.securityContext | nindent 12 }}
+          image: "{{ .Values.core.image.repository }}:{{ .Values.core.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.core.image.pullPolicy }}
+          volumeMounts:
+            - name: mailman-core
+              mountPath: /opt/mailman
+          ports:
+            - name: api
+              containerPort: 8001
+              protocol: TCP
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          resources:
+            {{- toYaml .Values.core.resources | nindent 12 }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "mailman.core.fullname" . }}-env
+          {{- range .Values.core.secretNamesForEnv }}
+            - secretRef:
+                name: {{ . }}
+          {{- end }}
+      {{- with .Values.core.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.core.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.core.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      volumes:
+        - name: mailman-core-config
+          configMap:
+            name: {{ include "mailman.core.fullname" . }}
+            items:
+              - key: mailman-extra.cfg
+                path: mailman-extra.cfg
+        - name: mailman-core
+          {{- if .Values.core.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ if .Values.core.persistence.existingClaim }}{{ .Values.core.persistence.existingClaim }}{{- else }}{{ include "mailman.core.fullname" . }}{{- end }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
