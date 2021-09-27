@@ -20,4 +20,32 @@ spec:
   resources:
     requests:
       storage: {{ .Values.core.persistence.size | quote }}
+
+---
+{{- end }}
+
+{{- if and .Values.web.persistence.enabled (not .Values.web.persistence.existingClaim) }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  {{- if .Values.web.persistence.annotations }}
+  annotations:
+{{ toYaml .Values.web.persistence.annotations | indent 4 }}
+  {{- end }}
+  name: {{ template "mailman.web.fullname" . }}
+  labels:
+    {{- include "mailman.labels" . | nindent 4 }}
+spec:
+  accessModes:
+{{ toYaml .Values.web.persistence.accessModes | indent 4 }}
+{{- if .Values.web.persistence.storageClass }}
+  storageClassName: {{ .Values.web.persistence.storageClass | quote }}
+{{- else }}
+  storageClassName: ""
+{{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.web.persistence.size | quote }}
+
+---
 {{- end }}

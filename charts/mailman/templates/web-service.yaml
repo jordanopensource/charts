@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mailman.web.fullname" . }}
+  labels:
+    {{- include "mailman.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.web.service.type }}
+  ports:
+    - port: {{ .Values.web.service.ports.api }}
+      targetPort: api
+      protocol: TCP
+      name: api
+    - port: {{ .Values.web.service.ports.http }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "mailman.web.selectorLabels" . | nindent 4 }}
