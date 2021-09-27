@@ -18,6 +18,13 @@ postgres:
 # Global
 global:
   adminEmail: ""
+  domainName: lists.example.com
+  mailHostName: mail.lists.example.com
+
+# Certificate manager
+certmanager:
+  issuerType: ClusterIssuer
+  issuerName: letsencrypt
 
 # Mailman Core
 core:
@@ -146,3 +153,52 @@ web:
     resources: {}
     secretNamesForEnv: []
     env: {}
+
+
+# Postfix
+postfix:
+  subnet: ""
+  dkimSecret: false
+  certSecret: false
+  debugMode: false
+  relay: false
+      
+  service:
+    type: LoadBalancer
+    externalTrafficPolicy: Local
+    ports:
+      smtp: 25
+      tls: 587
+
+  replicaCount: 1
+  
+  image:
+    repository: danilsmirnov/postfix
+    pullPolicy: IfNotPresent
+    tag: 1.7
+
+  podAnnotations: {}
+  podSecurityContext: {}
+  securityContext: {}
+  nodeSelector: {}
+  tolerations: []
+  affinity: {}
+  resources: {}
+
+  autoscaling:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 100
+    targetCPUUtilizationPercentage: 80
+    # targetMemoryUtilizationPercentage: 80
+
+  persistence:
+    enabled: false
+    annotations: {}
+    accessModes: 
+      - ReadWriteOnce
+    size: 10Gi
+    storageClass: ""
+
+  secretNamesForEnv: []
+  env: {}

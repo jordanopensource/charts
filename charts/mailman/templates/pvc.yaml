@@ -49,3 +49,29 @@ spec:
 
 ---
 {{- end }}
+
+{{- if and .Values.postfix.persistence.enabled (not .Values.postfix.persistence.existingClaim) }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  {{- if .Values.postfix.persistence.annotations }}
+  annotations:
+{{ toYaml .Values.postfix.persistence.annotations | indent 4 }}
+  {{- end }}
+  name: {{ template "mailman.postfix.fullname" . }}
+  labels:
+    {{- include "mailman.labels" . | nindent 4 }}
+spec:
+  accessModes:
+{{ toYaml .Values.postfix.persistence.accessModes | indent 4 }}
+{{- if .Values.postfix.persistence.storageClass }}
+  storageClassName: {{ .Values.postfix.persistence.storageClass | quote }}
+{{- else }}
+  storageClassName: ""
+{{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.postfix.persistence.size | quote }}
+
+---
+{{- end }}

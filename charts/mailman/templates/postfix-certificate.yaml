@@ -1,0 +1,15 @@
+{{- if .Values.postfix.certSecret }}
+apiVersion: cert-manager.io/v1alpha2
+kind: Certificate
+metadata:
+  name: {{ include "mailman.postfix.fullname" . }}-certificates
+spec:
+  secretName: {{ include "mailman.postfix.fullname" . }}-certificates
+  renewBefore: 1440h # 60d
+  commonName: {{ required "mailHostName" .Values.global.mailHostName }}
+  dnsNames:
+  - {{ .Values.global.mailHostName }}
+  issuerRef:
+    kind: {{ .Values.certmanager.issuerType }}
+    name: {{ .Values.certmanager.issuerName }}
+{{- end }}
