@@ -1,3 +1,18 @@
+{{- if .Values.postfix.extraEnv }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "mailman.postfix.fullname" . }}-extraEnv
+  labels:
+    {{- include "mailman.labels" . | nindent 4 }}
+data:
+{{- range $envKey, $envVal := .Values.postfix.extraEnv }}
+  {{ $envKey | upper }}: {{ $envVal | quote }}
+{{- end }}
+
+---
+{{- end }}
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -19,11 +34,11 @@ data:
     postconf -e "smtpd_recipient_restrictions=permit_mynetworks,permit_sasl_authenticated,reject_unauth_destination,reject_rbl_client zen.spamhaus.org,reject_rhsbl_reverse_client dbl.spamhaus.org,reject_rhsbl_helo dbl.spamhaus.org,reject_rhsbl_sender dbl.spamhaus.org"
   {{- if .Values.postfix.relay }}
     cat >> /etc/postfix/sasl_passwd <<EOF
-    [${RELAY_SMTP}]:${RELAY_PORT}    ${RELAY_USERNAME}:${RELAY_PASSWORD}
+    [${RELAY_HOST}]:${RELAY_PORT}    ${RELAY_USERNAME}:${RELAY_PASSWORD}
     EOF
     postmap /etc/postfix/sasl_passwd
     chmod 0600 /etc/postfix/sasl_passwd /etc/postfix/sasl_passwd.db
-    postconf -e "relayhost=[${RELAY_SMTP}]:${RELAY_PORT}"
+    postconf -e "relayhost=[${RELAY_HOST}]:${RELAY_PORT}"
     postconf -e "smtp_sasl_auth_enable=yes"
     postconf -e "smtp_sasl_security_options=noanonymous"
     postconf -e "smtp_sasl_password_maps=hash:/etc/postfix/sasl_passwd"

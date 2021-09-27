@@ -19,7 +19,7 @@ postgres:
 global:
   adminEmail: ""
   domainName: lists.example.com
-  mailHostName: mail.lists.example.com
+  hostName: mail.lists.example.com
 
 # Certificate manager
 certmanager:
@@ -161,8 +161,26 @@ postfix:
   dkimSecret: false
   certSecret: false
   debugMode: false
-  relay: false
-      
+
+  username: mailman
+  password: secret
+  existingSecret: {}
+    # secretName: mailman-secret
+    # passwordKey: postfixPassword
+    # usernameKey: postfixUser
+    # usernameAndPasswordKey: postfixUserAndPassword # Use this format "username:password" 
+
+  relay:
+    enabled: false
+    host: relay.example.com
+    port: 587
+    username: username
+    password: secret
+    existingSecret: {}
+      # secretName: mailman-secret
+      # usernameKey: relayUser
+      # passwordKey: relayPassword
+
   service:
     type: LoadBalancer
     externalTrafficPolicy: Local
@@ -200,5 +218,6 @@ postfix:
     size: 10Gi
     storageClass: ""
 
-  secretNamesForEnv: []
-  env: {}
+
+  secretNamesForExtraEnv: []
+  extraEnv: {}

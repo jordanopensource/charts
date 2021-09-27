@@ -91,10 +91,12 @@ spec:
           #     port: http
           resources:
             {{- toYaml .Values.postfix.resources | nindent 12 }}
+          env:
+            {{- include "mailman.postfix.env" . | nindent 12 }}
           envFrom:
             - configMapRef:
-                name: {{ include "mailman.postfix.fullname" . }}-env
-          {{- range .Values.postfix.secretNamesForEnv }}
+                name: {{ include "mailman.postfix.fullname" . }}-extraEnv
+          {{- range .Values.postfix.secretNamesForExtraEnv }}
             - secretRef:
                 name: {{ . }}
           {{- end }}

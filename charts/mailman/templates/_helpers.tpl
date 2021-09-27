@@ -106,3 +106,60 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Define postfix required domain name
+*/}}
+{{- define "mailman.domainName" -}}
+{{- required "Required parameter domainName is missing!" .Values.global.domainName }}
+{{- end -}}
+
+{{/*
+Define postfix required host name
+*/}}
+{{- define "mailman.hostName" -}}
+{{- required "Required parameter mailHostName is missing!" .Values.global.hostName -}}
+{{- end -}}
+
+{{/*
+Define postfix required enviroment variable
+*/}}
+{{- define "mailman.postfix.env" -}}
+- name: MAIL_DOMAIN
+  value: {{ include "mailman.domainName" . }}
+{{- if .Values.postfix.relay.enabled }}
+- name: RELAY_HOST
+  value: {{ .Values.postfix.relay.host }}
+- name: RELAY_PORT
+  value: {{ .Values.postfix.relay.port | quote }}
+{{- end }}
+- name: SMTP_USER
+{{- if .Values.postfix.existingSecret }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.postfix.existingSecret.secretName }}
+      key: {{ .Values.postfix.existingSecret.userAndPasswordKey }}
+{{- else }}
+  value: "{{ .Values.postfix.username }}:{{ .Values.postfix.password }}"
+{{- end }}
+{{- if .Values.postfix.relay.enabled }}
+- name: RELAY_USERNAME
+{{- if .Values.postfix.relay.existingSecret }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.postfix.relay.existingSecret.secretName }}
+      key: {{ .Values.postfix.relay.existingSecret.userKey }}
+{{- else }}
+  value: {{ .Values.postfix.relay.username }}
+{{- end }}
+- name: RELAY_PASSWORD
+{{- if .Values.postfix.relay.existingSecret }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.postfix.relay.existingSecret.secretName }}
+      key: {{ .Values.postfix.relay.existingSecret.passwordKey }}
+{{- else }}
+  value: {{ .Values.postfix.relay.password }}
+{{- end }}
+{{- end }}
+{{- end }}
