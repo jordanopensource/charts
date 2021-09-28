@@ -6,9 +6,9 @@ metadata:
 spec:
   secretName: {{ include "mailman.postfix.fullname" . }}-certificates
   renewBefore: 1440h # 60d
-  commonName: {{ required "mailHostName" .Values.global.mailHostName }}
+  commonName: {{ required "mailHostName" .Values.mailman.hostName }}
   dnsNames:
-  - {{ .Values.global.mailHostName }}
+  - {{ .Values.mailman.hostName }}
   issuerRef:
     kind: {{ .Values.certmanager.issuerType }}
     name: {{ .Values.certmanager.issuerName }}
