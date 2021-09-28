@@ -16,3 +16,8 @@ keywords:
   - mailing-list
   - newsletter
   - mailman
+dependencies:
+- name: postgresql
+  version: 10.10.2
+  repository: https://charts.bitnami.com/bitnami
+  condition: postgresql.internal

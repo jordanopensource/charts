@@ -163,3 +163,22 @@ Define postfix required enviroment variable
 {{- end }}
 {{- end }}
 {{- end }}
+
+
+{{/*
+Create the name for the Postgresql service to use.
+*/}}
+{{- define "mailman.postgresql.fullname" -}}
+{{- printf "%s-%s" .Release.Name "postgresql" | trunc 63 | trimSuffix "-" -}}
+{{- end -}}
+
+{{/*
+Create the hostname for the Postgresql service to use.
+*/}}
+{{- define "mailman.postgresql.host" -}}
+{{- if .Values.postgresql.internal }}
+{{ include "mailman.postgresql.fullname" . }}-headless:5432
+{{- else }}
+{{- printf "%s:%s" .Values.postgresql.postgresqlHost .Values.postgresql.postgresqlPort -}}
+{{- end -}}
+{{- end -}}

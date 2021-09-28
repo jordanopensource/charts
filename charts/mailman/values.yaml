@@ -11,9 +11,17 @@ serviceAccount:
   annotations: {}
   name: ""
 
-# Postgres database
-postgres:
-  enabled: false
+# Postgresql database
+postgresql:
+  internal: true
+  postgresqlHost: ""
+  postgresqlPort: ""
+  postgresqlDatabase: mailman
+  postgresqlUsername: postgres
+  postgresqlPassword: secret
+  existingSecret: {}
+    # secretName: mailman-secret
+    # databaseUrlKey: databaseUrl  # "postgres://username:password@host:port/database"
 
 # Global
 global:
