@@ -196,19 +196,6 @@ Define mailman web required enviroment variable
   value: "http://{{ include "mailman.web.fullname" . }}:8000"
 - name: MAILMAN_REST_URL
   value: "http://{{ include "mailman.core.fullname" . }}:8001"
-- name: DATABASE_TYPE
-  value: postgres
-- name: DATABASE_URL
-{{- if .Values.postgresql.existingSecret }}
-  valueFrom:
-    secretKeyRef:
-      name: {{ .Values.postgresql.existingSecret.secretName }}
-      key: {{ .Values.postgresql.existingSecret.databaseUrlKey }}
-{{- else }}
-  value: "{{ "postgres://" }}{{ .Values.postgresql.postgresqlUsername }}{{ ":" }}{{ .Values.postgresql.postgresqlPassword }}{{ "@" }}{{ include "mailman.postgresql.host" . }}{{ "/" }}{{ .Values.postgresql.postgresqlDatabase }}"
-{{- end }}
-- name: SMTP_HOST
-  value: {{ include "mailman.postfix.fullname" . }}
 - name: SMTP_HOST_USER
 {{- if .Values.postfix.existingSecret }}
   valueFrom:
@@ -226,21 +213,6 @@ Define mailman web required enviroment variable
       key: {{ .Values.postfix.existingSecret.passwordKey }}
 {{- else }}
   value: {{ .Values.postfix.password | quote }}
-{{- end }}
-{{- if .Values.postfix.certSecret }}
-- name: SMTP_PORT
-  value: "587"
-- name: SMTP_USE_TLS
-  value: "True"
-{{- end }}
-- name: HYPERKITTY_API_KEY
-{{- if .Values.mailman.existingSecret.apiKey }}
-  valueFrom:
-    secretKeyRef:
-      name: {{ .Values.mailman.existingSecret.secretName }}
-      key: {{ .Values.mailman.existingSecret.apiKeyKey }}
-{{- else }}
-  value: {{ .Values.mailman.apiKey | quote }}
 {{- end }}
 - name: SECRET_KEY
 {{- if .Values.mailman.existingSecret.secretKey }}
@@ -268,5 +240,46 @@ Define mailman web required enviroment variable
       key: {{ .Values.mailman.existingSecret.adminEmailKey }}
 {{- else }}
   value: {{ .Values.mailman.adminEmail | quote }}
+{{- end }}
+{{- end }}
+
+
+{{/*
+Define required mailman common (web and core) enviroment variable
+*/}}
+{{- define "mailman.common.env" -}}
+- name: DATABASE_TYPE
+  value: postgres
+- name: DATABASE_CLASS
+  value: "mailman.database.postgresql.PostgreSQLDatabase"
+- name: DATABASE_URL
+{{- if .Values.postgresql.existingSecret }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.postgresql.existingSecret.secretName }}
+      key: {{ .Values.postgresql.existingSecret.databaseUrlKey }}
+{{- else }}
+  value: "{{ "postgres://" }}{{ .Values.postgresql.postgresqlUsername }}{{ ":" }}{{ .Values.postgresql.postgresqlPassword }}{{ "@" }}{{ include "mailman.postgresql.host" . }}{{ "/" }}{{ .Values.postgresql.postgresqlDatabase }}"
+{{- end }}
+- name: HYPERKITTY_URL
+  value: "http://{{ include "mailman.web.fullname" . }}:8000/hyperkitty"
+- name: HYPERKITTY_API_KEY
+{{- if .Values.mailman.existingSecret.apiKey }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.mailman.existingSecret.secretName }}
+      key: {{ .Values.mailman.existingSecret.apiKeyKey }}
+{{- else }}
+  value: {{ .Values.mailman.apiKey | quote }}
+{{- end }}
+- name: MTA
+  value: postfix
+- name: SMTP_HOST
+  value: {{ include "mailman.postfix.fullname" . }}
+{{- if .Values.postfix.certSecret }}
+- name: SMTP_PORT
+  value: "587"
+- name: SMTP_USE_TLS
+  value: "True"
 {{- end }}
 {{- end }}

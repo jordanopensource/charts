@@ -95,6 +95,7 @@ spec:
           resources:
             {{- toYaml .Values.web.resources | nindent 12 }}
           env:
+            {{- include "mailman.common.env" . | nindent 12 }}
             {{- include "mailman.web.env" . | nindent 12 }}
           envFrom:
             - configMapRef:

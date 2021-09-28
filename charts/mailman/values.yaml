@@ -82,10 +82,8 @@ core:
     size: 1Gi
     storageClass: ""
 
-  secretNamesForEnv: []
-  env:
-    DATABASE_TYPE: postgres
-    DATABASE_CLASS: "mailman.database.postgresql.PostgreSQLDatabase"
+  secretNamesForExtraEnv: []
+  extraEnv: {}
 
   postfixExtender:
     image:
@@ -95,8 +93,8 @@ core:
     securityContext: {}
     resources: {}
 
-    secretNamesForEnv: []
-    env:
+    secretNamesForExtraEnv: []
+    extraEnv:
       FILES: "/opt/mailman/var/data/postfix_domains,/opt/mailman/var/data/postfix_lmtp"
 
       
@@ -234,7 +232,6 @@ postfix:
       - ReadWriteOnce
     size: 10Gi
     storageClass: ""
-
 
   secretNamesForExtraEnv: []
   extraEnv: {}

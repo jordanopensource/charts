@@ -1,4 +1,4 @@
-{{- if .Values.web.env }}
+{{- if .Values.web.extraEnv }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -12,7 +12,7 @@ data:
 ---
 {{- end }}
 
-{{- if .Values.web.nginx.env }}
+{{- if .Values.web.nginx.extraEnv }}
 apiVersion: v1
 kind: ConfigMap
 metadata:

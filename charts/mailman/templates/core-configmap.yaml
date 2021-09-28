@@ -1,27 +1,27 @@
-{{- if .Values.core.env }}
+{{- if .Values.core.extraEnv }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "mailman.core.fullname" . }}-env
+  name: {{ include "mailman.core.fullname" . }}-extraEnv
   labels:
     {{- include "mailman.labels" . | nindent 4 }}
 data:
-{{- range $envKey, $envVal := .Values.core.env }}
+{{- range $envKey, $envVal := .Values.core.extraEnv }}
   {{ $envKey | upper }}: {{ $envVal | quote }}
 {{- end }}
 
 ---
 {{- end }}
 
-{{- if .Values.core.postfixExtender.env }}
+{{- if .Values.core.postfixExtender.extraEnv }}
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "mailman.core.fullname" . }}-postfix-extender-env
+  name: {{ include "mailman.core.fullname" . }}-postfix-extender-extraEnv
   labels:
     {{- include "mailman.labels" . | nindent 4 }}
 data:
-{{- range $envKey, $envVal := .Values.core.postfixExtender.env }}
+{{- range $envKey, $envVal := .Values.core.postfixExtender.extraEnv }}
   {{ $envKey | upper }}: {{ $envVal | quote }}
 {{- end }}
 

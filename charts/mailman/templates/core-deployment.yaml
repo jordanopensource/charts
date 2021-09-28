@@ -45,8 +45,8 @@ spec:
           imagePullPolicy: {{ .Values.core.postfixExtender.image.pullPolicy }}
           envFrom:
             - configMapRef:
-                name: {{ include "mailman.core.fullname" . }}-postfix-extender-env
-          {{- range .Values.core.postfixExtender.secretNamesForEnv }}
+                name: {{ include "mailman.core.fullname" . }}-postfix-extender-extraEnv
+          {{- range .Values.core.postfixExtender.secretNamesForExtraEnv }}
             - secretRef:
                 name: {{ . }}
           {{- end }}
@@ -90,10 +90,12 @@ spec:
           #     port: http
           resources:
             {{- toYaml .Values.core.resources | nindent 12 }}
+          env:
+            {{- include "mailman.common.env" . | nindent 12 }}
           envFrom:
             - configMapRef:
-                name: {{ include "mailman.core.fullname" . }}-env
-          {{- range .Values.core.secretNamesForEnv }}
+                name: {{ include "mailman.core.fullname" . }}-extraEnv
+          {{- range .Values.core.secretNamesForExtraEnv }}
             - secretRef:
                 name: {{ . }}
           {{- end }}
