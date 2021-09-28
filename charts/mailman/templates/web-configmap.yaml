@@ -2,11 +2,11 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "mailman.web.fullname" . }}-env
+  name: {{ include "mailman.web.fullname" . }}-extraEnv
   labels:
     {{- include "mailman.labels" . | nindent 4 }}
 data:
-{{- range $envKey, $envVal := .Values.web.env }}
+{{- range $envKey, $envVal := .Values.web.extraEnv }}
   {{ $envKey | upper }}: {{ $envVal | quote }}
 {{- end }}
 ---
@@ -16,11 +16,11 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "mailman.web.fullname" . }}-nginx-env
+  name: {{ include "mailman.web.fullname" . }}-nginx-extraEnv
   labels:
     {{- include "mailman.labels" . | nindent 4 }}
 data:
-{{- range $envKey, $envVal := .Values.web.nginx.env }}
+{{- range $envKey, $envVal := .Values.web.nginx.extraEnv }}
   {{ $envKey | upper }}: {{ $envVal | quote }}
 {{- end }}
 ---

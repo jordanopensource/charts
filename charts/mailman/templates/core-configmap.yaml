@@ -37,4 +37,4 @@ metadata:
 data:
   mailman-extra.cfg: |
     [mailman]
-    site_owner: {{ .Values.global.adminEmail }}
+    site_owner: {{ .Values.mailman.adminEmail }}

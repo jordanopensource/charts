@@ -23,11 +23,20 @@ postgresql:
     # secretName: mailman-secret
     # databaseUrlKey: databaseUrl  # "postgres://username:password@host:port/database"
 
-# Global
-global:
-  adminEmail: ""
+# Application settings
+mailman:
   domainName: lists.example.com
   hostName: mail.lists.example.com
+  apikey: ""
+  secretKey: ""
+  adminUser: ""
+  adminEmail: admin@example.com
+  existingSecret: {}
+    # secretName: mailman-secret
+    # adminUserKey: adminUser
+    # apiKey: apiKey
+    # secretKey: secretKey
+    # adminEmailKey: ""
 
 # Certificate manager
 certmanager:
@@ -149,8 +158,8 @@ web:
     size: 1Gi
     storageClass: ""
 
-  secretNamesForEnv: []
-  env: {}
+  secretNamesForExtraEnv: []
+  extraEnv: {}
 
   nginx:
     image:
@@ -159,8 +168,8 @@ web:
       tag: latest
     securityContext: {}
     resources: {}
-    secretNamesForEnv: []
-    env: {}
+    secretNamesForExtraEnv: []
+    extraEnv: {}
 
 
 # Postfix

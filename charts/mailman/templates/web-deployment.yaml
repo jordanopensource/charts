@@ -46,8 +46,8 @@ spec:
           imagePullPolicy: {{ .Values.web.nginx.image.pullPolicy }}
           envFrom:
             - configMapRef:
-                name: {{ include "mailman.web.fullname" . }}-nginx-env
-          {{- range .Values.web.nginx.secretNamesForEnv }}
+                name: {{ include "mailman.web.fullname" . }}-nginx-extraEnv
+          {{- range .Values.web.nginx.secretNamesForExtraEnv }}
             - secretRef:
                 name: {{ . }}
           {{- end }}
@@ -94,10 +94,12 @@ spec:
           #     port: http
           resources:
             {{- toYaml .Values.web.resources | nindent 12 }}
+          env:
+            {{- include "mailman.web.env" . | nindent 12 }}
           envFrom:
             - configMapRef:
-                name: {{ include "mailman.web.fullname" . }}-env
-          {{- range .Values.web.secretNamesForEnv }}
+                name: {{ include "mailman.web.fullname" . }}-extraEnv
+          {{- range .Values.web.secretNamesForExtraEnv }}
             - secretRef:
                 name: {{ . }}
           {{- end }}

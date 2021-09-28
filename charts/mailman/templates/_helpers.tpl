@@ -111,14 +111,14 @@ Create the name of the service account to use
 Define postfix required domain name
 */}}
 {{- define "mailman.domainName" -}}
-{{- required "Required parameter domainName is missing!" .Values.global.domainName }}
+{{- required "Required parameter domainName is missing!" .Values.mailman.domainName }}
 {{- end -}}
 
 {{/*
 Define postfix required host name
 */}}
 {{- define "mailman.hostName" -}}
-{{- required "Required parameter mailHostName is missing!" .Values.global.hostName -}}
+{{- required "Required parameter mailHostName is missing!" .Values.mailman.hostName -}}
 {{- end -}}
 
 {{/*
@@ -164,7 +164,6 @@ Define postfix required enviroment variable
 {{- end }}
 {{- end }}
 
-
 {{/*
 Create the name for the Postgresql service to use.
 */}}
@@ -182,3 +181,92 @@ Create the hostname for the Postgresql service to use.
 {{- printf "%s:%s" .Values.postgresql.postgresqlHost .Values.postgresql.postgresqlPort -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Define mailman web required enviroment variable
+*/}}
+{{- define "mailman.web.env" -}}
+- name: SERVE_FROM_DOMAIN
+  value: {{ include "mailman.domainName" . }}
+- name: DJANGO_ALLOWED_HOSTS
+  value: {{ include "mailman.web.fullname" . }}
+- name: MAILMAN_HOST_IP
+  value: '*'
+- name: POSTORIUS_TEMPLATE_BASE_URL
+  value: "http://{{ include "mailman.web.fullname" . }}:8000"
+- name: MAILMAN_REST_URL
+  value: "http://{{ include "mailman.core.fullname" . }}:8001"
+- name: DATABASE_TYPE
+  value: postgres
+- name: DATABASE_URL
+{{- if .Values.postgresql.existingSecret }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.postgresql.existingSecret.secretName }}
+      key: {{ .Values.postgresql.existingSecret.databaseUrlKey }}
+{{- else }}
+  value: "{{ "postgres://" }}{{ .Values.postgresql.postgresqlUsername }}{{ ":" }}{{ .Values.postgresql.postgresqlPassword }}{{ "@" }}{{ include "mailman.postgresql.host" . }}{{ "/" }}{{ .Values.postgresql.postgresqlDatabase }}"
+{{- end }}
+- name: SMTP_HOST
+  value: {{ include "mailman.postfix.fullname" . }}
+- name: SMTP_HOST_USER
+{{- if .Values.postfix.existingSecret }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.postfix.existingSecret.secretName }}
+      key: {{ .Values.postfix.existingSecret.usernameKey }}
+{{- else }}
+  value: {{ .Values.postfix.username }}
+{{- end }}
+- name: SMTP_HOST_PASSWORD
+{{- if .Values.postfix.existingSecret }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.postfix.existingSecret.secretName }}
+      key: {{ .Values.postfix.existingSecret.passwordKey }}
+{{- else }}
+  value: {{ .Values.postfix.password | quote }}
+{{- end }}
+{{- if .Values.postfix.certSecret }}
+- name: SMTP_PORT
+  value: "587"
+- name: SMTP_USE_TLS
+  value: "True"
+{{- end }}
+- name: HYPERKITTY_API_KEY
+{{- if .Values.mailman.existingSecret.apiKey }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.mailman.existingSecret.secretName }}
+      key: {{ .Values.mailman.existingSecret.apiKeyKey }}
+{{- else }}
+  value: {{ .Values.mailman.apiKey | quote }}
+{{- end }}
+- name: SECRET_KEY
+{{- if .Values.mailman.existingSecret.secretKey }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.mailman.existingSecret.secretName }}
+      key: {{ .Values.mailman.existingSecret.secretKey }}
+{{- else }}
+  value: {{ .Values.mailman.secretKey | quote }}
+{{- end }}
+- name: MAILMAN_ADMIN_USER
+{{- if .Values.mailman.existingSecret.adminUserKey }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.mailman.existingSecret.secretName }}
+      key: {{ .Values.mailman.existingSecret.adminUserKey }}
+{{- else }}
+  value: {{ .Values.mailman.adminUser | quote }}
+{{- end }}
+- name: MAILMAN_ADMIN_EMAIL
+{{- if .Values.mailman.existingSecret.adminEmailKey }}
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.mailman.existingSecret.secretName }}
+      key: {{ .Values.mailman.existingSecret.adminEmailKey }}
+{{- else }}
+  value: {{ .Values.mailman.adminEmail | quote }}
+{{- end }}
+{{- end }}
