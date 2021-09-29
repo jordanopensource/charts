@@ -44,13 +44,17 @@ spec:
             {{- toYaml .Values.web.nginx.securityContext | nindent 12 }}
           image: "{{ .Values.web.nginx.image.repository }}:{{ .Values.web.nginx.image.tag }}"
           imagePullPolicy: {{ .Values.web.nginx.image.pullPolicy }}
+        {{- if or .Values.web.nginx.extraEnv .Values.web.nginx.secretNamesForExtraEnv }}
           envFrom:
+          {{- if .Values.web.nginx.extraEnv }}
             - configMapRef:
-                name: {{ include "mailman.web.fullname" . }}-nginx-extraEnv
+                name: {{ include "mailman.web.fullname" . }}-nginx-extra-env
+          {{- end }}
           {{- range .Values.web.nginx.secretNamesForExtraEnv }}
             - secretRef:
                 name: {{ . }}
           {{- end }}
+        {{- end }}
           volumeMounts:
             - name: mailman-web-config
               mountPath: /etc/nginx/conf.d/default.conf
@@ -97,13 +101,17 @@ spec:
           env:
             {{- include "mailman.common.env" . | nindent 12 }}
             {{- include "mailman.web.env" . | nindent 12 }}
+        {{- if or .Values.web.extraEnv .Values.web.secretNamesForExtraEnv }}
           envFrom:
+          {{- if .Values.web.extraEnv }}
             - configMapRef:
-                name: {{ include "mailman.web.fullname" . }}-extraEnv
+                name: {{ include "mailman.web.fullname" . }}-extra-env
+          {{- end }}
           {{- range .Values.web.secretNamesForExtraEnv }}
             - secretRef:
                 name: {{ . }}
           {{- end }}
+        {{- end }}
       {{- with .Values.web.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

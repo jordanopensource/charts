@@ -93,13 +93,17 @@ spec:
             {{- toYaml .Values.postfix.resources | nindent 12 }}
           env:
             {{- include "mailman.postfix.env" . | nindent 12 }}
+        {{- if or .Values.postfix.extraEnv .Values.postfix.secretNamesForExtraEnv }}
           envFrom:
+          {{- if .Values.postfix.extraEnv }}
             - configMapRef:
-                name: {{ include "mailman.postfix.fullname" . }}-extraEnv
+                name: {{ include "mailman.postfix.fullname" . }}-extra-env
+          {{- end }}
           {{- range .Values.postfix.secretNamesForExtraEnv }}
             - secretRef:
                 name: {{ . }}
           {{- end }}
+        {{- end }}
       {{- with .Values.postfix.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
