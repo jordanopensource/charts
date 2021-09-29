@@ -27,7 +27,7 @@ postgresql:
 mailman:
   domainName: lists.example.com
   hostName: mail.lists.example.com
-  apikey: verySecretApiKey
+  apiKey: verySecretApiKey
   secretKey: verySecretKey
   adminUser: admin
   adminEmail: admin@example.com
