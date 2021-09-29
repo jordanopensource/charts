@@ -54,6 +54,7 @@ core:
   replicaCount: 1
 
   image:
+    registry: docker.io
     repository: maxking/mailman-core
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
@@ -87,6 +88,7 @@ core:
 
   postfixExtender:
     image:
+      registry: docker.io
       repository: danilsmirnov/mailman-postfix-extender
       pullPolicy: IfNotPresent
       tag: latest
@@ -103,6 +105,7 @@ web:
   withHyperkitty: true
 
   image:
+    registry: docker.io
     repository: maxking/mailman-web
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
@@ -110,6 +113,7 @@ web:
 
   postorius:
     image:
+      registry: docker.io
       repository: maxking/postorius
       pullPolicy: IfNotPresent
       # Overrides the image tag whose default is the chart appVersion.
@@ -161,9 +165,10 @@ web:
 
   nginx:
     image:
+      registry: docker.io
       repository: nginx
       pullPolicy: IfNotPresent
-      tag: latest
+      tag: 1.21
     securityContext: {}
     resources: {}
     secretNamesForExtraEnv: []
@@ -206,6 +211,7 @@ postfix:
   replicaCount: 1
   
   image:
+    registry: docker.io
     repository: danilsmirnov/postfix
     pullPolicy: IfNotPresent
     tag: 1.7
