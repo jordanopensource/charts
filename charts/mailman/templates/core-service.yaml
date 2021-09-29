@@ -12,8 +12,8 @@ spec:
       protocol: TCP
       name: api
     - port: {{ .Values.core.service.ports.postfixExtender }}
-      targetPort: postfix-extender
+      targetPort: extender
       protocol: TCP
-      name: postfix-extender
+      name: extender
   selector:
     {{- include "mailman.core.selectorLabels" . | nindent 4 }}

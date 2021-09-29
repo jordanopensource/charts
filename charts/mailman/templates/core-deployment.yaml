@@ -59,7 +59,7 @@ spec:
               mountPath: /opt/mailman
               readOnly: true
           ports:
-            - name: postfix-extender
+            - name: extender
               containerPort: 5000
               protocol: TCP
           # livenessProbe:
