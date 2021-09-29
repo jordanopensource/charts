@@ -28,15 +28,15 @@ spec:
       securityContext:
         {{- toYaml .Values.core.podSecurityContext | nindent 8 }}
       initContainers:
-      - name: {{ .Chart.Name }}-core-init
-        image: busybox
-        imagePullPolicy: IfNotPresent
-        command: ['sh', '-c', 'cp /mailman-core-config/mailman-extra.cfg /opt/mailman/']
-        volumeMounts:
-          - name: mailman-core-config
-            mountPath: /mailman-core-config
-          - name: mailman-core
-            mountPath: /opt/mailman
+        - name: {{ .Chart.Name }}-core-init
+          image: busybox
+          imagePullPolicy: IfNotPresent
+          command: ['sh', '-c', 'cp /mailman-core-config/mailman-extra.cfg /opt/mailman/']
+          volumeMounts:
+            - name: mailman-core-config
+              mountPath: /mailman-core-config
+            - name: mailman-core
+              mountPath: /opt/mailman
       containers:
         - name: {{ .Chart.Name }}-core-postfix-extender
           securityContext:
