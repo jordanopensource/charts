@@ -176,7 +176,7 @@ Create the hostname for the Postgresql service to use.
 */}}
 {{- define "mailman.postgresql.host" -}}
 {{- if .Values.postgresql.internal }}
-{{ include "mailman.postgresql.fullname" . }}-headless:5432
+{{- include "mailman.postgresql.fullname" . }}-headless:5432
 {{- else }}
 {{- printf "%s:%s" .Values.postgresql.postgresqlHost .Values.postgresql.postgresqlPort -}}
 {{- end -}}
