@@ -27,16 +27,16 @@ postgresql:
 mailman:
   domainName: lists.example.com
   hostName: mail.lists.example.com
-  apikey: ""
-  secretKey: ""
-  adminUser: ""
+  apikey: verySecretApiKey
+  secretKey: verySecretKey
+  adminUser: admin
   adminEmail: admin@example.com
   existingSecret: {}
     # secretName: mailman-secret
     # adminUserKey: adminUser
     # apiKey: apiKey
     # secretKey: secretKey
-    # adminEmailKey: ""
+    # adminEmailKey: adminEmail
 
 # Certificate manager
 certmanager:
