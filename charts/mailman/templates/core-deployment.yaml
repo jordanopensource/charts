@@ -62,14 +62,26 @@ spec:
             - name: extender
               containerPort: 5000
               protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
+          {{- if .Values.core.postfixExtender.livenessProbe.enabled }}
+          livenessProbe:
+            tcpSocket:
+              port: 5000
+            initialDelaySeconds: {{ .Values.core.postfixExtender.livenessProbe.initialDelaySeconds }}
+            successThreshold: {{ .Values.core.postfixExtender.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.core.postfixExtender.livenessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.core.postfixExtender.livenessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.core.postfixExtender.livenessProbe.periodSeconds }}
+          {{- end }}
+          {{- if .Values.core.postfixExtender.readinessProbe.enabled }}
+          readinessProbe:
+            tcpSocket:
+              port: 5000
+            initialDelaySeconds: {{ .Values.core.postfixExtender.readinessProbe.initialDelaySeconds }}
+            successThreshold: {{ .Values.core.postfixExtender.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.core.postfixExtender.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.core.postfixExtender.readinessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.core.postfixExtender.readinessProbe.periodSeconds }}
+          {{- end }}
           resources:
             {{- toYaml .Values.core.postfixExtender.resources | nindent 12 }}
         - name: {{ .Chart.Name }}-core
@@ -84,14 +96,26 @@ spec:
             - name: api
               containerPort: 8001
               protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
+        {{- if .Values.core.livenessProbe.enabled }}
+          livenessProbe:
+            tcpSocket:
+              port: 8001
+            initialDelaySeconds: {{ .Values.core.livenessProbe.initialDelaySeconds }}
+            successThreshold: {{ .Values.core.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.core.livenessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.core.livenessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.core.livenessProbe.periodSeconds }}
+        {{- end }}
+        {{- if .Values.core.readinessProbe.enabled }}
+          readinessProbe:
+            tcpSocket:
+              port: 8001
+            initialDelaySeconds: {{ .Values.core.readinessProbe.initialDelaySeconds }}
+            successThreshold: {{ .Values.core.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.core.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.core.readinessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.core.readinessProbe.periodSeconds }}
+        {{- end }}
           resources:
             {{- toYaml .Values.core.resources | nindent 12 }}
           env:

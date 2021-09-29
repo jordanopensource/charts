@@ -86,6 +86,22 @@ core:
   secretNamesForExtraEnv: []
   extraEnv: {}
 
+  livenessProbe:
+    enabled: true
+    initialDelaySeconds: 10
+    successThreshold: 1
+    failureThreshold: 3
+    timeoutSeconds: 1
+    periodSeconds: 10
+
+  readinessProbe:
+    enabled: true
+    initialDelaySeconds: 10
+    successThreshold: 1
+    failureThreshold: 3
+    timeoutSeconds: 1
+    periodSeconds: 10
+
   postfixExtender:
     image:
       registry: docker.io
@@ -98,6 +114,22 @@ core:
     secretNamesForExtraEnv: []
     extraEnv:
       FILES: "/opt/mailman/var/data/postfix_domains,/opt/mailman/var/data/postfix_lmtp"
+
+    livenessProbe:
+      enabled: true
+      initialDelaySeconds: 10
+      successThreshold: 1
+      failureThreshold: 3
+      timeoutSeconds: 1
+      periodSeconds: 10
+
+    readinessProbe:
+      enabled: true
+      initialDelaySeconds: 10
+      successThreshold: 1
+      failureThreshold: 3
+      timeoutSeconds: 1
+      periodSeconds: 10
 
       
 # Mailman Web
