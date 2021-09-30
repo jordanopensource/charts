@@ -151,5 +151,5 @@ spec:
           emptyDir: {}
         - name: certs-secret
           secret:
-            secretName: {{ .Values.postfix.certSecret }}
+            secretName: {{ include "mailman.postfix.fullname" . }}-certificates
       {{- end }}
