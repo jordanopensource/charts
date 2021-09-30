@@ -195,6 +195,22 @@ web:
   secretNamesForExtraEnv: []
   extraEnv: {}
 
+  livenessProbe:
+    enabled: false
+    initialDelaySeconds: 10
+    successThreshold: 1
+    failureThreshold: 3
+    timeoutSeconds: 1
+    periodSeconds: 10
+
+  readinessProbe:
+    enabled: false
+    initialDelaySeconds: 10
+    successThreshold: 1
+    failureThreshold: 3
+    timeoutSeconds: 1
+    periodSeconds: 10
+
   nginx:
     image:
       registry: docker.io
@@ -206,6 +222,21 @@ web:
     secretNamesForExtraEnv: []
     extraEnv: {}
 
+    livenessProbe:
+      enabled: false
+      initialDelaySeconds: 10
+      successThreshold: 1
+      failureThreshold: 3
+      timeoutSeconds: 1
+      periodSeconds: 10
+
+    readinessProbe:
+      enabled: false
+      initialDelaySeconds: 10
+      successThreshold: 1
+      failureThreshold: 3
+      timeoutSeconds: 1
+      periodSeconds: 10
 
 # Postfix
 postfix:

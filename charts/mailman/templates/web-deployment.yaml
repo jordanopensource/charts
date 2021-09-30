@@ -66,14 +66,28 @@ spec:
             - name: http
               containerPort: 80
               protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
+        {{- if .Values.web.nginx.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: {{ .Values.web.nginx.livenessProbe.initialDelaySeconds }}
+            successThreshold: {{ .Values.web.nginx.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.web.nginx.livenessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.web.nginx.livenessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.web.nginx.livenessProbe.periodSeconds }}
+        {{- end }}
+        {{- if .Values.web.nginx.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            initialDelaySeconds: {{ .Values.web.nginx.readinessProbe.initialDelaySeconds }}
+            successThreshold: {{ .Values.web.nginx.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.web.nginx.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.web.nginx.readinessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.web.nginx.readinessProbe.periodSeconds }}
+        {{- end }}
           resources:
             {{- toYaml .Values.web.nginx.resources | nindent 12 }}
         - name: {{ .Chart.Name }}-web
@@ -88,14 +102,28 @@ spec:
             - name: api
               containerPort: 8000
               protocol: TCP
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
+        {{- if .Values.web.livenessProbe.enabled }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: api
+            initialDelaySeconds: {{ .Values.web.livenessProbe.initialDelaySeconds }}
+            successThreshold: {{ .Values.web.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.web.livenessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.web.livenessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.web.livenessProbe.periodSeconds }}
+        {{- end }}
+        {{- if .Values.web.readinessProbe.enabled }}
+          readinessProbe:
+            httpGet:
+              path: /
+              port: api
+            initialDelaySeconds: {{ .Values.web.readinessProbe.initialDelaySeconds }}
+            successThreshold: {{ .Values.web.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.web.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.web.readinessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.web.readinessProbe.periodSeconds }}
+        {{- end }}
           resources:
             {{- toYaml .Values.web.resources | nindent 12 }}
           env:
