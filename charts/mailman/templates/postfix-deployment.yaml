@@ -81,14 +81,26 @@ spec:
               containerPort: 587
               protocol: TCP
           {{- end }}
-          # livenessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
-          # readinessProbe:
-          #   httpGet:
-          #     path: /
-          #     port: http
+        {{- if .Values.postfix.livenessProbe.enabled }}
+          livenessProbe:
+            tcpSocket:
+              port: 25
+            initialDelaySeconds: {{ .Values.postfix.livenessProbe.initialDelaySeconds }}
+            successThreshold: {{ .Values.postfix.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.postfix.livenessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.postfix.livenessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.postfix.livenessProbe.periodSeconds }}
+        {{- end }}
+        {{- if .Values.postfix.readinessProbe.enabled }}
+          readinessProbe:
+            tcpSocket:
+              port: 25
+            initialDelaySeconds: {{ .Values.postfix.readinessProbe.initialDelaySeconds }}
+            successThreshold: {{ .Values.postfix.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.postfix.readinessProbe.failureThreshold }}
+            timeoutSeconds: {{ .Values.postfix.readinessProbe.timeoutSeconds }}
+            periodSeconds: {{ .Values.postfix.readinessProbe.periodSeconds }}
+        {{- end }}
           resources:
             {{- toYaml .Values.postfix.resources | nindent 12 }}
           env:
