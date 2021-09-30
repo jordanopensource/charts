@@ -87,16 +87,16 @@ core:
   extraEnv: {}
 
   livenessProbe:
-    enabled: true
-    initialDelaySeconds: 10
+    enabled: false
+    initialDelaySeconds: 0
     successThreshold: 1
     failureThreshold: 3
     timeoutSeconds: 1
     periodSeconds: 10
 
   readinessProbe:
-    enabled: true
-    initialDelaySeconds: 10
+    enabled: false
+    initialDelaySeconds: 0
     successThreshold: 1
     failureThreshold: 3
     timeoutSeconds: 1
@@ -116,16 +116,16 @@ core:
       FILES: "/opt/mailman/var/data/postfix_domains,/opt/mailman/var/data/postfix_lmtp"
 
     livenessProbe:
-      enabled: true
-      initialDelaySeconds: 10
+      enabled: false
+      initialDelaySeconds: 0
       successThreshold: 1
       failureThreshold: 3
       timeoutSeconds: 1
       periodSeconds: 10
 
     readinessProbe:
-      enabled: true
-      initialDelaySeconds: 10
+      enabled: false
+      initialDelaySeconds: 0
       successThreshold: 1
       failureThreshold: 3
       timeoutSeconds: 1
@@ -158,7 +158,7 @@ web:
       http: 80
 
   ingress:
-    enabled: true
+    enabled: false
     className: ""
     annotations: {}
     hosts:
@@ -197,7 +197,7 @@ web:
 
   livenessProbe:
     enabled: false
-    initialDelaySeconds: 10
+    initialDelaySeconds: 0
     successThreshold: 1
     failureThreshold: 3
     timeoutSeconds: 1
@@ -205,7 +205,7 @@ web:
 
   readinessProbe:
     enabled: false
-    initialDelaySeconds: 10
+    initialDelaySeconds: 0
     successThreshold: 1
     failureThreshold: 3
     timeoutSeconds: 1
@@ -224,7 +224,7 @@ web:
 
     livenessProbe:
       enabled: false
-      initialDelaySeconds: 10
+      initialDelaySeconds: 0
       successThreshold: 1
       failureThreshold: 3
       timeoutSeconds: 1
@@ -232,7 +232,7 @@ web:
 
     readinessProbe:
       enabled: false
-      initialDelaySeconds: 10
+      initialDelaySeconds: 0
       successThreshold: 1
       failureThreshold: 3
       timeoutSeconds: 1
