@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "mailman.postfix.fullname" . }}
+  labels:
+    {{- include "mailman.labels" . | nindent 4 }}
+  {{- with .Values.postfix.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.postfix.service.type }}
+  externalTrafficPolicy: {{ .Values.postfix.service.externalTrafficPolicy }}
+  ports:
+    - port: {{ .Values.postfix.service.ports.smtp }}
+      targetPort: smtp
+      protocol: TCP
+      name: smtp
+  {{- if .Values.postfix.certSecret }}
+    - port: {{ .Values.postfix.service.ports.tls }}
+      targetPort: tls
+      protocol: TCP
+      name: tls
+  {{- end }}
+  selector:
+    {{- include "mailman.postfix.selectorLabels" . | nindent 4 }}
