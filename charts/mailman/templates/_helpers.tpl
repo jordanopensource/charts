@@ -134,7 +134,7 @@ Define postfix required enviroment variable
   value: {{ .Values.postfix.relay.port | quote }}
 {{- end }}
 - name: SMTP_USER
-{{- if .Values.postfix.existingSecret }}
+{{- if .Values.postfix.existingSecret.userAndPasswordKey }}
   valueFrom:
     secretKeyRef:
       name: {{ .Values.postfix.existingSecret.secretName }}
@@ -144,7 +144,7 @@ Define postfix required enviroment variable
 {{- end }}
 {{- if .Values.postfix.relay.enabled }}
 - name: RELAY_USERNAME
-{{- if .Values.postfix.relay.existingSecret }}
+{{- if .Values.postfix.relay.existingSecret.userKey }}
   valueFrom:
     secretKeyRef:
       name: {{ .Values.postfix.relay.existingSecret.secretName }}
@@ -153,7 +153,7 @@ Define postfix required enviroment variable
   value: {{ .Values.postfix.relay.username }}
 {{- end }}
 - name: RELAY_PASSWORD
-{{- if .Values.postfix.relay.existingSecret }}
+{{- if .Values.postfix.relay.existingSecret.passwordKey }}
   valueFrom:
     secretKeyRef:
       name: {{ .Values.postfix.relay.existingSecret.secretName }}
@@ -197,7 +197,7 @@ Define mailman web required enviroment variable
 - name: MAILMAN_REST_URL
   value: "http://{{ include "mailman.core.fullname" . }}:8001"
 - name: SMTP_HOST_USER
-{{- if .Values.postfix.existingSecret }}
+{{- if .Values.postfix.existingSecret.usernameKey }}
   valueFrom:
     secretKeyRef:
       name: {{ .Values.postfix.existingSecret.secretName }}
@@ -206,7 +206,7 @@ Define mailman web required enviroment variable
   value: {{ .Values.postfix.username }}
 {{- end }}
 - name: SMTP_HOST_PASSWORD
-{{- if .Values.postfix.existingSecret }}
+{{- if .Values.postfix.existingSecret.passwordKey }}
   valueFrom:
     secretKeyRef:
       name: {{ .Values.postfix.existingSecret.secretName }}
@@ -253,7 +253,7 @@ Define required mailman common (web and core) enviroment variable
 - name: DATABASE_CLASS
   value: "mailman.database.postgresql.PostgreSQLDatabase"
 - name: DATABASE_URL
-{{- if .Values.postgresql.existingSecret }}
+{{- if .Values.postgresql.existingSecret.databaseUrlKey }}
   valueFrom:
     secretKeyRef:
       name: {{ .Values.postgresql.existingSecret.secretName }}
@@ -268,7 +268,7 @@ Define required mailman common (web and core) enviroment variable
   valueFrom:
     secretKeyRef:
       name: {{ .Values.mailman.existingSecret.secretName }}
-      key: {{ .Values.mailman.existingSecret.apiKeyKey }}
+      key: {{ .Values.mailman.existingSecret.apiKey }}
 {{- else }}
   value: {{ .Values.mailman.apiKey | quote }}
 {{- end }}
