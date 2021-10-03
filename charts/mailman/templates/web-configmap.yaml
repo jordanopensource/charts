@@ -45,15 +45,7 @@ data:
         alias /opt/mailman-web-data/static/;
       }
     }
-  settings_local.py: |
-    HAYSTACK_CONNECTIONS = {
-        'default': {
-            'ENGINE': 'xapian_backend.XapianEngine',
-            'PATH': "/opt/mailman-web-data/fulltext_index",
-        },
-    }
-    import dj_database_url
-    DATABASES = {
-        'default': dj_database_url.config(conn_max_age=0)
-    }
-    ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"
+{{- if .Values.web.extraConfig }}
+  settings_local.py:
+    {{- toYaml .Values.web.extraConfig | nindent 4 }}
+{{- end }}

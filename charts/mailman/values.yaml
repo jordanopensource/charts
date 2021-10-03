@@ -213,6 +213,19 @@ web:
     timeoutSeconds: 1
     periodSeconds: 10
 
+  extraConfig: |
+    HAYSTACK_CONNECTIONS = {
+      'default': {
+          'ENGINE': 'xapian_backend.XapianEngine',
+          'PATH': "/opt/mailman-web-data/fulltext_index",
+      },
+    }
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.config(conn_max_age=0)
+    }
+    ACCOUNT_DEFAULT_HTTP_PROTOCOL = "http"
+
   nginx:
     image:
       registry: docker.io
