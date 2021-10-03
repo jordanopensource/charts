@@ -4,6 +4,10 @@ metadata:
   name: {{ include "mailman.postfix.fullname" . }}
   labels:
     {{- include "mailman.labels" . | nindent 4 }}
+  {{- with .Values.postfix.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.postfix.service.type }}
   externalTrafficPolicy: {{ .Values.postfix.service.externalTrafficPolicy }}

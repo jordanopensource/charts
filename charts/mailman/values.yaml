@@ -50,6 +50,7 @@ core:
     ports:
       api: 8001
       postfixExtender: 5000
+    annotations: {}
 
   replicaCount: 1
 
@@ -156,6 +157,7 @@ web:
     ports:
       api: 8000
       http: 80
+    annotations: {}
 
   ingress:
     enabled: false
@@ -270,6 +272,7 @@ postfix:
     ports:
       smtp: 25
       tls: 587
+    annotations: {}
 
   replicaCount: 1
   

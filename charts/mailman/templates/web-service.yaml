@@ -4,6 +4,10 @@ metadata:
   name: {{ include "mailman.web.fullname" . }}
   labels:
     {{- include "mailman.labels" . | nindent 4 }}
+  {{- with .Values.web.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
   type: {{ .Values.web.service.type }}
   ports:
