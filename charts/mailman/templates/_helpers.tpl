@@ -191,7 +191,7 @@ Define mailman web required enviroment variable
 - name: DJANGO_ALLOWED_HOSTS
   value: {{ include "mailman.web.fullname" . }}
 - name: MAILMAN_HOST_IP
-  value: {{ include "mailman.web.fullname" . }}
+  value: '*'
 - name: POSTORIUS_TEMPLATE_BASE_URL
   value: "http://{{ include "mailman.web.fullname" . }}:8000"
 - name: MAILMAN_REST_URL
