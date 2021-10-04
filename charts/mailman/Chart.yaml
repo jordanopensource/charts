@@ -1,6 +1,6 @@
 apiVersion: v2
 name: mailman
-version: 1.0.3
+version: 1.0.4
 appVersion: 0.4
 description: Mailman is free software for managing electronic mail discussion and e-newsletter lists.
 home: https://list.org

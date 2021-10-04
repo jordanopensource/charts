@@ -2,8 +2,6 @@
 
 Mailman is free software for managing electronic mail discussion and e-newsletter lists.
 
-Chart version : `1.0.0`
-
 Mailman version: [`3.3.5`](https://gitlab.com/mailman/mailman/-/tree/3.3.5)
 
 This chart uses [`maxking/docker-mailman:0.4.1`](https://github.com/maxking/docker-mailman/tree/v0.4.1)
