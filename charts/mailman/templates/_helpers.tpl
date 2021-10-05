@@ -134,11 +134,11 @@ Define postfix required enviroment variable
   value: {{ .Values.postfix.relay.port | quote }}
 {{- end }}
 - name: SMTP_USER
-{{- if .Values.postfix.existingSecret.userAndPasswordKey }}
+{{- if .Values.postfix.existingSecret.usernameAndPasswordKey }}
   valueFrom:
     secretKeyRef:
       name: {{ .Values.postfix.existingSecret.secretName }}
-      key: {{ .Values.postfix.existingSecret.userAndPasswordKey }}
+      key: {{ .Values.postfix.existingSecret.usernameAndPasswordKey }}
 {{- else }}
   value: "{{ .Values.postfix.username }}:{{ .Values.postfix.password }}"
 {{- end }}
