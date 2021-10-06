@@ -53,7 +53,9 @@ core:
     annotations: {}
 
   replicaCount: 1
-
+  
+  updateStrategy: RollingUpdate 
+  
   image:
     registry: docker.io
     repository: maxking/mailman-core
@@ -171,6 +173,7 @@ web:
     tls: []
 
   replicaCount: 1
+  updateStrategy: RollingUpdate 
   podAnnotations: {}
   podSecurityContext: {}
   securityContext: {}
@@ -289,6 +292,8 @@ postfix:
 
   replicaCount: 1
   
+  updateStrategy: RollingUpdate 
+
   image:
     registry: docker.io
     repository: danilsmirnov/postfix

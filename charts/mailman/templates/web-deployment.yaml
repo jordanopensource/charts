@@ -8,6 +8,9 @@ spec:
   {{- if not .Values.web.autoscaling.enabled }}
   replicas: {{ .Values.web.replicaCount }}
   {{- end }}
+  {{- if .Values.web.updateStrategy }}
+  strategy: {{ .Values.web.updateStrategy }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "mailman.web.selectorLabels" . | nindent 6 }}

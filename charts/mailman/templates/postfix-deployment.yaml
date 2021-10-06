@@ -8,6 +8,9 @@ spec:
   {{- if not .Values.postfix.autoscaling.enabled }}
   replicas: {{ .Values.postfix.replicaCount }}
   {{- end }}
+  {{- if .Values.postfix.updateStrategy }}
+  strategy: {{ .Values.postfix.updateStrategy }}
+  {{- end }}
   selector:
     matchLabels:
       {{- include "mailman.postfix.selectorLabels" . | nindent 6 }}
