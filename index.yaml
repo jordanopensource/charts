@@ -144,6 +144,34 @@ entries:
   mailman:
   - apiVersion: v2
     appVersion: "0.4"
+    created: "2021-10-06T14:29:04.258057546Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.2
+    description: Mailman is free software for managing electronic mail discussion
+      and e-newsletter lists.
+    digest: 471a30639866c012fd1239bc7256b350cb860221384ac6dbb6aa7ff4bae16f53
+    home: https://list.org
+    icon: https://list.org/images/logo2010-2.jpg
+    keywords:
+    - mail
+    - mailing-list
+    - newsletter
+    - mailman
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: mailman
+    sources:
+    - https://github.com/maxking/docker-mailman
+    - https://gitlab.com/mailman
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mailman-1.0.9/mailman-1.0.9.tgz
+    version: 1.0.9
+  - apiVersion: v2
+    appVersion: "0.4"
     created: "2021-10-06T13:28:49.932632644Z"
     dependencies:
     - condition: postgresql.internal
@@ -673,4 +701,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-10-06T13:28:49.932721145Z"
+generated: "2021-10-06T14:29:04.258126046Z"
