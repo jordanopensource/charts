@@ -49,6 +49,7 @@ core:
     type: ClusterIP
     ports:
       api: 8001
+      lmtp: 8024
       postfixExtender: 5000
     annotations: {}
 

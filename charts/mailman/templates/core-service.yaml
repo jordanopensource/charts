@@ -19,5 +19,9 @@ spec:
       targetPort: extender
       protocol: TCP
       name: extender
+    - port: {{ .Values.core.service.ports.lmtp }}
+      targetPort: lmtp
+      protocol: TCP
+      name: lmtp
   selector:
     {{- include "mailman.core.selectorLabels" . | nindent 4 }}
