@@ -144,11 +144,11 @@ Define postfix required enviroment variable
 {{- end }}
 {{- if .Values.postfix.relay.enabled }}
 - name: RELAY_USERNAME
-{{- if .Values.postfix.relay.existingSecret.userKey }}
+{{- if .Values.postfix.relay.existingSecret.usernameKey }}
   valueFrom:
     secretKeyRef:
       name: {{ .Values.postfix.relay.existingSecret.secretName }}
-      key: {{ .Values.postfix.relay.existingSecret.userKey }}
+      key: {{ .Values.postfix.relay.existingSecret.usernameKey }}
 {{- else }}
   value: {{ .Values.postfix.relay.username }}
 {{- end }}
