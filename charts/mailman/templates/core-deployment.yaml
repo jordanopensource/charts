@@ -9,7 +9,7 @@ spec:
   replicas: {{ .Values.core.replicaCount }}
   {{- end }}
   {{- if .Values.core.updateStrategy }}
-  strategy: {{ .Values.core.updateStrategy }}
+  strategy: {{- tpl (toYaml .Values.core.updateStrategy) $ | nindent 4 }}
   {{- end }}
   selector:
     matchLabels:

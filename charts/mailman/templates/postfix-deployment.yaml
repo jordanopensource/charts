@@ -9,7 +9,7 @@ spec:
   replicas: {{ .Values.postfix.replicaCount }}
   {{- end }}
   {{- if .Values.postfix.updateStrategy }}
-  strategy: {{ .Values.postfix.updateStrategy }}
+  strategy: {{- tpl (toYaml .Values.postfix.updateStrategy) $ | nindent 4 }}
   {{- end }}
   selector:
     matchLabels:
