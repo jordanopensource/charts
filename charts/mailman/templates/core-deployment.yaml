@@ -96,9 +96,6 @@ spec:
             - name: api
               containerPort: 8001
               protocol: TCP
-            - name: lmtp
-              containerPort: 8024
-              protocol: TCP
         {{- if .Values.core.livenessProbe.enabled }}
           livenessProbe:
             tcpSocket:
