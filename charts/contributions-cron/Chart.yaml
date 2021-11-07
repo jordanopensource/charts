@@ -1,0 +1,12 @@
+apiVersion: v1
+name: contributions-cron
+description: A chart for the contributions CRON job
+version: 1.0.0
+keywords:
+  - cron
+home: "https://github.com/jordanopensource/contributions-cron"
+sources:
+  - "https://github.com/jordanopensource/contributions-cron"
+maintainers:
+  - email: admin@josa.ngo
+    name: Jordan Open Source Association

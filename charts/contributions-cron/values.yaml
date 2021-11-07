@@ -1,0 +1,23 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+jobs:
+  # Contributors CRON
+  - name: contributors-cron
+    image:
+      repository: josaorg/top-contributors-cron
+      tag: latest
+      imagePullPolicy: Always
+    resources:
+      limits:
+        cpu: 50m
+        memory: 256Mi
+      requests:
+        cpu: 50m
+        memory: 256Mi
+    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 3
+    concurrencyPolicy: Forbid
+    restartPolicy: Never
+    tolerations:
+      - effect: NoSchedule
+        operator: Exists
