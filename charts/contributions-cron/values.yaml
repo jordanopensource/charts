@@ -7,6 +7,8 @@ jobs:
       repository: josaorg/top-contributors-cron
       tag: latest
       imagePullPolicy: Always
+    # CRON job schedule
+    schedule: "0 * * * *"
     resources:
       limits:
         cpu: 50m
