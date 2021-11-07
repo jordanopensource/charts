@@ -1,5 +1,22 @@
 apiVersion: v1
 entries:
+  contributions-cron:
+  - apiVersion: v1
+    created: "2021-11-07T16:56:20.360931388Z"
+    description: A chart for the contributions CRON job
+    digest: 46cad80475b0e92f8ac11886c2ae2e427fdfd5219fdc75c41299383c31171380
+    home: https://github.com/jordanopensource/contributions-cron
+    keywords:
+    - cron
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-cron
+    sources:
+    - https://github.com/jordanopensource/contributions-cron
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-cron-1.0.0/contributions-cron-1.0.0.tgz
+    version: 1.0.0
   drone:
   - apiVersion: v2
     appVersion: 1.10.1
@@ -729,4 +746,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-10-06T15:25:16.771289685Z"
+generated: "2021-11-07T16:56:20.361200491Z"
