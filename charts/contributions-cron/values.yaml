@@ -8,7 +8,7 @@ jobs:
       tag: latest
       imagePullPolicy: Always
     # CRON job schedule
-    schedule: "0 * * * *"
+    schedule: "* * * * *"
     resources:
       limits:
         cpu: 50m
