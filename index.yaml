@@ -17,6 +17,27 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/contributions-cron-1.0.0/contributions-cron-1.0.0.tgz
     version: 1.0.0
+  contributions-web:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2021-11-09T17:59:06.545877251Z"
+    description: A Nuxtjs web client for the Jordan Top Contributors Website, a website
+      that displays the top contributors to open source repositories in Jordan.
+    digest: ddde4a032facd1e854661bf41f19f38c0b3f863a8436c7797eb2affdd9d8301f
+    home: https://github.com/jordanopensource/contributions-web
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - nuxt
+    - javascript
+    - vue
+    - frontend
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-web
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-web-1.0.0/contributions-web-1.0.0.tgz
+    version: 1.0.0
   drone:
   - apiVersion: v2
     appVersion: 1.10.1
@@ -746,4 +767,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-11-07T16:56:20.361200491Z"
+generated: "2021-11-09T17:59:06.54600716Z"
