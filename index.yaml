@@ -2,6 +2,26 @@ apiVersion: v1
 entries:
   contributions-api:
   - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2021-11-10T22:19:42.825393866Z"
+    description: Express based APIs for the JOSA Top Contributors.
+    digest: 3f4f6f7e93536f1694fad4a647debb28a655ac52453cb5eefd810967ccdc6ecd
+    home: https://github.com/jordanopensource/contributions-api
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - express
+    - javascript
+    - node
+    - backend
+    - api
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-api
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-api-1.0.1/contributions-api-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     appVersion: 1.0.0
     created: "2021-11-09T18:11:34.123237836Z"
     description: Express based APIs for the JOSA Top Contributors.
@@ -787,4 +807,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-11-09T18:11:34.123319338Z"
+generated: "2021-11-10T22:19:42.82547387Z"
