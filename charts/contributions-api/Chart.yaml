@@ -1,6 +1,6 @@
 apiVersion: v2
 appVersion: 1.0.0
-description: Express based APIs for the JOSA Top Contributors. 
+description: Express based APIs for the JOSA Top Contributors.
 home: https://github.com/jordanopensource/contributions-api
 keywords:
   - nuxt
