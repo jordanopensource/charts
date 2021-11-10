@@ -33,9 +33,18 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            HOST: {{ .Chart.Name }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "contributions-api.fullname" . }}-config
+          {{- range .Values.secretNamesForEnv }}
+            - secretRef:
+                name: {{ . }}
+          {{- end }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 8080
               protocol: TCP
           livenessProbe:
             httpGet:

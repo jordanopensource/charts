@@ -56,6 +56,11 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
+env:
+  - NODE_ENV: dev
+
+secretNamesForEnv: []
+
 resources:
   {}
   # We usually recommend not to specify default resources and to leave this as a conscious
