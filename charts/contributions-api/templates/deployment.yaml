@@ -56,6 +56,8 @@ spec:
             httpGet:
               path: /
               port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
           {{- if .Values.certificate.enabled }}
           volumeMounts:
           - mountPath: {{ .Values.certificate.path | quote }}
@@ -64,10 +66,8 @@ spec:
       volumes:
         - name: ca-certificate
           secret:
-            secretName: {{ .Values.certificate.secret}}
+            secretName: {{ .Values.certificate.secret }}
           {{- end }}
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
