@@ -81,6 +81,12 @@ configMapNamesforEnv: []
 env:
   NODE_ENV: dev
 
+# Certificate for DB connection
+# certificate:
+#   enabled: true
+#   path: /app
+#   secret: secret-name
+
 nodeSelector: {}
 
 tolerations: []

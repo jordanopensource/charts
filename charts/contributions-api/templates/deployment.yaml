@@ -56,6 +56,16 @@ spec:
             httpGet:
               path: /
               port: http
+          {{- if .Values.certificate.enabled }}
+          volumeMounts:
+          - mountPath: {{ .Values.certificate.path | quote }}
+            name: ca-certificate
+            readOnly: true
+      volumes:
+        - name: ca-certificate
+          secret:
+            secretName: {{ .Values.certificate.secret}}
+          {{- end }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
