@@ -36,6 +36,10 @@ spec:
           envFrom:
             - configMapRef:
                 name: {{ include "contributions-api.fullname" . }}-config
+            {{- range .Values.configMapNamesforEnv }}
+            - configMapRef:
+                name: {{ . }}
+          {{- end }}
           {{- range .Values.secretNamesForEnv }}
             - secretRef:
                 name: {{ . }}

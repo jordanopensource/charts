@@ -75,6 +75,8 @@ autoscaling:
 # Add secrets here
 secretNamesForEnv: []
 
+configMapNamesforEnv: []
+
 # Enviornment variables mapped literally here
 env:
   NODE_ENV: dev
