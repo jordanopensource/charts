@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: 1.0.4
+appVersion: 1.0.5
 description: Express based APIs for the JOSA Top Contributors. 
 home: https://github.com/jordanopensource/contributions-api
 keywords:
@@ -12,5 +12,5 @@ maintainers:
   - email: admin@josa.ngo
     name: Jordan Open Source Association
 name: contributions-api
-version: 1.0.4
+version: 1.0.5
 icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
