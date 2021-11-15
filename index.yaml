@@ -642,6 +642,32 @@ entries:
     version: 1.0.0
   monica:
   - apiVersion: v2
+    appVersion: 3.4.0
+    created: "2021-11-15T14:36:00.067639903Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.8.6
+    description: Personal CRM. Remember everything about your friends, family and
+      business relationships.
+    digest: 11e4cb9ab82c95d528f5003559f7e08d34990a0c0be73e00339f2fa594431037
+    home: https://www.monicahq.com
+    icon: https://www.monicahq.com/img/logo_vertical.png
+    keywords:
+    - social
+    - crm
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: monica
+    sources:
+    - https://github.com/monicahq/monica
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/monica-1.0.3/monica-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
     appVersion: "3.2"
     created: "2021-09-14T18:57:25.266042384Z"
     dependencies:
@@ -887,4 +913,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-11-11T15:15:15.450064653Z"
+generated: "2021-11-15T14:36:00.067844404Z"
