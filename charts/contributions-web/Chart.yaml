@@ -1,6 +1,6 @@
 apiVersion: v2
 appVersion: 1.0.0
-description: A Nuxtjs web client for the Jordan Top Contributors Website, a website that displays the top contributors to open source repositories in Jordan.
+description: The web client for the Github contributions in Jordan. 
 home: https://github.com/jordanopensource/contributions-web
 keywords:
   - nuxt
@@ -11,5 +11,5 @@ maintainers:
   - email: admin@josa.ngo
     name: Jordan Open Source Association
 name: contributions-web
-version: 1.0.0
+version: 1.0.1
 icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg

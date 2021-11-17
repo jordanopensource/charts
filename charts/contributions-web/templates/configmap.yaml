@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "contributions-web.fullname" . }}-config
+  labels:
+    {{- include "contributions-web.labels" . | nindent 4 }}
+data:
+{{- range $envKey, $envVal := .Values.env }}
+  {{ $envKey | upper }}: {{ $envVal | quote }}
+{{- end }}

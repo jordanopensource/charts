@@ -8,7 +8,7 @@ image:
   repository: josaorg/contributions-web
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -42,12 +42,15 @@ service:
 
 ingress:
   enabled: false
+  className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: contributions.local
-      paths: []
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
@@ -74,7 +77,13 @@ autoscaling:
 
 nodeSelector: {}
 
-
 tolerations: []
 
 affinity: {}
+# Enviornment variables
+# env:
+#   API_BASE_URL:
+
+configMapNamesforEnv: []
+
+secretNamesforEnv: []

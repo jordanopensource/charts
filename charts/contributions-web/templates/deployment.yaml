@@ -33,6 +33,17 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "contributions-web.fullname" . }}-config
+            {{- range .Values.configMapNamesforEnv }}
+            - configMapRef:
+                name: {{ . }}
+          {{- end }}
+          {{- range .Values.secretNamesForEnv }}
+            - secretRef:
+                name: {{ . }}
+          {{- end }}
           ports:
             - name: http
               containerPort: 3000
