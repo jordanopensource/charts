@@ -1,0 +1,962 @@
+apiVersion: v1
+entries:
+  contributions-api:
+  - apiVersion: v2
+    appVersion: 1.0.5
+    created: "2021-11-11T15:15:15.449986751Z"
+    description: Express based APIs for the JOSA Top Contributors.
+    digest: 861cd2cf1fe27a9ca009757dae955f54601542c4860723633fe19aa45da03f8f
+    home: https://github.com/jordanopensource/contributions-api
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - express
+    - javascript
+    - node
+    - backend
+    - api
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-api
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-api-1.0.5/contributions-api-1.0.5.tgz
+    version: 1.0.5
+  - apiVersion: v2
+    appVersion: 1.0.4
+    created: "2021-11-11T11:05:38.549362657Z"
+    description: Express based APIs for the JOSA Top Contributors.
+    digest: a2f702e3d46885940e9d072276ae6475a2623a1f439b187c1855ba07849e8549
+    home: https://github.com/jordanopensource/contributions-api
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - express
+    - javascript
+    - node
+    - backend
+    - api
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-api
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-api-1.0.4/contributions-api-1.0.4.tgz
+    version: 1.0.4
+  - apiVersion: v2
+    appVersion: 1.0.3
+    created: "2021-11-11T10:57:37.399935166Z"
+    description: Express based APIs for the JOSA Top Contributors.
+    digest: e5718ef92a1d3067ddf8107eca5bbbb2fcd43f2ef6ed2077cc8c7854486f22fd
+    home: https://github.com/jordanopensource/contributions-api
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - express
+    - javascript
+    - node
+    - backend
+    - api
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-api
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-api-1.0.3/contributions-api-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
+    appVersion: 1.0.2
+    created: "2021-11-11T10:20:44.778858711Z"
+    description: Express based APIs for the JOSA Top Contributors.
+    digest: 0a39bff43c9fa9e06eb72f7b62a2bd47a6a08a3a53e27c8def9815531b446054
+    home: https://github.com/jordanopensource/contributions-api
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - express
+    - javascript
+    - node
+    - backend
+    - api
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-api
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-api-1.0.2/contributions-api-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: 1.0.1
+    created: "2021-11-10T22:19:42.825393866Z"
+    description: Express based APIs for the JOSA Top Contributors.
+    digest: 3f4f6f7e93536f1694fad4a647debb28a655ac52453cb5eefd810967ccdc6ecd
+    home: https://github.com/jordanopensource/contributions-api
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - express
+    - javascript
+    - node
+    - backend
+    - api
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-api
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-api-1.0.1/contributions-api-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2021-11-09T18:11:34.123237836Z"
+    description: Express based APIs for the JOSA Top Contributors.
+    digest: 22208147b037c2805ad4c8bff10c5dda008e8cc094afd91949c2e9e28616da08
+    home: https://github.com/jordanopensource/contributions-api
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - express
+    - javascript
+    - api
+    - backend
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-api
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-api-1.0.0/contributions-api-1.0.0.tgz
+    version: 1.0.0
+  contributions-cron:
+  - apiVersion: v1
+    created: "2021-11-17T17:52:56.671280421Z"
+    description: CRON job for data aggregation from Github.
+    digest: 8ced50bd06f931d5b8cc789d4381ea6fcdaf52069b13563e76f7cf0c0974720f
+    home: https://github.com/jordanopensource/contributions-cron
+    keywords:
+    - cron
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-cron
+    sources:
+    - https://github.com/jordanopensource/contributions-cron
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-cron-1.0.1/contributions-cron-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v1
+    created: "2021-11-07T16:56:20.360931388Z"
+    description: A chart for the contributions CRON job
+    digest: 46cad80475b0e92f8ac11886c2ae2e427fdfd5219fdc75c41299383c31171380
+    home: https://github.com/jordanopensource/contributions-cron
+    keywords:
+    - cron
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-cron
+    sources:
+    - https://github.com/jordanopensource/contributions-cron
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-cron-1.0.0/contributions-cron-1.0.0.tgz
+    version: 1.0.0
+  contributions-web:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2021-11-17T17:58:14.652544461Z"
+    description: The web client for the Github contributions in Jordan.
+    digest: a03d514c660eefbc8846ef496abc22228fb0ce2a8dffabe03925396a444c0afe
+    home: https://github.com/jordanopensource/contributions-web
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - nuxt
+    - javascript
+    - vue
+    - frontend
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-web
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-web-1.0.1/contributions-web-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2021-11-09T17:59:06.545877251Z"
+    description: A Nuxtjs web client for the Jordan Top Contributors Website, a website
+      that displays the top contributors to open source repositories in Jordan.
+    digest: ddde4a032facd1e854661bf41f19f38c0b3f863a8436c7797eb2affdd9d8301f
+    home: https://github.com/jordanopensource/contributions-web
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - nuxt
+    - javascript
+    - vue
+    - frontend
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: contributions-web
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/contributions-web-1.0.0/contributions-web-1.0.0.tgz
+    version: 1.0.0
+  drone:
+  - apiVersion: v2
+    appVersion: 1.10.1
+    created: "2021-08-15T22:43:12.940177025Z"
+    description: Drone is a Container-Native, Continuous Delivery Platform.
+    digest: d4a3cb932cb47b6574533ffbf67bcb3dc3350f122457ddb358a7c5e67ccdf52f
+    home: https://drone.io/
+    icon: https://github.com/drone/brand/blob/master/logos/png/dark/drone-logo-png-dark-64.png
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - drone
+    - drone.io
+    - go
+    - drone-server
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: drone
+    sources:
+    - https://github.com/drone/drone
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/drone-1.0.1/drone-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.10.1
+    created: "2021-08-15T13:11:34.27772083Z"
+    description: Drone is a Container-Native, Continuous Delivery Platform.
+    digest: b1fda715fc49bc9a394d1c1e2eb483782fe37d7c562e2085c31feb45b61d82c2
+    home: https://drone.io/
+    icon: https://github.com/drone/brand/blob/master/logos/png/dark/drone-logo-png-dark-64.png
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - drone
+    - drone.io
+    - go
+    - drone-server
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: drone
+    sources:
+    - https://github.com/drone/drone
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/drone-1.0.0/drone-1.0.0.tgz
+    version: 1.0.0
+  drone-runner-kube:
+  - apiVersion: v2
+    appVersion: 1.0.0-beta.8
+    created: "2021-08-16T00:26:50.410098007Z"
+    description: The Drone Kubernetes runner launches builds in Kubernetes Jobs.
+    digest: 4210e4fc2c1c11a0cd7a744ef577c1531f002a36681a0670492c6358b171a43e
+    home: https://drone.io/
+    icon: https://github.com/drone/brand/blob/master/logos/png/dark/drone-logo-png-dark-64.png
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - drone
+    - drone.io
+    - go
+    - drone-server
+    - drone-runner
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: drone-runner-kube
+    sources:
+    - https://github.com/drone-runners/drone-runner-kube
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/drone-runner-kube-1.0.2/drone-runner-kube-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: 1.0.0-beta.8
+    created: "2021-08-15T23:22:57.633410892Z"
+    description: The Drone Kubernetes runner launches builds in Kubernetes Jobs.
+    digest: 3ee830c504d15e16dd1c72879277246b89366018688501848a03d999678bd8b0
+    home: https://drone.io/
+    icon: https://github.com/drone/brand/blob/master/logos/png/dark/drone-logo-png-dark-64.png
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - drone
+    - drone.io
+    - go
+    - drone-server
+    - drone-runner
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: drone-runner-kube
+    sources:
+    - https://github.com/drone-runners/drone-runner-kube
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/drone-runner-kube-1.0.1/drone-runner-kube-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.0.0-beta.8
+    created: "2021-08-15T13:11:34.454125037Z"
+    description: The Drone Kubernetes runner launches builds in Kubernetes Jobs.
+    digest: ba5b009d24305db59f54922c1c51a7821bf343fe39e21245cf3e95a531e0009a
+    home: https://drone.io/
+    icon: https://github.com/drone/brand/blob/master/logos/png/dark/drone-logo-png-dark-64.png
+    keywords:
+    - continuous-delivery
+    - continuous-deployment
+    - continuous-integration
+    - docker
+    - drone
+    - drone.io
+    - go
+    - drone-server
+    - drone-runner
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: drone-runner-kube
+    sources:
+    - https://github.com/drone-runners/drone-runner-kube
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/drone-runner-kube-1.0.0/drone-runner-kube-1.0.0.tgz
+    version: 1.0.0
+  josa-autodiscover:
+  - apiVersion: v2
+    appVersion: 0.1.0
+    created: "2021-07-16T09:37:59.243231823Z"
+    description: A Helm chart for the JOSA Autodiscover service
+    digest: b8269a7b663bad85c9cbcd5e74c7477c75553e8ddc287cdd89d70a0eafb5e678
+    name: josa-autodiscover
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/josa-autodiscover-0.1.0/josa-autodiscover-0.1.0.tgz
+    version: 0.1.0
+  link:
+  - apiVersion: v2
+    appVersion: 2.7.3
+    created: "2021-11-15T14:57:17.438219341Z"
+    description: A Helm chart for Kutt
+    digest: c1178b0e890341d5d239f02a96af9b6fc0d92cedba6960418741fc179491f4f1
+    name: link
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/link-2.7.3/link-2.7.3.tgz
+    version: 2.7.3
+  mailman:
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2021-10-06T15:25:16.771001782Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.2
+    description: Mailman is free software for managing electronic mail discussion
+      and e-newsletter lists.
+    digest: bb2ba28759166f2900ab11c17275248e1883af941c08f588e6a1f4865fa1c340
+    home: https://list.org
+    icon: https://list.org/images/logo2010-2.jpg
+    keywords:
+    - mail
+    - mailing-list
+    - newsletter
+    - mailman
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: mailman
+    sources:
+    - https://github.com/maxking/docker-mailman
+    - https://gitlab.com/mailman
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mailman-1.0.10/mailman-1.0.10.tgz
+    version: 1.0.10
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2021-10-06T14:29:04.258057546Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.2
+    description: Mailman is free software for managing electronic mail discussion
+      and e-newsletter lists.
+    digest: 471a30639866c012fd1239bc7256b350cb860221384ac6dbb6aa7ff4bae16f53
+    home: https://list.org
+    icon: https://list.org/images/logo2010-2.jpg
+    keywords:
+    - mail
+    - mailing-list
+    - newsletter
+    - mailman
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: mailman
+    sources:
+    - https://github.com/maxking/docker-mailman
+    - https://gitlab.com/mailman
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mailman-1.0.9/mailman-1.0.9.tgz
+    version: 1.0.9
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2021-10-06T13:28:49.932632644Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.2
+    description: Mailman is free software for managing electronic mail discussion
+      and e-newsletter lists.
+    digest: 2d9466ac394cad5f428bd1f4f13f07b446743ec3d911f9814c4eb3142530e6bc
+    home: https://list.org
+    icon: https://list.org/images/logo2010-2.jpg
+    keywords:
+    - mail
+    - mailing-list
+    - newsletter
+    - mailman
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: mailman
+    sources:
+    - https://github.com/maxking/docker-mailman
+    - https://gitlab.com/mailman
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mailman-1.0.8/mailman-1.0.8.tgz
+    version: 1.0.8
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2021-10-05T16:03:21.334288092Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.2
+    description: Mailman is free software for managing electronic mail discussion
+      and e-newsletter lists.
+    digest: 3bdb6a4eb507be6be9d499c3db4e3759d98a595d672efc6de7ee7fb78e16bb74
+    home: https://list.org
+    icon: https://list.org/images/logo2010-2.jpg
+    keywords:
+    - mail
+    - mailing-list
+    - newsletter
+    - mailman
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: mailman
+    sources:
+    - https://github.com/maxking/docker-mailman
+    - https://gitlab.com/mailman
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mailman-1.0.7/mailman-1.0.7.tgz
+    version: 1.0.7
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2021-10-04T22:46:30.926141507Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.2
+    description: Mailman is free software for managing electronic mail discussion
+      and e-newsletter lists.
+    digest: 1a5fc795bc3d1653dcc77a2fd86e725ea79ad35665d42e3e725da1eeb06ceabc
+    home: https://list.org
+    icon: https://list.org/images/logo2010-2.jpg
+    keywords:
+    - mail
+    - mailing-list
+    - newsletter
+    - mailman
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: mailman
+    sources:
+    - https://github.com/maxking/docker-mailman
+    - https://gitlab.com/mailman
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mailman-1.0.6/mailman-1.0.6.tgz
+    version: 1.0.6
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2021-10-04T22:33:54.845642907Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.2
+    description: Mailman is free software for managing electronic mail discussion
+      and e-newsletter lists.
+    digest: c1550db040817942948776bcef155f9fa23df02a96adb57a91b8868e7bbf6415
+    home: https://list.org
+    icon: https://list.org/images/logo2010-2.jpg
+    keywords:
+    - mail
+    - mailing-list
+    - newsletter
+    - mailman
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: mailman
+    sources:
+    - https://github.com/maxking/docker-mailman
+    - https://gitlab.com/mailman
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mailman-1.0.5/mailman-1.0.5.tgz
+    version: 1.0.5
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2021-10-04T22:05:59.627388438Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.2
+    description: Mailman is free software for managing electronic mail discussion
+      and e-newsletter lists.
+    digest: fc37a2b8738d1503b1de25582ca6d1d31ecaa807446fd037707e59ac2b36233a
+    home: https://list.org
+    icon: https://list.org/images/logo2010-2.jpg
+    keywords:
+    - mail
+    - mailing-list
+    - newsletter
+    - mailman
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: mailman
+    sources:
+    - https://github.com/maxking/docker-mailman
+    - https://gitlab.com/mailman
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mailman-1.0.4/mailman-1.0.4.tgz
+    version: 1.0.4
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2021-10-04T20:51:33.127344557Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.2
+    description: Mailman is free software for managing electronic mail discussion
+      and e-newsletter lists.
+    digest: cfe41ae412b719be04f625d23718e2fe3d740cf0e204ae58088af7629ee2f160
+    home: https://list.org
+    icon: https://list.org/images/logo2010-2.jpg
+    keywords:
+    - mail
+    - mailing-list
+    - newsletter
+    - mailman
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: mailman
+    sources:
+    - https://github.com/maxking/docker-mailman
+    - https://gitlab.com/mailman
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mailman-1.0.3/mailman-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2021-10-03T15:40:49.63725925Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.2
+    description: Mailman is free software for managing electronic mail discussion
+      and e-newsletter lists.
+    digest: 08f921d7d5641a01d635ed3ca1e073030c5087ce01ebc7975ef4220849f77ff4
+    home: https://list.org
+    icon: https://list.org/images/logo2010-2.jpg
+    keywords:
+    - mail
+    - mailing-list
+    - newsletter
+    - mailman
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: mailman
+    sources:
+    - https://github.com/maxking/docker-mailman
+    - https://gitlab.com/mailman
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mailman-1.0.2/mailman-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2021-10-03T15:09:59.666369506Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.2
+    description: Mailman is free software for managing electronic mail discussion
+      and e-newsletter lists.
+    digest: 38cd3b8a66136692689c216c7d23ee500858fc6689eee0d49e66d96bce7ca50a
+    home: https://list.org
+    icon: https://list.org/images/logo2010-2.jpg
+    keywords:
+    - mail
+    - mailing-list
+    - newsletter
+    - mailman
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: mailman
+    sources:
+    - https://github.com/maxking/docker-mailman
+    - https://gitlab.com/mailman
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mailman-1.0.1/mailman-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: "0.4"
+    created: "2021-10-03T15:05:18.322383841Z"
+    dependencies:
+    - condition: postgresql.internal
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.10.2
+    description: Mailman is free software for managing electronic mail discussion
+      and e-newsletter lists.
+    digest: e54644a2a618bc9ea4da57d2ad7b054daf27c3e8e286d1fab39b7145ea27c239
+    home: https://list.org
+    icon: https://list.org/images/logo2010-2.jpg
+    keywords:
+    - mail
+    - mailing-list
+    - newsletter
+    - mailman
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: mailman
+    sources:
+    - https://github.com/maxking/docker-mailman
+    - https://gitlab.com/mailman
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mailman-1.0.0/mailman-1.0.0.tgz
+    version: 1.0.0
+  matomo:
+  - apiVersion: v2
+    appVersion: 4.4.1
+    created: "2021-09-19T16:02:50.42160358Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.8.6
+    description: Matomo (formerly Piwik) is the leading open alternative to Google
+      Analytics that gives you full control over your data.
+    digest: 77ff047a35835497471c56c4e016d211c94851d786eafe86913af65c03500e04
+    home: https://matomo.org
+    icon: https://static.matomo.org/wp-content/uploads/2018/10/matomo-logo-final-1-340x50.png
+    keywords:
+    - matomo
+    - web-analytics
+    - analytics
+    - piwik
+    - privacy
+    - security
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: matomo
+    sources:
+    - https://github.com/matomo-org/matomo
+    - https://github.com/bitnami/bitnami-docker-matomo
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/matomo-1.0.0/matomo-1.0.0.tgz
+    version: 1.0.0
+  monica:
+  - apiVersion: v2
+    appVersion: 3.4.0
+    created: "2021-11-15T14:36:00.067639903Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.8.6
+    description: Personal CRM. Remember everything about your friends, family and
+      business relationships.
+    digest: 11e4cb9ab82c95d528f5003559f7e08d34990a0c0be73e00339f2fa594431037
+    home: https://www.monicahq.com
+    icon: https://www.monicahq.com/img/logo_vertical.png
+    keywords:
+    - social
+    - crm
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: monica
+    sources:
+    - https://github.com/monicahq/monica
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/monica-1.0.3/monica-1.0.3.tgz
+    version: 1.0.3
+  - apiVersion: v2
+    appVersion: "3.2"
+    created: "2021-09-14T18:57:25.266042384Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.8.6
+    description: Personal CRM. Remember everything about your friends, family and
+      business relationships.
+    digest: 2261e9c54c7dc5b070d05d83dda5f14f91a7a1e1aa42f52cd1ff0f68fb2a8a72
+    home: https://www.monicahq.com
+    icon: https://www.monicahq.com/img/logo_vertical.png
+    keywords:
+    - social
+    - crm
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: monica
+    sources:
+    - https://github.com/monicahq/monica
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/monica-1.0.2/monica-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: "3.2"
+    created: "2021-09-12T14:18:27.239587222Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.8.6
+    description: Personal CRM. Remember everything about your friends, family and
+      business relationships.
+    digest: 35e1f7279c69db8125ccdb2c5042f5985ce76c1236fd361ae0b8d7574c1dfece
+    home: https://www.monicahq.com
+    icon: https://www.monicahq.com/img/logo_vertical.png
+    keywords:
+    - social
+    - crm
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: monica
+    sources:
+    - https://github.com/monicahq/monica
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/monica-1.0.1/monica-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: "3.2"
+    created: "2021-09-09T14:32:35.557813682Z"
+    dependencies:
+    - condition: mysql.enabled
+      name: mysql
+      repository: https://charts.bitnami.com/bitnami
+      version: 8.8.6
+    description: Personal CRM. Remember everything about your friends, family and
+      business relationships.
+    digest: 8cc2db79b3172f2c56736321d54e02e08b86728dea218ac2a8a4b409a764d248
+    home: https://www.monicahq.com
+    icon: https://www.monicahq.com/img/logo_vertical.png
+    keywords:
+    - social
+    - crm
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: monica
+    sources:
+    - https://github.com/monicahq/monica
+    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/monica-1.0.0/monica-1.0.0.tgz
+    version: 1.0.0
+  statping:
+  - apiVersion: v2
+    appVersion: v0.90.74
+    created: "2021-09-08T15:40:26.76763391Z"
+    description: Status Page for monitoring your websites and applications with beautiful
+      graphs, analytics, and plugins.
+    digest: bd73c62fd5d44794cb5039c724a0b209a7d78f573e99f0af22eb1167d5e30096
+    home: https://github.com/statping/statping
+    icon: https://s3-us-west-2.amazonaws.com/gitimgs/statping.png
+    keywords:
+    - monitoring
+    - notifier
+    - statping
+    - status
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: statping
+    sources:
+    - https://github.com/statping/statping
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/statping-1.0.1/statping-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: v0.90.74
+    created: "2021-09-08T14:47:26.357972535Z"
+    description: Status Page for monitoring your websites and applications with beautiful
+      graphs, analytics, and plugins.
+    digest: a4c0a2b368f93e21c4a1832bb7f1fe421f0b3210959532de17993be12291d64e
+    home: https://github.com/statping/statping
+    icon: https://s3-us-west-2.amazonaws.com/gitimgs/statping.png
+    keywords:
+    - monitoring
+    - notifier
+    - statping
+    - status
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: statping
+    sources:
+    - https://github.com/statping/statping
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/statping-1.0.0/statping-1.0.0.tgz
+    version: 1.0.0
+  strapi:
+  - apiVersion: v2
+    appVersion: 3.6.5
+    created: "2021-08-08T01:25:06.261592797Z"
+    description: An open-source headless CMS to build powerful APIs.
+    digest: c34a551c5c42781a6576bb62221695defd0e19451a9cfc411fe79cc15305ddc7
+    home: https://github.com/strapi/strapi
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - strapi
+    - javascript
+    - api
+    - cms
+    - headless
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: strapi
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/strapi-1.0.1/strapi-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 3.6.5
+    created: "2021-08-04T15:39:43.341442426Z"
+    description: An open-source headless CMS to build powerful APIs.
+    digest: 88b9255bc16d1a259ef24b2b6e83b06750b26fb0f5c04dfc9c77d2c517530236
+    home: https://github.com/strapi/strapi
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - strapi
+    - javascript
+    - api
+    - cms
+    - headless
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: strapi
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/strapi-1.0.0/strapi-1.0.0.tgz
+    version: 1.0.0
+  uptime-kuma:
+  - apiVersion: v2
+    appVersion: 1.3.2
+    created: "2021-08-22T18:36:53.570216668Z"
+    description: A fancy self-hosted monitoring tool.
+    digest: b06daf225fedb8f7b4c702b7fb4f3679b63adadd62800a5c87f19adb85ee7bfd
+    home: https://github.com/louislam/uptime-kuma
+    icon: https://github.com/louislam/uptime-kuma/blob/master/public/icon.png
+    keywords:
+    - monitoring
+    - uptime
+    - uptime-kuma
+    - healthcheck
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: uptime-kuma
+    sources:
+    - https://github.com/louislam/uptime-kuma
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/uptime-kuma-1.0.1/uptime-kuma-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.3.2
+    created: "2021-08-22T18:11:42.183960718Z"
+    description: A fancy self-hosted monitoring tool.
+    digest: b40b69a973705408c68350e3df458078ac095d85f1589b8ca8e6939938282225
+    home: https://github.com/louislam/uptime-kuma
+    icon: https://github.com/louislam/uptime-kuma/blob/master/public/icon.png
+    keywords:
+    - monitoring
+    - uptime
+    - uptime-kuma
+    - healthcheck
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: uptime-kuma
+    sources:
+    - https://github.com/louislam/uptime-kuma
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/uptime-kuma-1.0.0/uptime-kuma-1.0.0.tgz
+    version: 1.0.0
+  whoami:
+  - apiVersion: v2
+    appVersion: v1.5.0
+    created: "2021-06-27T13:13:37.730150522Z"
+    description: Tiny Go webserver that prints os information and HTTP request to
+      output
+    digest: d87d86bcf24b8d0bae2fb4895d1bc11f78f77f70c0401d85a896499d257bd48a
+    home: https://github.com/containous/whoami
+    keywords:
+    - golang
+    - go
+    - whoami
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: whoami
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
+    version: 1.0.0
+  - apiVersion: v1
+    appVersion: v1.4.0
+    created: "2021-06-20T09:27:35.012771178Z"
+    description: Tiny Go webserver that prints os information and HTTP request to
+      output
+    digest: 638908567ba55050cdcd3e365d2080fdfaec7caa8e69aacb68c629b914a06182
+    home: https://github.com/containous/whoami
+    keywords:
+    - golang
+    - go
+    - whoami
+    maintainers:
+    - email: helm@gavinmogan.com
+      name: Gavin Mogan
+    name: whoami
+    sources:
+    - https://github.com/containous/whoami
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
+    version: 0.3.2
+generated: "2021-11-17T17:58:14.652640862Z"
