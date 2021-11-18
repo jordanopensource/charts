@@ -60,15 +60,15 @@ spec:
 {{ toYaml . | indent 14 }}
             {{- end }}
             {{- if .Values.certificate.enabled }}
-          volumeMounts:
-          - mountPath: {{ .Values.certificate.path | quote }}
-            name: ca-certificate
-            readOnly: true
-      volumes:
-        - name: ca-certificate
-          secret:
-            secretName: {{ .Values.certificate.secret }}
-          {{- end }}
+              volumeMounts:
+              - mountPath: {{ .Values.certificate.path | quote }}
+                name: ca-certificate
+                readOnly: true
+          volumes:
+            - name: ca-certificate
+              secret:
+                secretName: {{ .Values.certificate.secret }}
+            {{- end }}
           {{- with .Values.nodeSelector }}
           nodeSelector:
 {{ toYaml . | indent 12 }}
