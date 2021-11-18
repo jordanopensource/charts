@@ -3,10 +3,10 @@
 fullnameOverride: "" 
 
 # Contributors CRON
-name: contributors-cron
+name: contributions-cron
 image:
-  repository: josaorg/top-contributors-cron
-  tag: latest
+  repository: josaorg/contributions-cron
+  tag: "latest"
   imagePullPolicy: Always
 # CRON job schedule
 schedule: "* * * * *"
