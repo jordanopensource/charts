@@ -1,0 +1,15 @@
+apiVersion: v2
+appVersion: 1.0.0
+description: Chart for Nuxt.js applications
+home: https://github.com/jordanopensource/charts
+keywords:
+  - vue.js
+  - Nuxt.js
+  - javascript
+  - node
+maintainers:
+  - email: admin@josa.ngo
+    name: Jordan Open Source Association
+name: nuxt
+version: 1.0.0
+icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
