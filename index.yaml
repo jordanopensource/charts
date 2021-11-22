@@ -711,6 +711,26 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/monica-1.0.0/monica-1.0.0.tgz
     version: 1.0.0
+  nuxt:
+  - apiVersion: v2
+    appVersion: 1.0.0
+    created: "2021-11-22T15:08:26.907804716Z"
+    description: Chart for Nuxt.js applications
+    digest: 5fead68c9a1afaca9b4c8d2ca30e7c7bb9de1f40fe098f25af9a1072a3fad428
+    home: https://github.com/jordanopensource/charts
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - vue.js
+    - Nuxt.js
+    - javascript
+    - node
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: nuxt
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/nuxt-1.0.0/nuxt-1.0.0.tgz
+    version: 1.0.0
   statping:
   - apiVersion: v2
     appVersion: v0.90.74
@@ -879,4 +899,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-11-17T17:58:14.652640862Z"
+generated: "2021-11-22T15:08:26.907900518Z"
