@@ -1,0 +1,12 @@
+apiVersion: v2
+home: https://github.com/jordanopensource/crypto-web
+keywords:
+  - nginx
+  - tor
+  - onion
+maintainers:
+  - email: admin@josa.ngo
+    name: Jordan Open Source Association
+name: tor-service
+version: 1.0.0
+icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
