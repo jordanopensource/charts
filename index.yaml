@@ -819,6 +819,22 @@ entries:
     version: 1.0.0
   tor-service:
   - apiVersion: v2
+    created: "2021-12-13T14:52:53.651196951Z"
+    digest: 45f68ed656a4c901fe579ea4a825c31ec9e83ca23d2d22dace8778476517bb94
+    home: https://github.com/jordanopensource/crypto-web
+    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
+    keywords:
+    - nginx
+    - tor
+    - onion
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: tor-service
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/tor-service-1.0.1/tor-service-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
     created: "2021-11-23T15:52:53.734182811Z"
     digest: 8248de3de14b2e67fda184190a15593ea504bc07e183f30bccdb8b2fb1baf416
     home: https://github.com/jordanopensource/crypto-web
@@ -916,4 +932,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-11-23T15:52:53.734261011Z"
+generated: "2021-12-13T14:52:53.651262752Z"
