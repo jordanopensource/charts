@@ -731,6 +731,17 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/nuxt-1.0.0/nuxt-1.0.0.tgz
     version: 1.0.0
+  spiderfoot:
+  - apiVersion: v2
+    appVersion: 3.3.0
+    created: "2021-12-13T15:17:09.600786505Z"
+    description: Spiderfoot helm chart for Kubernetes
+    digest: da15a720b200f799994f0e066d8e582498ca93a07a818c251124992e6e728d49
+    name: spiderfoot
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/spiderfoot-1.0.0/spiderfoot-1.0.0.tgz
+    version: 1.0.0
   statping:
   - apiVersion: v2
     appVersion: v0.90.74
@@ -932,4 +943,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-12-13T14:52:53.651262752Z"
+generated: "2021-12-13T15:17:09.756773448Z"
