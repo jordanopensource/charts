@@ -80,11 +80,3 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
-
-
-## Persist data to a persitent volume
-persistence:
-  enabled: false
-  accessMode: ReadWriteOnce
-  size: 1Gi
-  storageClass: ""
