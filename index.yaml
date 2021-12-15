@@ -243,6 +243,20 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/drone-runner-kube-1.0.0/drone-runner-kube-1.0.0.tgz
     version: 1.0.0
+  gophish:
+  - apiVersion: v2
+    appVersion: 0.9.0
+    created: "2021-12-15T15:34:17.818712203Z"
+    description: gophish helm chart for Kubernetes
+    digest: f517726e58ad3322c73503f1b6b54ecb041a63182e5b233a875ac515e45fa123
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: gophish
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/gophish-1.0.0/gophish-1.0.0.tgz
+    version: 1.0.0
   josa-autodiscover:
   - apiVersion: v2
     appVersion: 0.1.0
@@ -953,4 +967,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2021-12-14T11:27:10.421767775Z"
+generated: "2021-12-15T15:34:17.8188126Z"
