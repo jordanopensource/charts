@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "gophish.fullname" . }}-admin
+  labels:
+    {{- include "gophish.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.admin.service.type }}
+  ports:
+    - port: {{ .Values.admin.service.port }}
+      targetPort: admin
+      protocol: TCP
+      name: admin
+  selector:
+    {{- include "gophish.selectorLabels" . | nindent 4 }}

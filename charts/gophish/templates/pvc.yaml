@@ -1,0 +1,21 @@
+{{- if .Values.persistence.enabled }}
+{{- if not .Values.persistence.existingClaim -}}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ template "gophish.fullname" . }}
+  labels:
+    app: {{ template "gophish.fullname" . }}
+spec:
+  accessModes:
+    - {{ .Values.persistence.accessMode | quote }}
+{{- if .Values.persistence.storageClass }}
+  storageClassName: "{{ .Values.persistence.storageClass }}"
+{{- else }}
+  storageClassName: ""
+{{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.size | quote }}
+{{- end -}}
+{{- end }}
