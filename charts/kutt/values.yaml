@@ -86,3 +86,8 @@ env: {}
 secretNamesForEnv: []
 
 configMapNamesforEnv: []
+
+# Redis
+redis: 
+  image: redis
+  tag: 6.0-alpine
