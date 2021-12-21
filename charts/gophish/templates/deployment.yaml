@@ -43,11 +43,11 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: admin
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: admin
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           {{- if .Values.config.enabled }}
@@ -69,6 +69,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       {{- if .Values.config.enabled }}
+      volumes:
       - name: config
         configMap:
           name: {{ template "gophish.fullname" . }}-config
