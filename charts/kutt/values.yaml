@@ -5,8 +5,8 @@
 replicaCount: 1
 
 image:
-  repository: nginx
-  pullPolicy: kutt/kutt
+  repository: kutt/kutt
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
 
@@ -86,8 +86,3 @@ env: {}
 secretNamesForEnv: []
 
 configMapNamesforEnv: []
-
-# Redis
-redis: 
-  image: redis
-  tag: 6.0-alpine
