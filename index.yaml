@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  autodiscover:
+  - apiVersion: v2
+    appVersion: 1.4.0
+    created: "2022-02-14T12:28:08.38318538Z"
+    description: A Helm chart for the JOSA Autodiscover service
+    digest: 168d33586ac1f037e7b36597f1fc865e4f1fb708080cd9ec28779b8b79d6663a
+    name: autodiscover
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/autodiscover-0.1.0/autodiscover-0.1.0.tgz
+    version: 0.1.0
   contributions-api:
   - apiVersion: v2
     appVersion: 1.0.1
@@ -1037,4 +1048,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-01-24T13:19:21.838732126Z"
+generated: "2022-02-14T12:28:08.383275681Z"
