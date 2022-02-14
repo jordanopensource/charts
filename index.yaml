@@ -966,6 +966,28 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/tor-service-1.0.0/tor-service-1.0.0.tgz
     version: 1.0.0
+  uptime:
+  - apiVersion: v2
+    appVersion: 1.11.4
+    created: "2022-02-14T13:08:14.020418702Z"
+    description: A fancy self-hosted monitoring tool.
+    digest: b1842fb131c1d9e9e5af107724257ab3e17ef275d4a1f07d0e4525e35d043875
+    home: https://github.com/louislam/uptime-kuma
+    icon: https://github.com/louislam/uptime-kuma/blob/master/public/icon.png
+    keywords:
+    - monitoring
+    - uptime
+    - uptime-kuma
+    - healthcheck
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: uptime
+    sources:
+    - https://github.com/louislam/uptime-kuma
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/uptime-1.0.2/uptime-1.0.2.tgz
+    version: 1.0.2
   uptime-kuma:
   - apiVersion: v2
     appVersion: 1.3.2
@@ -1048,4 +1070,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-02-14T12:28:08.383275681Z"
+generated: "2022-02-14T13:08:14.020508403Z"
