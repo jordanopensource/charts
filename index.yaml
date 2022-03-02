@@ -254,6 +254,17 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/drone-runner-kube-1.0.0/drone-runner-kube-1.0.0.tgz
     version: 1.0.0
+  flame:
+  - apiVersion: v2
+    appVersion: 2.2.1
+    created: "2022-03-02T14:09:48.214634019Z"
+    description: A Helm chart for Flame
+    digest: bcd00f453b461fa5b839470b2edf1d89902c47c649bdcc9e63e8e8cc09f379af
+    name: flame
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/flame-1.0.0/flame-1.0.0.tgz
+    version: 1.0.0
   gophish:
   - apiVersion: v2
     appVersion: 0.9.0
@@ -1070,4 +1081,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-02-14T13:08:14.020508403Z"
+generated: "2022-03-02T14:09:48.214722518Z"
