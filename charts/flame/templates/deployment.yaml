@@ -33,6 +33,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: PASSWORD
+              valueFrom:
+                secretKeyRef:
+                # The secret resource we are reading from
+                name: flame-secrets
+                # This key is read from our secret
+                key: FLAME_PASSWORD
           ports:
             - name: http
               containerPort: {{ .Values.service.containerPort }}
