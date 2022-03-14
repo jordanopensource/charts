@@ -257,6 +257,16 @@ entries:
   flame:
   - apiVersion: v2
     appVersion: 2.2.1
+    created: "2022-03-14T12:39:55.413702844Z"
+    description: A Helm chart for Flame
+    digest: 32f0ffcbc760e821e6e261f83cdc01437d1ab8de1a71af268b414ae0ddff15d3
+    name: flame
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/flame-1.0.2/flame-1.0.2.tgz
+    version: 1.0.2
+  - apiVersion: v2
+    appVersion: 2.2.1
     created: "2022-03-14T12:08:55.569952848Z"
     description: A Helm chart for Flame
     digest: 23ee6a4b13c345b8ec18384e47ab261c24c4af64bdd2cf4395c33e88b7cbd0ca
@@ -1091,4 +1101,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-03-14T12:08:55.570040449Z"
+generated: "2022-03-14T12:39:55.413807544Z"
