@@ -19,7 +19,7 @@ metadata:
   name: flame
 subjects:
   - kind: ServiceAccount
-    name: flame
+    name: { { .Values.serviceaccount.name } }
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
