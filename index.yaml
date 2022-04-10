@@ -256,6 +256,16 @@ entries:
     version: 1.0.0
   flame:
   - apiVersion: v2
+    appVersion: 2.3.0
+    created: "2022-04-10T13:50:19.134972055Z"
+    description: A Helm chart for Flame
+    digest: 2029c45e386afe53aee915e5de8281e03322146a354f57e16311334e6e521fe5
+    name: flame
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/flame-1.0.5/flame-1.0.5.tgz
+    version: 1.0.5
+  - apiVersion: v2
     appVersion: 2.2.1
     created: "2022-03-14T14:33:30.330080954Z"
     description: A Helm chart for Flame
@@ -857,6 +867,17 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/monica-1.0.0/monica-1.0.0.tgz
     version: 1.0.0
+  monk:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-04-10T13:50:19.317598414Z"
+    description: A Helm chart for Kubernetes
+    digest: 5cfc02bd89fb64a7b0a527a792a3219b09c98b8024f7cb75e61f0c4012dd3455
+    name: monk
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/monk-0.1.0/monk-0.1.0.tgz
+    version: 0.1.0
   nuxt:
   - apiVersion: v2
     appVersion: 1.0.0
@@ -1121,4 +1142,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-03-14T14:33:30.330371654Z"
+generated: "2022-04-10T13:50:19.317687815Z"
