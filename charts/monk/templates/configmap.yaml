@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "monk.fullname" . }}
+  labels:
+{{ include "monk.labels" . | indent 4 }}
+data:
+  # database
+  LISTMONK_db__host: {{ .Values.listmonk.database.host  }}
+  LISTMONK_db__user: {{ .Values.listmonk.database.credentials.username  }}
+  LISTMONK_db__database: {{ .Values.listmonk.database.name }}
+  LISTMONK_db__ssl_mode: {{ .Values.listmonk.database.sslMode }}
+  {{- range $key, $value := .Values.env.public }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}
