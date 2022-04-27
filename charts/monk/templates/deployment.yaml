@@ -27,45 +27,73 @@ spec:
       serviceAccountName: {{ include "monk.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      {{- if .Values.listmonk.freshInstall}}
+      initContainers:
+        - name: init-db
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          command: ["./listmonk", "--install", "--yes"]
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.existingSecret.enabled}}
+          env:
+            - name: LISTMONK_app__admin_username
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecret.secretName }}
+                  key: {{ .Values.existingSecret.adminUsernameKey }}
+            - name: LISTMONK_app__admin_password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecret.secretName }}
+                  key: {{ .Values.existingSecret.adminPasswordKey }}
+            - name: LISTMONK_db__password
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecret.secretName }}
+                  key: {{ .Values.existingSecret.databasePasswordKey }}
+          {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "monk.fullname" . }}
+          {{- if not .Values.existingSecret.enabled }}
+            - secretRef:
+                name: {{ include "monk.fullname" . }}
+          {{- end }}
+          {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          {{- if .Values.existingSecret.enabled}}
           env:
-            # - name: LISTMONK_app__address
-            #   value: "0.0.0.0:9000"
             - name: LISTMONK_app__admin_username
-              value: monk
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecret.secretName }}
+                  key: {{ .Values.existingSecret.adminUsernameKey }}
             - name: LISTMONK_app__admin_password
-              value: monk
-            - name: LISTMONK_db__host
-              value: "postgresql-db-jordanopensource-org-do-user-1737715-0.b.db.ondigitalocean.com"
-            - name: LISTMONK_db__port
-              value: "25060"
-            - name: LISTMONK_db__user
-              value: monk
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecret.secretName }}
+                  key: {{ .Values.existingSecret.adminPasswordKey }}
             - name: LISTMONK_db__password
-              value: "s2iozQWmFkdxRmkI"
-            - name: LISTMONK_db__database
-              value: monk
-            - name: LISTMONK_db__ssl_mode
-              value: "require"
-          command: ["yes| ./listmonk"]
-          args: ["--install"]
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.existingSecret.secretName }}
+                  key: {{ .Values.existingSecret.databasePasswordKey }}
+          {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "monk.fullname" . }}
+            {{- if not .Values.existingSecret.enabled }}
+            - secretRef:
+                name: {{ include "monk.fullname" . }}
+            {{- end }}
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 9090
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /
-              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

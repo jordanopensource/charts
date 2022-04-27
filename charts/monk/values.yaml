@@ -44,13 +44,10 @@ service:
 
 ingress:
   enabled: false
-  className: ""
-  annotations:
-    {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  className: "traefik"
+  annotations: {}
   hosts:
-    - host: chart-example.local
+    - host: monk.localhost
       paths:
         - path: /
           pathType: ImplementationSpecific
@@ -72,6 +69,7 @@ resources:
   #   cpu: 100m
   #   memory: 128Mi
 
+# Options for the horizontal pod autoscaling feature.
 autoscaling:
   enabled: false
   minReplicas: 1
@@ -84,3 +82,39 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+existingSecret:
+  # Enable if you want to use an existing secret and not create one from the values in the listmonk section.
+  enabled: true
+  secretName: monk-secrets
+  # this will overwrite the username in the adminCredentials section.
+  adminUsernameKey: admin_username
+  # this will overwrite the password in the adminCredentials section.
+  adminPasswordKey: admin_password
+  # this will overwrite the password in the database credentials section.
+  databasePasswordKey: db_password
+
+# To see the list of environment variables available go to https://listmonk.app/docs/configuration/#environment-variables
+env:
+  public:
+    LISTMONK_app__address: "0.0.0.0:9090"
+    LISTMONK_db__port: "5432"
+  private: {}
+
+#listmonk app specific configurations
+listmonk:
+  # Changing this to true will delete and overwrite listmonk tables if they already exist in the database and that will reset the app state.
+  # If this is the first time you are running the app and didn't initialize the database leave it as true.
+  freshInstall: true
+  adminCredentials:
+    username: "admin"
+    password: "admin"
+  # The database connection options.
+  # NOTE: listmonk only supports PostgreSQL.
+  database:
+    host: db.localhost
+    name: monk
+    sslMode: "require"
+    credentials:
+      username: monk
+      password: "changeme"
