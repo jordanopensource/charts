@@ -13,14 +13,10 @@ data:
   PORT: {{ .Values.general.port | quote }}
   # Database configs
   DB_TYPE: {{ .Values.database.type }}
-  {{- if not .Values.database.url }}
   DB_HOST: {{ .Values.database.host }}
   DB_PORT: {{ .Values.database.port | quote }}
   DB_NAME: {{ .Values.database.name }}
   DB_USER: {{ .Values.database.credentials.dbUser }}
-  {{- else }}
-  DB_URL: {{ .Values.database.url }}
-  {{- end }}
   {{- if .Values.database.dbCharset }}
   DB_CHARSET: {{ .Values.database.dbCharSet }}
   {{- end }}
