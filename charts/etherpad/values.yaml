@@ -6,7 +6,7 @@ image:
   repository: etherpad/etherpad
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  # tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -18,28 +18,51 @@ replicaCount: 1
 general:
   title: "JOSA PAD"
   icon: "https://pad.josa.ngo/img/favicon.ico"
-  defaultPadText: "Welcome to JOSA pad"
+  defaultPadText: "Welcome to JOSA PAD!"
   ip: "0.0.0.0"
   port: 9001
   userPassword: "changeme"
   adminCredentials:
     password: "changeme"
 
+# Refer to https://github.com/bitnami/charts/tree/master/bitnami/postgresql for extra configurations
+postgresql:
+  create: true
+  fullnameOverride: "postgres"
+  global:
+    postgresql:
+      auth:
+        database: "pad_dev"
+        username: "pad_dev"
+        existingSecret: "postgres-secret"
+        secretKeys:
+          adminPasswordKey: "admin-password"
+          userPasswordKey: "db-password"
+      service:
+        ports:
+          postgresql: "5432"
+  primary:
+    nodeSelector: {}
+    persistence:
+      enabled: true
+      mountPath: /bitnami/postgresql
+      storageClass: "do-block-storage"
+      size: 8Gi
+
 # The Database settings for etherpad-lite
 database:
   # Check the supported databases from https://www.npmjs.com/package/@topgames/ueberdb2
   type: "postgres"
-  host: "private-mysql-db-jordanopensource-org-do-user-1737715-0.b.db.ondigitalocean.com"
-  port: 25060
+  host: "postgres.pad.svc.cluster.local"
+  port: 5432
   name: "pad_dev"
-  url: "postgresql://pad_dev:AVNS_ozIf-AXE7igoOl4@private-postgresql-db-jordanopensource-org-do-user-1737715-0.b.db.ondigitalocean.com:25060/pad_dev?sslmode=require"
   # dbCharSet is only required for MySQL
   dbCharSet: ""
   # dbFileName is only required in case DB_TYPE is DirtyDB or sqlite, the database file.
   dbFileName: ""
   credentials:
     dbUser: "pad_dev"
-    dbPassword: "***REMOVED***"
+    dbPassword: "changeme"
 
 # The default pad options
 padOptions:
@@ -128,21 +151,25 @@ service:
   port: 80
 
 ingress:
-  enabled: false
-  className: ""
+  enabled: enable
+  className: "nginx"
   annotations:
-    {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    external-dns.alpha.kubernetes.io/target: nginx.ingress.cloud.josa.ngo
+    external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+    flame.pawelmalak/type: application # "app" works too
+    flame.pawelmalak/name: "PAD"
+    flame.pawelmalak/url: "https://pad.josa.ngo"
+    flame.pawelmalak/icon: "note-edit"
   hosts:
-    - host: chart-example.local
+    - host: pad.josa.ngo
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+    - secretName: pad-tls
+      hosts:
+        - pad.josa.ngo
 
 resources:
   {}
@@ -151,11 +178,11 @@ resources:
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
   # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
   # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
+  #   cpu: 200m
+  #   memory: 600Mi
   # requests:
   #   cpu: 100m
-  #   memory: 128Mi
+  #   memory: 300Mi
 
 autoscaling:
   enabled: false
@@ -169,3 +196,17 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+livenessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
+
+readinessProbe:
+  initialDelaySeconds: 60
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
