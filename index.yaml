@@ -254,6 +254,26 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/drone-runner-kube-1.0.0/drone-runner-kube-1.0.0.tgz
     version: 1.0.0
+  etherpad:
+  - apiVersion: v2
+    appVersion: 1.8.18
+    created: "2022-05-30T15:20:56.337188398Z"
+    dependencies:
+    - condition: postgresql.create
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ~11.5.0
+    description: A Helm chart for Kubernetes
+    digest: 4d476b461ad7193224bad303ebfb0a757e8a0b4f196b665bd7f8141e1804db75
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+      url: https://charts.josa.ngo
+    name: etherpad
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/etherpad-0.1.0/etherpad-0.1.0.tgz
+    version: 0.1.0
   flame:
   - apiVersion: v2
     appVersion: 2.3.0
@@ -1142,4 +1162,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-04-10T13:50:19.317687815Z"
+generated: "2022-05-30T15:20:56.3372956Z"
