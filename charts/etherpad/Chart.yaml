@@ -23,8 +23,12 @@ version: 0.1.0
 # It is recommended to use it with quotes.
 appVersion: "1.8.18"
 
+maintainers:
+  - name: Jordan Open Source Association
+    email: admin@josa.ngo
+    url: "https://charts.josa.ngo"
 dependencies:
   - name: postgresql
     version: "~11.5.0"
-    repository: https://charts.bitnami.com/bitnami
+    repository: "https://charts.bitnami.com/bitnami"
     condition: postgresql.create

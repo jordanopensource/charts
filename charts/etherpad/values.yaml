@@ -157,7 +157,7 @@ ingress:
     cert-manager.io/cluster-issuer: "letsencrypt-staging"
     external-dns.alpha.kubernetes.io/target: nginx.ingress.cloud.josa.ngo
     external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
-    flame.pawelmalak/type: application # "app" works too
+    flame.pawelmalak/type: application
     flame.pawelmalak/name: "PAD"
     flame.pawelmalak/url: "https://pad.josa.ngo"
     flame.pawelmalak/icon: "note-edit"
