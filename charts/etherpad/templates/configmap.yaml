@@ -1,0 +1,79 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "etherpad.fullname" . }}
+  labels:
+{{ include "etherpad.labels" . | indent 4 }}
+data:
+  # General configs
+  TITLE: {{ .Values.general.title}}
+  FAVICON: {{ .Values.general.icon }}
+  DEFAULT_PAD_TEXT: {{ .Values.general.defaultPadText }}
+  IP: {{ .Values.general.ip }}
+  PORT: {{ .Values.general.port | quote }}
+  # Database configs
+  DB_TYPE: {{ .Values.database.type }}
+  DB_HOST: {{ .Values.database.host }}
+  DB_PORT: {{ .Values.database.port | quote }}
+  DB_NAME: {{ .Values.database.name }}
+  DB_USER: {{ .Values.database.credentials.dbUser }}
+  {{- if .Values.database.dbCharset }}
+  DB_CHARSET: {{ .Values.database.dbCharSet }}
+  {{- end }}
+  {{- if .Values.database.dbCharset }}
+  DB_FILENAME: {{ .Values.database.dbFileName }}
+  {{- end }}
+  # Etherpad configs
+  PAD_OPTIONS_NO_COLORS: {{ .Values.padOptions.noColors | quote }}
+  PAD_OPTIONS_SHOW_CONTROLS: {{ .Values.padOptions.showControls | quote }}
+  PAD_OPTIONS_SHOW_CHAT: {{ .Values.padOptions.showChat | quote }}
+  PAD_OPTIONS_SHOW_LINE_NUMBERS: {{ .Values.padOptions.showLineNumbers | quote }}
+  PAD_OPTIONS_USE_MONOSPACE_FONT: {{ .Values.padOptions.useMonospaceFont | quote }}
+  {{- if .Values.padOptions.userName }}
+  PAD_OPTIONS_USER_NAME: {{ .Values.padOptions.userName }}
+  {{- end }}
+  {{- if .Values.padOptions.userColor }}
+  PAD_OPTIONS_USER_COLOR: {{ .Values.padOptions.userColor }}
+  {{- end }}
+  PAD_OPTIONS_RTL: {{ .Values.padOptions.rtl | quote }}
+  PAD_OPTIONS_ALWAYS_SHOW_CHAT: {{ .Values.padOptions.alwaysShowChat | quote }}
+  PAD_OPTIONS_CHAT_AND_USERS: {{ .Values.padOptions.chatAndUsers | quote }}
+  {{- if .Values.padOptions.language }}
+  PAD_OPTIONS_LANG: {{ .Values.padOptions.language }}
+  {{- end }}
+  # Etherpad theme
+  SKIN_NAME: {{ .Values.padOptions.theme.padSkin }}
+  SKIN_VARIANTS: {{ .Values.padOptions.theme.skinVariants }}
+  # Logging configs
+  LOGLEVEL: {{ .Values.logging.level }}
+  DISABLE_IP_LOGGING: {{ .Values.logging.disableIPLogging | quote }}
+  # Advanced configs
+  TRUST_PROXY: {{ .Values.advanced.proxy | quote}}
+  REQUIRE_SESSION: {{ .Values.advanced.requireSession | quote }}
+  SUPPRESS_ERRORS_IN_PAD_TEXT: {{ .Values.advanced.suppressErrorsInPadText | quote }}
+  EDIT_ONLY: {{ .Values.advanced.editOnly | quote }}
+  MINIFY: {{ .Values.advanced.minify | quote }}
+  MAX_AGE: {{ .Values.advanced.cacheMaxAge | quote }}
+  {{- if .Values.advanced.abiwordExecutablePath }}
+  ABIWORD: {{ .Values.advanced.abiwordExecutablePath }}
+  {{- end }}
+  {{- if .Values.advanced.abiwordOptions }}
+  SOFFICE: {{ .Values.advanced.sofficeExecutablePath }}
+  {{- end }}
+  {{- if .Values.advanced.tidyExecutablePath }}
+  TIDY_HTML: {{ .Values.advanced.tidyExecutablePath }}
+  {{- end }}
+  ALLOW_UNKNOWN_FILE_ENDS: {{ .Values.advanced.allowUnknownFileEnds | quote }}
+  REQUIRE_AUTHENTICATION: {{ .Values.advanced.requireAuthentication | quote }}
+  REQUIRE_AUTHORIZATION: {{ .Values.advanced.requireAuthorization | quote }}
+  COOKIE_SAME_SITE: {{ .Values.advanced.cookies.cookieSameSite }}
+  COOKIE_SESSION_LIFETIME: {{ .Values.advanced.cookies.sessionLifeTime | quote }}
+  COOKIE_SESSION_REFRESH_INTERVAL: {{ .Values.advanced.cookies.sessionRefreshInterval | quote }}
+  IMPORT_MAX_FILE_SIZE: {{ .Values.advanced.limits.importMaxFileSize | quote }}
+  IMPORT_EXPORT_MAX_REQ_PER_IP: {{ .Values.advanced.limits.maxCallsPerIP | quote }}
+  IMPORT_EXPORT_RATE_LIMIT_WINDOW: {{ .Values.advanced.limits.rateLimitWindow | quote }}
+  COMMIT_RATE_LIMIT_DURATION: {{ .Values.advanced.limits.rateLimitDuration | quote }}
+  COMMIT_RATE_LIMIT_POINTS: {{ .Values.advanced.limits.rateLimitPoints | quote }}
+  {{- range $key, $value := .Values.env }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}
