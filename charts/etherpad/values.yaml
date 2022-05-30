@@ -1,0 +1,212 @@
+# Default values for etherpad.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+image:
+  repository: etherpad/etherpad
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  # tag: ""
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+replicaCount: 1
+
+# The general setting for etherpad-lite
+general:
+  title: "JOSA PAD"
+  icon: "https://pad.josa.ngo/img/favicon.ico"
+  defaultPadText: "Welcome to JOSA PAD!"
+  ip: "0.0.0.0"
+  port: 9001
+  userPassword: "changeme"
+  adminCredentials:
+    password: "changeme"
+
+# Refer to https://github.com/bitnami/charts/tree/master/bitnami/postgresql for extra configurations
+postgresql:
+  create: true
+  fullnameOverride: "postgres"
+  global:
+    postgresql:
+      auth:
+        database: "pad_dev"
+        username: "pad_dev"
+        existingSecret: "postgres-secret"
+        secretKeys:
+          adminPasswordKey: "admin-password"
+          userPasswordKey: "db-password"
+      service:
+        ports:
+          postgresql: "5432"
+  primary:
+    nodeSelector: {}
+    persistence:
+      enabled: true
+      mountPath: /bitnami/postgresql
+      storageClass: "do-block-storage"
+      size: 8Gi
+
+# The Database settings for etherpad-lite
+database:
+  # Check the supported databases from https://www.npmjs.com/package/@topgames/ueberdb2
+  type: "postgres"
+  host: "postgres.pad.svc.cluster.local"
+  port: 5432
+  name: "pad_dev"
+  # dbCharSet is only required for MySQL
+  dbCharSet: ""
+  # dbFileName is only required in case DB_TYPE is DirtyDB or sqlite, the database file.
+  dbFileName: ""
+  credentials:
+    dbUser: "pad_dev"
+    dbPassword: "changeme"
+
+# The default pad options
+padOptions:
+  noColors: false
+  showControls: true
+  showChat: true
+  showLineNumbers: true
+  useMonospaceFont: false
+  userName: ""
+  userColor: ""
+  rtl: false
+  alwaysShowChat: false
+  chatAndUsers: false
+  language: ""
+  theme:
+    padSkin: "colibris"
+    skinVariants: "super-dark-toolbar super-dark-editor dark-background"
+
+logging:
+  level: "INFO"
+  disableIPLogging: false
+
+advanced:
+  proxy: false
+  requireSession: false
+  suppressErrorsInPadText: false
+  editOnly: false
+  minify: true
+  cacheMaxAge: 21600
+  abiwordExecutablePath: ""
+  sofficeExecutablePath: ""
+  tidyExecutablePath: ""
+  allowUnknownFileEnds: true
+  requireAuthentication: false
+  requireAuthorization: false
+  cookies:
+    cookieSameSite: "Lax"
+    sessionLifeTime: 864000000
+    sessionRefreshInterval: 86400000
+  limits:
+    importMaxFileSize: 52428800
+    maxCallsPerIP: 10
+    rateLimitWindow: 90000
+    rateLimitDuration: 1
+    rateLimitPoints: 10
+
+# Extra environment variables for the full list visit https://github.com/ether/etherpad-lite/blob/develop/doc/docker.md
+env:
+  {}
+  # - name: SOME_ENV_VAR
+  #   value: "someValue"
+
+existingSecret:
+  enabled: true
+  secretName: etherpad-secrets
+  adminPasswordKey: admin_password
+  userPasswordKey: user_password
+  databasePasswordKey: db_password
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: enable
+  className: "nginx"
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    external-dns.alpha.kubernetes.io/target: nginx.ingress.cloud.josa.ngo
+    external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+    flame.pawelmalak/type: application # "app" works too
+    flame.pawelmalak/name: "PAD"
+    flame.pawelmalak/url: "https://pad.josa.ngo"
+    flame.pawelmalak/icon: "note-edit"
+  hosts:
+    - host: pad.josa.ngo
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    - secretName: pad-tls
+      hosts:
+        - pad.josa.ngo
+
+resources:
+  {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 200m
+  #   memory: 600Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 300Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+livenessProbe:
+  initialDelaySeconds: 30
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
+
+readinessProbe:
+  initialDelaySeconds: 60
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
