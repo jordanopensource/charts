@@ -57,7 +57,7 @@ data:
   {{- if .Values.advanced.abiwordExecutablePath }}
   ABIWORD: {{ .Values.advanced.abiwordExecutablePath }}
   {{- end }}
-  {{- if .Values.advanced.abiwordOptions }}
+  {{- if .Values.advanced.sofficeExecutablePath }}
   SOFFICE: {{ .Values.advanced.sofficeExecutablePath }}
   {{- end }}
   {{- if .Values.advanced.tidyExecutablePath }}
