@@ -112,8 +112,7 @@ advanced:
 # Extra environment variables for the full list visit https://github.com/ether/etherpad-lite/blob/develop/doc/docker.md
 env:
   {}
-  # - name: SOME_ENV_VAR
-  #   value: "someValue"
+  # SOME_ENV_VAR: "someValue"
 
 existingSecret:
   enabled: true
