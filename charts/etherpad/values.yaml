@@ -120,6 +120,23 @@ existingSecret:
   adminPasswordKey: admin_password
   userPasswordKey: user_password
   databasePasswordKey: db_password
+  ldapPasswordKey: ldap_password
+
+# if you are using the ldap authentication plugin, you can configure it here
+ldap:
+  enabled: false
+  url: ""
+  accountBase: ""
+  accountPattern: ""
+  displayNameAttribute: ""
+  searchDN: ""
+  ldapPassword: ""
+  groupSearchBase: ""
+  groupAttribute: ""
+  groupAttributeIsDN: ""
+  searchScope: ""
+  groupSearch: ""
+  anonymousReadOnly: false
 
 serviceAccount:
   # Specifies whether a service account should be created
