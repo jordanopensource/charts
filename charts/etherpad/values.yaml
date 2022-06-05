@@ -120,6 +120,8 @@ existingSecret:
   adminPasswordKey: admin_password
   userPasswordKey: user_password
   databasePasswordKey: db_password
+  # If you installed the ldap_auth plugin for etherpad
+  ldapPasswordKey: ldap_password
 
 serviceAccount:
   # Specifies whether a service account should be created
