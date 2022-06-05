@@ -1096,6 +1096,17 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/tor-service-1.0.0/tor-service-1.0.0.tgz
     version: 1.0.0
+  twenty-forty-eight:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-06-05T14:14:33.885795126Z"
+    description: A Helm chart for Kubernetes
+    digest: 09b2e727092cc1898a7aa62ea5a2412b3be5faf66d14b5ba632c368c9b2f5c91
+    name: twenty-forty-eight
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/twenty-forty-eight-0.1.0/twenty-forty-eight-0.1.0.tgz
+    version: 0.1.0
   uptime:
   - apiVersion: v2
     appVersion: 1.11.4
@@ -1200,4 +1211,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-06-05T14:11:46.903654994Z"
+generated: "2022-06-05T14:14:33.885983828Z"
