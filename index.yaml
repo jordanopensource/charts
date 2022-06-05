@@ -257,6 +257,25 @@ entries:
   etherpad:
   - apiVersion: v2
     appVersion: 1.8.18
+    created: "2022-06-05T14:11:46.903540192Z"
+    dependencies:
+    - condition: postgresql.create
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ~11.5.0
+    description: A Helm chart for Kubernetes
+    digest: 81cd30fc52dbd131cced169fae43eb6a1424b1045d7adacd8a46fcabf3fa1813
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+      url: https://charts.josa.ngo
+    name: etherpad
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/etherpad-0.1.2/etherpad-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 1.8.18
     created: "2022-06-05T12:02:04.093499247Z"
     dependencies:
     - condition: postgresql.create
@@ -1181,4 +1200,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-06-05T12:02:04.093684546Z"
+generated: "2022-06-05T14:11:46.903654994Z"
