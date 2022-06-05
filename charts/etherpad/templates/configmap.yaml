@@ -90,6 +90,7 @@ data:
   {{- end }}
   LDAP_GROUP_SEARCH_BASE: {{ .Values.ldap.groupSearchBase }}
   LDAP_GROUP_ATTRIBUTE: {{ .Values.ldap.groupAttribute }}
+  LDAP_GROUP_ATTRIBUTE_IS_DN: {{ .Values.ldap.groupAttributeIsDN | quote }}
   LDAP_SEARCH_SCOPE: {{ .Values.ldap.searchScope }}
   LDAP_GROUP_SEARCH: {{ .Values.ldap.groupSearch }}
   LDAP_ANONYMOUS_READ_ONLY: {{ .Values.ldap.anonymousReadOnly | quote }}
