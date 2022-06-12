@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   registry: docker.io
   repository: josaorg/josa-2048
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   tag: "latest"
 
 imagePullSecrets: []
@@ -101,33 +101,3 @@ environment:
 
 # Container port
 containerPort: 3000
-
-# Paths for healthchecks
-healthcheck:
-  livenessPath: /
-  readinessPath: /
-livenessProbe:
-  enabled: false
-  initialDelaySeconds: 60
-  successThreshold: 1
-  failureThreshold: 3
-  timeoutSeconds: 1
-  periodSeconds: 10
-  httpGet:
-    host:
-    scheme: HTTP
-    path: /
-    port: 80
-
-readinessProbe:
-  enabled: false
-  initialDelaySeconds: 60
-  successThreshold: 1
-  failureThreshold: 3
-  timeoutSeconds: 1
-  periodSeconds: 10
-  httpGet:
-    host:
-    scheme: HTTP
-    path: /
-    port: 80
