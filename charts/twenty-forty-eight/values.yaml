@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   registry: docker.io
-  repository: evilroot/docker-2048
+  repository: josaorg/josa-2048
   pullPolicy: IfNotPresent
   tag: "latest"
 
@@ -25,10 +25,12 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -47,7 +49,7 @@ ingress:
     cert-manager.io/cluster-issuer: "letsencrypt"
     external-dns.alpha.kubernetes.io/target: nginx.ingress.cloud.josa.ngo
     external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
-    
+
   hosts:
     - host: 2048.josa.ngo
       paths:
@@ -58,7 +60,8 @@ ingress:
       hosts:
         - 2048.josa.ngo
 
-resources: {}
+resources:
+  {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -83,14 +86,15 @@ tolerations: []
 
 affinity: {}
 
-# Secrets already created that need to be included 
+# Secrets already created that need to be included
 secretNamesForEnv: []
 
 # ConfigMaps already created that need to be included
 configMapNamesForEnv: []
 
 # Environment variables
-environment: {}
+environment:
+  {}
   # NODE_ENV:
   # LOG_LEVEL:
   # API_BASE_URL:
@@ -102,3 +106,28 @@ containerPort: 3000
 healthcheck:
   livenessPath: /
   readinessPath: /
+livenessProbe:
+  enabled: false
+  initialDelaySeconds: 60
+  successThreshold: 1
+  failureThreshold: 3
+  timeoutSeconds: 1
+  periodSeconds: 10
+  httpGet:
+    host:
+    scheme: HTTP
+    path: /
+    port: 80
+
+readinessProbe:
+  enabled: false
+  initialDelaySeconds: 60
+  successThreshold: 1
+  failureThreshold: 3
+  timeoutSeconds: 1
+  periodSeconds: 10
+  httpGet:
+    host:
+    scheme: HTTP
+    path: /
+    port: 80
