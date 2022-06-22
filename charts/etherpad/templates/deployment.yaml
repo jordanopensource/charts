@@ -36,12 +36,12 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.existingSecret.enabled}}
           env:
-          {{- if .Values.ldap.enabled }}
-            - name: LDAP_PASSWORD
+          {{- if .Values.openID.enabled }}
+            - name: OPENID_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.existingSecret.secretName }}
-                  key: {{ .Values.existingSecret.ldapPasswordKey }}
+                  key: {{ .Values.existingSecret.openIDSecretKey }}
           {{- end }}
             - name: ADMIN_PASSWORD
               valueFrom:
