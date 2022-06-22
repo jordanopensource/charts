@@ -78,23 +78,6 @@ data:
   IMPORT_EXPORT_RATE_LIMIT_WINDOW: {{ .Values.advanced.limits.rateLimitWindow | quote }}
   COMMIT_RATE_LIMIT_DURATION: {{ .Values.advanced.limits.rateLimitDuration | quote }}
   COMMIT_RATE_LIMIT_POINTS: {{ .Values.advanced.limits.rateLimitPoints | quote }}
-  # ldap configs if enabled
-  {{- if .Values.ldap.enabled }}
-  LDAP_URL: {{ .Values.ldap.url }}
-  LDAP_ACCOUNT_BASE: {{ .Values.ldap.accountBase }}
-  LDAP_ACCOUNT_PATTERN: {{ .Values.ldap.accountPattern }}
-  LDAP_DISPLAY_NAME_ATTRIBUTE: {{ .Values.ldap.displayNameAttribute }}
-  LDAP_SEARCH_DN: {{ .Values.ldap.searchDN }}
-  {{- if not .Values.existingSecret.enabled }}
-  LDAP_PASSWORD: {{ .Values.ldap.ldapPassword }}
-  {{- end }}
-  LDAP_GROUP_SEARCH_BASE: {{ .Values.ldap.groupSearchBase }}
-  LDAP_GROUP_ATTRIBUTE: {{ .Values.ldap.groupAttribute }}
-  LDAP_GROUP_ATTRIBUTE_IS_DN: {{ .Values.ldap.groupAttributeIsDN | quote }}
-  LDAP_SEARCH_SCOPE: {{ .Values.ldap.searchScope }}
-  LDAP_GROUP_SEARCH: {{ .Values.ldap.groupSearch }}
-  LDAP_ANONYMOUS_READ_ONLY: {{ .Values.ldap.anonymousReadOnly | quote }}
-  {{- end }}
   {{- range $key, $value := .Values.env }}
   {{ $key }}: {{ $value | quote }}
   {{- end }}

@@ -36,13 +36,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.existingSecret.enabled}}
           env:
-          {{- if .Values.ldap.enabled }}
-            - name: LDAP_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.existingSecret.secretName }}
-                  key: {{ .Values.existingSecret.ldapPasswordKey }}
-          {{- end }}
             - name: ADMIN_PASSWORD
               valueFrom:
                 secretKeyRef:
