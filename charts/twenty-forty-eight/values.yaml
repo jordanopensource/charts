@@ -7,7 +7,7 @@ replicaCount: 1
 image:
   registry: docker.io
   repository: josaorg/josa-2048
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   tag: "latest"
 
 imagePullSecrets: []
@@ -61,17 +61,12 @@ ingress:
         - 2048.josa.ngo
 
 resources:
-  {}
-  # We usually recommend not to specify default resources and to leave this as a conscious
-  # choice for the user. This also increases chances charts run on environments with little
-  # resources, such as Minikube. If you do want to specify resources, uncomment the following
-  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
-  # limits:
-  #   cpu: 100m
-  #   memory: 128Mi
-  # requests:
-  #   cpu: 100m
-  #   memory: 128Mi
+  limits:
+    cpu: 20m
+    memory: 32Mi
+  requests:
+    cpu: 10m
+    memory: 16Mi
 
 autoscaling:
   enabled: false
@@ -80,7 +75,8 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-nodeSelector: {}
+nodeSelector:
+  doks.digitalocean.com/node-pool: web-np
 
 tolerations: []
 
