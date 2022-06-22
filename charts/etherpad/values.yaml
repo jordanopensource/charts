@@ -3,7 +3,7 @@
 # Declare variables to be passed into your templates.
 
 image:
-  repository: etherpad/etherpad
+  repository: josaorg/etherpad
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   # tag: ""
@@ -110,17 +110,38 @@ advanced:
     rateLimitDuration: 1
     rateLimitPoints: 10
 
+# Use this section if you are using the openID connect plugin
+openID:
+  enabled: true
+  issuer: "https://id.jordanopensource.org/auth/realms/JOSA"
+  clientID: "pad"
+  clientSecret: "changeme"
+  baseUrl: "https://pad.josa.ngo"
+  userProperties:
+    isAdmin: "etherpad_is_admin"
+    readOnly: "etherpad_readOnly"
+    canCreate: "etherpad_canCreate"
+
+# Configuration for the guest plugin
+guestPlugin:
+  enabled: true
+  displayName: "JOSA Guest"
+  displayNameChangeable: false
+  readOnly: true
+
 # Extra environment variables for the full list visit https://github.com/ether/etherpad-lite/blob/develop/doc/docker.md
 env:
   {}
-  # SOME_ENV_VAR: "someValue"
+  # SOME_ENV_VAR_NAME: "some value"
+  # IS_DISPLAY_NAME_CHANGEABLE: "false"
 
 existingSecret:
-  enabled: true
+  enabled: false
   secretName: etherpad-secrets
   adminPasswordKey: admin_password
   userPasswordKey: user_password
   databasePasswordKey: db_password
+  openIDSecretKey: openid_secret
 
 serviceAccount:
   # Specifies whether a service account should be created

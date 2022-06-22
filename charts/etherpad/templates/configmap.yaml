@@ -78,6 +78,21 @@ data:
   IMPORT_EXPORT_RATE_LIMIT_WINDOW: {{ .Values.advanced.limits.rateLimitWindow | quote }}
   COMMIT_RATE_LIMIT_DURATION: {{ .Values.advanced.limits.rateLimitDuration | quote }}
   COMMIT_RATE_LIMIT_POINTS: {{ .Values.advanced.limits.rateLimitPoints | quote }}
+  # OpenID configs
+  {{- if .Values.openID.enabled }}
+  OPENID_ISSUER: {{ .Values.openID.issuer | quote }}
+  OPENID_CLIENT_ID: {{ .Values.openID.clientID | quote }}
+  OPENID_BASE_URL: {{ .Values.openID.baseUrl | quote }}
+  USER_PROPERTY_IS_ADMIN: {{ .Values.openID.userProperties.isAdmin | quote }}
+  USER_PROPERTY_READ_ONLY: {{ .Values.openID.userProperties.readOnly | quote }}
+  USER_PROPERTY_CAN_CREATE: {{ .Values.openID.userProperties.canCreate | quote }}
+  {{- end }}
+  # Guest plugin configs
+  {{- if .Values.guestPlugin.enabled }}
+  GUEST_DISPLAY_NAME: {{ .Values.guestPlugin.displayName | quote }}
+  GUEST_DISPLAY_NAME_CHANGEABLE: {{ .Values.guestPlugin.displayNameChangeable | quote }}
+  GUEST_IS_READ_ONLY: {{ .Values.guestPlugin.readOnly | quote }}
+  {{- end }}
   {{- range $key, $value := .Values.env }}
   {{ $key }}: {{ $value | quote }}
   {{- end }}
