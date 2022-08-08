@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "nuxt.fullname" . }}
+  name: {{ include "rally.fullname" . }}
   labels:
-    {{- include "nuxt.labels" . | nindent 4 }}
+    {{- include "rally.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "nuxt.selectorLabels" . | nindent 6 }}
+      {{- include "rally.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "nuxt.selectorLabels" . | nindent 8 }}
+        {{- include "rally.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "nuxt.serviceAccountName" . }}
+      serviceAccountName: {{ include "rally.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -33,28 +33,17 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          envFrom:
-            - configMapRef:
-                name: {{ include "nuxt.fullname" . }}-config
-            {{- range .Values.configMapNamesforEnv }}
-            - configMapRef:
-                name: {{ . }}
-          {{- end }}
-          {{- range .Values.secretNamesForEnv }}
-            - secretRef:
-                name: {{ . }}
-          {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.containerPort | default 3000 }}
+              containerPort: 80
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: {{ .Values.healthcheck.livenessPath | default "/" }}
+              path: /
               port: http
           readinessProbe:
             httpGet:
-              path: {{ .Values.healthcheck.readinessPath | default "/" }}
+              path: /
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
