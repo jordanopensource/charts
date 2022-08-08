@@ -975,6 +975,17 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/nuxt-1.0.0/nuxt-1.0.0.tgz
     version: 1.0.0
+  rally:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-08-08T13:05:07.932552023Z"
+    description: A Helm chart for Kubernetes
+    digest: 4403f4d6bfee1f003bc6e8ca896018e9110c39cd3e5dd5079c09e74c31b13d40
+    name: rally
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/rally-0.1.0/rally-0.1.0.tgz
+    version: 0.1.0
   spiderfoot:
   - apiVersion: v2
     appVersion: 3.3.0
@@ -1230,4 +1241,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-06-22T14:29:04.755167419Z"
+generated: "2022-08-08T13:05:07.932755425Z"
