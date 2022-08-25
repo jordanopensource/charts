@@ -12,8 +12,10 @@ data:
   DISALLOW_ANONYMOUS_LINKS: {{ .Values.general.disallowAnonymousLinks | quote }}
   NON_USER_COOLDOWN: {{ .Values.general.nonUserCoolDown | quote }}
   NODE_TLS_REJECT_UNAUTHORIZED: {{ .Values.general.tlsRejectUnauthorized | quote }}
+  CUSTOM_DOMAIN_USE_HTTPS: {{ .Values.general.useHTTPSForCustomDomains | quote }}
   ## SMTP Settings
   REPORT_EMAIL: {{ .Values.smtp.reportEmail | quote }}
+  CONTACT_EMAIL: {{ .Values.smtp.contactEmail | quote }}
   MAIL_HOST: {{ .Values.smtp.host | quote }}
   MAIL_PORT: {{ .Values.smtp.port | quote }}
   MAIL_USER: {{ .Values.smtp.user | quote }}
