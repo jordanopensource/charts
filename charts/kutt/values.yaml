@@ -5,14 +5,79 @@
 replicaCount: 1
 
 image:
-  repository: kutt/kutt
+  repository: josaorg/kutt
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+## For a full list of configuration visit https://github.com/thedevs-network/kutt/blob/develop/.docker.env
+## General App Settings
+general:
+  siteName: "JOSA Link"
+  siteDomain: "example.com"
+  disallowRegistration: "true"
+  disallowAnonymousLinks: "true"
+  nonUserCoolDown: 0
+  tlsRejectUnauthorized: 0
+  ## A passphrase to encrypt JWT. Use a long and secure key.
+  ## The Secret name for the jwt secret
+  ## NOTE: Must contain key `jwt-secret`
+  jwtSecretName: "kutt-secret"
+  ## The ConfigMap name containing the admin emails
+  ## NOTE: Must contain key `ADMIN_EMAILS`
+  adminEmailsConfigMapName: "admin-emails"
+  ## Use HTTPS for links with custom domain
+  useHTTPSForCustomDomains: "false"
+
+smtp:
+  ## The email address that will receive submitted reports.
+  reportEmail: "admin@example.com"
+  ## Support email to show on the app
+  contactEmail: "contact@example.com"
+  ## Your email host details to use to send verification emails.
+  ## More info on http://nodemailer.com/
+  ## Mail from example "Kutt <support@kutt.it>". Leave empty to use MAIL_USER
+  host: mail.example.com
+  port: 587
+  user: "noreply@example.com"
+  mailFrom: "Kutt <noreply@example.com>"
+  secure: "true"
+  ## The Secret name containing the smtp password
+  ## NOTE: Must contain key `smtp-password`
+  smtpPasswordSecretName: "kutt-secret"
+
+database:
+  host: database-host
+  name: kutt_db
+  port: 25060
+  ssl: "true"
+  ## The Secret name containing the database credentials
+  ## NOTE: Must contain key `database-password`
+  ## NOTE: Must contain key `database-user`
+  databaseSecretName: "kutt-secret"
+
+redis:
+  host: redis-host
+  port: 6379
+  ## The Secret name containing the redis password
+  ## NOTE: Must contain key `redis-password`
+  redisPasswordSecretName: "kutt-secret"
+
+extraEnv:
+  {}
+  # ENV_VAR: "SomeValue"
+
+extraEnvFromConfigMap:
+  []
+  # - kutt-extra-configMap-name
+
+extraEnvFromSecret:
+  []
+  # - kutt-extra-secret-name
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -25,10 +90,12 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
+podSecurityContext:
+  {}
   # fsGroup: 2000
 
-securityContext: {}
+securityContext:
+  {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -43,20 +110,23 @@ service:
 ingress:
   enabled: false
   className: ""
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  annotations:
+    {}
+    # cert-manager.io/cluster-issuer: letsencrypt
+    # external-dns.alpha.kubernetes.io/target: nginx-new.ingress.cloud.josa.ngo
+    # external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
   hosts:
-    - host: chart-example.local
+    - host: example.com
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+    - secretName: kutt-tls
+      hosts:
+        - example.com
 
-resources: {}
+resources:
+  {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -81,8 +151,16 @@ tolerations: []
 
 affinity: {}
 
-env: {}
+livenessProbe:
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
 
-secretNamesForEnv: []
-
-configMapNamesforEnv: []
+readinessProbe:
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
