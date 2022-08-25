@@ -14,6 +14,7 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+## For a full list of configuration visit https://github.com/thedevs-network/kutt/blob/develop/.docker.env
 ## General App Settings
 general:
   siteName: "JOSA Link"
@@ -22,15 +23,24 @@ general:
   disallowAnonymousLinks: "true"
   nonUserCoolDown: 0
   tlsRejectUnauthorized: 0
+  ## A passphrase to encrypt JWT. Use a long and secure key.
   ## The Secret name for the jwt secret
   ## NOTE: Must contain key `jwt-secret`
   jwtSecretName: "kutt-secret"
   ## The ConfigMap name containing the admin emails
   ## NOTE: Must contain key `ADMIN_EMAILS`
   adminEmailsConfigMapName: "admin-emails"
+  ## Use HTTPS for links with custom domain
+  useHTTPSForCustomDomains: "false"
 
 smtp:
+  ## The email address that will receive submitted reports.
   reportEmail: "admin@example.com"
+  ## Support email to show on the app
+  contactEmail: "contact@example.com"
+  ## Your email host details to use to send verification emails.
+  ## More info on http://nodemailer.com/
+  ## Mail from example "Kutt <support@kutt.it>". Leave empty to use MAIL_USER
   host: mail.example.com
   port: 587
   user: "noreply@example.com"
