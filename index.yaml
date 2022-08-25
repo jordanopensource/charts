@@ -456,48 +456,6 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/josa-autodiscover-0.1.0/josa-autodiscover-0.1.0.tgz
     version: 0.1.0
-  kutt:
-  - apiVersion: v2
-    appVersion: 2.7.3
-    created: "2022-01-10T13:33:36.661546206Z"
-    description: A Helm chart for kutt.it link shortener
-    digest: 80a9bf57409ab2f4d60a0c5f52b6516d9cfd45d6434554cb5b49be42299d3d44
-    name: kutt
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/kutt-1.0.1/kutt-1.0.1.tgz
-    version: 1.0.1
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2021-12-20T11:30:17.125582099Z"
-    description: A Helm chart for kutt link shortener
-    digest: 87b180371d5327fdae6c43d04be2111526c7bd44d774b6b2e99e61aca04e72fe
-    name: kutt
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/kutt-1.0.0/kutt-1.0.0.tgz
-    version: 1.0.0
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2021-12-19T15:19:01.011275855Z"
-    description: A Helm chart for kutt link shortener
-    digest: e7a07fca0255b64c542e5d70ea6d238898b61475cf1c1ffd69e3d664403d27e6
-    name: kutt
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/kutt-0.1.0/kutt-0.1.0.tgz
-    version: 0.1.0
-  link:
-  - apiVersion: v2
-    appVersion: 2.7.3
-    created: "2021-11-15T14:57:17.438219341Z"
-    description: A Helm chart for Kutt
-    digest: c1178b0e890341d5d239f02a96af9b6fc0d92cedba6960418741fc179491f4f1
-    name: link
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/link-2.7.3/link-2.7.3.tgz
-    version: 2.7.3
   mailman:
   - apiVersion: v2
     appVersion: "0.4"
