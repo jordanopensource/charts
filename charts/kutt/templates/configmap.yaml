@@ -5,6 +5,28 @@ metadata:
   labels:
     {{- include "kutt.labels" . | nindent 4 }}
 data:
-{{- range $envKey, $envVal := .Values.env }}
-  {{ $envKey | upper }}: {{ $envVal | quote }}
-{{- end }}
+  ## General Settings
+  SITE_NAME: {{ .Values.general.siteName | quote }}
+  DEFAULT_DOMAIN: {{ .Values.general.siteDomain | quote }}
+  DISALLOW_REGISTRATION: {{ .Values.general.disallowRegistration | quote }}
+  DISALLOW_ANONYMOUS_LINKS: {{ .Values.general.disallowAnonymousLinks | quote }}
+  NON_USER_COOLDOWN: {{ .Values.general.nonUserCoolDown | quote }}
+  NODE_TLS_REJECT_UNAUTHORIZED: {{ .Values.general.tlsRejectUnauthorized | quote }}
+  ## SMTP Settings
+  REPORT_EMAIL: {{ .Values.smtp.reportEmail | quote }}
+  MAIL_HOST: {{ .Values.smtp.host | quote }}
+  MAIL_PORT: {{ .Values.smtp.port | quote }}
+  MAIL_USER: {{ .Values.smtp.user | quote }}
+  MAIL_FROM: {{ .Values.smtp.mailFrom | quote }}
+  MAIL_SECURE: {{ .Values.smtp.secure | quote }}
+  ## Database Settings
+  DB_HOST: {{ .Values.database.host | quote }}
+  DB_NAME: {{ .Values.database.name | quote }}
+  DB_PORT: {{ .Values.database.port | quote }}
+  DB_SSL: {{ .Values.database.ssl | quote }}
+  ## Redis Settings
+  REDIS_HOST: {{ .Values.redis.host | quote }}
+  REDIS_PORT: {{ .Values.redis.port | quote }}
+  {{- range $key, $value := .Values.extraEnv }}
+  {{ $key }}: {{ $value | quote }}
+  {{- end }}
