@@ -1,5 +1,5 @@
 apiVersion: v2
-appVersion: v1.5.0
+appVersion: v1.8.6
 description: Tiny Go webserver that prints os information and HTTP request to output
 home: https://github.com/containous/whoami
 keywords:
