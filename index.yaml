@@ -417,6 +417,25 @@ entries:
     version: 1.0.2
   whoami:
   - apiVersion: v2
+    appVersion: v1.8.6
+    created: "2022-09-26T10:56:32.805298178Z"
+    description: Tiny Go webserver that prints os information and HTTP request to
+      output
+    digest: 2df4bb619126803fbdf2e00d986cf0199bbdb76ebc4c63848ae2035fb2e0694a
+    home: https://github.com/containous/whoami
+    icon: https://raw.githubusercontent.com/stackrox/kube-linter/main/images/logo/KubeLinter-vertical.svg
+    keywords:
+    - golang
+    - go
+    - whoami
+    maintainers:
+    - email: admin@josa.ngo
+      name: Jordan Open Source Association
+    name: whoami
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/whoami-1.1.0/whoami-1.1.0.tgz
+    version: 1.1.0
+  - apiVersion: v2
     appVersion: v1.5.0
     created: "2021-06-27T13:13:37.730150522Z"
     description: Tiny Go webserver that prints os information and HTTP request to
@@ -454,4 +473,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-08-25T15:36:12.024432423Z"
+generated: "2022-09-26T10:56:32.805339678Z"
