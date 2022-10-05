@@ -287,6 +287,17 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/nuxt-1.0.0/nuxt-1.0.0.tgz
     version: 1.0.0
+  safepass:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-10-05T13:46:44.480539755Z"
+    description: A Helm chart for Kubernetes
+    digest: b392af5b6120146ee5e163730ad09c3c1b4b00dd79294b3fd2f632ecd3658d25
+    name: safepass
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/safepass-0.1.0/safepass-0.1.0.tgz
+    version: 0.1.0
   spiderfoot:
   - apiVersion: v2
     appVersion: 3.3.0
@@ -473,4 +484,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-09-26T10:56:32.805339678Z"
+generated: "2022-10-05T13:46:44.638269601Z"
