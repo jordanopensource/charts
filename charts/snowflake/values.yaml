@@ -1,0 +1,146 @@
+# Default values for snowflake.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+proxy:
+  enabled: true
+  replicaCount: 3
+  image:
+    repository: thetorproject/snowflake-proxy
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"
+
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: "snowflake-proxy-sa"
+
+  podAnnotations: {}
+
+  podSecurityContext:
+    {}
+    # fsGroup: 2000
+
+  securityContext:
+    {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  resources:
+    {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  settings:
+    brokerURL: "https://snowflake-broker.bamsoftware.com/"
+    keepLocalAddress: false
+    unsafeLogging: true
+    # if you don't want to change the default values for stunURL and relayURL leave them empty
+    # stun URL (default "stun:stun.stunprotocol.org:3478")
+    stunURL: ""
+    # websocket relay URL (default "wss://snowflake.bamsoftware.com/")
+    relayURL: ""
+
+web:
+  enabled: true
+  replicaCount: 1
+  image:
+    repository: josaorg/snowflake-web
+    pullPolicy: Always
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "latest"
+
+  imagePullSecrets: []
+  nameOverride: ""
+  fullnameOverride: ""
+
+  serviceAccount:
+    # Specifies whether a service account should be created
+    create: true
+    # Annotations to add to the service account
+    annotations: {}
+    # The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: "snowflake-web-sa"
+
+  podAnnotations: {}
+
+  podSecurityContext:
+    {}
+    # fsGroup: 2000
+
+  securityContext:
+    {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  service:
+    type: ClusterIP
+    port: 80
+
+  ingress:
+    enabled: true
+    className: "nginx"
+    annotations:
+      cert-manager.io/cluster-issuer: "letsencrypt"
+      external-dns.alpha.kubernetes.io/target: nginx.ingress.cloud.josa.ngo
+      external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+    hosts:
+      - host: snowflake.josa.ngo
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls:
+      - secretName: snowflake-tls
+        hosts:
+          - snowflake.josa.ngo
+
+  resources:
+    {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
