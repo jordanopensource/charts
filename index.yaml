@@ -298,6 +298,17 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/safepass-0.1.0/safepass-0.1.0.tgz
     version: 0.1.0
+  snowflake:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-10-30T16:33:10.77581154Z"
+    description: A Helm chart for Snowflake
+    digest: 1afc0bb509381e40de7f6da7b885e0eaa3e94df91f87a779b437c0b7c2ac7f77
+    name: snowflake
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/snowflake-0.1.0/snowflake-0.1.0.tgz
+    version: 0.1.0
   spiderfoot:
   - apiVersion: v2
     appVersion: 3.3.0
@@ -484,4 +495,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-10-05T13:46:44.638269601Z"
+generated: "2022-10-30T16:33:10.776013742Z"
