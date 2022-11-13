@@ -14,6 +14,109 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+mastodon:
+  # Please look at https://docs.joinmastodon.org/admin/config/ for the full documentation.
+  localDomain: example.com
+  # available locales: https://github.com/mastodon/mastodon/blob/main/config/application.rb#L71
+  locale: en
+  # Possible values are debug, info, warn, error, fatal
+  logLevel: debug
+
+  streaming:
+    port: 4000
+    # this should be set manually since os.cpus() returns the number of CPUs on
+    # the node running the pod, which is unrelated to the resources allocated to
+    # the pod by k8s
+    workers: 3
+    # The base url for streaming can be set if the streaming API is deployed to
+    # a different domain/subdomain.
+    # base_url: wws://streaming.example.com
+  web:
+    port: 3000
+
+  cron:
+    # run `tootctl media remove` every week
+    removeMedia:
+      enabled: true
+      schedule: "0 0 * * 0"
+
+  secrets:
+    ## The Secret name containing the secrets for mastodon.
+    ## NOTE: Must contain key `SECRET_KEY_BASE`
+    ## NOTE: Must contain key `OTP_SECRET` for otp
+    ## NOTE: Must contain key `VAPID_PRIVATE_KEY` for push notification
+    ## NOTE: Must contain key `VAPID_PUBLIC_KEY` for push notification
+    secretName: ""
+
+  persistence:
+    assets:
+      accessMode: ReadWriteOnce
+      storageClassName: ""
+      resources:
+        requests:
+          storage: 10Gi
+    system:
+      accessMode: ReadWriteOnce
+      storageClassName: ""
+      resources:
+        requests:
+          storage: 100Gi
+
+postgres:
+  host: localhost
+  name: mastodon
+  port: 5432
+  sslMode: prefer
+
+  credentials:
+    ## The Secret name containing the credentials for postgres.
+    ## NOTE: Must contain key `DB_USER`
+    ## NOTE: Must contain key `DB_PASS`
+    secretName: ""
+
+redis:
+  # namespaces all Redis keys
+  # This allows sharing the same Redis database between different projects
+  namespace: mastodon
+  ## The Secret name containing the url for redis.
+  # Example value: redis://user:password@localhost:6379
+  ## NOTE: Must contain key `REDIS_URL`
+  secretName: ""
+
+elasticsearch:
+  enabled: false
+  host: localhost
+  port: 9200
+  prefix: mastodon
+
+smtp:
+  authMethod: plain
+  server: changeme
+  port: changeme
+  fromAddress: changeme
+  domain: changeme
+  opensslVerifyMode: full
+  startTls: false
+  tls: true
+  credentials:
+    ## The Secret name containing the credentials for smtp.
+    ## NOTE: Must contain key `SMTP_LOGIN`
+    ## NOTE: Must contain key `SMTP_PASSWORD`
+    secretName: ""
+
+s3:
+  enabled: false
+  bucket: ""
+  region: ""
+  protocol: https
+  hostname: ""
+  endpoint: ""
+  credentials:
+    ## The Secret name containing the credentials for s3.
+    ## NOTE: Must contain key `AWS_ACCESS_KEY_ID`
+    ## NOTE: Must contain key `AWS_SECRET_ACCESS_KEY`
+    secretName: ""
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
@@ -82,5 +185,8 @@ autoscaling:
 nodeSelector: {}
 
 tolerations: []
+
+# The annotations set with jobAnnotations will be added to all job pods.
+jobAnnotations: {}
 
 affinity: {}
