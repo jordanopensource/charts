@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "mastodon.fullname" .}}-config
+data:
+  # mastodon
+  LOCAL_DOMAIN: {{ .Values.mastodon.localDomain | quote }}
+  DEFAULT_LOCALE: {{ .Values.mastodon.locale | quote }}
+  RAILS_LOG_LEVEL: {{ .Values.mastodon.logLevel | quote }}
+  STREAMING_CLUSTER_NUM: {{ .Values.mastodon.streaming.workers | quote }}
+  NODE_ENV: "production"
+  RAILS_ENV: "production"
+  # Database
+  DB_HOST: {{ .Values.postgres.host | quote }}
+  DB_NAME: {{ .Values.postgres.name | quote }}
+  DB_PORT: {{ .Values.postgres.port | quote }}
+  DB_SSLMODE: {{ .Values.postgres.sslMode | quote }}
+  # Redis
+  REDIS_NAMESPACE: {{ .Values.redis.namespace | quote }}
+  # ElasticSearch
+  {{- if .Values.elasticsearch.enabled -}}
+  ES_ENABLED: {{ .Values.elasticsearch.enabled | quote }}
+  ES_HOST: {{ .Values.elasticsearch.host | quote }}
+  ES_PORT: {{ .Values.elasticsearch.port | quote }}
+  ES_PREFIX: {{ .Values.elasticsearch.prefix | quote }}
+  {{- end -}}
+  # SMTP
+  SMTP_SERVER: {{ .Values.smtp.server | quote }}
+  SMTP_PORT: {{ .Values.smtp.port | quote }}
+  SMTP_FROM_ADDRESS: {{ .Values.smtp.fromAddress | quote }}
+  SMTP_DOMAIN: {{ .Values.smtp.domain | quote }}
+  SMTP_AUTH_METHOD: {{ .Values.smtp.authMethod | quote }}
+  SMTP_OPENSSL_VERIFY_MODE: {{ .Values.smtp.opensslVerifyMode | quote }}
+  SMTP_ENABLE_STARTTLS_AUTO: {{ .Values.smtp.startTls | quote }}
+  SMTP_TLS: {{ .Values.smtp.tls | quote }}
+  # S3
+  {{- if .Values.s3.enabled -}}
+  S3_ENABLED: {{ .Values.s3.enabled | quote }}
+  S3_BUCKET: {{ .Values.s3.bucket | quote }}
+  S3_REGION: {{ .Values.s3.region | quote }}
+  S3_PROTOCOL: {{ .Values.s3.protocol | quote }}
+  S3_HOSTNAME: {{ .Values.s3.hostname | quote }}
+  S3_ENDPOINT: {{ .Values.s3.endpoint | quote }}
+  {{- end -}}
