@@ -25,6 +25,17 @@ mastodon:
   sidekiq:
     concurrency: 25
 
+    nodeSelector: {}
+
+    resources:
+      {}
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
   streaming:
     port: 4000
     # this should be set manually since os.cpus() returns the number of CPUs on
