@@ -22,6 +22,9 @@ mastodon:
   # Possible values are debug, info, warn, error, fatal
   logLevel: debug
 
+  sidekiq:
+    concurrency: 25
+
   streaming:
     port: 4000
     # this should be set manually since os.cpus() returns the number of CPUs on
@@ -31,8 +34,58 @@ mastodon:
     # The base url for streaming can be set if the streaming API is deployed to
     # a different domain/subdomain.
     # base_url: wws://streaming.example.com
+    livenessProbe:
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 5
+      successThreshold: 1
+      failureThreshold: 3
+
+    readinessProbe:
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 5
+      successThreshold: 1
+      failureThreshold: 3
+
+    nodeSelector: {}
+
+    resources:
+      {}
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
   web:
     port: 3000
+
+    livenessProbe:
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 5
+      successThreshold: 1
+      failureThreshold: 3
+
+    readinessProbe:
+      initialDelaySeconds: 30
+      periodSeconds: 10
+      timeoutSeconds: 5
+      successThreshold: 1
+      failureThreshold: 3
+
+    nodeSelector: {}
+
+    resources:
+      {}
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
 
   cron:
     # run `tootctl media remove` every week
