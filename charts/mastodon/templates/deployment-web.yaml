@@ -33,7 +33,7 @@ spec:
       serviceAccountName: {{ include "mastodon.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if (not .Values.mastodon.s3.enabled) }}
+      {{- if (not .Values.s3.enabled) }}
       volumes:
         - name: assets
           persistentVolumeClaim:
@@ -56,35 +56,23 @@ spec:
             - config/puma.rb
           envFrom:
             - configMapRef:
-                name: {{ include "mastodon.fullname" . }}-env
+                name: {{ include "mastodon.fullname" . }}-config
             - secretRef:
-                name: {{ template "mastodon.secretName" . }}
+                name: {{ .Values.mastodon.secrets.secretName }}
+            - secretRef:
+                name: {{ .Values.postgres.credentials.secretName }}
+            - secretRef:
+                name: {{ .Values.redis.secretName }}
+            - secretRef:
+                name: {{ .Values.smtp.credentials.secretName }}
+          {{- if .Values.s3.enabled }}
+            - secretRef:
+                name: {{ .Values.s3.credentials.secretName }}
+          {{- end }}
           env:
-            - name: "DB_PASS"
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "mastodon.postgresql.secretName" . }}
-                  key: password
-            - name: "REDIS_PASSWORD"
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "mastodon.redis.secretName" . }}
-                  key: redis-password
             - name: "PORT"
               value: {{ .Values.mastodon.web.port | quote }}
-            {{- if (and .Values.mastodon.s3.enabled .Values.mastodon.s3.existingSecret) }}
-            - name: "AWS_SECRET_ACCESS_KEY"
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.mastodon.s3.existingSecret }}
-                  key: AWS_SECRET_ACCESS_KEY
-            - name: "AWS_ACCESS_KEY_ID"
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.mastodon.s3.existingSecret }}
-                  key: AWS_ACCESS_KEY_ID
-            {{- end -}}
-          {{- if (not .Values.mastodon.s3.enabled) }}
+          {{- if (not .Values.s3.enabled) }}
           volumeMounts:
             - name: assets
               mountPath: /opt/mastodon/public/assets
@@ -96,16 +84,27 @@ spec:
               containerPort: {{ .Values.mastodon.web.port }}
               protocol: TCP
           livenessProbe:
+            initialDelaySeconds: {{ .Values.mastodon.web.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.mastodon.web.livenessProbe.periodSeconds }}
+            # One second longer than command timeout should prevent generation of zombie processes.
+            timeoutSeconds: {{ add1 .Values.mastodon.web.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.mastodon.web.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.mastodon.web.livenessProbe.failureThreshold }}
             httpGet:
               path: /health
               port: http
           readinessProbe:
+            initialDelaySeconds: {{ .Values.mastodon.web.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.mastodon.web.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ add1 .Values.mastodon.web.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.mastodon.web.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.mastodon.web.readinessProbe.failureThreshold }}
             httpGet:
               path: /health
               port: http
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
+            {{- toYaml .Values.mastodon.web.resources | nindent 12 }}
+      {{- with .Values.mastodon.web.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
