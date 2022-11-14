@@ -7,9 +7,10 @@ metadata:
 spec:
   type: {{ .Values.service.type }}
   ports:
-    - port: {{ .Values.service.port }}
+    - port: {{ .Values.mastodon.streaming.port }}
       targetPort: streaming
       protocol: TCP
       name: streaming
   selector:
     {{- include "mastodon.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: streaming
