@@ -18,7 +18,7 @@ spec:
         {{- end }}
         spec:
           restartPolicy: OnFailure
-          {{- if (not .Values.mastodon.s3.enabled) }}
+          {{- if (not .Values.s3.enabled) }}
           # ensure we run on the same node as the other rails components; only
           # required when using PVCs that are ReadWriteOnce
           {{- if or (eq "ReadWriteOnce" .Values.mastodon.persistence.assets.accessMode) (eq "ReadWriteOnce" .Values.mastodon.persistence.system.accessMode) }}
@@ -60,14 +60,14 @@ spec:
                     name: {{ .Values.redis.secretName }}
                 - secretRef:
                     name: {{ .Values.smtp.credentials.secretName }}
-                {{- if .Values.s3.enabled -}}
+              {{- if .Values.s3.enabled }}
                 - secretRef:
                     name: {{ .Values.s3.credentials.secretName }}
-                {{- end -}}
+              {{- end }}
               env:
                 - name: "PORT"
                   value: {{ .Values.mastodon.web.port | quote }}
-              {{- if (not .Values.mastodon.s3.enabled) }}
+              {{- if (not .Values.s3.enabled) }}
               volumeMounts:
                 - name: assets
                   mountPath: /opt/mastodon/public/assets
