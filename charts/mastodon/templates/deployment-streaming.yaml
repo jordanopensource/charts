@@ -53,6 +53,10 @@ spec:
             - secretRef:
                 name: {{ .Values.s3.credentials.secretName }}
           {{- end }}
+          {{- if .Values.elasticsearch.credentials.enabled }}
+            - secretRef:
+                name: {{ .Values.elasticsearch.credentials.secretName }}
+          {{- end }}
           env:
             - name: "PORT"
               value: {{ .Values.mastodon.streaming.port | quote }}
@@ -79,6 +83,12 @@ spec:
             httpGet:
               path: /api/v1/streaming/health
               port: streaming
+          {{- if .Values.postgres.credentials.certificateSecret }}
+          volumeMounts:
+            - name: certificates
+              mountPath: "/etc/ssl/certs/database"
+              readOnly: true
+          {{- end }}
           resources:
             {{- toYaml .Values.mastodon.streaming.resources | nindent 12 }}
       {{- with .Values.mastodon.streaming.nodeSelector }}
@@ -92,4 +102,13 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.postgres.credentials.certificateSecret }}
+      volumes:
+      - name: certificates
+        secret:
+          secretName: {{ .Values.postgres.credentials.certificateSecret }}
+          items:
+          - key: db-certificate.crt
+            path: db_cert.crt
       {{- end }}

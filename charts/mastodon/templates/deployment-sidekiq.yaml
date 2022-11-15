@@ -83,6 +83,10 @@ spec:
             - secretRef:
                 name: {{ .Values.s3.credentials.secretName }}
           {{- end }}
+          {{- if .Values.elasticsearch.credentials.enabled }}
+            - secretRef:
+                name: {{ .Values.elasticsearch.credentials.secretName }}
+          {{- end }}
           {{- if (not .Values.s3.enabled) }}
           volumeMounts:
             - name: assets
