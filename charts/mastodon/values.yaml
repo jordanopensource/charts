@@ -6,7 +6,7 @@ replicaCount: 1
 
 image:
   repository: tootsuite/mastodon
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v3.5.3"
 
@@ -16,7 +16,7 @@ fullnameOverride: ""
 
 mastodon:
   # Please look at https://docs.joinmastodon.org/admin/config/ for the full documentation.
-  localDomain: example.com
+  localDomain: josa.social
   # available locales: https://github.com/mastodon/mastodon/blob/main/config/application.rb#L71
   locale: en
   # Possible values are debug, info, warn, error, fatal
@@ -25,7 +25,8 @@ mastodon:
   sidekiq:
     concurrency: 25
 
-    nodeSelector: {}
+    nodeSelector:
+      doks.digitalocean.com/node-pool: josa-cloud-np
 
     resources:
       {}
@@ -59,7 +60,8 @@ mastodon:
       successThreshold: 1
       failureThreshold: 3
 
-    nodeSelector: {}
+    nodeSelector:
+      doks.digitalocean.com/node-pool: josa-cloud-np
 
     resources:
       {}
@@ -110,7 +112,7 @@ mastodon:
     ## NOTE: Must contain key `OTP_SECRET` for otp
     ## NOTE: Must contain key `VAPID_PRIVATE_KEY` for push notification
     ## NOTE: Must contain key `VAPID_PUBLIC_KEY` for push notification
-    secretName: ""
+    secretName: "mastodon-secrets"
 
   persistence:
     assets:
@@ -127,16 +129,21 @@ mastodon:
           storage: 100Gi
 
 postgres:
-  host: localhost
-  name: mastodon
-  port: 5432
-  sslMode: prefer
+  host: private-postgresql-db-jordanopensource-org-do-user-1737715-0.b.db.ondigitalocean.com
+  name: mastodon_dev
+  port: 25060
+  ## https://www.postgresql.org/docs/10/libpq-ssl.html
+  sslMode: "require"
 
   credentials:
     ## The Secret name containing the credentials for postgres.
     ## NOTE: Must contain key `DB_USER`
     ## NOTE: Must contain key `DB_PASS`
-    secretName: ""
+    secretName: "database-secret"
+    ## The Secret name containing the certificate for postgres.
+    ## NOTE: Must contain key `db-certificate.crt`
+    ## NOTE: Leave empty if your database ssl mode is disable or allow or prefer
+    certificateSecret: "database-cert"
 
 redis:
   # namespaces all Redis keys
@@ -145,41 +152,48 @@ redis:
   ## The Secret name containing the url for redis.
   # Example value: redis://user:password@localhost:6379
   ## NOTE: Must contain key `REDIS_URL`
-  secretName: ""
+  secretName: "redis-secret"
 
 elasticsearch:
-  enabled: false
-  host: localhost
+  enabled: true
+  host: elasticsearch-coordinating-only.elasticsearch.svc.cluster.local
   port: 9200
   prefix: mastodon
 
+  ## This is optional
+  credentials:
+    enabled: false
+    ## The Secret name containing the credentials for ElasticSearch.
+    ## NOTE: Must contain key `ES_USER`
+    ## NOTE: Must contain key `ES_PASS`
+    secretName: ""
+
 smtp:
   authMethod: plain
-  server: changeme
-  port: changeme
-  fromAddress: changeme
-  domain: changeme
-  opensslVerifyMode: full
+  server: mail.josa.ngo
+  port: 465
+  fromAddress: "JOSA Mastodon <noreply@josa.ngo>"
+  domain: josa.ngo
   startTls: false
   tls: true
   credentials:
     ## The Secret name containing the credentials for smtp.
     ## NOTE: Must contain key `SMTP_LOGIN`
     ## NOTE: Must contain key `SMTP_PASSWORD`
-    secretName: ""
+    secretName: "smtp-secrets"
 
 s3:
-  enabled: false
-  bucket: ""
-  region: ""
+  enabled: true
+  bucket: "mastodon-dev"
+  region: "fra1"
   protocol: https
-  hostname: ""
-  endpoint: ""
+  hostname: "fra1.digitaloceanspaces.com"
+  endpoint: "https://fra1.digitaloceanspaces.com"
   credentials:
     ## The Secret name containing the credentials for s3.
     ## NOTE: Must contain key `AWS_ACCESS_KEY_ID`
     ## NOTE: Must contain key `AWS_SECRET_ACCESS_KEY`
-    secretName: ""
+    secretName: "s3-secrets"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -188,7 +202,7 @@ serviceAccount:
   annotations: {}
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
-  name: ""
+  name: "mastodon-sa"
 
 podAnnotations: {}
 
@@ -210,21 +224,22 @@ service:
   port: 80
 
 ingress:
-  enabled: false
-  className: ""
+  enabled: true
+  className: "nginx"
   annotations:
-    {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt"
+    external-dns.alpha.kubernetes.io/target: nginx.ingress.cloud.josa.ngo
+    external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
+    nginx.ingress.kubernetes.io/proxy-body-size: 40m
   hosts:
-    - host: chart-example.local
+    - host: josa.social
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls: []
-  #  - secretName: chart-example-tls
-  #    hosts:
-  #      - chart-example.local
+  tls:
+    - secretName: josa.social-tls
+      hosts:
+        - josa.social
 
 resources:
   {}
@@ -246,7 +261,8 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-nodeSelector: {}
+nodeSelector:
+  doks.digitalocean.com/node-pool: josa-cloud-np
 
 tolerations: []
 

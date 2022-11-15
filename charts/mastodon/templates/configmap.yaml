@@ -16,6 +16,7 @@ data:
   DB_HOST: {{ .Values.postgres.host | quote }}
   DB_NAME: {{ .Values.postgres.name | quote }}
   DB_PORT: {{ .Values.postgres.port | quote }}
+  DB_SSLMODE: {{ .Values.postgres.sslMode | quote}}
   # Redis
   REDIS_NAMESPACE: {{ .Values.redis.namespace | quote }}
   # ElasticSearch
