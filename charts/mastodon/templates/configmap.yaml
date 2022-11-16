@@ -11,7 +11,6 @@ data:
   NODE_ENV: "production"
   RAILS_ENV: "production"
   STREAMING_CLUSTER_NUM: {{ .Values.mastodon.streaming.workers | quote }}
-  MALLOC_ARENA_MAX: "2"
   # Database
   DB_HOST: {{ .Values.postgres.host | quote }}
   DB_NAME: {{ .Values.postgres.name | quote }}
@@ -20,12 +19,12 @@ data:
   # Redis
   REDIS_NAMESPACE: {{ .Values.redis.namespace | quote }}
   # ElasticSearch
-  {{- if .Values.elasticsearch.enabled }}
+{{- if .Values.elasticsearch.enabled }}
   ES_ENABLED: {{ .Values.elasticsearch.enabled | quote }}
   ES_HOST: {{ .Values.elasticsearch.host | quote }}
   ES_PORT: {{ .Values.elasticsearch.port | quote }}
   ES_PREFIX: {{ .Values.elasticsearch.prefix | quote }}
-  {{- end }}
+{{- end }}
   # SMTP
   SMTP_SERVER: {{ .Values.smtp.server | quote }}
   SMTP_PORT: {{ .Values.smtp.port | quote }}
@@ -35,11 +34,25 @@ data:
   SMTP_ENABLE_STARTTLS_AUTO: {{ .Values.smtp.startTls | quote }}
   SMTP_TLS: {{ .Values.smtp.tls | quote }}
   # S3
-  {{- if .Values.s3.enabled -}}
+{{- if .Values.s3.enabled }}
   S3_ENABLED: {{ .Values.s3.enabled | quote }}
   S3_BUCKET: {{ .Values.s3.bucket | quote }}
   S3_REGION: {{ .Values.s3.region | quote }}
   S3_PROTOCOL: {{ .Values.s3.protocol | quote }}
   S3_HOSTNAME: {{ .Values.s3.hostname | quote }}
   S3_ENDPOINT: {{ .Values.s3.endpoint | quote }}
-  {{- end -}}
+{{- end }}
+{{- if .Values.ldap.enabled }}
+  LDAP_ENABLED: {{ .Values.ldap.enabled | quote }}
+  LDAP_HOST: {{ .Values.ldap.host | quote }}
+  LDAP_PORT: {{ .Values.ldap.port | quote }}
+  LDAP_METHOD: {{ .Values.ldap.ldapMethod | quote }}
+  LDAP_BASE: {{ .Values.ldap.baseDN | quote }}
+  LDAP_BIND_DN: {{ .Values.ldap.bindDN | quote }}
+  LDAP_UID: {{ .Values.ldap.uid | quote }}
+  LDAP_MAIL: {{ .Values.ldap.mail | quote }}
+  LDAP_SEARCH_FILTER: {{ .Values.ldap.searchFilter | quote }}
+{{- end }}
+{{- range $key, $value := .Values.extraEnv }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}

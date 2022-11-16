@@ -57,6 +57,10 @@ spec:
             - secretRef:
                 name: {{ .Values.elasticsearch.credentials.secretName }}
           {{- end }}
+          {{- if .Values.ldap.enabled }}
+            - secretRef:
+                name: {{ .Values.ldap.credentials.secretName }}
+          {{- end }}
           env:
             - name: "PORT"
               value: {{ .Values.mastodon.streaming.port | quote }}

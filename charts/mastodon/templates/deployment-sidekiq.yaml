@@ -87,6 +87,10 @@ spec:
             - secretRef:
                 name: {{ .Values.elasticsearch.credentials.secretName }}
           {{- end }}
+          {{- if .Values.ldap.enabled }}
+            - secretRef:
+                name: {{ .Values.ldap.credentials.secretName }}
+          {{- end }}
           {{- if .Values.postgres.credentials.certificateSecret }}
           volumeMounts:
             - name: certificates
