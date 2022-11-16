@@ -60,6 +60,8 @@ spec:
           env:
             - name: "PORT"
               value: {{ .Values.mastodon.streaming.port | quote }}
+            - name: "NODE_TLS_REJECT_UNAUTHORIZED"
+              value: "0"
           ports:
             - name: streaming
               containerPort: {{ .Values.mastodon.streaming.port }}
@@ -86,7 +88,7 @@ spec:
           {{- if .Values.postgres.credentials.certificateSecret }}
           volumeMounts:
             - name: certificates
-              mountPath: "/etc/ssl/certs/database"
+              mountPath: "/opt/mastodon/.postgresql"
               readOnly: true
           {{- end }}
           resources:
@@ -110,5 +112,5 @@ spec:
           secretName: {{ .Values.postgres.credentials.certificateSecret }}
           items:
           - key: db-certificate.crt
-            path: db_cert.crt
+            path: root.crt
       {{- end }}

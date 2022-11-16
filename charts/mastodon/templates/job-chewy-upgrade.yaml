@@ -80,4 +80,23 @@ spec:
             - name: system
               mountPath: /opt/mastodon/public/system
           {{- end }}
+          {{- if .Values.postgres.credentials.certificateSecret }}
+          volumeMounts:
+            - name: certificates
+              mountPath: "/opt/mastodon/.postgresql"
+              readOnly: true
+          {{- end }}
+      {{- if .Values.postgres.credentials.certificateSecret }}
+      volumes:
+      - name: certificates
+        secret:
+          secretName: {{ .Values.postgres.credentials.certificateSecret }}
+          items:
+          - key: db-certificate.crt
+            path: root.crt
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
 {{- end }}
