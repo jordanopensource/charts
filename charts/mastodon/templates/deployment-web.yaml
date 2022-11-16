@@ -106,6 +106,12 @@ spec:
             httpGet:
               path: /health
               port: http
+          {{- if .Values.postgres.credentials.certificateSecret }}
+          volumeMounts:
+            - name: certificates
+              mountPath: "/opt/mastodon/.postgresql"
+              readOnly: true
+          {{- end }}
           resources:
             {{- toYaml .Values.mastodon.web.resources | nindent 12 }}
       {{- with .Values.mastodon.web.nodeSelector }}
@@ -119,4 +125,13 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.postgres.credentials.certificateSecret }}
+      volumes:
+      - name: certificates
+        secret:
+          secretName: {{ .Values.postgres.credentials.certificateSecret }}
+          items:
+          - key: db-certificate.crt
+            path: root.crt
       {{- end }}
