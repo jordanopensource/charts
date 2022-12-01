@@ -40,35 +40,64 @@ spec:
             - ./streaming
           envFrom:
             - configMapRef:
-                name: {{ include "mastodon.fullname" . }}-env
+                name: {{ include "mastodon.fullname" . }}-config
+            - secretRef:
+                name: {{ .Values.mastodon.secrets.secretName }}
+            - secretRef:
+                name: {{ .Values.postgres.credentials.secretName }}
+            - secretRef:
+                name: {{ .Values.redis.secretName }}
+            - secretRef:
+                name: {{ .Values.smtp.credentials.secretName }}
+          {{- if .Values.s3.enabled }}
+            - secretRef:
+                name: {{ .Values.s3.credentials.secretName }}
+          {{- end }}
+          {{- if .Values.elasticsearch.credentials.enabled }}
+            - secretRef:
+                name: {{ .Values.elasticsearch.credentials.secretName }}
+          {{- end }}
+          {{- if .Values.ldap.enabled }}
+            - secretRef:
+                name: {{ .Values.ldap.credentials.secretName }}
+          {{- end }}
           env:
-            - name: "DB_PASS"
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "mastodon.postgresql.secretName" . }}
-                  key: password
-            - name: "REDIS_PASSWORD"
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "mastodon.redis.secretName" . }}
-                  key: redis-password
             - name: "PORT"
               value: {{ .Values.mastodon.streaming.port | quote }}
+            - name: "NODE_TLS_REJECT_UNAUTHORIZED"
+              value: "0"
           ports:
             - name: streaming
               containerPort: {{ .Values.mastodon.streaming.port }}
               protocol: TCP
           livenessProbe:
+            initialDelaySeconds: {{ .Values.mastodon.streaming.livenessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.mastodon.streaming.livenessProbe.periodSeconds }}
+            # One second longer than command timeout should prevent generation of zombie processes.
+            timeoutSeconds: {{ add1 .Values.mastodon.streaming.livenessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.mastodon.streaming.livenessProbe.successThreshold }}
+            failureThreshold: {{ .Values.mastodon.streaming.livenessProbe.failureThreshold }}
             httpGet:
               path: /api/v1/streaming/health
               port: streaming
           readinessProbe:
+            initialDelaySeconds: {{ .Values.mastodon.streaming.readinessProbe.initialDelaySeconds }}
+            periodSeconds: {{ .Values.mastodon.streaming.readinessProbe.periodSeconds }}
+            timeoutSeconds: {{ add1 .Values.mastodon.streaming.readinessProbe.timeoutSeconds }}
+            successThreshold: {{ .Values.mastodon.streaming.readinessProbe.successThreshold }}
+            failureThreshold: {{ .Values.mastodon.streaming.readinessProbe.failureThreshold }}
             httpGet:
               path: /api/v1/streaming/health
               port: streaming
+          {{- if .Values.postgres.credentials.certificateSecret }}
+          volumeMounts:
+            - name: certificates
+              mountPath: "/opt/mastodon/.postgresql"
+              readOnly: true
+          {{- end }}
           resources:
-            {{- toYaml .Values.resources | nindent 12 }}
-      {{- with .Values.nodeSelector }}
+            {{- toYaml .Values.mastodon.streaming.resources | nindent 12 }}
+      {{- with .Values.mastodon.streaming.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
@@ -79,4 +108,13 @@ spec:
       {{- with .Values.tolerations }}
       tolerations:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if .Values.postgres.credentials.certificateSecret }}
+      volumes:
+      - name: certificates
+        secret:
+          secretName: {{ .Values.postgres.credentials.certificateSecret }}
+          items:
+          - key: db-certificate.crt
+            path: root.crt
       {{- end }}

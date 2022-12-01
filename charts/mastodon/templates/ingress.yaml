@@ -2,7 +2,12 @@
 {{- $fullName := include "mastodon.fullname" . -}}
 {{- $webPort := .Values.mastodon.web.port -}}
 {{- $streamingPort := .Values.mastodon.streaming.port -}}
-{{- if or (.Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress") (not (.Capabilities.APIVersions.Has "networking.k8s.io/v1beta1/Ingress")) }}
+{{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
+  {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
+  {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
+  {{- end }}
+{{- end }}
+{{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1
 {{- else if semverCompare ">=1.14-0" .Capabilities.KubeVersion.GitVersion -}}
 apiVersion: networking.k8s.io/v1beta1
@@ -19,6 +24,9 @@ metadata:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
+  {{- if and .Values.ingress.className (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion) }}
+  ingressClassName: {{ .Values.ingress.className }}
+  {{- end }}
   {{- if .Values.ingress.tls }}
   tls:
     {{- range .Values.ingress.tls }}
@@ -36,8 +44,11 @@ spec:
         paths:
           {{- range .paths }}
           - path: {{ .path }}
+            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ .pathType }}
+            {{- end }}
             backend:
-              {{- if or ($.Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress") (not ($.Capabilities.APIVersions.Has "networking.k8s.io/v1beta1/Ingress")) }}
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
                 name: {{ $fullName }}-web
                 port:
@@ -46,12 +57,12 @@ spec:
               serviceName: {{ $fullName }}-web
               servicePort: {{ $webPort }}
               {{- end }}
-            {{- if or ($.Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress") (not ($.Capabilities.APIVersions.Has "networking.k8s.io/v1beta1/Ingress")) }}
-            pathType: Prefix
-            {{- end }}
           - path: {{ .path }}api/v1/streaming/
+            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: {{ .pathType }}
+            {{- end }}
             backend:
-              {{- if or ($.Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress") (not ($.Capabilities.APIVersions.Has "networking.k8s.io/v1beta1/Ingress")) }}
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
                 name: {{ $fullName }}-streaming
                 port:
@@ -60,9 +71,6 @@ spec:
               serviceName: {{ $fullName }}-streaming
               servicePort: {{ $streamingPort }}
               {{- end }}
-            {{- if or ($.Capabilities.APIVersions.Has "networking.k8s.io/v1/Ingress") (not ($.Capabilities.APIVersions.Has "networking.k8s.io/v1beta1/Ingress")) }}
-            pathType: Exact
-            {{- end }}
           {{- end }}
     {{- end }}
 {{- end }}
