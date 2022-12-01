@@ -18,7 +18,7 @@ spec:
     {{- end }}
     spec:
       restartPolicy: Never
-      {{- if (not .Values.mastodon.s3.enabled) }}
+      {{- if (not .Values.s3.enabled) }}
       # ensure we run on the same node as the other rails components; only
       # required when using PVCs that are ReadWriteOnce
       {{- if or (eq "ReadWriteOnce" .Values.mastodon.persistence.assets.accessMode) (eq "ReadWriteOnce" .Values.mastodon.persistence.system.accessMode) }}
@@ -52,26 +52,53 @@ spec:
                 bundle exec rake assets:precompile && yarn cache clean
           envFrom:
             - configMapRef:
-                name: {{ include "mastodon.fullname" . }}-env
+                name: {{ include "mastodon.fullname" . }}-config
             - secretRef:
-                name: {{ template "mastodon.secretName" . }}
+                name: {{ .Values.mastodon.secrets.secretName }}
+            - secretRef:
+                name: {{ .Values.postgres.credentials.secretName }}
+            - secretRef:
+                name: {{ .Values.redis.secretName }}
+            - secretRef:
+                name: {{ .Values.smtp.credentials.secretName }}
+          {{- if .Values.s3.enabled }}
+            - secretRef:
+                name: {{ .Values.s3.credentials.secretName }}
+          {{- end }}
+          {{- if .Values.elasticsearch.credentials.enabled }}
+            - secretRef:
+                name: {{ .Values.elasticsearch.credentials.secretName }}
+          {{- end }}
+          {{- if .Values.ldap.enabled }}
+            - secretRef:
+                name: {{ .Values.ldap.credentials.secretName }}
+          {{- end }}
           env:
-            - name: "DB_PASS"
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "mastodon.postgresql.secretName" . }}
-                  key: password
-            - name: "REDIS_PASSWORD"
-              valueFrom:
-                secretKeyRef:
-                  name: {{ template "mastodon.redis.secretName" . }}
-                  key: redis-password
             - name: "PORT"
               value: {{ .Values.mastodon.web.port | quote }}
-          {{- if (not .Values.mastodon.s3.enabled) }}
+          {{- if (not .Values.s3.enabled) }}
           volumeMounts:
             - name: assets
               mountPath: /opt/mastodon/public/assets
             - name: system
               mountPath: /opt/mastodon/public/system
           {{- end }}
+          {{- if .Values.postgres.credentials.certificateSecret }}
+          volumeMounts:
+            - name: certificates
+              mountPath: "/opt/mastodon/.postgresql"
+              readOnly: true
+          {{- end }}
+      {{- if .Values.postgres.credentials.certificateSecret }}
+      volumes:
+      - name: certificates
+        secret:
+          secretName: {{ .Values.postgres.credentials.certificateSecret }}
+          items:
+          - key: db-certificate.crt
+            path: root.crt
+      {{- end }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

@@ -1,6 +1,6 @@
 apiVersion: v2
 name: mastodon
-description: Mastodon is a free, open-source social network server based on ActivityPub.
+description: A Helm chart for Mastodon, Mastodon is a free open-source social network server based on ActivityPub.
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -15,22 +15,10 @@ type: application
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
-version: 2.0.0
+version: 0.1.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
-appVersion: v3.5.3
-
-dependencies:
-  - name: elasticsearch
-    repository: https://charts.bitnami.com/bitnami
-    version: 19.5.0
-    condition: elasticsearch.enabled
-  - name: postgresql
-    repository: https://charts.bitnami.com/bitnami
-    version: 12.1.1
-    condition: postgresql.enabled
-  - name: redis
-    repository: https://charts.bitnami.com/bitnami
-    version: 17.3.9
+# It is recommended to use it with quotes.
+appVersion: "v3.5.3"
