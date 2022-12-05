@@ -1,0 +1,128 @@
+# Default values for label-studio.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: heartexlabs/label-studio
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+app:
+  ## This should include the protocol you will be using
+  host: "https://example.com"
+
+  ## Restrict signup to only those with a link
+  restrictSignUp:
+    enabled: "false"
+    ## If you enabled the restrict signup option, you need to set this secret
+    ## The Secret name containing the credentials for the admin username.
+    ## NOTE: Must contain key `LABEL_STUDIO_USERNAME`
+    ## NOTE: Must contain key `LABEL_STUDIO_PASSWORD`
+    secretName: "label-studio-secret"
+
+postgres:
+  host: "private-postgresql-db-jordanopensource-org-do-user-1737715-0.b.db.ondigitalocean.com"
+  port: "25060"
+  database: "label_studio"
+  username: "label_studio"
+  credentials:
+    ## The Secret name containing the credentials for postgres.
+    ## NOTE: Must contain key `POSTGRE_PASSWORD`
+    secretName: "label-studio-secret"
+
+extraEnv:
+  JSON_LOG: "1"
+  LOG_LEVEL: "DEBUG"
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: "label-studio-sa"
+
+podAnnotations: {}
+
+podSecurityContext:
+  {}
+  # fsGroup: 2000
+
+securityContext:
+  {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+service:
+  type: ClusterIP
+  port: 8080
+
+ingress:
+  enabled: false
+  className: "nginx"
+  annotations:
+    {}
+    # cert-manager.io/cluster-issuer: "letsencrypt"
+    # nginx.ingress.kubernetes.io/proxy-body-size: 200m
+  hosts:
+    - host: example.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls:
+    []
+    # - secretName: ls.toolbox.josa.ngo-tls
+    #   hosts:
+    #     - ls.toolbox.josa.ngo
+
+resources:
+  # https://labelstud.io/guide/install.html#Server-requirements
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  limits:
+    cpu: 300m
+    memory: 600Mi
+  requests:
+    cpu: 150m
+    memory: 300Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+livenessProbe:
+  initialDelaySeconds: 25
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
+
+readinessProbe:
+  initialDelaySeconds: 25
+  periodSeconds: 10
+  timeoutSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
