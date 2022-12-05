@@ -10,7 +10,6 @@ data:
   STREAMING_CLUSTER_NUM: {{ .Values.mastodon.streaming.workers | quote }}
   NODE_ENV: "production"
   RAILS_ENV: "production"
-  STREAMING_CLUSTER_NUM: {{ .Values.mastodon.streaming.workers | quote }}
   # Database
   DB_HOST: {{ .Values.postgres.host | quote }}
   DB_NAME: {{ .Values.postgres.name | quote }}
