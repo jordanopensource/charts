@@ -141,6 +141,17 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/kutt-0.1.0/kutt-0.1.0.tgz
     version: 0.1.0
+  label-studio:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-12-05T10:29:42.386682838Z"
+    description: A Helm chart for Kubernetes
+    digest: ebad13cba5df542118678783a6c2a550b4048ae51696472530b9064eef1846bb
+    name: label-studio
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/label-studio-0.1.0/label-studio-0.1.0.tgz
+    version: 0.1.0
   mastodon:
   - apiVersion: v2
     appVersion: v3.5.3
@@ -529,4 +540,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2022-12-01T11:05:14.634443872Z"
+generated: "2022-12-05T10:29:42.386731541Z"
