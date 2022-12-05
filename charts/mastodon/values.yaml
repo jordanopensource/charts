@@ -16,7 +16,7 @@ fullnameOverride: ""
 
 mastodon:
   # Please look at https://docs.joinmastodon.org/admin/config/ for the full documentation.
-  localDomain: josa.social
+  localDomain: example.com
   # available locales: https://github.com/mastodon/mastodon/blob/main/config/application.rb#L71
   locale: en
   # Possible values are debug, info, warn, error, fatal
@@ -129,8 +129,8 @@ mastodon:
           storage: 100Gi
 
 postgres:
-  host: private-postgresql-db-jordanopensource-org-do-user-1737715-0.b.db.ondigitalocean.com
-  name: mastodon_dev
+  host: "localhost"
+  name: mastodon
   port: 25060
   ## https://www.postgresql.org/docs/10/libpq-ssl.html
   sslMode: "require"
@@ -170,9 +170,9 @@ elasticsearch:
 
 smtp:
   authMethod: plain
-  server: mail.josa.ngo
+  server: mail.example.com
   port: 465
-  fromAddress: "JOSA Mastodon <noreply@josa.ngo>"
+  fromAddress: "Mastodon <noreply@example.com>"
   domain: josa.ngo
   startTls: false
   tls: true
@@ -194,6 +194,21 @@ s3:
     ## NOTE: Must contain key `AWS_ACCESS_KEY_ID`
     ## NOTE: Must contain key `AWS_SECRET_ACCESS_KEY`
     secretName: "s3-secrets"
+
+ldap:
+  enabled: true
+  host: "localhost"
+  port: "636"
+  ldapMethod: "simple_tls"
+  baseDN: "DC=example,DC=com"
+  bindDN: "cn=admin,dc=example,dc=com"
+  uid: "mastodon"
+  mail: "mail"
+  searchFilter: "(|(%{uid}=%{email})(%{mail}=%{email}))"
+  credentials:
+    ## The Secret name containing the credentials for ldap.
+    ## NOTE: Must contain key `LDAP_PASSWORD`
+    secretName: "ldap-secret"
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -227,19 +242,18 @@ ingress:
   enabled: true
   className: "nginx"
   annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt"
-    external-dns.alpha.kubernetes.io/target: nginx.ingress.cloud.josa.ngo
-    external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
-    nginx.ingress.kubernetes.io/proxy-body-size: 40m
+    # cert-manager.io/cluster-issuer: "letsencrypt"
+    # nginx.ingress.kubernetes.io/proxy-body-size: 40m
   hosts:
-    - host: josa.social
+    - host: example.com
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls:
-    - secretName: josa.social-tls
-      hosts:
-        - josa.social
+    []
+    # - secretName: josa.social-tls
+    #   hosts:
+    #     - example.com
 
 resources:
   {}
@@ -261,8 +275,7 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-nodeSelector:
-  doks.digitalocean.com/node-pool: josa-cloud-np
+nodeSelector: {}
 
 tolerations: []
 
