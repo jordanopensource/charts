@@ -106,6 +106,8 @@ listmonk:
   # Changing this to true will delete and overwrite listmonk tables if they already exist in the database and that will reset the app state.
   # If this is the first time you are running the app and didn't initialize the database leave it as true.
   freshInstall: true
+  # This will run the upgrade command ./listmonk --upgrade
+  upgrade: false
   adminCredentials:
     username: "admin"
     password: "admin"
