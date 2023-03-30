@@ -64,6 +64,9 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          {{- if .Values.listmonk.upgrade}}
+          command: ["./listmonk", "--upgrade", "--yes"]
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.existingSecret.enabled}}
           env:
