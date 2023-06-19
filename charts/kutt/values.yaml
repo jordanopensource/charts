@@ -152,6 +152,7 @@ tolerations: []
 affinity: {}
 
 livenessProbe:
+  path: /api/v2/health
   initialDelaySeconds: 5
   periodSeconds: 10
   timeoutSeconds: 5
@@ -159,6 +160,7 @@ livenessProbe:
   failureThreshold: 3
 
 readinessProbe:
+  path: /api/v2/health
   initialDelaySeconds: 5
   periodSeconds: 10
   timeoutSeconds: 5
