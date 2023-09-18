@@ -34,10 +34,8 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
-            {{ range .Values.extraEnvFromConfigMap }}
             - configMapRef:
-                name: {{ . }}
-            {{ end }}
+                name: {{ .Values.extraEnvFromConfigMap }}           
           ports:
             - name: http
               containerPort: 80
