@@ -379,6 +379,16 @@ entries:
   spiderfoot:
   - apiVersion: v2
     appVersion: 3.3.0
+    created: "2023-11-30T13:50:33.738686788Z"
+    description: A Helm chart for spiderfoot
+    digest: f1c739686ced05d9ead342f9dc61ba86322214c1918f118a2b75017122a4133a
+    name: spiderfoot
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/spiderfoot-2.0.1/spiderfoot-2.0.1.tgz
+    version: 2.0.1
+  - apiVersion: v2
+    appVersion: 3.3.0
     created: "2023-11-30T13:27:09.272973969Z"
     description: A Helm chart for spiderfoot
     digest: d551892327ae2e4eabe48c88255fc8bc8f5844955f8a4e82c9d478951519fe7c
@@ -610,4 +620,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2023-11-30T13:27:09.273047085Z"
+generated: "2023-11-30T13:50:33.738755076Z"
