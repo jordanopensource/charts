@@ -60,3 +60,11 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+
+{{/*
+Return  the proper Storage Class
+*/}}
+{{- define "spiderfoot.storageClass" -}}
+{{- include "common.storage.class" (dict "persistence" .Values.persistence) -}}
+{{- end -}}
