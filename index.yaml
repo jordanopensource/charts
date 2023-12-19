@@ -80,6 +80,16 @@ entries:
   formbricks:
   - apiVersion: v2
     appVersion: 1.3.5
+    created: "2023-12-19T12:26:09.86048845Z"
+    description: A Helm chart for deploying frombricks on kubernetes
+    digest: 686d177f4e3e991573449bef2b05f013df9177d4b55ef1b03e8ccc7fab3645b3
+    name: formbricks
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/formbricks-0.1.1/formbricks-0.1.1.tgz
+    version: 0.1.1
+  - apiVersion: v2
+    appVersion: 1.3.5
     created: "2023-12-19T12:18:47.207351177Z"
     description: A Helm chart for deploying frombricks on kubernetes
     digest: cf7f43335105001872322291b64a5f668dcc1222a97439550cc576af1d5867eb
@@ -631,4 +641,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2023-12-19T12:18:47.207420116Z"
+generated: "2023-12-19T12:26:09.860561536Z"
