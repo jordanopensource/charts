@@ -54,28 +54,19 @@ service:
   port: 3000
 
 ingress:
-  enabled: true
+  enabled: false
   className: "nginx"
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt"
-    external-dns.alpha.kubernetes.io/target: nginx.ingress.cloud.josa.ngo
-    external-dns.alpha.kubernetes.io/ingress-hostname-source: defined-hosts-only
-    start.josa.ngo/type: application
-    start.josa.ngo/name: FormBricks
-    start.josa.ngo/url: https://forms.josa.ngo
-    start.josa.ngo/icon: archive
-    start.josa.ngo/description: "Create stunning embeddable forms for recruiting, market research, surveys and more"
-    start.josa.ngo/environment: "Production"
-    start.josa.ngo/login: "Local"
+  annotations: {}
   hosts:
-    - host: forms.josa.ngo
+    - host: example.com
       paths:
         - path: /
           pathType: ImplementationSpecific
   tls:
-    - secretName: froms.josa.ngo-tls
-      hosts:
-        - forms.josa.ngo
+    []
+    # - secretName: example.com-tls
+    #   hosts:
+    #     - forms.josa.ngo
 
 resources:
   {}
