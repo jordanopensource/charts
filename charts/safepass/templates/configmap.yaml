@@ -6,7 +6,7 @@ metadata:
     {{- include "safepass.labels" . | nindent 4 }}
 data:
   DEBUG: {{ .Values.general.debug | quote }}
-  REDIS_PREFIX: {{ .Values.redis.redisPrefix | quote }} 
+  REDIS_PREFIX: {{ .Values.redis.redisPrefix | quote }}
   {{- range $key, $value := .Values.extraEnv }}
   {{ $key }}: {{ $value | quote }}
   {{- end }}

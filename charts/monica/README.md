@@ -43,7 +43,7 @@ $ helm delete my-release
 
 ## Enviroment Variables
 
-See https://github.com/monicahq/monica/blob/master/.env.example for available enviroment variables. 
+See https://github.com/monicahq/monica/blob/master/.env.example for available enviroment variables.
 
 
 ## Values
@@ -151,7 +151,7 @@ The following tables lists the configurable parameters of the Monica chart and t
 
 This Monica chart contains a bundled MySQL as subchart which is enabled by default using the `mysql.enabled=true` value. To further customize this deployment modify the values under `mysql`.
 
-To see the full configuration for this subchart check https://github.com/bitnami/charts/tree/master/bitnami/mysql#parameters 
+To see the full configuration for this subchart check https://github.com/bitnami/charts/tree/master/bitnami/mysql#parameters
 
 ### Use a remote database
 

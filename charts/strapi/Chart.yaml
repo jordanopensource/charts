@@ -1,6 +1,6 @@
 apiVersion: v2
 appVersion: 3.6.5
-description: An open-source headless CMS to build powerful APIs. 
+description: An open-source headless CMS to build powerful APIs.
 home: https://github.com/strapi/strapi
 keywords:
   - strapi
