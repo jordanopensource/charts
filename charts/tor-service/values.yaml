@@ -62,3 +62,6 @@ env: {}
 configMapNamesforEnv: []
 
 secretNamesforEnv: []
+
+autoscaling:
+  enabled: false
