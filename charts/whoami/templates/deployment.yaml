@@ -35,7 +35,7 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
             - configMapRef:
-                name: {{ .Values.extraEnvFromConfigMap }}           
+                name: {{ .Values.extraEnvFromConfigMap }}
           ports:
             - name: http
               containerPort: 80

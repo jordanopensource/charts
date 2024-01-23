@@ -45,7 +45,7 @@ spec:
                   name: {{ .Values.redis.redisUrlSecretName }}
                   key: redis-url
           envFrom:
-            - configMapRef: 
+            - configMapRef:
                 name: {{ include "safepass.fullname" . }}-config
           ports:
             - name: http

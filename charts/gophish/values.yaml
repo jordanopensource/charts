@@ -107,4 +107,3 @@ affinity: {}
 ## Config for gophish
 config:
   enabled: false
-
