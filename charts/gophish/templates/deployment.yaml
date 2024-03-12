@@ -70,10 +70,13 @@ spec:
       {{- end }}
       {{- if .Values.config.enabled }}
       volumes:
-      - name: config
-        configMap:
-          name: {{ template "gophish.fullname" . }}-config
-          items:
-          - key: config.json
-            path: config
-      {{- end }}
+        - name: gophish-data
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.persistence.existingClaim | default (printf "%s-gophish" (include "common.names.fullname" .)) }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
+        {{- if .Values.extraVolumes }}
+        {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumes "context" $) | nindent 8 }}
+        {{- end }}
