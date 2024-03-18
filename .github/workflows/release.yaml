@@ -1,11 +1,9 @@
 name: Release Charts
 
 on:
-  workflow_run:
-    workflows: ["Lint and Test Charts"]
-    branches: [main]
-    types:
-      - completed
+  push:
+    branches:
+      - main
 jobs:
   release:
     runs-on: ubuntu-latest
