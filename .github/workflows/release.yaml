@@ -5,6 +5,9 @@ on:
     workflows: ["Lint and Test Charts"]
     types:
       - completed
+  push:
+    branches:
+      - main
 jobs:
   release:
     runs-on: ubuntu-latest
