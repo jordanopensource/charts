@@ -16,6 +16,6 @@ keywords:
   - crm
 dependencies:
   - name: mysql
-    version: 8.8.6
+    version: 10.1.0
     repository: https://charts.bitnami.com/bitnami
     condition: mysql.enabled
