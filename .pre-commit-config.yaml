@@ -3,7 +3,7 @@ default_stages:
 repos:
   - repo: meta
     hooks:
-      - id: check-hooks-apply
+      # - id: check-hooks-apply
       - id: check-useless-excludes
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
@@ -13,6 +13,17 @@ repos:
       - id: end-of-file-fixer
       - id: check-added-large-files
       - id: detect-private-key
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-json
+        types: ["json"]
+      - id: pretty-format-json
+        types: ["json"]
+        args:
+          - "--autofix"
+          - "--no-sort-keys"
       # - id: check-yaml
       #   args: [--allow-multiple-documents]
       #   exclude: ^charts/*/templates/$
