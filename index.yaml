@@ -167,6 +167,16 @@ entries:
   kutt:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2024-03-20T11:40:38.936458363Z"
+    description: A Helm chart for kutt.it link shortener
+    digest: 0bc173cf88e5d65b805fe2d9ff291721e70ba24d2ab66c7ab1c6f33318bc6e03
+    name: kutt
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/kutt-0.2.1/kutt-0.2.1.tgz
+    version: 0.2.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-06-19T11:18:30.85084709Z"
     description: A Helm chart for kutt.it link shortener
     digest: 121f70474bf7601cbd167a673516932083d4a10292d6151723aff253698ed304
@@ -641,4 +651,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2023-12-19T12:26:09.860561536Z"
+generated: "2024-03-20T11:40:38.936523565Z"
