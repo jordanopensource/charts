@@ -1,6 +1,10 @@
 default_stages:
-- commit
+  - commit
 repos:
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+      - id: check-useless-excludes
   - repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v4.5.0
     hooks:
@@ -9,7 +13,15 @@ repos:
       - id: end-of-file-fixer
       - id: check-added-large-files
       - id: detect-private-key
+      # - id: check-yaml
+      #   args: [--allow-multiple-documents]
+      #   exclude: ^charts/*/templates/$
   - repo: https://github.com/gruntwork-io/pre-commit
     rev: v0.1.23
     hooks:
       - id: helmlint
+  - repo: https://github.com/zricethezav/gitleaks
+    rev: v8.18.2
+    hooks:
+      - id: gitleaks
+        name: detect hardcoded secrets
