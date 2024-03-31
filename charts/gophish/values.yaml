@@ -107,8 +107,7 @@ readinessProbe:
   successThreshold: 1
 
 ## Config for gophish
-config:
-  enabled: false
+customConfig: ''
 
 ## Service and ingress for listener
 listener:

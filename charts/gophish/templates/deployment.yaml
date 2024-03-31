@@ -33,6 +33,14 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          envFrom:
+            {{ if .Values.customConfig }}
+              - configMapRef:
+                  name: {{ .Values.customConfig }}
+            {{ else }}
+              - configMapRef:
+                name: {{ include "gophish.fullname" . }}-config
+            {{ end }}
           ports:
             - name: http
               containerPort: {{ .Values.listener.service.port }}
