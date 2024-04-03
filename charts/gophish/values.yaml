@@ -91,6 +91,7 @@ affinity: {}
 livenessProbe:
   enabled: true
   path: /
+  port: admin
   initialDelaySeconds: 30
   periodSeconds: 10
   timeoutSeconds: 5
@@ -100,6 +101,7 @@ livenessProbe:
 readinessProbe:
   enabled: true
   path: /
+  port: admin
   initialDelaySeconds: 30
   periodSeconds: 5
   timeoutSeconds: 1
