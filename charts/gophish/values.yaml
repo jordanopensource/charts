@@ -25,16 +25,20 @@ serviceAccount:
 
 podAnnotations: {}
 
-podSecurityContext: {}
-  # fsGroup: 2000
+strategy:
+  type: Recreate
 
-securityContext: {}
-  # capabilities:
-  #   drop:
-  #   - ALL
-  # readOnlyRootFilesystem: true
-  # runAsNonRoot: true
-  # runAsUser: 1000
+initContainers: []
+
+securityContext:
+  container:
+    runAsGroup: 1000
+    runAsUser: 1000
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    privileged: false
+  pod:
+    fsGroup: 1000
 
 service:
   type: ClusterIP
@@ -184,3 +188,11 @@ persistence:
   ##     app: my-app
   ##
   selector: {}
+  dataMountDir: /mnt/gophish/data
+  subPath: data
+
+  data:
+    enabled: true
+    existingClaim: gophish-data
+    dataMountDir: /mnt/gophish/data
+    subPath: data
