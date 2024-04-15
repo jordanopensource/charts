@@ -8,6 +8,8 @@ spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
+  strategy:
+  {{- toYaml .Values.strategy | nindent 4 }}
   selector:
     matchLabels:
       {{- include "gophish.selectorLabels" . | nindent 6 }}
@@ -27,6 +29,12 @@ spec:
       serviceAccountName: {{ include "gophish.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.securityContext.pod | nindent 8 }}
+      {{- if or .Values.initContainers }}
+      initContainers:
+        {{- with .Values.initContainers }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      {{- end }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -75,14 +83,27 @@ spec:
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
+          volumeMounts:
+            {{- if and .Values.persistence.data.enabled .Values.persistence.enabled }}
+            - name: gophish-data
+              mountPath: {{ .Values.data.dataMountDir }}
+              subPath: {{ ternary "data" (printf "%s/data" .Values.persistence.data.subPath) (empty .Values.persistence.data.subPath) }}
+            {{- else }}
+            - name: gophish-gophish
+              mountPath: {{ .Values.data.dataMountDir }}
+              subPath: {{ ternary "data" (printf "%s/data" .Values.data.subPath) (empty .Values.data.subPath) }}
+            {{- end }}
           {{- end }}
       volumes:
-        - name: gophish-data
+        - name: gophish-gophish
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
             claimName: {{ .Values.persistence.existingClaim | default (printf "%s-gophish" (include "common.names.fullname" .)) }}
-          {{- else }}
-          emptyDir: {}
+          {{- end }}
+          {{- if and .Values.persistence.data.enabled .Values.persistence.enabled }}
+          - name: gophish-data
+            persistentVolumeClaim:
+              claimName: {{ if .Values.persistence.data.existingClaim }}{{ .Values.persistence.data.existingClaim }}{{- else }}{{ template "common.names.fullname" . }}-data{{- end }}
           {{- end }}
         {{- if .Values.extraVolumes }}
         {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumes "context" $) | nindent 8 }}
