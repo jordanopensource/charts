@@ -101,6 +101,19 @@ entries:
   gophish:
   - apiVersion: v2
     appVersion: 0.12.1
+    created: "2024-04-16T11:46:26.699399115Z"
+    description: gophish helm chart for Kubernetes
+    digest: 016d904cd39ab7923598c694575f3811072becb43468c3ef2b443cd6323211e9
+    maintainers:
+    - email: admin@josa.ngo
+      name: JOSA
+    name: gophish
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.11/gophish-1.2.11.tgz
+    version: 1.2.11
+  - apiVersion: v2
+    appVersion: 0.12.1
     created: "2024-04-16T11:14:02.354801175Z"
     description: gophish helm chart for Kubernetes
     digest: 4d3e12610db1c34da70c40f539d0cd8167e5176ea34ca52617bb83b9f39df0cb
@@ -768,4 +781,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2024-04-16T11:14:02.354942891Z"
+generated: "2024-04-16T11:46:26.699574621Z"
