@@ -47,7 +47,7 @@ spec:
                   name: {{ .Values.customConfig }}
             {{ else }}
               - configMapRef:
-                name: {{ include "gophish.fullname" . }}-config
+                  name: {{ include "gophish.fullname" . }}-config
             {{ end }}
           ports:
             - name: http
@@ -83,7 +83,7 @@ spec:
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
-            {{- if and .Values.persistence.data.enabled .Values.persistence.enabled }}
+            {{- if and .Values.persistence.enabled .Values.persistence.data.enabled }}
             - name: gophish-data
               mountPath: {{ .Values.data.dataMountDir }}
               subPath: {{ ternary "data" (printf "%s/data" .Values.persistence.data.subPath) (empty .Values.persistence.data.subPath) }}
@@ -99,7 +99,7 @@ spec:
           persistentVolumeClaim:
             claimName: {{ .Values.persistence.existingClaim | default (printf "%s-gophish" (include "common.names.fullname" .)) }}
           {{- end }}
-          {{- if and .Values.persistence.data.enabled .Values.persistence.enabled }}
+          {{- if and .Values.persistence.enabled .Values.persistence.data.enabled }}
           - name: gophish-data
             persistentVolumeClaim:
               claimName: {{ if .Values.persistence.data.existingClaim }}{{ .Values.persistence.data.existingClaim }}{{- else }}{{ template "common.names.fullname" . }}-data{{- end }}

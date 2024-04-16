@@ -93,7 +93,7 @@ tolerations: []
 affinity: {}
 
 livenessProbe:
-  enabled: true
+  enabled: false
   path: /
   port: admin
   initialDelaySeconds: 30
@@ -103,7 +103,7 @@ livenessProbe:
   successThreshold: 1
 
 readinessProbe:
-  enabled: true
+  enabled: false
   path: /
   port: admin
   initialDelaySeconds: 30
