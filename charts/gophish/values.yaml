@@ -196,3 +196,5 @@ persistence:
     existingClaim: gophish-data
     dataMountDir: /mnt/gophish/data
     subPath: data
+
+extraVolumesMount: []
