@@ -34,8 +34,8 @@ securityContext:
   container:
     runAsGroup: 1000
     runAsUser: 1000
-    readOnlyRootFilesystem: true
-    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: false
+    allowPrivilegeEscalation: true
     privileged: false
   pod:
     fsGroup: 1000
