@@ -83,7 +83,6 @@ spec:
           {{- with .Values.volumeMounts }}
           volumeMounts:
             {{- toYaml . | nindent 12 }}
-          volumeMounts:
             {{- if and .Values.persistence.data.enabled .Values.persistence.enabled }}
             - name: gophish-data
               mountPath: {{ .Values.data.dataMountDir }}
