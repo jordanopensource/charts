@@ -4,7 +4,7 @@ Return  the proper Storage Class
 */}}
 {{- define "common.storage.class" -}}
 
-{{- $storageClass := .persistence.storageClass -}}
+{{- $storageClass := .persistence.data.storageClass -}}
 {{- if .global -}}
     {{- if .global.storageClass -}}
         {{- $storageClass = .global.storageClass -}}
