@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: gophish/gophish
+  repository: josaorg/gophish
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -28,14 +28,14 @@ podAnnotations: {}
 strategy:
   type: Recreate
 
-initContainers: []
+# initContainers: []
 
 securityContext:
   container:
     runAsGroup: 1000
     runAsUser: 1000
-    readOnlyRootFilesystem: false
-    allowPrivilegeEscalation: true
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
     privileged: false
   pod:
     fsGroup: 1000
@@ -47,7 +47,8 @@ service:
 ingress:
   enabled: false
   className: ""
-  annotations: {}
+  annotations:
+    {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
@@ -60,7 +61,8 @@ ingress:
   #    hosts:
   #      - chart-example.local
 
-resources: {}
+resources:
+  {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -78,13 +80,6 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
-
-# Additional volumes on the output Deployment definition.
-extraVolumes: []
-# - name: foo
-#   secret:
-#     secretName: mysecret
-#     optional: false
 
 nodeSelector: {}
 
@@ -113,12 +108,12 @@ readinessProbe:
   successThreshold: 1
 
 ## Config for gophish
-customConfig: ''
+customConfig: "gophish-config"
 
 ## Service and ingress for listener
 listener:
   service:
-    port: 80
+    port: 8080
 
 ## Service and ingress for admin
 admin:
@@ -129,7 +124,8 @@ admin:
   ingress:
     enabled: false
     className: ""
-    annotations: {}
+    annotations:
+      {}
       # kubernetes.io/ingress.class: nginx
       # kubernetes.io/tls-acme: "true"
     hosts:
@@ -143,58 +139,55 @@ admin:
     #      - chart-example.local
 
 persistence:
-  ## @param persistence.enabled Enable persistence using PVC
-  ##
-  enabled: false
-  ## @param persistence.storageClass PVC Storage Class for gophish volume
-  ## If defined, storageClassName: <storageClass>
-  ## If set to "-", storageClassName: "", which disables dynamic provisioning
-  ## If undefined (the default) or set to null, no storageClassName spec is
-  ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
-  ##   GKE, AWS & OpenStack)
-  ##
-  storageClass: ""
-  ## @param persistence.accessModes PVC Access Mode for gophish volume
-  ## Requires persistence.enabled: true
-  ## If defined, PVC must be created manually before volume will be bound
-  ##
-  accessModes:
-    - ReadWriteOnce
-  ## @param persistence.size PVC Storage Request for gophish volume
-  ##
-  size: 8Gi
-  ## @param persistence.dataSource Custom PVC data source
-  ##
-  dataSource: {}
-  ## @param persistence.existingClaim A manually managed Persistent Volume Claim
-  ## Requires persistence.enabled: true
-  ## If defined, PVC must be created manually before volume will be bound
-  ##
-  existingClaim: ""
-  ## @param persistence.hostPath If defined, the gophish-data volume will mount to the specified hostPath.
-  ## Requires persistence.enabled: true
-  ## Requires persistence.existingClaim: nil|false
-  ## Default: nil.
-  ##
-  hostPath: ""
-  ## @param persistence.annotations Persistent Volume Claim annotations
-  ##
-  annotations: {}
-  ## @param persistence.selector Selector to match an existing Persistent Volume for gophish data PVC
-  ## If set, the PVC can't have a PV dynamically provisioned for it
-  ## E.g.
-  ## selector:
-  ##   matchLabels:
-  ##     app: my-app
-  ##
-  selector: {}
-  dataMountDir: /mnt/gophish/data
-  subPath: data
-
   data:
-    enabled: true
-    existingClaim: gophish-data
-    dataMountDir: /mnt/gophish/data
-    subPath: data
+    ## @param persistence.data.enabled Enables Gophish data persistence using PVC
+    ##
+    enabled: false
+    ## @param persistence.data.dataMountDir Specify the data persistence volume mount path
+    ## By default the path points to `/mnt/gophish/data`
+    # dataMountDir: /mnt/gophish/data
+    ## @param persistence.data.subPath Specify the data persistence volume mount path subpath
+    ## By default the path points to the `data` dir
+    # subPath: data
+    ## @param persistence.data.storageClass PVC Storage Class for gophish volume
+    ## If defined, storageClassName: <storageClass>
+    ## If set to "-", storageClassName: "", which disables dynamic provisioning
+    ## If undefined (the default) or set to null, no storageClassName spec is
+    ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+    ##   GKE, AWS & OpenStack)
+    ##
+    storageClass: ""
+    ## @param persistence.data.accessModes PVC Access Mode for gophish volume
+    ## Requires persistence.data.enabled: true
+    ## If defined, PVC must be created manually before volume will be bound
+    ##
+    accessModes:
+      - ReadWriteOnce
+    ## @param persistence.data.size PVC Storage Request for gophish volume
+    ##
+    size: 8Gi
+    ## @param persistence.data.dataSource Custom PVC data source
+    ##
+    dataSource: {}
+    ## @param persistence.data.annotations Persistent Volume Claim annotations
+    ##
+    hostPath: ""
+    annotations:
+      helm.sh/resource-policy: keep
+    ## @param persistence.data.selector Selector to match an existing Persistent Volume for gophish data PVC
+    ## If set, the PVC can't have a PV dynamically provisioned for it
+    ## E.g.
+    ## selector:
+    ##   matchLabels:
+    ##     app: my-app
+    ##
+    selector: {}
+
+# Additional volumes on the output Deployment definition.
+extraVolumes: []
+# - name: foo
+#   secret:
+#     secretName: mysecret
+#     optional: false
 
 extraVolumesMount: []
