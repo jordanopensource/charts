@@ -1,4 +1,4 @@
-{{- if and .Values.persistence.enabled .Values.persistence.hostPath (not .Values.persistence.existingClaim) -}}
+{{- if and .Values.persistence.data.enabled .Values.persistence.data.hostPath -}}
 apiVersion: v1
 kind: PersistentVolume
 metadata:
@@ -9,14 +9,14 @@ metadata:
   annotations: {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
   {{- end }}
 spec:
-  {{- if not (empty .Values.persistence.accessModes) }}
+  {{- if not (empty .Values.persistence.data.accessModes) }}
   accessModes:
-  {{- range .Values.persistence.accessModes }}
+  {{- range .Values.persistence.data.accessModes }}
     - {{ . | quote }}
   {{- end }}
   {{- end }}
   capacity:
-    storage: {{ .Values.persistence.size | quote }}
+    storage: {{ .Values.persistence.data.size | quote }}
   hostPath:
-    path: {{ .Values.persistence.hostPath | quote }}
+    path: {{ .Values.persistence.data.hostPath | quote }}
 {{- end -}}

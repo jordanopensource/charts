@@ -1,33 +1,34 @@
-{{- if and .Values.persistence.enabled (not .Values.persistence.existingClaim) -}}
+
+{{- if and .Values.persistence.data.enabled -}}
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: {{ include "common.names.fullname" . }}-gophish
+  name: {{ include "common.names.fullname" . }}-data
   namespace: {{ include "common.names.namespace" . | quote }}
   labels: {{- include "common.labels.standard" ( dict "customLabels" .Values.commonLabels "context" $ ) | nindent 4 }}
-  {{- if or .Values.persistence.annotations .Values.commonAnnotations }}
-  {{- $annotations := include "common.tplvalues.merge" ( dict "values" ( list .Values.persistence.annotations .Values.commonAnnotations ) "context" . ) }}
+  {{- if or .Values.persistence.data.annotations .Values.commonAnnotations }}
+  {{- $annotations := include "common.tplvalues.merge" ( dict "values" ( list .Values.persistence.data.annotations .Values.commonAnnotations ) "context" . ) }}
   annotations: {{- include "common.tplvalues.render" ( dict "value" $annotations "context" $) | nindent 4 }}
   {{- end }}
 spec:
-  {{- if .Values.persistence.hostPath }}
+  {{- if .Values.persistence.data.hostPath }}
   storageClassName: ""
   {{- else }}
   {{- include "gophish.storageClass" . | nindent 2 }}
   {{- end }}
-  {{- if not (empty .Values.persistence.accessModes) }}
+  {{- if not (empty .Values.persistence.data.accessModes) }}
   accessModes:
-  {{- range .Values.persistence.accessModes }}
+  {{- range .Values.persistence.data.accessModes }}
     - {{ . | quote }}
   {{- end }}
   {{- end }}
   resources:
     requests:
-      storage: {{ .Values.persistence.size | quote }}
-  {{- if .Values.persistence.selector }}
-  selector: {{- include "common.tplvalues.render" (dict "value" .Values.persistence.selector "context" $) | nindent 4 }}
+      storage: {{ .Values.persistence.data.size | quote }}
+  {{- if .Values.persistence.data.selector }}
+  selector: {{- include "common.tplvalues.render" (dict "value" .Values.persistence.data.selector "context" $) | nindent 4 }}
   {{- end -}}
-  {{- if .Values.persistence.dataSource }}
-  dataSource: {{- include "common.tplvalues.render" (dict "value" .Values.persistence.dataSource "context" $) | nindent 4 }}
+  {{- if .Values.persistence.data.dataSource }}
+  dataSource: {{- include "common.tplvalues.render" (dict "value" .Values.persistence.data.dataSource "context" $) | nindent 4 }}
   {{- end }}
 {{- end -}}
