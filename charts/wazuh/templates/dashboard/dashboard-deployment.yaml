@@ -1,0 +1,122 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "wazuh.fullname" . }}-dashboard
+  labels:
+    {{- include "wazuh.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.dashboard.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "wazuh.fullname" . }}-dashboard
+      {{- include "wazuh.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.dashboard.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{ include "wazuh.fullname" . }}-dashboard
+        {{- include "wazuh.labels" . | nindent 8 }}
+        {{- with .Values.dashboard.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.dashboard.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "wazuh.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.dashboard.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ include "wazuh.fullname" . }}-dashboard
+          securityContext:
+            {{- toYaml .Values.dashboard.securityContext | nindent 12 }}
+          image: "{{ .Values.dashboard.image.repository }}:{{ .Values.dashboard.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.dashboard.image.pullPolicy }}
+          envFrom:
+            {{- if .Values.dashboard.config.secrets.existingSecretName }}
+            - secretRef:
+                name: {{ .Values.dashboard.config.secrets.existingSecretName }}
+            {{- else }}
+            - secretRef:
+                name: {{ include "wazuh.fullname" . }}-dashboard
+            {{- end }}
+            {{- if .Values.manager.config.secrets.existingSecretName }}
+            - secretRef:
+                name: {{ .Values.manager.config.secrets.existingSecretName }}
+            {{- else }}
+            - secretRef:
+                name: {{ include "wazuh.fullname" . }}-manager
+            {{- end }}
+          env:
+            - name: INDEXER_URL
+              value: {{ .Values.global.indexerUrl | quote  }}
+            - name: WAZUH_API_URL
+              value: {{ .Values.global.wazuhApiUrl | quote  }}
+            - name: SERVER_SSL_ENABLED
+              value: {{ .Values.dashboard.config.ServerSSL | quote  }}
+            - name: SERVER_SSL_CERTIFICATE
+              value: /usr/share/wazuh-dashboard/certs/cert.pem
+            - name: SERVER_SSL_KEY
+              value: /usr/share/wazuh-dashboard/certs/key.pem
+          ports:
+            - name: dashboard
+              containerPort: 5601
+              protocol: TCP
+          livenessProbe:
+            {{- toYaml .Values.dashboard.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.dashboard.readinessProbe | nindent 12 }}
+          resources:
+            {{- toYaml .Values.dashboard.resources | nindent 12 }}
+          volumeMounts:
+            - name: config
+              mountPath: /usr/share/wazuh-dashboard/config/opensearch_dashboards.yml
+              subPath: opensearch_dashboards.yml
+              readOnly: false
+            - name: dashboard-certs
+              mountPath: /usr/share/wazuh-dashboard/certs/cert.pem
+              readOnly: true
+              subPath: cert.pem
+            - name: dashboard-certs
+              mountPath: /usr/share/wazuh-dashboard/certs/key.pem
+              readOnly: true
+              subPath: key.pem
+            - name: dashboard-certs
+              mountPath: /usr/share/wazuh-dashboard/certs/root-ca.pem
+              subPath: root-ca.pem
+              readOnly: true
+          {{- with .Values.dashboard.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        {{- if .Values.dashboard.config.dashboardCustomConfig }}
+        - name: config
+          configMap:
+            name: {{ .Values.dashboard.config.dashboardCustomConfig }}
+        {{- else }}
+        - name: config
+          configMap:
+            name: {{ include "wazuh.fullname" . }}-dashboard-config
+        {{- end }}
+        - name: dashboard-certs
+          secret:
+            secretName: {{ required "A valid dashboardCertsSecretName is required!" .Values.dashboard.config.dashboardCertsSecretName }}
+      {{- with .Values.dashboard.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.dashboard.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.dashboard.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.dashboard.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

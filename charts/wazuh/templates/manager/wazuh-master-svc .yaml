@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "wazuh.fullname" . }}
+  labels:
+    app: {{ include "wazuh.fullname" . }}-manager
+    {{- include "wazuh.labels" . | nindent 4 }}
+  {{- with .Values.manager.master.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
+spec:
+  type: {{ .Values.manager.master.service.type }}
+  ports:
+    - port: 1515
+      targetPort: 1515
+      protocol: TCP
+      name: registration
+    - port: 55000
+      targetPort: 55000
+      protocol: TCP
+      name: api
+  selector:
+    app: {{ include "wazuh.fullname" . }}-manager
+    node-type: master
+    {{- include "wazuh.selectorLabels" . | nindent 4 }}

@@ -1,0 +1,8 @@
+{{- if not .Values.dashboard.config.dashboardCustomConfig }}
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ include "wazuh.fullname" . }}-dashboard-config
+data:
+{{ (.Files.Glob "dashboard_conf/*").AsConfig | indent 2 }}
+{{- end }}

@@ -1,0 +1,8 @@
+{{- if not .Values.manager.config.customManagerConfig }}
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ include "wazuh.fullname" . }}-manager-config
+data:
+{{ (.Files.Glob "wazuh_conf/*").AsConfig | indent 2 }}
+{{- end }}
