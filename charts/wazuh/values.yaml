@@ -19,7 +19,7 @@ indexer:
     # The Secret name for the indexer certs must have the following keys
     # admin-key.pem, admin.pem, dashboard-key.pem, dashboard.pem
     # filebeat-key.pem, filebeat.pem, node-key.pem, node.pem, root-ca.pem
-    indexerCertsSecretName: "indexer-certs"
+    indexerCertsSecretName: ""
     # The name of the configmap that includes the custom indexer config
     # Must have the following key "opensearch.yml"
     indexerCustomConfig: ""
@@ -260,7 +260,7 @@ dashboard:
     # ** REQUIRED **
     # The Secret name for the dashboard certs must have the following keys
     # cert.pem, key.pem, root-ca.pem
-    dashboardCertsSecretName: "dashboard-certs"
+    dashboardCertsSecretName: ""
     # ----------------
     # The configmap name that includes the dashboard custom config file
     # Must have the key 'opensearch_dashboards.yml'
