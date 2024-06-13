@@ -1,5 +1,5 @@
 {{- if .Values.dashboard.ingress.enabled -}}
-{{- $fullName := include "wazuh.fullname" . -}}-dashboard
+{{- $fullName := include "wazuh.fullname" . -}}
 {{- $svcPort := .Values.dashboard.service.port -}}
 {{- if and .Values.dashboard.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.dashboard.ingress.annotations "kubernetes.io/ingress.class") }}
@@ -15,7 +15,7 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: {{ $fullName }}
+  name: {{ $fullName }}-dashboard
   labels:
     {{- include "wazuh.labels" . | nindent 4 }}
   {{- with .Values.dashboard.ingress.annotations }}
@@ -49,11 +49,11 @@ spec:
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ $fullName }}
+                name: {{ $fullName }}-dashboard
                 port:
                   number: {{ $svcPort }}
               {{- else }}
-              serviceName: {{ $fullName }}
+              serviceName: {{ $fullName }}-dashboard
               servicePort: {{ $svcPort }}
               {{- end }}
           {{- end }}

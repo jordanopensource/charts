@@ -348,7 +348,7 @@ dashboard:
 
   service:
     type: ClusterIP
-    port: 443
+    port: 5601
 
   ingress:
     enabled: false
