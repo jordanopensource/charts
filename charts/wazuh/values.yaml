@@ -13,6 +13,21 @@ indexer:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "4.7.4"
 
+certificate:
+  enabled: false
+  issuerRef:
+    name: "letsencrypt"
+    # We can reference ClusterIssuers by changing the kind here.
+    # The default value is Issuer (i.e. a locally namespaced Issuer)
+    kind: "Issuer"
+  # The use of the common name field has been deprecated since 2000 and is
+  # discouraged from being used.
+  commonName: example.com
+    # At least one of commonName (possibly through literalSubject), dnsNames, uris, emailAddresses, ipAddresses or otherNames is required.
+  dnsNames:
+    - example.com
+    - www.example.com
+
   config:
     sslEnabled: false
     # **REQUIRED**
