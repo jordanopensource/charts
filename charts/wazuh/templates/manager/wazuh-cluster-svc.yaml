@@ -5,9 +5,14 @@ metadata:
   labels:
     app: {{ include "wazuh.fullname" . }}-manager
     {{- include "wazuh.labels" . | nindent 4 }}
+  annotations:
+    service.kubernetes.io/do-loadbalancer-disown: "false"
+    service.beta.kubernetes.io/do-loadbalancer-hostname: "events.siem.josa.dev"
+    service.beta.kubernetes.io/do-loadbalancer-name: "events.siem.josa.dev"
+    external-dns.alpha.kubernetes.io/target: "64.225.93.242"
+    external-dns.alpha.kubernetes.io/ingress-hostname-source: annotation-only
 spec:
-  type: ClusterIP
-  clusterIP: None
+  type: LoadBalancer
   ports:
     - port: 1516
       targetPort: 1516

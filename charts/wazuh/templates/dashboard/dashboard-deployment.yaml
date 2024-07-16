@@ -93,6 +93,29 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
       volumes:
+        {{- if eq "auto" .Values.tlsFlavor }}
+        - name: dashboard-certs
+          projected:
+            sources:
+            - secret:
+                name: {{ .Values.certManagerConfig.caCrtSecretName }}
+                items:
+                  - key: ca.crt
+                    path: root-ca.pem
+            - secret:
+                name: dashboard-tls
+                items:
+                  - key: tls.crt
+                    path: cert.pem
+                  - key: tls.key
+                    path: key.pem
+        {{- else if eq "secret" .Values.tlsFlavor }}
+          - name: dashboard-certs
+            secret:
+              secretName: {{ .Values.dashboard.config.dashboardCertsSecretName }}
+        {{- else }}
+        {{- fail "Either provide your own certificates under .Values.dashboard.config.dashboardCertsSecretName or enable the autoGenerate certificate"}}
+        {{- end }}
         {{- if .Values.dashboard.config.dashboardCustomConfig }}
         - name: config
           configMap:
@@ -102,9 +125,6 @@ spec:
           configMap:
             name: {{ include "wazuh.fullname" . }}-dashboard-config
         {{- end }}
-        - name: dashboard-certs
-          secret:
-            secretName: {{ required "A valid dashboardCertsSecretName is required!" .Values.dashboard.config.dashboardCertsSecretName }}
       {{- with .Values.dashboard.volumes }}
         {{- toYaml . | nindent 8 }}
       {{- end }}
