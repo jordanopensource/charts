@@ -127,6 +127,43 @@ spec:
               {{- toYaml . | nindent 12 }}
             {{- end }}
       volumes:
+        {{- if and .Values.tls.enabled .Values.tls.certManager.enabled }}
+        - name: indexer-certs
+          projected:
+            sources:
+            - secret:
+                name: {{ .Values.tls.certManager.caCrtSecretName }}
+                items:
+                  - key: ca.crt
+                    path: root-ca.pem
+            - secret:
+                name: admin-tls
+                items:
+                  - key: tls.crt
+                    path: admin.pem
+                  - key: tls.key
+                    path: admin-key.pem
+            - secret:
+                name: node-tls
+                items:
+                  - key: tls.crt
+                    path: node.pem
+                  - key: tls.key
+                    path: node-key.pem
+            - secret:
+                name: filebeat-tls
+                items:
+                  - key: tls.crt
+                    path: filebeat.pem
+                  - key: tls.key
+                    path: filebeat-key.pem
+        {{- else if and .Values.tls.enabled (not (eq .Values.tls.secretName "")) }}
+        - name: indexer-certs
+          secret:
+            secretName: {{ .Values.tls.secretName }}
+        {{- else }}
+        {{- fail "Either provide your own certificates under .Values.tls.secretName or enable the tls certManager certificate if you have cert-manager on your cluster!"}}
+        {{- end }}
         {{- if .Values.indexer.config.indexerInternalUsersSecretName }}
         - name: indexer-users
           secret:
@@ -145,9 +182,6 @@ spec:
           configMap:
             name: {{ include "wazuh.fullname" . }}-indexer-config
         {{- end }}
-        - name: indexer-certs
-          secret:
-            secretName: {{ required "A valid indexerCertsSecretName is required!" .Values.indexer.config.indexerCertsSecretName }}
         {{- if .Values.indexer.storage.existingClaim }}
         - name: wazuh-indexer
           persistentVolumeClaim:

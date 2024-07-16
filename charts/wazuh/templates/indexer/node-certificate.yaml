@@ -2,9 +2,9 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "dashboard-tls"
+  name: "node-tls"
 spec:
-  secretName: "dashboard-tls"
+  secretName: "node-tls"
   issuerRef:
     name: {{ .Values.tls.certManager.issuer.name }}
     kind: {{ .Values.tls.certManager.issuer.kind }}

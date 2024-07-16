@@ -122,7 +122,30 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
       volumes:
-       {{- if .Values.manager.config.customManagerConfig }}
+        {{- if and .Values.tls.enabled .Values.tls.certManager.enabled }}
+        - name: filebeat-certs
+          projected:
+            sources:
+            - secret:
+                name: {{ .Values.tls.certManager.caCrtSecretName }}
+                items:
+                  - key: ca.crt
+                    path: root-ca.pem
+            - secret:
+                name: filebeat-tls
+                items:
+                  - key: tls.crt
+                    path: filebeat.pem
+                  - key: tls.key
+                    path: filebeat-key.pem
+        {{- else if and .Values.tls.enabled (not (eq .Values.tls.secretName "")) }}
+        - name: filebeat-certs
+          secret:
+            secretName: {{ .Values.tls.secretName }}
+        {{- else }}
+        {{- fail "Either provide your own certificates under .Values.tls.secretName or enable the tls certManager certificate if you have cert-manager on your cluster!"}}
+        {{- end }}
+        {{- if .Values.manager.config.customManagerConfig }}
         - name: config
           configMap:
             name: {{ .Values.manager.config.customManagerConfig }}
@@ -131,9 +154,6 @@ spec:
           configMap:
             name: {{ include "wazuh.fullname" . }}-manager-config
         {{- end }}
-        - name: filebeat-certs
-          secret:
-            secretName: {{ .Values.indexer.config.indexerCertsSecretName }}
         {{- if .Values.manager.workers.storage.existingClaim }}
         - name: wazuh-manager-worker
           persistentVolumeClaim:

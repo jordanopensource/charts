@@ -3,8 +3,37 @@
 # Declare variables to be passed into your templates.
 
 global:
-  indexerUrl: "http://wazuh-indexer:9200"
-  wazuhApiUrl: "https://wazuh"
+  indexerUrl: "https://wazuh-indexer:9200"
+  wazuhApiUrl: "https://wazuh-master"
+
+tls:
+  # If enabled you either need to provide a secrete name containing specific keys as certs or enable the creation of certifications if
+  # your cluster supports issuing certificates.
+  enabled: true
+  # **REQUIRED** when you want to provide your own certificate
+  # The Secret name for the certs must have the following keys within it
+  # admin-key.pem, admin.pem, dashboard-key.pem, dashboard.pem
+  # filebeat-key.pem, filebeat.pem, node-key.pem, node.pem, root-ca.pem,
+  # key.pem, cert.pem
+  secretName: ""
+  certManager:
+    enabled: true
+    duration: 2160h # 90d
+    renewBefore: 360h # 15d
+    issuer:
+      name: "selfsigned-josa"
+      # We can reference ClusterIssuers by changing the kind here.
+      # The default value is Issuer (i.e. a locally namespaced Issuer)
+      kind: "ClusterIssuer"
+    # The use of the common name field has been deprecated since 2000 and is
+    # discouraged from being used.
+    commonName: test.josa.dev
+    # At least one of commonName (possibly through literalSubject), dnsNames, uris, emailAddresses, ipAddresses or otherNames is required.
+    dnsNames:
+      - test.josa.dev
+      - www.test.josa.dev
+    ## CA certificate secret name that can be downloaded from https://letsencrypt.org/certificates/, the key name should be ca.crt in the secret file.
+    caCrtSecretName: "letsencrypt-ca"
 
 indexer:
   image:
@@ -13,28 +42,8 @@ indexer:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "4.7.4"
 
-certificate:
-  enabled: false
-  issuerRef:
-    name: "letsencrypt"
-    # We can reference ClusterIssuers by changing the kind here.
-    # The default value is Issuer (i.e. a locally namespaced Issuer)
-    kind: "Issuer"
-  # The use of the common name field has been deprecated since 2000 and is
-  # discouraged from being used.
-  commonName: example.com
-    # At least one of commonName (possibly through literalSubject), dnsNames, uris, emailAddresses, ipAddresses or otherNames is required.
-  dnsNames:
-    - example.com
-    - www.example.com
-
   config:
     sslEnabled: false
-    # **REQUIRED**
-    # The Secret name for the indexer certs must have the following keys
-    # admin-key.pem, admin.pem, dashboard-key.pem, dashboard.pem
-    # filebeat-key.pem, filebeat.pem, node-key.pem, node.pem, root-ca.pem
-    indexerCertsSecretName: ""
     # The name of the configmap that includes the custom indexer config
     # Must have the following key "opensearch.yml"
     indexerCustomConfig: ""
@@ -272,10 +281,6 @@ dashboard:
 
   config:
     ServerSSL: false
-    # ** REQUIRED **
-    # The Secret name for the dashboard certs must have the following keys
-    # cert.pem, key.pem, root-ca.pem
-    dashboardCertsSecretName: ""
     # ----------------
     # The configmap name that includes the dashboard custom config file
     # Must have the key 'opensearch_dashboards.yml'

@@ -1,10 +1,10 @@
-{{- if and .Values.tls.enabled .Values.tls.certManager.enabled }}
+{{- if and .Values.tls.enabled .Values.tls.certManager.enabled}}
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: "dashboard-tls"
+  name: "admin-tls"
 spec:
-  secretName: "dashboard-tls"
+  secretName: "admin-tls"
   issuerRef:
     name: {{ .Values.tls.certManager.issuer.name }}
     kind: {{ .Values.tls.certManager.issuer.kind }}
