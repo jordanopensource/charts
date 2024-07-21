@@ -133,7 +133,7 @@ spec:
           projected:
             sources:
             - secret:
-                name: {{ .Values.tls.caCrtSecretName }}
+                name: {{ .Values.tls.certManager.caCrtSecretName }}
                 items:
                   - key: ca.crt
                     path: root-ca.pem
