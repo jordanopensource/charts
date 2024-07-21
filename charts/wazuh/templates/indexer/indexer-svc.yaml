@@ -13,6 +13,10 @@ spec:
       targetPort: 9300
       protocol: TCP
       name: indexer-nodes
+    - port: 9200
+      targetPort: 9200
+      protocol: TCP
+      name: indexer-api
   selector:
     app: {{ include "wazuh.fullname" . }}-indexer
     {{- include "wazuh.selectorLabels" . | nindent 4 }}
