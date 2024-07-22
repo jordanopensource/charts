@@ -398,9 +398,9 @@ dashboard:
           - path: /
             pathType: ImplementationSpecific
     tls:
-     - secretName: dashboard.siem.josa.dev-tls
-       hosts:
-         - dashboard.siem.josa.dev
+      - secretName: dashboard.siem.josa.dev-tls
+        hosts:
+          - dashboard.siem.josa.dev
 
 nameOverride: ""
 fullnameOverride: ""
