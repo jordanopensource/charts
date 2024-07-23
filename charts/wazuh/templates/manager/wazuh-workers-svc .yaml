@@ -5,12 +5,8 @@ metadata:
   labels:
     app: {{ include "wazuh.fullname" . }}-manager
     {{- include "wazuh.labels" . | nindent 4 }}
-  {{- with .Values.manager.workers.service.annotations }}
-  annotations:
-    {{- toYaml . | nindent 8 }}
-  {{- end }}
 spec:
-  type: {{ .Values.manager.workers.service.type }}
+  type: ClusterIP
   ports:
     - port: 1514
       targetPort: 1514
