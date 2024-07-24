@@ -6,6 +6,17 @@ global:
   indexerUrl: "https://wazuh-indexer:9200"
   wazuhApiUrl: "https://wazuh-master"
 
+## **IMPORTANT**
+## ** Choose the release name as "wazuh" for easier time **
+## If the name of the release is not "wazuh" it will break the manager configuration
+## So you need to provide your own wazuh-manager configuration
+## With the updated wazuh manager nodes in the cluster section in the [master.conf,worker.conf] files
+## example: {release-name}-manager-master-0.{release-name}-cluster
+## and the cluster name should be the same as the {release-name}
+## go to the manager.config section in the values file to see how you can add your own configuration files
+nameOverride: ""
+fullnameOverride: ""
+
 tls:
   # If enabled you either need to provide a secrete name containing specific keys as certs or enable the creation of certifications if
   # your cluster supports issuing certificates.
@@ -21,29 +32,30 @@ tls:
     duration: 2160h # 90d
     renewBefore: 360h # 15d
     issuer:
-      name: "selfsigned-josa"
+      name: "your-issuer"
       # We can reference ClusterIssuers by changing the kind here.
       # The default value is Issuer (i.e. a locally namespaced Issuer)
       kind: "ClusterIssuer"
     # The use of the common name field has been deprecated since 2000 and is
     # discouraged from being used.
-    commonName: test.josa.dev
+    commonName: wazuh.example.com
     # At least one of commonName (possibly through literalSubject), dnsNames, uris, emailAddresses, ipAddresses or otherNames is required.
     dnsNames:
-      - test.josa.dev
-      - www.test.josa.dev
-    ## CA certificate secret name that can be downloaded from https://letsencrypt.org/certificates/, the key name should be ca.crt in the secret file.
-    caCrtSecretName: "letsencrypt-ca"
+      - wazuh.example.com
+      - www.wazuh.example.com
+    ## CA certificate secret name, the key name should be ca.crt in the secret file.
+    ## By default it will take the CA from the indexer node cert secret
+    caCrtSecretName: "node-tls"
 
 indexer:
   image:
     repository: wazuh/wazuh-indexer
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.7.4"
+    tag: "4.8.1"
 
   config:
-    sslEnabled: false
+    sslEnabled: true
     # The name of the configmap that includes the custom indexer config
     # Must have the following key "opensearch.yml"
     indexerCustomConfig: ""
@@ -115,7 +127,7 @@ manager:
     repository: wazuh/wazuh-manager
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.7.4"
+    tag: "4.8.1"
 
   imagePullSecrets: []
 
@@ -135,14 +147,14 @@ manager:
       # do not change unless you changed the passwords and the usernames
       # using the indexerInternalUsersSecretName in the indexer section
       indexerUsername: "admin"
-      indexerPassword: "SecretPassword"
+      indexerPassword: "SecretPassword" #gitleaks:allow
       # -------------------
       wazuhApiUsername: "wazuh"
       # Note The password for Wazuh API users must be between 8 and 64 characters long.
       # It must contain at least one uppercase and one lowercase letter, a number, and a symbol.
-      wazuhApiPassword: "Pho8OH1voo6eew@ahVui4Ahghu6leith"
-      wazuhClusterKey: "123a45bc67def891gh23i45jk67l8mn9"
-      wazuhAuthDPass: "password"
+      wazuhApiPassword: "Pho8OH1voo6eew@ahVui4Ahghu6leith" #gitleaks:allow
+      wazuhClusterKey: "123a45bc67def891gh23i45jk67l8mn9" #gitleaks:allow
+      wazuhAuthDPass: "password" #gitleaks:allow
       # The secret must have the following keys
       # INDEXER_USERNAME, INDEXER_PASSWORD
       # API_USERNAME, API_PASSWORD
@@ -150,11 +162,13 @@ manager:
       # authd.pass
       existingSecretName: ""
 
-  master:
-    service:
-      type: ClusterIP
-      annotations: {}
+  ## The manager service that is going to be responsible for the agent registration
+  ## and the agent events
+  service:
+    type: LoadBalancer
+    annotations: {}
 
+  master:
     podSecurityContext:
       fsGroup: 101
       # fsGroup: 2000
@@ -211,10 +225,6 @@ manager:
 
   workers:
     replicaCount: 1
-
-    service:
-      type: ClusterIP
-      annotations: {}
 
     podSecurityContext:
       fsGroup: 101
@@ -277,10 +287,10 @@ dashboard:
     repository: wazuh/wazuh-dashboard
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.7.4"
+    tag: "4.8.1"
 
   config:
-    ServerSSL: false
+    ServerSSL: true
     # ----------------
     # The configmap name that includes the dashboard custom config file
     # Must have the key 'opensearch_dashboards.yml'
@@ -293,11 +303,28 @@ dashboard:
       # do not change unless you changed the passwords and the usernames
       # using the indexerInternalUsersSecretName in the indexer section
       dashboardUsername: "kibanaserver"
-      dashboardPassword: "kibanaserver"
+      dashboardPassword: "kibanaserver" #gitleaks:allow
       # -------------------
       # The secret must have the following keys
       # DASHBOARD_USERNAME, DASHBOARD_PASSWORD
       existingSecretName: ""
+
+  ingress:
+    enabled: false
+    className: nginx
+    annotations:
+      {}
+      # cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls:
+      []
+      # - secretName: chart-example.local-tls
+      #   hosts:
+      #     - chart-example.local
 
   imagePullSecrets: []
 
@@ -369,26 +396,6 @@ dashboard:
   service:
     type: ClusterIP
     port: 5601
-
-  ingress:
-    enabled: false
-    className: ""
-    annotations:
-      {}
-      # kubernetes.io/ingress.class: nginx
-      # kubernetes.io/tls-acme: "true"
-    hosts:
-      - host: chart-example.local
-        paths:
-          - path: /
-            pathType: ImplementationSpecific
-    tls: []
-    #  - secretName: chart-example-tls
-    #    hosts:
-    #      - chart-example.local
-
-nameOverride: ""
-fullnameOverride: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
