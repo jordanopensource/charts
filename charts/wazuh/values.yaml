@@ -143,7 +143,7 @@ manager:
       # If you provide an existing secret name those values will be ignored
       # -------------------
       #
-      # WARN: Those are the default indexer credentials for the wazuh-ui 'dashboard',
+      # WARN: Those are the default indexer credentials for the wazuh-manager,
       # do not change unless you changed the passwords and the usernames
       # using the indexerInternalUsersSecretName in the indexer section
       indexerUsername: "admin"
