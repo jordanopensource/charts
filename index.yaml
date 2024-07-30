@@ -773,6 +773,18 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/uptime-1.0.2/uptime-1.0.2.tgz
     version: 1.0.2
+  wazuh:
+  - apiVersion: v2
+    appVersion: 4.8.1
+    created: "2024-07-30T13:29:40.431672206Z"
+    description: A Helm chart for Wazuh the open source security platform that unifies
+      XDR and SIEM protection for endpoints and cloud workloads.
+    digest: 37bb9de6a29f48b429e5e30819dfecbd796819f84f9f68328388254deb12e1b6
+    name: wazuh
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/wazuh-1.0.0/wazuh-1.0.0.tgz
+    version: 1.0.0
   whoami:
   - apiVersion: v2
     appVersion: v1.8.6
@@ -869,4 +881,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2024-07-18T07:21:21.805908616Z"
+generated: "2024-07-30T13:29:40.431769438Z"
