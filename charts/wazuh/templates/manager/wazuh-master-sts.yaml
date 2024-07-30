@@ -1,0 +1,204 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "wazuh.fullname" . }}-manager-master
+  labels:
+    {{- include "wazuh.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  serviceName: {{ include "wazuh.fullname" . }}-cluster
+  selector:
+    matchLabels:
+      app: {{ include "wazuh.fullname" . }}-manager
+      node-type: master
+      {{- include "wazuh.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.manager.master.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        app: {{ include "wazuh.fullname" . }}-manager
+        node-type: master
+        {{- include "wazuh.labels" . | nindent 8 }}
+        {{- with .Values.manager.master.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.manager.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "wazuh.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.manager.master.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ include "wazuh.fullname" . }}-manager
+          securityContext:
+            {{- toYaml .Values.manager.master.securityContext | nindent 12 }}
+          image: "{{ .Values.manager.image.repository }}:{{ .Values.manager.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.manager.image.pullPolicy }}
+          envFrom:
+            {{- if .Values.manager.config.secrets.existingSecretName }}
+            - secretRef:
+                name: {{ .Values.manager.config.secrets.existingSecretName }}
+            {{- else }}
+            - secretRef:
+                name: {{ include "wazuh.fullname" . }}-manager
+            {{- end }}
+          env:
+            - name: INDEXER_URL
+              value: {{ .Values.global.indexerUrl | quote }}
+            - name: FILEBEAT_SSL_VERIFICATION_MODE
+              value: {{ .Values.manager.config.filebeatSSLVerificationMode | quote }}
+            - name: SSL_CERTIFICATE_AUTHORITIES
+              value: /etc/ssl/root-ca.pem
+            - name: SSL_CERTIFICATE
+              value: /etc/ssl/filebeat.pem
+            - name: SSL_KEY
+              value: /etc/ssl/filebeat.key
+          ports:
+            - name: registration
+              containerPort: 1515
+              protocol: TCP
+            - name: cluster
+              containerPort: 1516
+              protocol: TCP
+            - name: api
+              containerPort: 55000
+              protocol: TCP
+          resources:
+            {{- toYaml .Values.manager.master.resources | nindent 12 }}
+          volumeMounts:
+            - name: config
+              mountPath: /wazuh-config-mount/etc/ossec.conf
+              subPath: master.conf
+              readOnly: true
+            - name: wazuh-authd-pass
+              mountPath: /wazuh-config-mount/etc/authd.pass
+              subPath: authd.pass
+              readOnly: true
+            - name: wazuh-manager-master
+              mountPath: /var/ossec/api/configuration
+              subPath: wazuh/var/ossec/api/configuration
+            - name: wazuh-manager-master
+              mountPath: /var/ossec/etc
+              subPath: wazuh/var/ossec/etc
+            - name: wazuh-manager-master
+              mountPath: /var/ossec/logs
+              subPath: wazuh/var/ossec/logs
+            - name: wazuh-manager-master
+              mountPath: /var/ossec/queue
+              subPath: wazuh/var/ossec/queue
+            - name: wazuh-manager-master
+              mountPath: /var/ossec/var/multigroups
+              subPath: wazuh/var/ossec/var/multigroups
+            - name: wazuh-manager-master
+              mountPath: /var/ossec/integrations
+              subPath: wazuh/var/ossec/integrations
+            - name: wazuh-manager-master
+              mountPath: /var/ossec/active-response/bin
+              subPath: wazuh/var/ossec/active-response/bin
+            - name: wazuh-manager-master
+              mountPath: /var/ossec/agentless
+              subPath: wazuh/var/ossec/agentless
+            - name: wazuh-manager-master
+              mountPath: /var/ossec/wodles
+              subPath: wazuh/var/ossec/wodles
+            - name: wazuh-manager-master
+              mountPath: /etc/filebeat
+              subPath: filebeat/etc/filebeat
+            - name: wazuh-manager-master
+              mountPath: /var/lib/filebeat
+              subPath: filebeat/var/lib/filebeat
+            - name: filebeat-certs
+              mountPath: /etc/ssl/root-ca.pem
+              readOnly: true
+              subPath: root-ca.pem
+            - name: filebeat-certs
+              mountPath: /etc/ssl/filebeat.pem
+              subPath: filebeat.pem
+              readOnly: true
+            - name: filebeat-certs
+              mountPath: /etc/ssl/filebeat.key
+              subPath: filebeat-key.pem
+              readOnly: true
+          {{- with .Values.manager.master.volumeMounts }}
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      volumes:
+        {{- if and .Values.tls.enabled .Values.tls.certManager.enabled }}
+        - name: filebeat-certs
+          projected:
+            sources:
+            - secret:
+                name: {{ .Values.tls.certManager.caCrtSecretName }}
+                items:
+                  - key: ca.crt
+                    path: root-ca.pem
+            - secret:
+                name: filebeat-tls
+                items:
+                  - key: tls.crt
+                    path: filebeat.pem
+                  - key: tls.key
+                    path: filebeat-key.pem
+        {{- else if and .Values.tls.enabled (not (eq .Values.tls.secretName "")) }}
+        - name: filebeat-certs
+          secret:
+            secretName: {{ .Values.tls.secretName }}
+        {{- else }}
+        {{- fail "Either provide your own certificates under .Values.tls.secretName or enable the tls certManager certificate if you have cert-manager on your cluster!"}}
+        {{- end }}
+        {{- if .Values.manager.config.customManagerConfig }}
+        - name: config
+          configMap:
+            name: {{ .Values.manager.config.customManagerConfig }}
+        {{- else }}
+        - name: config
+          configMap:
+            name: {{ include "wazuh.fullname" . }}-manager-config
+        {{- end }}
+        {{- if .Values.manager.config.secrets.existingSecretName }}
+        - name: wazuh-authd-pass
+          secret:
+            secretName: {{ .Values.manager.config.secrets.existingSecretName }}
+        {{- else }}
+        - name: wazuh-authd-pass
+          secret:
+            secretName:  {{ include "wazuh.fullname" . }}-manager
+        {{- end }}
+        {{- if .Values.manager.master.storage.existingClaim }}
+        - name: wazuh-manager-master
+          persistentVolumeClaim:
+            claimName: {{ .Values.manager.master.storage.existingClaim }}
+        {{- end }}
+      {{- with .Values.manager.master.volumes }}
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.manager.master.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.manager.master.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.manager.master.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+  {{- if not .Values.manager.master.storage.existingClaim }}
+  volumeClaimTemplates:
+    - metadata:
+        name:  wazuh-manager-master
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        {{- if .Values.manager.master.storage.storageClassName }}
+        storageClassName: {{ .Values.manager.master.storage.storageClassName }}
+        {{- end }}
+        resources:
+          requests:
+            storage: {{ .Values.manager.master.storage.size }}
+  {{- end }}

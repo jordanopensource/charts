@@ -1,0 +1,18 @@
+{{- if and .Values.tls.enabled .Values.tls.certManager.enabled}}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: "admin-tls"
+spec:
+  secretName: "admin-tls"
+  issuerRef:
+    name: {{ .Values.tls.certManager.issuer.name }}
+    kind: {{ .Values.tls.certManager.issuer.kind }}
+  commonName: {{ .Values.tls.certManager.commonName }}
+  duration: {{ .Values.tls.certManager.duration }}
+  renewBefore: {{ .Values.tls.certManager.renewBefore }}
+  dnsNames:
+    {{- range .Values.tls.certManager.dnsNames }}
+    - {{ . }}
+    {{- end }}
+{{- end }}

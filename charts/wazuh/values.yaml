@@ -1,0 +1,416 @@
+# Default values for wazuh.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+global:
+  indexerUrl: "https://wazuh-indexer:9200"
+  wazuhApiUrl: "https://wazuh-master"
+
+## **IMPORTANT**
+## ** Choose the release name as "wazuh" for easier time **
+## If the name of the release is not "wazuh" it will break the manager configuration
+## So you need to provide your own wazuh-manager configuration
+## With the updated wazuh manager nodes in the cluster section in the [master.conf,worker.conf] files
+## example: {release-name}-manager-master-0.{release-name}-cluster
+## and the cluster name should be the same as the {release-name}
+## go to the manager.config section in the values file to see how you can add your own configuration files
+nameOverride: ""
+fullnameOverride: ""
+
+tls:
+  # If enabled you either need to provide a secrete name containing specific keys as certs or enable the creation of certifications if
+  # your cluster supports issuing certificates.
+  enabled: true
+  # **REQUIRED** when you want to provide your own certificate
+  # The Secret name for the certs must have the following keys within it
+  # admin-key.pem, admin.pem, dashboard-key.pem, dashboard.pem
+  # filebeat-key.pem, filebeat.pem, node-key.pem, node.pem, root-ca.pem,
+  # key.pem, cert.pem
+  secretName: ""
+  certManager:
+    enabled: true
+    duration: 2160h # 90d
+    renewBefore: 360h # 15d
+    issuer:
+      name: "your-issuer"
+      # We can reference ClusterIssuers by changing the kind here.
+      # The default value is Issuer (i.e. a locally namespaced Issuer)
+      kind: "ClusterIssuer"
+    # The use of the common name field has been deprecated since 2000 and is
+    # discouraged from being used.
+    commonName: wazuh.example.com
+    # At least one of commonName (possibly through literalSubject), dnsNames, uris, emailAddresses, ipAddresses or otherNames is required.
+    dnsNames:
+      - wazuh.example.com
+      - www.wazuh.example.com
+    ## CA certificate secret name, the key name should be ca.crt in the secret file.
+    ## By default it will take the CA from the indexer node cert secret
+    caCrtSecretName: "node-tls"
+
+indexer:
+  image:
+    repository: wazuh/wazuh-indexer
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "4.8.1"
+
+  config:
+    sslEnabled: true
+    # The name of the configmap that includes the custom indexer config
+    # Must have the following key "opensearch.yml"
+    indexerCustomConfig: ""
+    # **IMPORTANT** Do not change the usernames unless you know what you are doing
+    # * as the usernames are reserved and used in many config files across the stack
+    # * Make sure to not use the default passwords for production,
+    # * make sure to provide your own internal_users.yml and update the passwords for the admin and the kibanaserver users
+    # * example internal_users.yml file https://github.com/jordanopensource/charts/tree/main/charts/wazuh/configs/indexer_conf/internal_users.yml
+    # * reflect the new passwords in the manager.config.secrets.indexerPassword
+    # * and reflect the changes for the dashboard "kibanaserver password" in the dashboard section
+    # Custom indexer internal_users.yml file secretname
+    # usernames and passwords hashes are in this file
+    # Must have the key "internal_users.yml"
+    # Please read https://documentation.wazuh.com/current/deployment-options/docker/wazuh-container.html#change-the-password-of-wazuh-users
+    indexerInternalUsersSecretName: ""
+
+  imagePullSecrets: []
+
+  replicaCount: 1
+
+  podAnnotations: {}
+
+  podLabels: {}
+
+  podSecurityContext: {}
+  # fsGroup: 2000
+
+  securityContext:
+    capabilities:
+      add: ["SYS_CHROOT"]
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+  # Additional volumes on the output StatefulSet definition.
+  volumes: []
+  # - name: foo
+  #   secret:
+  #     secretName: mysecret
+  #     optional: false
+
+  # Additional volumeMounts on the output StatefulSet definition.
+  volumeMounts: []
+  # - name: foo
+  #   mountPath: "/etc/foo"
+  #   readOnly: true
+
+  resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  storage:
+    storageClassName: ""
+    size: "1Gi"
+    existingClaim: ""
+
+manager:
+  image:
+    repository: wazuh/wazuh-manager
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "4.8.1"
+
+  imagePullSecrets: []
+
+  config:
+    # possible values 'full' and 'none'
+    filebeatSSLVerificationMode: "none"
+    # The name of the configmap that includes the custom manager configurations
+    # Must have following keys
+    # 'master.conf', 'worker.conf'
+    customManagerConfig: ""
+
+    secrets:
+      # If you provide an existing secret name those values will be ignored
+      # -------------------
+      #
+      # WARN: Those are the default indexer credentials for the wazuh-manager,
+      # do not change unless you changed the passwords and the usernames
+      # using the indexerInternalUsersSecretName in the indexer section
+      indexerUsername: "admin"
+      indexerPassword: "SecretPassword" #gitleaks:allow
+      # -------------------
+      wazuhApiUsername: "wazuh"
+      # Note The password for Wazuh API users must be between 8 and 64 characters long.
+      # It must contain at least one uppercase and one lowercase letter, a number, and a symbol.
+      wazuhApiPassword: "Pho8OH1voo6eew@ahVui4Ahghu6leith" #gitleaks:allow
+      wazuhClusterKey: "123a45bc67def891gh23i45jk67l8mn9" #gitleaks:allow
+      wazuhAuthDPass: "password" #gitleaks:allow
+      # The secret must have the following keys
+      # INDEXER_USERNAME, INDEXER_PASSWORD
+      # API_USERNAME, API_PASSWORD
+      # WAZUH_CLUSTER_KEY
+      # authd.pass
+      existingSecretName: ""
+
+  ## The manager service that is going to be responsible for the agent registration
+  ## and the agent events
+  service:
+    type: LoadBalancer
+    annotations: {}
+
+  master:
+    podSecurityContext:
+      fsGroup: 101
+      # fsGroup: 2000
+
+    podAnnotations: {}
+
+    podLabels: {}
+
+    securityContext:
+      capabilities:
+        add: ["SYS_CHROOT"]
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+    # Additional volumes on the output deployment definition.
+    volumes: []
+    # - name: foo
+    #   secret:
+    #     secretName: mysecret
+    #     optional: false
+
+    # Additional volumeMounts on the output deployment definition.
+    volumeMounts: []
+    # - name: foo
+    #   mountPath: "/etc/foo"
+    #   readOnly: true
+
+    resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+    nodeSelector: {}
+
+    tolerations: []
+
+    affinity: {}
+
+    storage:
+      storageClassName: ""
+      size: "1Gi"
+      existingClaim: ""
+
+  workers:
+    replicaCount: 1
+
+    podSecurityContext:
+      fsGroup: 101
+      # fsGroup: 2000
+
+    podAnnotations: {}
+
+    podLabels: {}
+
+    securityContext:
+      capabilities:
+        add: ["SYS_CHROOT"]
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+    # Additional volumes on the output deployment definition.
+    volumes: []
+    # - name: foo
+    #   secret:
+    #     secretName: mysecret
+    #     optional: false
+
+    # Additional volumeMounts on the output deployment definition.
+    volumeMounts: []
+    # - name: foo
+    #   mountPath: "/etc/foo"
+    #   readOnly: true
+
+    resources: {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+    nodeSelector: {}
+
+    tolerations: []
+
+    affinity: {}
+
+    storage:
+      storageClassName: ""
+      size: "1Gi"
+      existingClaim: ""
+
+dashboard:
+  replicaCount: 1
+
+  image:
+    repository: wazuh/wazuh-dashboard
+    pullPolicy: IfNotPresent
+    # Overrides the image tag whose default is the chart appVersion.
+    tag: "4.8.1"
+
+  config:
+    ServerSSL: true
+    # ----------------
+    # The configmap name that includes the dashboard custom config file
+    # Must have the key 'opensearch_dashboards.yml'
+    dashboardCustomConfig: ""
+
+    secrets:
+      # If you provide an existing secret name those values will be ignored
+      # -------------------
+      # WARN: Those are the default indexer dashboard credentials,
+      # do not change unless you changed the passwords and the usernames
+      # using the indexerInternalUsersSecretName in the indexer section
+      dashboardUsername: "kibanaserver"
+      dashboardPassword: "kibanaserver" #gitleaks:allow
+      # -------------------
+      # The secret must have the following keys
+      # DASHBOARD_USERNAME, DASHBOARD_PASSWORD
+      existingSecretName: ""
+
+  ingress:
+    enabled: false
+    className: nginx
+    annotations:
+      {}
+      # cert-manager.io/cluster-issuer: letsencrypt
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls:
+      []
+      # - secretName: chart-example.local-tls
+      #   hosts:
+      #     - chart-example.local
+
+  imagePullSecrets: []
+
+  podAnnotations: {}
+
+  podLabels: {}
+
+  podSecurityContext: {}
+  # fsGroup: 2000
+
+  securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+  # runAsUser: 1000
+
+  # Additional volumes on the output deployment definition.
+  volumes: []
+  # - name: foo
+  #   secret:
+  #     secretName: mysecret
+  #     optional: false
+
+  # Additional volumeMounts on the output deployment definition.
+  volumeMounts: []
+  # - name: foo
+  #   mountPath: "/etc/foo"
+  #   readOnly: true
+
+  resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+  livenessProbe:
+    initialDelaySeconds: 60
+    periodSeconds: 10
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 3
+    httpGet:
+      path: /
+      port: dashboard
+  readinessProbe:
+    initialDelaySeconds: 60
+    periodSeconds: 10
+    timeoutSeconds: 5
+    successThreshold: 1
+    failureThreshold: 3
+    httpGet:
+      path: /
+      port: dashboard
+
+  nodeSelector: {}
+
+  tolerations: []
+
+  affinity: {}
+
+  service:
+    type: ClusterIP
+    port: 5601
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Automatically mount a ServiceAccount's API credentials?
+  automount: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
