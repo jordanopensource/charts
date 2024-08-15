@@ -124,6 +124,14 @@ spec:
               mountPath: /etc/ssl/filebeat.key
               subPath: filebeat-key.pem
               readOnly: true
+            - name: manager-certs
+              mountPath: /etc/ssl/sslmanager.cert
+              subPath: sslmanager.cert
+              readOnly: true
+            - name: manager-certs
+              mountPath: /etc/ssl/sslmanager.key
+              subPath: sslmanager.key
+              readOnly: true
           {{- with .Values.manager.master.volumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
@@ -144,8 +152,21 @@ spec:
                     path: filebeat.pem
                   - key: tls.key
                     path: filebeat-key.pem
+        - name: manager-certs
+          projected:
+            sources:
+            - secret:
+                name: manager-tls
+                items:
+                  - key: tls.crt
+                    path: sslmanager.cert
+                  - key: tls.key
+                    path: sslmanager.key
         {{- else if and .Values.tls.enabled (not (eq .Values.tls.secretName "")) }}
         - name: filebeat-certs
+          secret:
+            secretName: {{ .Values.tls.secretName }}
+        - name: manager-certs
           secret:
             secretName: {{ .Values.tls.secretName }}
         {{- else }}
