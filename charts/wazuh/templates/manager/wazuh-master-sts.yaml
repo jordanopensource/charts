@@ -79,6 +79,26 @@ spec:
               mountPath: /wazuh-config-mount/etc/authd.pass
               subPath: authd.pass
               readOnly: true
+            - name: manager-certs
+              mountPath: /wazuh-config-mount/etc/server.cert
+              subPath: server.cert
+              readOnly: true
+            - name: manager-certs
+              mountPath: /wazuh-config-mount/etc/server.key
+              subPath: server.key
+              readOnly: true
+            - name: manager-certs
+              mountPath: /wazuh-config-mount/api/configuration/ssl/server.crt
+              subPath: server.cert
+              readOnly: true
+            - name: manager-certs
+              mountPath: /wazuh-config-mount/api/configuration/ssl/server.key
+              subPath: server.key
+              readOnly: true
+            - name: filebeat-certs
+              mountPath: /wazuh-config-mount/api/configuration/ssl/ca.crt
+              subPath: root-ca.pem
+              readOnly: true
             - name: wazuh-manager-master
               mountPath: /var/ossec/api/configuration
               subPath: wazuh/var/ossec/api/configuration
@@ -124,19 +144,11 @@ spec:
               mountPath: /etc/ssl/filebeat.key
               subPath: filebeat-key.pem
               readOnly: true
-            - name: manager-certs
-              mountPath: /etc/ssl/sslmanager.cert
-              subPath: sslmanager.cert
-              readOnly: true
-            - name: manager-certs
-              mountPath: /etc/ssl/sslmanager.key
-              subPath: sslmanager.key
-              readOnly: true
           {{- with .Values.manager.master.volumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
       volumes:
-        {{- if and .Values.tls.enabled .Values.tls.certManager.enabled }}
+        {{- if .Values.tls.certManager.enabled }}
         - name: filebeat-certs
           projected:
             sources:
@@ -159,10 +171,10 @@ spec:
                 name: manager-tls
                 items:
                   - key: tls.crt
-                    path: sslmanager.cert
+                    path: server.cert
                   - key: tls.key
-                    path: sslmanager.key
-        {{- else if and .Values.tls.enabled (not (eq .Values.tls.secretName "")) }}
+                    path: server.key
+        {{- else if .Values.tls.secretName }}
         - name: filebeat-certs
           secret:
             secretName: {{ .Values.tls.secretName }}
