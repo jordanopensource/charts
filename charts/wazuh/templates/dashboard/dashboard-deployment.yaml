@@ -93,7 +93,7 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
       volumes:
-        {{- if and .Values.tls.enabled .Values.tls.certManager.enabled }}
+        {{- if .Values.tls.certManager.enabled }}
         - name: dashboard-certs
           projected:
             sources:
@@ -109,7 +109,7 @@ spec:
                     path: cert.pem
                   - key: tls.key
                     path: key.pem
-        {{- else if and .Values.tls.enabled (not (eq .Values.tls.secretName "")) }}
+        {{- else if not (eq .Values.tls.secretName "") }}
         - name: dashboard-certs
           secret:
             secretName: {{ .Values.tls.secretName }}
