@@ -125,7 +125,7 @@ indexer:
 
   storage:
     storageClassName: ""
-    size: "1Gi"
+    size: "25Gi"
     existingClaim: ""
 
 manager:
@@ -240,7 +240,7 @@ manager:
 
     storage:
       storageClassName: ""
-      size: "1Gi"
+      size: "25Gi"
       existingClaim: ""
 
   workers:
@@ -311,7 +311,7 @@ manager:
 
     storage:
       storageClassName: ""
-      size: "1Gi"
+      size: "25Gi"
       existingClaim: ""
 
 dashboard:
