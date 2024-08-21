@@ -157,7 +157,7 @@ spec:
                     path: filebeat.pem
                   - key: tls.key
                     path: filebeat-key.pem
-        {{- else if not (eq .Values.tls.secretName "") }}
+        {{- else if .Values.tls.secretName }}
         - name: indexer-certs
           secret:
             secretName: {{ .Values.tls.secretName }}

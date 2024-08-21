@@ -109,7 +109,7 @@ spec:
                     path: cert.pem
                   - key: tls.key
                     path: key.pem
-        {{- else if not (eq .Values.tls.secretName "") }}
+        {{- else if .Values.tls.secretName }}
         - name: dashboard-certs
           secret:
             secretName: {{ .Values.tls.secretName }}
