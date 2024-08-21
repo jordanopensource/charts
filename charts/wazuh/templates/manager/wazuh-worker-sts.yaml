@@ -74,12 +74,24 @@ spec:
               subPath: worker.conf
               readOnly: true
             - name: manager-certs
-              mountPath: /wazuh-config-mount/etc/server.cert
+              mountPath: /wazuh-config-mount/etc/sslmanager.cert
               subPath: server.cert
               readOnly: true
             - name: manager-certs
-              mountPath: /wazuh-config-mount/etc/server.key
+              mountPath: /wazuh-config-mount/etc/sslmanager.key
               subPath: server.key
+              readOnly: true
+            - name: manager-certs
+              mountPath: /wazuh-config-mount/api/configuration/ssl/server.crt
+              subPath: server.cert
+              readOnly: true
+            - name: manager-certs
+              mountPath: /wazuh-config-mount/api/configuration/ssl/server.key
+              subPath: server.key
+              readOnly: true
+            - name: filebeat-certs
+              mountPath: /wazuh-config-mount/api/configuration/ssl/ca.crt
+              subPath: root-ca.pem
               readOnly: true
             - name: wazuh-manager-worker
               mountPath: /var/ossec/api/configuration
@@ -156,7 +168,7 @@ spec:
                     path: server.cert
                   - key: tls.key
                     path: server.key
-        {{- else if not (eq .Values.tls.secretName "") }}
+        {{- else if .Values.tls.secretName }}
         - name: filebeat-certs
           secret:
             secretName: {{ .Values.tls.secretName }}

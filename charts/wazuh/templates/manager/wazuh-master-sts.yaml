@@ -7,6 +7,7 @@ metadata:
 spec:
   replicas: 1
   serviceName: {{ include "wazuh.fullname" . }}-cluster
+  podManagementPolicy: Parallel
   selector:
     matchLabels:
       app: {{ include "wazuh.fullname" . }}-manager
@@ -80,11 +81,11 @@ spec:
               subPath: authd.pass
               readOnly: true
             - name: manager-certs
-              mountPath: /wazuh-config-mount/etc/server.cert
+              mountPath: /wazuh-config-mount/etc/sslmanager.cert
               subPath: server.cert
               readOnly: true
             - name: manager-certs
-              mountPath: /wazuh-config-mount/etc/server.key
+              mountPath: /wazuh-config-mount/etc/sslmanager.key
               subPath: server.key
               readOnly: true
             - name: manager-certs
