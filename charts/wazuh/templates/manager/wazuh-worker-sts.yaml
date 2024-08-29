@@ -73,6 +73,26 @@ spec:
               mountPath: /wazuh-config-mount/etc/ossec.conf
               subPath: worker.conf
               readOnly: true
+            - name: manager-certs
+              mountPath: /wazuh-config-mount/etc/sslmanager.cert
+              subPath: server.cert
+              readOnly: true
+            - name: manager-certs
+              mountPath: /wazuh-config-mount/etc/sslmanager.key
+              subPath: server.key
+              readOnly: true
+            - name: manager-certs
+              mountPath: /wazuh-config-mount/api/configuration/ssl/server.crt
+              subPath: server.cert
+              readOnly: true
+            - name: manager-certs
+              mountPath: /wazuh-config-mount/api/configuration/ssl/server.key
+              subPath: server.key
+              readOnly: true
+            - name: filebeat-certs
+              mountPath: /wazuh-config-mount/api/configuration/ssl/ca.crt
+              subPath: root-ca.pem
+              readOnly: true
             - name: wazuh-manager-worker
               mountPath: /var/ossec/api/configuration
               subPath: wazuh/var/ossec/api/configuration
@@ -122,7 +142,7 @@ spec:
             {{- toYaml . | nindent 12 }}
           {{- end }}
       volumes:
-        {{- if and .Values.tls.enabled .Values.tls.certManager.enabled }}
+        {{- if .Values.tls.certManager.enabled }}
         - name: filebeat-certs
           projected:
             sources:
@@ -138,8 +158,21 @@ spec:
                     path: filebeat.pem
                   - key: tls.key
                     path: filebeat-key.pem
-        {{- else if and .Values.tls.enabled (not (eq .Values.tls.secretName "")) }}
+        - name: manager-certs
+          projected:
+            sources:
+            - secret:
+                name: manager-tls
+                items:
+                  - key: tls.crt
+                    path: server.cert
+                  - key: tls.key
+                    path: server.key
+        {{- else if .Values.tls.secretName }}
         - name: filebeat-certs
+          secret:
+            secretName: {{ .Values.tls.secretName }}
+        - name: manager-certs
           secret:
             secretName: {{ .Values.tls.secretName }}
         {{- else }}

@@ -18,14 +18,13 @@ nameOverride: ""
 fullnameOverride: ""
 
 tls:
-  # If enabled you either need to provide a secrete name containing specific keys as certs or enable the creation of certifications if
+  # You either need to provide a secrete name containing specific keys as certs or enable the creation of certifications if
   # your cluster supports issuing certificates.
-  enabled: true
   # **REQUIRED** when you want to provide your own certificate
   # The Secret name for the certs must have the following keys within it
   # admin-key.pem, admin.pem, dashboard-key.pem, dashboard.pem
   # filebeat-key.pem, filebeat.pem, node-key.pem, node.pem, root-ca.pem,
-  # key.pem, cert.pem
+  # key.pem, cert.pem, server.key, server.cert
   secretName: ""
   certManager:
     enabled: true
@@ -52,7 +51,7 @@ indexer:
     repository: wazuh/wazuh-indexer
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.8.1"
+    tag: "4.8.2"
 
   config:
     sslEnabled: true
@@ -126,7 +125,7 @@ indexer:
 
   storage:
     storageClassName: ""
-    size: "1Gi"
+    size: "25Gi"
     existingClaim: ""
 
 manager:
@@ -134,7 +133,7 @@ manager:
     repository: wazuh/wazuh-manager
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.8.1"
+    tag: "4.8.2"
 
   imagePullSecrets: []
 
@@ -202,6 +201,20 @@ manager:
     #     optional: false
 
     # Additional volumeMounts on the output deployment definition.
+    # *NOTE*
+    # There is a special directory called "/wazuh-config-mount/"
+    # you can place your configuration files you want to replace
+    # there and it will automatically be replaced correctly
+    # example:
+    # lets say you want to replace the api.yaml configuration file for the manager api
+    # get the path for the configuration file for this example the path will be /var/ossec/api/configuration/
+    # always exclude the /var/ossec which in this case the final path will be "/api/configuration/"
+    # append the the path and the file after the /wazuh-config-mount/ which will be "/wazuh-config-mount/api/configuration/api.yaml"
+    # *Snippet:*
+    # - name: api-config
+    #   mountPath: /wazuh-config-mount/api/configuration/api.yaml
+    #   subPath: api.yaml
+    #   readOnly: true
     volumeMounts: []
     # - name: foo
     #   mountPath: "/etc/foo"
@@ -227,7 +240,7 @@ manager:
 
     storage:
       storageClassName: ""
-      size: "1Gi"
+      size: "25Gi"
       existingClaim: ""
 
   workers:
@@ -259,6 +272,20 @@ manager:
     #     optional: false
 
     # Additional volumeMounts on the output deployment definition.
+    # *NOTE*
+    # There is a special directory called "/wazuh-config-mount/"
+    # you can place your configuration files you want to replace
+    # there and it will automatically be replaced correctly
+    # example:
+    # lets say you want to replace the api.yaml configuration file for the manager api
+    # get the path for the configuration file for this example the path will be /var/ossec/api/configuration/
+    # always exclude the /var/ossec which in this case the final path will be "/api/configuration/"
+    # append the the path and the file after the /wazuh-config-mount/ which will be "/wazuh-config-mount/api/configuration/api.yaml"
+    # *Snippet:*
+    # - name: api-config
+    #   mountPath: /wazuh-config-mount/api/configuration/api.yaml
+    #   subPath: api.yaml
+    #   readOnly: true
     volumeMounts: []
     # - name: foo
     #   mountPath: "/etc/foo"
@@ -284,7 +311,7 @@ manager:
 
     storage:
       storageClassName: ""
-      size: "1Gi"
+      size: "25Gi"
       existingClaim: ""
 
 dashboard:
@@ -294,7 +321,7 @@ dashboard:
     repository: wazuh/wazuh-dashboard
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.8.1"
+    tag: "4.8.2"
 
   config:
     ServerSSL: true
