@@ -8,7 +8,7 @@ image:
   repository: josaorg/gophish
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "8d91c2f3c6c270eef8ed8b1855c827c081ac66cb"
 
 imagePullSecrets: []
 nameOverride: ""
