@@ -1,0 +1,253 @@
+# Default values for the base chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+## @param nameOverride String to partially override base.fullname template (will maintain the release name)
+nameOverride: ""
+## @param fullnameOverride String to fully override base.fullname template
+namespaceOverride: ""
+## @param namespaceOverride String to fully override base.names.namespace
+fullnameOverride: ""
+## @param commonAnnotations Add annotations to all the deployed resources
+commonAnnotations: {}
+## @param commonLabels Add labels to all the deployed resources
+commonLabels: {}
+
+## @section workload params
+workload:
+  ## @param workload.type [default: Deployment] choose on of (Deployment, StatefulSet)
+  type: Deployment
+  ## @param workload.replicaCount [default: 1]
+  replicaCount: 1
+
+  image:
+    ## @param workload.image.repository [default: REPOSITORY_NAME/DOCKER_IMAGE_NAME] NGINX image repository
+    repository: REPOSITORY_NAME/DOCKER_IMAGE_NAME
+    ## @param workload.image.pullPolicy [default: IfNotPresent] image pull policy
+    pullPolicy: IfNotPresent
+    ## @param workload.image.tag Overrides the image tag whose default is the chart appVersion.
+    tag: ""
+
+  ## @param workload.imagePullSecrets Specify docker-registry secret names as an array
+  imagePullSecrets: []
+
+  ## @param workload.initContainers define initContainers as an array to run before the main container
+  ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+  ## e.g:
+  ## initContainers:
+  ##  - name: your-image-name
+  ##    image: your-image
+  ##    imagePullPolicy: Always
+  ##    command: ['sh', '-c', 'echo "hello world"']
+  initContainers: []
+
+  ## @param workload.sideCars define sideCars as an array to run alongside the main container
+  ## e.g:
+  ## sidecars:
+  ##   - name: your-image-name
+  ##     image: your-image
+  ##     imagePullPolicy: Always
+  ##     ports:
+  ##       - name: portname
+  ##         containerPort: 1234
+  sideCars: []
+
+  ## @param workload.env define environment variables
+  ## Example
+  ## - name: NODE_ENV
+  ##   value: production
+  env: []
+
+  ## @param workload.envFrom define environment variables using secrets and configmaps
+  ## Example
+  ## - configMapRef:
+  ##     name: special-config
+  envFrom: []
+
+  serviceAccount:
+    ## @param workload.serviceAccount.create Enable creation of a ServiceAccount
+    create: true
+    ## @param workload.serviceAccount.automount Automatically mount a ServiceAccount's API credentials?
+    automount: true
+    ## @param workload.serviceAccount.annotations Annotations to add to the service account
+    annotations: {}
+    ## @param workload.serviceAccount.name The name of the service account to use.
+    # If not set and create is true, a name is generated using the fullname template
+    name: ""
+
+  ## @param workload.podAnnotations Annotations for the pod
+  podAnnotations: {}
+  ## @param workload.podLabels Labels for the pod
+  podLabels: {}
+
+  ## @param workload.podSecurityContext define the security context for the pod
+  podSecurityContext:
+    {}
+    # fsGroup: 2000
+
+  ## @param workload.securityContext define the security context for the container
+  securityContext:
+    {}
+    # capabilities:
+    #   drop:
+    #   - ALL
+    # readOnlyRootFilesystem: true
+    # runAsNonRoot: true
+    # runAsUser: 1000
+
+  service:
+    ## @param workload.service.type define the type of the service
+    type: ClusterIP
+    ## @param workload.service.port define the port of the service
+    port: 3000
+    ## @param workload.service.annotations add annotations for the service
+    annotations: {}
+
+  ingress:
+    ## @param workload.ingress.enabled create an ingress for the svc
+    enabled: false
+    ## @param workload.ingress.className choose the ingress class name
+    className: ""
+    ## @param workload.ingress.annotations add the ingress annotations
+    annotations: {}
+    ## @param workload.ingress.hosts define the hosts as an array
+    hosts:
+      - host: chart-example.local
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    ## @param workload.ingress.tls add tls for the ingress
+    tls: []
+    #  - secretName: chart-example-tls
+    #    hosts:
+    #      - chart-example.local
+
+  ## @param workload.resourcesPreset Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if resources is set (resources is recommended for production).
+  resourcesPreset: "micro"
+  ## @param workload.resources set the resources for the pod
+  resources:
+    {}
+    # We usually recommend not to specify default resources and to leave this as a conscious
+    # choice for the user. This also increases chances charts run on environments with little
+    # resources, such as Minikube. If you do want to specify resources, uncomment the following
+    # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+    # limits:
+    #   cpu: 100m
+    #   memory: 128Mi
+    # requests:
+    #   cpu: 100m
+    #   memory: 128Mi
+
+  ## @param workload.livenessProbe define the livenessProbe for the pod
+  ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  ## @param workload.readinessProbe define the readinessProbe for the pod
+  ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+
+  ## Autoscaling parameters
+  autoscaling:
+    ## @param workload.autoscaling.enabled Enable autoscaling for the Workload
+    enabled: false
+    ## @param workload.autoscaling.minReplicas Minimum number of replicas to scale back
+    minReplicas: 1
+    ## @param workload.autoscaling.maxReplicas Maximum number of replicas to scale out
+    maxReplicas: 100
+    ## @param workload.autoscaling.targetCPU Target CPU utilization percentage
+    targetCPUUtilizationPercentage: 80
+    ## @param workload.autoscaling.targetMemory Target Memory utilization percentage
+    targetMemoryUtilizationPercentage: 80
+
+  ## @param workload.volumes Additional volumes on the output Workload definition.
+  volumes: []
+  # - name: foo
+  #   secret:
+  #     secretName: mysecret
+  #     optional: false
+
+  ## @param workload.volumeMounts Additional volumeMounts on the output Workload definition.
+  volumeMounts: []
+  # - name: foo
+  #   mountPath: "/etc/foo"
+  #   readOnly: true
+
+  ## @param workload.nodeSelector Node labels for pod assignment.
+  nodeSelector: {}
+
+  ## @param workload.tolerations Tolerations for pod assignment.
+  tolerations: []
+
+  ## @param workload.podAffinityPreset Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
+  podAffinityPreset: ""
+  ## @param workload.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
+  podAntiAffinityPreset: "soft"
+  ## Node affinity preset
+  ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
+  nodeAffinityPreset:
+    ## @param workload.nodeAffinityPreset.type Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
+    ##
+    type: ""
+    ## @param workload.nodeAffinityPreset.key Node label key to match Ignored if `affinity` is set.
+    ## E.g.
+    ## key: "kubernetes.io/e2e-az-name"
+    ##
+    key: ""
+    ## @param workload.nodeAffinityPreset.values Node label values to match. Ignored if `affinity` is set.
+    ## E.g.
+    ## values:
+    ##   - e2e-az1
+    ##   - e2e-az2
+    ##
+    values: []
+
+  ## @param workload.affinity Affinity for pod assignment
+  ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+  ## Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set
+  affinity: {}
+
+  ## Persistence parameters
+  ## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+  persistence:
+    ## @param workload.persistence.enabled Enable persistence
+    enabled: false
+    ## @param workload.persistence.existingClaim Use a existing PVC which must be created manually before bound
+    existingClaim: ""
+    ## @param workload.persistence.path The path the volume will be mounted at
+    path: "/test"
+    ## @param workload.persistence.subPath The subdirectory of the volume to mount
+    subPath: ""
+    ## @param workload.persistence.storageClass Persistent Volume storage class
+    storageClass: ""
+    ## @param workload.persistence.annotations Additional custom annotations for the PVC
+    annotations: {}
+    ## @param workload.persistence.labels Additional custom labels for the PVC
+    labels: {}
+    ## @param workload.persistence.accessModes Persistent Volume access modes
+    accessModes:
+      - ReadWriteOnce
+    ## @param workload.persistence.size Persistent Volume size
+    size: 8Gi
+    ## @param workload.persistence.selector Additional labels to match for the PVC
+    ## e.g:
+    ## selector:
+    ##   matchLabels:
+    ##     app: my-app
+    selector: {}
+    ## @param workload.persistence.dataSource Custom PVC data source
+    datasource: {}
+
+    ## persistentVolumeClaimRetentionPolicy
+    ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention
+    persistentVolumeClaimRetentionPolicy:
+      ## @param workload.persistence.persistentVolumeClaimRetentionPolicy.enabled Controls if and how PVCs are deleted during the lifecycle of a StatefulSet
+      enabled: false
+      ## @param workload.persistence.persistentVolumeClaimRetentionPolicy.whenScaled Volume retention behavior when the replica count of the StatefulSet is reduced
+      whenScaled: Retain
+      ## @param workload.persistence.persistentVolumeClaimRetentionPolicy.whenDeleted Volume retention behavior that applies when the StatefulSet is deleted
+      whenDeleted: Retain
