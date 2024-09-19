@@ -87,15 +87,14 @@ spec:
             {{- end }}
           {{- else }}
           {{- if .Values.workload.volumeMounts }}
-          volumeMounts: 
+          volumeMounts:
           {{- include "base.tplvalues.render" ( dict "value" .Values.workload.volumeMounts "context" $) | nindent 12 }}
           {{- end }}
           {{- end }}
-  {{- if not .Values.workload.persistence.enabled }}
       {{- if .Values.workload.volumes }}
       volumes: {{- include "base.tplvalues.render" ( dict "value" .Values.workload.volumes "context" $) | nindent 8 }}
       {{- end }}
-      {{- else }}
+  {{- if .Values.workload.persistence.enabled }}
       volumes:
       {{- if .Values.workload.persistence.existingClaim }}
         - name: app-data
@@ -109,12 +108,12 @@ spec:
       {{- if .Values.workload.volumes }}
       {{- include "base.tplvalues.render" ( dict "value" .Values.workload.volumes "context" $) | nindent 8 }}
       {{- end }}
-  {{- if eq .Values.workload.type "StatefulSet" }}
   {{- if .Values.workload.persistence.persistentVolumeClaimRetentionPolicy.enabled }}
   persistentVolumeClaimRetentionPolicy:
     whenDeleted: {{ .Values.workload.persistence.persistentVolumeClaimRetentionPolicy.whenDeleted }}
     whenScaled: {{ .Values.workload.persistence.persistentVolumeClaimRetentionPolicy.whenScaled }}
   {{- end }}
+  {{- if eq .Values.workload.type "StatefulSet" }}
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
