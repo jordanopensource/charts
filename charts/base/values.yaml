@@ -19,6 +19,8 @@ workload:
   type: Deployment
   ## @param workload.replicaCount [default: 1]
   replicaCount: 1
+  ## @param workload.port define the port of the main container
+  containerPort: 3000
 
   image:
     ## @param workload.image.repository [default: REPOSITORY_NAME/DOCKER_IMAGE_NAME] NGINX image repository
@@ -99,7 +101,7 @@ workload:
     ## @param workload.service.type define the type of the service
     type: ClusterIP
     ## @param workload.service.port define the port of the service
-    port: 3000
+    port: 80
     ## @param workload.service.annotations add annotations for the service
     annotations: {}
 

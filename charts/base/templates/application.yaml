@@ -62,7 +62,7 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.workload.service.port }}
+              containerPort: {{ .Values.workload.containerPort }}
               protocol: TCP
           {{- if .Values.workload.livenessProbe }}
           livenessProbe: {{- include "base.tplvalues.render" (dict "value" .Values.workload.livenessProbe "context" $) | nindent 12 }}
