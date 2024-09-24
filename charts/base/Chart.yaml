@@ -10,7 +10,7 @@ keywords:
   - general
   - containers
 maintainers:
-  - name: Jordan open source association
+  - name: JOSA
     url: https://github.com/jordanopensource/charts/
 sources:
   - https://github.com/jordanopensource/charts/tree/main/charts/base
