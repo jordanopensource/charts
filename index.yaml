@@ -495,6 +495,22 @@ entries:
     version: 0.1.0
   mastodon:
   - apiVersion: v2
+    appVersion: v4.2.12
+    created: "2024-09-29T13:28:09.153771171Z"
+    description: A Helm chart for Mastodon, Mastodon is a free open-source social
+      network server based on ActivityPub.
+    digest: 60cf4c06cd83397f90b87a1d05da030866b4e0b5f74e9f8b05e0f014c6b4beaa
+    maintainers:
+    - name: JOSA
+      url: https://github.com/jordanopensource/charts/
+    name: mastodon
+    sources:
+    - https://github.com/jordanopensource/charts/tree/main/charts/mastodon
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/mastodon-0.3.1/mastodon-0.3.1.tgz
+    version: 0.3.1
+  - apiVersion: v2
     appVersion: v4.2.10
     created: "2024-07-18T07:21:21.805811655Z"
     description: A Helm chart for Mastodon, Mastodon is a free open-source social
@@ -972,4 +988,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2024-09-29T13:25:45.771483224Z"
+generated: "2024-09-29T13:28:09.153889162Z"
