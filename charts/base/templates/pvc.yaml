@@ -1,0 +1,29 @@
+{{- if and (.Values.workload.persistence.enabled) (eq .Values.workload.type "Deployment") (not .Values.workload.persistence.existingClaim) }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ include "base.names.fullname" . }}
+  namespace: {{ include "base.names.namespace" . | quote }}
+  {{- $labels := include "base.tplvalues.merge" ( dict "values" ( list .Values.workload.persistence.labels .Values.commonLabels ) "context" . ) }}
+  labels: {{- include "base.labels.standard" ( dict "customLabels" $labels "context" $ ) | nindent 4 }}
+  {{- if .Values.workload.persistence.annotations }}
+  annotations: {{- toYaml .Values.workload.persistence.annotations | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if .Values.workload.persistence.storageClass }}
+  storageClassName: {{ .Values.workload.persistence.storageClass }}
+  {{- end }}
+  accessModes:
+  {{- range .Values.workload.persistence.accessModes }}
+    - {{ . | quote }}
+  {{- end }}
+  resources:
+    requests:
+      storage: {{ .Values.workload.persistence.size | quote }}
+  {{- if .Values.workload.persistence.selector }}
+  selector: {{- include "base.tplvalues.render" (dict "value" .Values.workload.persistence.selector "context" $) | nindent 4 }}
+  {{- end }}
+  {{- if .Values.workload.persistence.datasource }}
+  dataSource: {{- include "base.tplvalues.render" (dict "value" .Values.workload.persistence.datasource "context" $) | nindent 4 }}
+  {{- end }}
+{{- end }}

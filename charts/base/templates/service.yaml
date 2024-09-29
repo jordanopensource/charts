@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "base.serviceAccountName" . }}
+  namespace: {{ include "base.names.namespace" . | quote }}
+  labels: {{- include "base.labels.standard" ( dict "customLabels" .Values.commonLabels "context" $ ) | nindent 4 }}
+  {{- if or .Values.workload.service.annotations .Values.commonAnnotations }}
+  {{- $annotations := include "base.tplvalues.merge" ( dict "values" ( list .Values.workload.service.annotations .Values.commonAnnotations ) "context" . ) }}
+  annotations: {{- include "base.tplvalues.render" ( dict "value" $annotations "context" $) | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{.Values.workload.service.type}}
+  ports:
+    - port: {{ .Values.workload.containerPort }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  {{- $podLabels := include "base.tplvalues.merge" ( dict "values" ( list .Values.workload.podLabels .Values.commonLabels ) "context" . ) }}
+  selector: {{- include "base.labels.matchLabels" ( dict "customLabels" $podLabels "context" $ ) | nindent 4 }}
