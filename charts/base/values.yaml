@@ -24,11 +24,11 @@ workload:
 
   image:
     ## @param workload.image.repository [default: REPOSITORY_NAME/DOCKER_IMAGE_NAME] NGINX image repository
-    repository: REPOSITORY_NAME/DOCKER_IMAGE_NAME
+    repository: josaorg/whoami
     ## @param workload.image.pullPolicy [default: IfNotPresent] image pull policy
     pullPolicy: IfNotPresent
     ## @param workload.image.tag Overrides the image tag whose default is the chart appVersion.
-    tag: ""
+    tag: "latest"
 
   ## @param workload.imagePullSecrets Specify docker-registry secret names as an array
   imagePullSecrets: []
