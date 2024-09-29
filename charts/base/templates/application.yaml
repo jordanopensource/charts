@@ -1,0 +1,145 @@
+apiVersion: apps/v1
+kind: {{ .Values.workload.type }}
+metadata:
+  name: {{ include "base.names.fullname" . }}
+  namespace: {{ include "base.names.namespace" . | quote }}
+  labels: {{- include "base.labels.standard" ( dict "customLabels" .Values.commonLabels "context" $ ) | nindent 4 }}
+  {{- if .Values.commonAnnotations }}
+  annotations: {{- include "base.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
+  {{- end }}
+spec:
+  {{- if not .Values.workload.autoscaling.enabled }}
+  replicas: {{ .Values.workload.replicaCount }}
+  {{- end }}
+  {{- $podLabels := include "base.tplvalues.merge" ( dict "values" ( list .Values.workload.podLabels .Values.commonLabels ) "context" . ) }}
+  selector:
+    matchLabels: {{- include "base.labels.matchLabels" ( dict "customLabels" $podLabels "context" $ ) | nindent 6 }}
+  template:
+    metadata:
+      {{- if .Values.workload.podAnnotations }}
+      annotations: {{- include "base.tplvalues.render" ( dict "value" .Values.workload.podAnnotations "context" $) | nindent 8 }}
+      {{- end }}
+      labels: {{- include "base.labels.standard" ( dict "customLabels" $podLabels "context" $ ) | nindent 8 }}
+    spec:
+      {{- with .Values.workload.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "base.serviceAccountName" . }}
+      {{- if .Values.workload.affinity }}
+      affinity: {{- include "base.tplvalues.render" (dict "value" .Values.workload.affinity "context" $) | nindent 8 }}
+      {{- else }}
+      affinity:
+        podAffinity: {{- include "base.affinities.pods" (dict "type" .Values.workload.podAffinityPreset "customLabels" $podLabels "context" $) | nindent 10 }}
+        podAntiAffinity: {{- include "base.affinities.pods" (dict "type" .Values.workload.podAntiAffinityPreset "customLabels" $podLabels "context" $) | nindent 10 }}
+        nodeAffinity: {{- include "base.affinities.nodes" (dict "type" .Values.workload.nodeAffinityPreset.type "key" .Values.workload.nodeAffinityPreset.key "values" .Values.workload.nodeAffinityPreset.values) | nindent 10 }}
+      {{- end }}
+      {{- if .Values.workload.nodeSelector }}
+      nodeSelector: {{- include "base.tplvalues.render" (dict "value" .Values.workload.nodeSelector "context" $) | nindent 8 }}
+      {{- end }}
+      {{- if .Values.workload.tolerations }}
+      tolerations: {{- include "base.tplvalues.render" (dict "value" .Values.workload.tolerations "context" $) | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.workload.podSecurityContext | nindent 8 }}
+      {{- if .Values.workload.initContainers }}
+      initContainers: {{- include "base.tplvalues.render" (dict "value" .Values.workload.initContainers "context" $) | nindent 8 }}
+      {{- end }}
+      containers:
+        {{- if .Values.workload.sideCars }}
+        {{- include "base.tplvalues.render" ( dict "value" .Values.workload.sideCars "context" $) | nindent 8 }}
+        {{- end }}
+        - name: {{ include "base.names.fullname" . }}
+          securityContext:
+            {{- toYaml .Values.workload.securityContext | nindent 12 }}
+          image: "{{ .Values.workload.image.repository }}:{{ .Values.workload.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.workload.image.pullPolicy }}
+          {{- if .Values.workload.env }}
+          env: {{- include "base.tplvalues.render" (dict "value" .Values.workload.env "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.workload.envFrom }}
+          envFrom: {{- include "base.tplvalues.render" (dict "value" .Values.workload.envFrom "context" $) | nindent 12 }}
+          {{- end }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.workload.containerPort }}
+              protocol: TCP
+          {{- if .Values.workload.livenessProbe }}
+          livenessProbe: {{- include "base.tplvalues.render" (dict "value" .Values.workload.livenessProbe "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.workload.readinessProbe }}
+          readinessProbe: {{- include "base.tplvalues.render" (dict "value" .Values.workload.readinessProbe "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.workload.resources }}
+          resources: {{- toYaml .Values.workload.resources | nindent 12 }}
+          {{- else if ne .Values.workload.resourcesPreset "none" }}
+          resources: {{- include "base.resources.preset" (dict "type" .Values.workload.resourcesPreset) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.workload.persistence.enabled }}
+          volumeMounts:
+            - name: app-data
+              mountPath: {{ .Values.workload.persistence.path }}
+              {{- if .Values.workload.persistence.subPath }}
+              subPath: {{ .Values.master.persistence.subPath }}
+              {{- end }}
+            {{- if .Values.workload.volumeMounts }}
+            {{- include "base.tplvalues.render" ( dict "value" .Values.workload.volumeMounts "context" $) | nindent 12 }}
+            {{- end }}
+          {{- else }}
+          {{- if .Values.workload.volumeMounts }}
+          volumeMounts:
+          {{- include "base.tplvalues.render" ( dict "value" .Values.workload.volumeMounts "context" $) | nindent 12 }}
+          {{- end }}
+          {{- end }}
+      {{- if .Values.workload.volumes }}
+      volumes: {{- include "base.tplvalues.render" ( dict "value" .Values.workload.volumes "context" $) | nindent 8 }}
+      {{- end }}
+  {{- if .Values.workload.persistence.enabled }}
+      volumes:
+      {{- if .Values.workload.persistence.existingClaim }}
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: {{ .Values.workload.persistence.existingClaim . }}
+      {{- else }}
+        - name: app-data
+          persistentVolumeClaim:
+            claimName: {{ include "base.names.fullname" . }}
+      {{- end }}
+      {{- if .Values.workload.volumes }}
+      {{- include "base.tplvalues.render" ( dict "value" .Values.workload.volumes "context" $) | nindent 8 }}
+      {{- end }}
+  {{- if .Values.workload.persistence.persistentVolumeClaimRetentionPolicy.enabled }}
+  persistentVolumeClaimRetentionPolicy:
+    whenDeleted: {{ .Values.workload.persistence.persistentVolumeClaimRetentionPolicy.whenDeleted }}
+    whenScaled: {{ .Values.workload.persistence.persistentVolumeClaimRetentionPolicy.whenScaled }}
+  {{- end }}
+  {{- if eq .Values.workload.type "StatefulSet" }}
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: app-data
+        {{- $claimLabels := include "base.tplvalues.merge" ( dict "values" ( list .Values.workload.persistence.labels .Values.commonLabels ) "context" . ) }}
+        labels: {{- include "base.labels.matchLabels" ( dict "customLabels" $claimLabels "context" $ ) | nindent 10 }}
+        {{- if .Values.workload.persistence.annotations }}
+        annotations: {{- toYaml .Values.workload.persistence.annotations | nindent 10 }}
+        {{- end }}
+      spec:
+        {{- if .Values.workload.persistence.storageClass }}
+        storageClassName: {{ .Values.workload.persistence.storageClass }}
+        {{- end }}
+        accessModes:
+        {{- range .Values.workload.persistence.accessModes }}
+          - {{ . | quote }}
+        {{- end }}
+        resources:
+          requests:
+            storage: {{ .Values.workload.persistence.size | quote }}
+        {{- if .Values.workload.persistence.selector }}
+        selector: {{- include "base.tplvalues.render" (dict "value" .Values.workload.persistence.selector "context" $) | nindent 10 }}
+        {{- end }}
+        {{- if .Values.workload.persistence.dataSource }}
+        dataSource: {{- include "base.tplvalues.render" (dict "value" .Values.workload.persistence.datasource "context" $) | nindent 10 }}
+        {{- end }}
+  {{- end }}
+  {{- end }}
