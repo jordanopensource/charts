@@ -5,6 +5,28 @@ entries:
       category: Applications
     apiVersion: v2
     appVersion: 1.0.1
+    created: "2024-10-07T10:15:12.894629343Z"
+    description: A general helm chart for any container
+    digest: e9d35827c334a2bfd8e6833ec83e79313a48c387a4b47fbe286111803fa44d9c
+    home: https://josa.ngo
+    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+    keywords:
+    - base
+    - general
+    - containers
+    maintainers:
+    - name: JOSA
+      url: https://github.com/jordanopensource/charts/
+    name: base
+    sources:
+    - https://github.com/jordanopensource/charts/tree/main/charts/base
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/base-1.0.3/base-1.0.3.tgz
+    version: 1.0.3
+  - annotations:
+      category: Applications
+    apiVersion: v2
+    appVersion: 1.0.1
     created: "2024-09-29T13:25:45.771365094Z"
     description: A general helm chart for any container
     digest: 6c1621764884ea617464355ca59eb2e69538cbb44086b2a968c80fb8b6a88bff
@@ -988,4 +1010,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2024-09-29T13:28:09.153889162Z"
+generated: "2024-10-07T10:15:12.894770767Z"
