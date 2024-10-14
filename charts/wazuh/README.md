@@ -1,8 +1,98 @@
 # wazuh
 
-![Version: 1.0.0](https://img.shields.io/badge/Version-1.0.0-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.8.1](https://img.shields.io/badge/AppVersion-4.8.1-informational?style=flat-square)
+![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-informational?style=flat-square) ![Type: application](https://img.shields.io/badge/Type-application-informational?style=flat-square) ![AppVersion: 4.8.3](https://img.shields.io/badge/AppVersion-4.8.3-informational?style=flat-square)
 
 A Helm chart for Wazuh the open source security platform that unifies XDR and SIEM protection for endpoints and cloud workloads.
+
+## Getting started
+
+To get started, first install our helm repo
+
+```bash
+helm repo add josa https://charts.josa.ngo
+helm repo update
+```
+
+Once your values.yaml configuration is ready use
+
+**Read the [Configurations notes](#configurations-notes) before installing the chart**
+
+```bash
+helm install wazuh josa/wazuh
+```
+
+### Configurations notes
+
+#### Release Name
+
+We strongly recommend setting the release name to "wazuh" in order to avoid issues with the manager configuration. The reason for this is that the wazuh manager nodes uses the name "wazuh" by default.
+
+If you want to change the name you will need to provide your own wazuh-manager configuration under `manager.config.customManagerConfig`.
+
+You will need to provide your own `master.conf` and `worker.conf` in your config maps, containing the your release name.
+
+**Example on the release name:**
+
+If your release name is `my-release`, the manager node references in the configuration files should look like:
+
+```yaml
+my-release-manager-master-0.my-release-cluster
+```
+
+> Make sure that the cluster name matches the release name (my-release in this example)
+
+**Example of the node name under `master.conf` and `worker.conf`:**
+
+```conf
+  <cluster>
+    <name>my-release</name>
+    <node_name>my-release-manager-master</node_name>
+    <node_type>master</node_type>
+    <key>to_be_replaced_by_cluster_key</key>
+    <port>1516</port>
+    <bind_addr>0.0.0.0</bind_addr>
+    <nodes>
+        <node>my-release-manager-master-0.my-release-cluster</node>
+    </nodes>
+    <hidden>no</hidden>
+    <disabled>no</disabled>
+  </cluster>
+```
+
+You can take a look at our configuration in our templates [here](./configs/wazuh_conf/).
+
+#### TLS
+
+We need to note that TLS is enabled and required at all times in our chart. In order to get this chart working you will need to provide the following tls configuration.
+
+The easiest way, and the one we recommend is that you enable the certification creation in our chart if your cluster has  [cert-manager](https://cert-manager.io/docs/installation/helm/) installed.
+
+If you don't have a cert-manager. You can generate the required certificates and provide them as secrets under `tls.secretName`
+
+The required certificates you will need in your secrets are the following:
+
+- admin-key.pem
+- admin.pem
+- node-key.pem (referenced in the docs as index-key.pem and indexer.pem)
+- node.pem
+- root-ca.pem
+- server.key
+- server.cert
+- key.pem
+- cert.pem
+- filebeat-key.pem
+- filebeat.pem
+
+For more information on how to generate these .pem files refer to the [wazuh Deployment kubernets](https://documentation.wazuh.com/current/deployment-options/deploying-with-kubernetes/kubernetes-deployment.html#setup-ssl-certificates)
+> You may notice that we did not provide the files dashboard-key.pem and dashboard.pem.
+>
+>This is because the Wazuh Kubernetes setup uses multiple names for the same certificate. Specifically, it utilizes key.pem and cert.pem alongside dashboard.pem and dashboard-key.pem, even though they refer to the same underlying certificates.
+>
+>In other words, different names are used interchangeably for the same certificate files across the setup.
+
+## Helpful links
+
+- [Wazuh documentation](https://documentation.wazuh.com/current/deployment-options/deploying-with-kubernetes/index.html)
 
 ## Values
 
@@ -16,7 +106,7 @@ A Helm chart for Wazuh the open source security platform that unifies XDR and SI
 | dashboard.config.secrets.existingSecretName | string | `""` | ----------------- The secret must have the following keys DASHBOARD_USERNAME, DASHBOARD_PASSWORD |
 | dashboard.image.pullPolicy | string | `"IfNotPresent"` |  |
 | dashboard.image.repository | string | `"wazuh/wazuh-dashboard"` |  |
-| dashboard.image.tag | string | `"4.8.1"` |  |
+| dashboard.image.tag | string | `"4.8.2"` |  |
 | dashboard.imagePullSecrets | list | `[]` |  |
 | dashboard.ingress.annotations | object | `{}` |  |
 | dashboard.ingress.className | string | `"nginx"` |  |
@@ -60,7 +150,7 @@ A Helm chart for Wazuh the open source security platform that unifies XDR and SI
 | indexer.config.sslEnabled | bool | `true` |  |
 | indexer.image.pullPolicy | string | `"IfNotPresent"` |  |
 | indexer.image.repository | string | `"wazuh/wazuh-indexer"` |  |
-| indexer.image.tag | string | `"4.8.1"` |  |
+| indexer.image.tag | string | `"4.8.2"` |  |
 | indexer.imagePullSecrets | list | `[]` |  |
 | indexer.nodeSelector | object | `{}` |  |
 | indexer.podAnnotations | object | `{}` |  |
@@ -70,7 +160,7 @@ A Helm chart for Wazuh the open source security platform that unifies XDR and SI
 | indexer.resources | object | `{}` |  |
 | indexer.securityContext.capabilities.add[0] | string | `"SYS_CHROOT"` |  |
 | indexer.storage.existingClaim | string | `""` |  |
-| indexer.storage.size | string | `"1Gi"` |  |
+| indexer.storage.size | string | `"25Gi"` |  |
 | indexer.storage.storageClassName | string | `""` |  |
 | indexer.tolerations | list | `[]` |  |
 | indexer.volumeMounts | list | `[]` |  |
@@ -86,7 +176,7 @@ A Helm chart for Wazuh the open source security platform that unifies XDR and SI
 | manager.config.secrets.wazuhClusterKey | string | `"123a45bc67def891gh23i45jk67l8mn9"` |  |
 | manager.image.pullPolicy | string | `"IfNotPresent"` |  |
 | manager.image.repository | string | `"wazuh/wazuh-manager"` |  |
-| manager.image.tag | string | `"4.8.1"` |  |
+| manager.image.tag | string | `"4.8.2"` |  |
 | manager.imagePullSecrets | list | `[]` |  |
 | manager.master.affinity | object | `{}` |  |
 | manager.master.nodeSelector | object | `{}` |  |
@@ -96,7 +186,7 @@ A Helm chart for Wazuh the open source security platform that unifies XDR and SI
 | manager.master.resources | object | `{}` |  |
 | manager.master.securityContext.capabilities.add[0] | string | `"SYS_CHROOT"` |  |
 | manager.master.storage.existingClaim | string | `""` |  |
-| manager.master.storage.size | string | `"1Gi"` |  |
+| manager.master.storage.size | string | `"25Gi"` |  |
 | manager.master.storage.storageClassName | string | `""` |  |
 | manager.master.tolerations | list | `[]` |  |
 | manager.master.volumeMounts | list | `[]` |  |
@@ -112,7 +202,7 @@ A Helm chart for Wazuh the open source security platform that unifies XDR and SI
 | manager.workers.resources | object | `{}` |  |
 | manager.workers.securityContext.capabilities.add[0] | string | `"SYS_CHROOT"` |  |
 | manager.workers.storage.existingClaim | string | `""` |  |
-| manager.workers.storage.size | string | `"1Gi"` |  |
+| manager.workers.storage.size | string | `"25Gi"` |  |
 | manager.workers.storage.storageClassName | string | `""` |  |
 | manager.workers.tolerations | list | `[]` |  |
 | manager.workers.volumeMounts | list | `[]` |  |
@@ -131,7 +221,6 @@ A Helm chart for Wazuh the open source security platform that unifies XDR and SI
 | tls.certManager.issuer.kind | string | `"ClusterIssuer"` |  |
 | tls.certManager.issuer.name | string | `"your-issuer"` |  |
 | tls.certManager.renewBefore | string | `"360h"` |  |
-| tls.enabled | bool | `true` |  |
 | tls.secretName | string | `""` |  |
 
 ----------------------------------------------

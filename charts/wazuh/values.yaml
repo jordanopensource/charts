@@ -13,16 +13,15 @@ global:
 ## With the updated wazuh manager nodes in the cluster section in the [master.conf,worker.conf] files
 ## example: {release-name}-manager-master-0.{release-name}-cluster
 ## and the cluster name should be the same as the {release-name}
-## go to the manager.config section in the values file to see how you can add your own configuration files
+## go to the manager.config.customManagerConfig section in the values file to see how you can add your own configuration files
 nameOverride: ""
 fullnameOverride: ""
 
 tls:
-  # You either need to provide a secrete name containing specific keys as certs or enable the creation of certifications if
-  # your cluster supports issuing certificates.
+  # You either need to provide a secrete name containing specific keys as certs or enable the creation of certifications if  your cluster supports cert manager.
   # **REQUIRED** when you want to provide your own certificate
   # The Secret name for the certs must have the following keys within it
-  # admin-key.pem, admin.pem, dashboard-key.pem, dashboard.pem
+  # admin-key.pem, admin.pem
   # filebeat-key.pem, filebeat.pem, node-key.pem, node.pem, root-ca.pem,
   # key.pem, cert.pem, server.key, server.cert
   secretName: ""
