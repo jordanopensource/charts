@@ -14,5 +14,5 @@ maintainers:
     url: https://github.com/jordanopensource/charts/
 sources:
   - https://github.com/jordanopensource/charts/tree/main/charts/base
-version: 1.0.3
+version: 1.0.4
 appVersion: 1.0.1
