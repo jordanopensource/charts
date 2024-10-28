@@ -19,8 +19,6 @@ workload:
   type: Deployment
   ## @param workload.replicaCount [default: 1]
   replicaCount: 1
-  ## @param workload.port define the port of the main container
-  containerPort: 3000
 
   image:
     ## @param workload.image.repository [default: REPOSITORY_NAME/DOCKER_IMAGE_NAME] NGINX image repository
@@ -32,6 +30,13 @@ workload:
 
   ## @param workload.imagePullSecrets Specify docker-registry secret names as an array
   imagePullSecrets: []
+
+  ## @param workload.containerPorts define the ports of the main container
+  ## Leave empty if no ports are exposed
+  containerPorts:
+    - name: http
+      containerPort: 80
+      protocol: TCP
 
   ## @param workload.initContainers define initContainers as an array to run before the main container
   ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
@@ -115,10 +120,16 @@ workload:
     # runAsUser: 1000
 
   service:
+    ## @param workload.service.create if you want the service to be created
+    create: true
     ## @param workload.service.type define the type of the service
     type: ClusterIP
-    ## @param workload.service.port define the port of the service
-    port: 80
+    ## @param workload.service.ports define the ports of the service
+    ports:
+      - port: 80
+        targetPort: 80
+        protocol: TCP
+        name: http
     ## @param workload.service.annotations add annotations for the service
     annotations: {}
 
@@ -127,6 +138,8 @@ workload:
     enabled: false
     ## @param workload.ingress.className choose the ingress class name
     className: ""
+    ## @param workload.ingress.servicePort specify the target service port for ingress routing.
+    servicePort: 80
     ## @param workload.ingress.annotations add the ingress annotations
     annotations: {}
     ## @param workload.ingress.hosts define the hosts as an array
