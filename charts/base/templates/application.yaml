@@ -54,6 +54,12 @@ spec:
             {{- toYaml .Values.workload.securityContext | nindent 12 }}
           image: "{{ .Values.workload.image.repository }}:{{ .Values.workload.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.workload.image.pullPolicy }}
+          {{- if .Values.workload.command }}
+          command: {{- include "base.tplvalues.render" (dict "value" .Values.workload.command "context" $) | nindent 12 }}
+          {{- end }}
+          {{- if .Values.workload.args }}
+          args: {{- include "base.tplvalues.render" (dict "value" .Values.workload.args "context" $) | nindent 12 }}
+          {{- end }}
           {{- if .Values.workload.env }}
           env: {{- include "base.tplvalues.render" (dict "value" .Values.workload.env "context" $) | nindent 12 }}
           {{- end }}
