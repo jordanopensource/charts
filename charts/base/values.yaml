@@ -54,6 +54,23 @@ workload:
   ##         containerPort: 1234
   sideCars: []
 
+  ## @param workload.args add or override main container arguments as an array
+  ## https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/
+  ## Example
+  # ["-capacity", "500"]
+  # Or
+  # - "-capacity"
+  # - "500"
+  args: []
+
+  ## @param workload.command override main container command
+  ## https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/
+  ## Example
+  # ["/bin/echo"]
+  # Or
+  # - "/bin/echo"
+  command: []
+
   ## @param workload.env define environment variables
   ## Example
   ## - name: NODE_ENV
