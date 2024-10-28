@@ -66,10 +66,9 @@ spec:
           {{- if .Values.workload.envFrom }}
           envFrom: {{- include "base.tplvalues.render" (dict "value" .Values.workload.envFrom "context" $) | nindent 12 }}
           {{- end }}
-          ports:
-            - name: http
-              containerPort: {{ .Values.workload.containerPort }}
-              protocol: TCP
+          {{- if .Values.workload.containerPorts }}
+          ports: {{- include "base.tplvalues.render" (dict "value" .Values.workload.containerPorts "context" $) | nindent 12 }}
+          {{- end }}
           {{- if .Values.workload.livenessProbe }}
           livenessProbe: {{- include "base.tplvalues.render" (dict "value" .Values.workload.livenessProbe "context" $) | nindent 12 }}
           {{- end }}

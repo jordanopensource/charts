@@ -1,6 +1,6 @@
 {{- if .Values.workload.ingress.enabled -}}
 {{- $fullName := include "base.names.fullname" . -}}
-{{- $svcPort := .Values.workload.service.port -}}
+{{- $svcPort := .Values.workload.ingress.servicePort -}}
 {{- if and .Values.workload.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.workload.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.workload.ingress.annotations "kubernetes.io/ingress.class" .Values.workload.ingress.className}}
