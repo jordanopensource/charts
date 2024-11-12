@@ -50,7 +50,7 @@ indexer:
     repository: wazuh/wazuh-indexer
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.8.2"
+    tag: "4.9.2"
 
   config:
     sslEnabled: true
@@ -132,7 +132,7 @@ manager:
     repository: wazuh/wazuh-manager
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.8.2"
+    tag: "4.9.2"
 
   imagePullSecrets: []
 
@@ -320,7 +320,7 @@ dashboard:
     repository: wazuh/wazuh-dashboard
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.8.2"
+    tag: "4.9.2"
 
   config:
     ServerSSL: true
