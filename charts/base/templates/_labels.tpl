@@ -10,7 +10,7 @@ Kubernetes standard labels
 {{- end -}}
 {{ template "base.tplvalues.merge" (dict "values" (list .customLabels $default) "context" .context) }}
 {{- else -}}
-app.kubernetes.io/name: {{ include "base.names.name" . }}
+app.kubernetes.io/name: {{ include "base.names.fullname" . }}
 helm.sh/chart: {{ include "base.names.chart" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
