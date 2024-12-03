@@ -1,0 +1,756 @@
+# Default values for the base chart.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+## We use our josa base chart for the uwazi workload
+## https://github.com/jordanopensource/charts/tree/main/charts/base
+uwazi:
+  ## @param nameOverride String to partially override base.fullname template (will maintain the release name)
+  nameOverride: ""
+  ## @param fullnameOverride String to fully override base.fullname template
+  namespaceOverride: ""
+  ## @param namespaceOverride String to fully override base.names.namespace
+  fullnameOverride: "uwazi"
+  ## @param commonAnnotations Add annotations to all the deployed resources
+  commonAnnotations: {}
+  ## @param commonLabels Add labels to all the deployed resources
+  commonLabels: {}
+
+  ## @section workload params
+  workload:
+    ## @param workload.type [default: Deployment] choose on of (Deployment, StatefulSet)
+    type: StatefulSet
+    ## @param workload.replicaCount [default: 1]
+    replicaCount: 1
+
+    image:
+      ## @param workload.image.repository [default: REPOSITORY_NAME/DOCKER_IMAGE_NAME] NGINX image repository
+      repository: josaorg/uwazi
+      ## @param workload.image.pullPolicy [default: IfNotPresent] image pull policy
+      pullPolicy: Always
+      ## @param workload.image.tag Overrides the image tag whose default is the chart appVersion.
+      tag: "latest"
+
+    ## @param workload.imagePullSecrets Specify docker-registry secret names as an array
+    imagePullSecrets: []
+
+    ## @param workload.containerPorts define the ports of the main container
+    ## Leave empty if no ports are exposed
+    containerPorts:
+      - name: http
+        containerPort: 3000
+        protocol: TCP
+
+    ## @param workload.initContainers define initContainers as an array to run before the main container
+    ## ref: https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+    ## e.g:
+    ## initContainers:
+    ##  - name: your-image-name
+    ##    image: your-image
+    ##    imagePullPolicy: Always
+    ##    command: ['sh', '-c', 'echo "hello world"']
+    initContainers: []
+
+    ## @param workload.sideCars define sideCars as an array to run alongside the main container
+    ## e.g:
+    ## sidecars:
+    ##   - name: your-image-name
+    ##     image: your-image
+    ##     imagePullPolicy: Always
+    ##     ports:
+    ##       - name: portname
+    ##         containerPort: 1234
+    sideCars: []
+
+    ## @param workload.args add or override main container arguments as an array
+    ## https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/
+    ## Example
+    # ["-capacity", "500"]
+    # Or
+    # - "-capacity"
+    # - "500"
+    args: []
+
+    ## @param workload.command override main container command
+    ## https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/
+    ## Example
+    # ["/bin/echo"]
+    # Or
+    # - "/bin/echo"
+    command: []
+
+    ## @param workload.env define environment variables
+    ## Example
+    ## - name: NODE_ENV
+    ##   value: production
+    ## Note: if you are in production environment please use secrets using the workload.envFrom section
+    ## Check this link for the whole environment variables and configurations
+    ## https://github.com/jordanopensource/uwazi/blob/main/app/api/config.ts
+    env:
+      - name: DATABASE_HOST
+        value: mongo-headless
+      - name: DATABASE_NAME
+        value: uwazi_development
+      - name: ELASTICSEARCH_URL
+        value: http://elasticsearch:9200
+      - name: INDEX_NAME
+        value: uwazi_development
+      - name: REDIS_HOST
+        value: redis-headless
+
+    ## @param workload.envFrom define environment variables using secrets and configmaps
+    ## Example
+    ## - configMapRef:
+    ##     name: special-config
+    envFrom: []
+
+    serviceAccount:
+      ## @param workload.serviceAccount.create Enable creation of a ServiceAccount
+      create: true
+      ## @param workload.serviceAccount.automount Automatically mount a ServiceAccount's API credentials?
+      automount: false
+      ## @param workload.serviceAccount.annotations Annotations to add to the service account
+      annotations: {}
+      ## @param workload.serviceAccount.name The name of the service account to use.
+      # If not set and create is true, a name is generated using the fullname template
+      name: "uwazi-sa"
+
+    ## @param workload.podAnnotations Annotations for the pod
+    podAnnotations: {}
+    ## @param workload.podLabels Labels for the pod
+    podLabels: {}
+
+    ## @param workload.podSecurityContext define the security context for the pod
+    podSecurityContext:
+      runAsNonRoot: true
+      runAsUser: 1001
+      runAsGroup: 1001
+      fsGroup: 1001
+
+    ## @param workload.securityContext define the security context for the container
+    securityContext:
+      runAsNonRoot: true
+      runAsUser: 1001
+      runAsGroup: 1001
+
+    service:
+      ## @param workload.service.create if you want the service to be created
+      create: true
+      ## @param workload.service.type define the type of the service
+      type: ClusterIP
+      ## @param workload.service.ports define the ports of the service
+      ports:
+        - port: 80
+          targetPort: 3000
+          protocol: TCP
+          name: http
+      ## @param workload.service.annotations add annotations for the service
+      annotations: {}
+
+    ingress:
+      ## @param workload.ingress.enabled create an ingress for the svc
+      enabled: false
+      ## @param workload.ingress.className choose the ingress class name
+      className: ""
+      ## @param workload.ingress.servicePort specify the target service port for ingress routing.
+      servicePort: 80
+      ## @param workload.ingress.annotations add the ingress annotations
+      annotations: {}
+      ## @param workload.ingress.hosts define the hosts as an array
+      hosts:
+        - host: chart-example.local
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+      ## @param workload.ingress.tls add tls for the ingress
+      tls: []
+      #  - secretName: chart-example-tls
+      #    hosts:
+      #      - chart-example.local
+
+    ## @param workload.resourcesPreset Set container resources according to one common preset (allowed values: none, nano, micro, small, medium, large, xlarge, 2xlarge). This is ignored if resources is set (resources is recommended for production).
+    resourcesPreset: "medium"
+    ## @param workload.resources set the resources for the pod
+    resources:
+      {}
+      # We usually recommend not to specify default resources and to leave this as a conscious
+      # choice for the user. This also increases chances charts run on environments with little
+      # resources, such as Minikube. If you do want to specify resources, uncomment the following
+      # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+      # limits:
+      #   cpu: 100m
+      #   memory: 128Mi
+      # requests:
+      #   cpu: 100m
+      #   memory: 128Mi
+
+    ## @param workload.livenessProbe define the livenessProbe for the pod
+    ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+    livenessProbe:
+      httpGet:
+        path: /
+        port: http
+      initialDelaySeconds: 150
+      periodSeconds: 10
+      timeoutSeconds: 3
+      failureThreshold: 3
+      successThreshold: 1
+    ## @param workload.readinessProbe define the readinessProbe for the pod
+    ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+    readinessProbe:
+      httpGet:
+        path: /
+        port: http
+      initialDelaySeconds: 150
+      periodSeconds: 10
+      timeoutSeconds: 3
+      failureThreshold: 3
+      successThreshold: 1
+
+    ## Autoscaling parameters
+    autoscaling:
+      ## @param workload.autoscaling.enabled Enable autoscaling for the Workload
+      enabled: false
+      ## @param workload.autoscaling.minReplicas Minimum number of replicas to scale back
+      minReplicas: 1
+      ## @param workload.autoscaling.maxReplicas Maximum number of replicas to scale out
+      maxReplicas: 100
+      ## @param workload.autoscaling.targetCPU Target CPU utilization percentage
+      targetCPUUtilizationPercentage: 80
+      ## @param workload.autoscaling.targetMemory Target Memory utilization percentage
+      targetMemoryUtilizationPercentage: 80
+
+    ## @param workload.volumes Additional volumes on the output Workload definition.
+    volumes: []
+    # - name: foo
+    #   secret:
+    #     secretName: mysecret
+    #     optional: false
+
+    ## @param workload.volumeMounts Additional volumeMounts on the output Workload definition.
+    volumeMounts: []
+    # - name: foo
+    #   mountPath: "/etc/foo"
+    #   readOnly: true
+
+    ## @param workload.nodeSelector Node labels for pod assignment.
+    nodeSelector: {}
+
+    ## @param workload.tolerations Tolerations for pod assignment.
+    tolerations: []
+
+    ## @param workload.podAffinityPreset Pod affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
+    podAffinityPreset: ""
+    ## @param workload.podAntiAffinityPreset Pod anti-affinity preset. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
+    podAntiAffinityPreset: "soft"
+    ## Node affinity preset
+    ## Ref: https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#node-affinity
+    nodeAffinityPreset:
+      ## @param workload.nodeAffinityPreset.type Node affinity preset type. Ignored if `affinity` is set. Allowed values: `soft` or `hard`
+      ##
+      type: ""
+      ## @param workload.nodeAffinityPreset.key Node label key to match Ignored if `affinity` is set.
+      ## E.g.
+      ## key: "kubernetes.io/e2e-az-name"
+      ##
+      key: ""
+      ## @param workload.nodeAffinityPreset.values Node label values to match. Ignored if `affinity` is set.
+      ## E.g.
+      ## values:
+      ##   - e2e-az1
+      ##   - e2e-az2
+      ##
+      values: []
+
+    ## @param workload.affinity Affinity for pod assignment
+    ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity
+    ## Note: podAffinityPreset, podAntiAffinityPreset, and  nodeAffinityPreset will be ignored when it's set
+    affinity: {}
+
+    ## Persistence parameters
+    ## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+    persistence:
+      ## @param workload.persistence.enabled Enable persistence
+      enabled: true
+      ## @param workload.persistence.existingClaim Use a existing PVC which must be created manually before bound
+      existingClaim: ""
+      ## @param workload.persistence.path The path the volume will be mounted at
+      path: "/uwazi/uploaded_documents"
+      ## @param workload.persistence.subPath The subdirectory of the volume to mount
+      subPath: ""
+      ## @param workload.persistence.storageClass Persistent Volume storage class
+      storageClass: ""
+      ## @param workload.persistence.annotations Additional custom annotations for the PVC
+      annotations: {}
+      ## @param workload.persistence.labels Additional custom labels for the PVC
+      labels: {}
+      ## @param workload.persistence.accessModes Persistent Volume access modes
+      accessModes:
+        - ReadWriteOnce
+      ## @param workload.persistence.size Persistent Volume size
+      size: 8Gi
+      ## @param workload.persistence.selector Additional labels to match for the PVC
+      ## e.g:
+      ## selector:
+      ##   matchLabels:
+      ##     app: my-app
+      selector: {}
+      ## @param workload.persistence.dataSource Custom PVC data source
+      datasource: {}
+
+      ## persistentVolumeClaimRetentionPolicy
+      ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention
+      persistentVolumeClaimRetentionPolicy:
+        ## @param workload.persistence.persistentVolumeClaimRetentionPolicy.enabled Controls if and how PVCs are deleted during the lifecycle of a StatefulSet
+        enabled: false
+        ## @param workload.persistence.persistentVolumeClaimRetentionPolicy.whenScaled Volume retention behavior when the replica count of the StatefulSet is reduced
+        whenScaled: Retain
+        ## @param workload.persistence.persistentVolumeClaimRetentionPolicy.whenDeleted Volume retention behavior that applies when the StatefulSet is deleted
+        whenDeleted: Retain
+
+# This uses the bitnami helm chart for full values please visit
+# https://github.com/bitnami/charts/tree/main/bitnami/mongodb
+mongodb:
+  create: true
+
+  ## @param fullnameOverride String to fully override mongodb.fullname template
+  ##
+  fullnameOverride: "mongo"
+
+  ## @param replicaCount Number of MongoDB(&reg;) nodes
+  ## When `mongodb.architecture=replicaset`, the number of replicas is taken in account
+  ## When `mongodb.architecture=standalone`, the number of replicas can only be 0 or 1 (value higher then 1 will not be taken in account)
+  ##
+  replicaCount: 1
+
+  ## @param architecture MongoDB(&reg;) architecture (`standalone` or `replicaset`)
+  ##
+  architecture: replicaset
+
+  ## MongoDB(&reg;) Authentication parameters
+  ##
+  auth:
+    ## @param auth.enabled Enable authentication
+    ## ref: https://docs.mongodb.com/manual/tutorial/enable-authentication/
+    ##
+    enabled: false
+    ## @param auth.rootUser MongoDB(&reg;) root user
+    ##
+    rootUser: root
+    ## @param auth.rootPassword MongoDB(&reg;) root password
+    ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mongodb#setting-the-root-user-and-password-on-first-run
+    ##
+    rootPassword: ""
+    ## MongoDB(&reg;) custom users and databases
+    ## ref: https://github.com/bitnami/containers/tree/main/bitnami/mongodb#creating-a-user-and-database-on-first-run
+    ## @param auth.usernames List of custom users to be created during the initialization
+    ## @param auth.passwords List of passwords for the custom users set at `auth.usernames`
+    ## @param auth.databases List of custom databases to be created during the initialization
+    ##
+    usernames: []
+    passwords: []
+    databases: []
+    ## @param auth.username DEPRECATED: use `auth.usernames` instead
+    ## @param auth.password DEPRECATED: use `auth.passwords` instead
+    ## @param auth.database DEPRECATED: use `auth.databases` instead
+    ##
+    username: ""
+    password: ""
+    database: ""
+    ## @param auth.replicaSetKey Key used for authentication in the replicaset (only when `architecture=replicaset`)
+    ##
+    replicaSetKey: ""
+    ## @param auth.existingSecret Existing secret with MongoDB(&reg;) credentials (keys: `mongodb-passwords`, `mongodb-root-password`, `mongodb-metrics-password`, `mongodb-replica-set-key`)
+    ## NOTE: When it's set the previous parameters are ignored.
+    ##
+    existingSecret: ""
+
+  service:
+    type: ClusterIP
+
+  ## @section Arbiter parameters
+  ##
+  arbiter:
+    ## @param arbiter.enabled Enable deploying the arbiter
+    ##   https://docs.mongodb.com/manual/tutorial/add-replica-set-arbiter/
+    ##
+    enabled: false
+
+  persistence:
+    ## @param persistence.enabled Enable MongoDB(&reg;) data persistence using PVC
+    ##
+    enabled: true
+    ## @param persistence.name Name of the PVC and mounted volume
+    ##
+    name: "datadir"
+    ## @param persistence.medium Provide a medium for `emptyDir` volumes.
+    ## Requires persistence.enabled: false
+    ##
+    medium: ""
+    ## @param persistence.existingClaim Provide an existing `PersistentVolumeClaim` (only when `architecture=standalone`)
+    ## Requires persistence.enabled: true
+    ## If defined, PVC must be created manually before volume will be bound
+    ## Ignored when mongodb.architecture=replicaset
+    ##
+    existingClaim: ""
+    ## @param persistence.resourcePolicy Setting it to "keep" to avoid removing PVCs during a helm delete operation. Leaving it empty will delete PVCs after the chart deleted
+    ##
+    resourcePolicy: ""
+    ## @param persistence.storageClass PVC Storage Class for MongoDB(&reg;) data volume
+    ## If defined, storageClassName: <storageClass>
+    ## If set to "-", storageClassName: "", which disables dynamic provisioning
+    ## If undefined (the default) or set to null, no storageClassName spec is
+    ## set, choosing the default provisioner.
+    ##
+    storageClass: ""
+    ## @param persistence.accessModes PV Access Mode
+    ##
+    accessModes:
+      - ReadWriteOnce
+    ## @param persistence.size PVC Storage Request for MongoDB(&reg;) data volume
+    ##
+    size: 8Gi
+    ## @param persistence.annotations PVC annotations
+    ##
+    annotations: {}
+    ## @param persistence.labels PVC labels
+    ##
+    labels: {}
+    ## @param persistence.mountPath Path to mount the volume at
+    ## MongoDB(&reg;) images.
+    ##
+    mountPath: /bitnami/mongodb
+    ## @param persistence.subPath Subdirectory of the volume to mount at
+    ## and one PV for multiple services.
+    ##
+    subPath: ""
+    ## Fine tuning for volumeClaimTemplates
+    ##
+    volumeClaimTemplates:
+      ## @param persistence.volumeClaimTemplates.selector A label query over volumes to consider for binding (e.g. when using local volumes)
+      ## A label query over volumes to consider for binding (e.g. when using local volumes)
+      ## See https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.20/#labelselector-v1-meta for more details
+      ##
+      selector: {}
+      ## @param persistence.volumeClaimTemplates.requests Custom PVC requests attributes
+      ## Sometime cloud providers use additional requests attributes to provision custom storage instance
+      ## See https://cloud.ibm.com/docs/containers?topic=containers-file_storage#file_dynamic_statefulset
+      ##
+      requests: {}
+      ## @param persistence.volumeClaimTemplates.dataSource Add dataSource to the VolumeClaimTemplate
+      ##
+      dataSource: {}
+  ## Persistent Volume Claim Retention Policy
+  ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention
+  ##
+  persistentVolumeClaimRetentionPolicy:
+    ## @param persistentVolumeClaimRetentionPolicy.enabled Enable Persistent volume retention policy for MongoDB(&reg;) Statefulset
+    ##
+    enabled: false
+    ## @param persistentVolumeClaimRetentionPolicy.whenScaled Volume retention behavior when the replica count of the StatefulSet is reduced
+    ##
+    whenScaled: Retain
+    ## @param persistentVolumeClaimRetentionPolicy.whenDeleted Volume retention behavior that applies when the StatefulSet is deleted
+    ##
+    whenDeleted: Retain
+
+# This uses the bitnami helm chart for full values please visit
+# https://github.com/bitnami/charts/tree/main/bitnami/redis
+redis:
+  create: true
+  ## @param fullnameOverride String to fully override common.names.fullname
+  ##
+  fullnameOverride: "redis"
+  ## @param architecture Redis&reg; architecture. Allowed values: `standalone` or `replication`
+  ##
+  architecture: standalone
+
+  auth:
+    ## @param auth.enabled Enable password authentication
+    ##
+    enabled: false
+    ## @param auth.sentinel Enable password authentication on sentinels too
+    ##
+    sentinel: true
+    ## @param auth.password Redis&reg; password
+    ## Defaults to a random 10-character alphanumeric string if not set
+    ##
+    password: ""
+    ## @param auth.existingSecret The name of an existing secret with Redis&reg; credentials
+    ## NOTE: When it's set, the previous `auth.password` parameter is ignored
+    ##
+    existingSecret: ""
+    ## @param auth.existingSecretPasswordKey Password key to be retrieved from existing secret
+    ## NOTE: ignored unless `auth.existingSecret` parameter is set
+    ##
+    existingSecretPasswordKey: ""
+    ## @param auth.usePasswordFiles Mount credentials as files instead of using an environment variable
+    ##
+    usePasswordFiles: false
+    ## @param auth.usePasswordFileFromSecret Mount password file from secret
+    ##
+    usePasswordFileFromSecret: true
+
+  master:
+    count: 1
+    ## Persistence parameters
+    ## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+    ##
+    persistence:
+      ## @param master.persistence.enabled Enable persistence on Redis&reg; master nodes using Persistent Volume Claims
+      ##
+      enabled: true
+      ## @param master.persistence.medium Provide a medium for `emptyDir` volumes.
+      ##
+      medium: ""
+      ## @param master.persistence.sizeLimit Set this to enable a size limit for `emptyDir` volumes.
+      ##
+      sizeLimit: ""
+      ## @param master.persistence.path The path the volume will be mounted at on Redis&reg; master containers
+      ## NOTE: Useful when using different Redis&reg; images
+      ##
+      path: /data
+      ## @param master.persistence.subPath The subdirectory of the volume to mount on Redis&reg; master containers
+      ## NOTE: Useful in dev environments
+      ##
+      subPath: ""
+      ## @param master.persistence.subPathExpr Used to construct the subPath subdirectory of the volume to mount on Redis&reg; master containers
+      ##
+      subPathExpr: ""
+      ## @param master.persistence.storageClass Persistent Volume storage class
+      ## If defined, storageClassName: <storageClass>
+      ## If set to "-", storageClassName: "", which disables dynamic provisioning
+      ## If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner
+      ##
+      storageClass: ""
+      ## @param master.persistence.accessModes Persistent Volume access modes
+      ##
+      accessModes:
+        - ReadWriteOnce
+      ## @param master.persistence.size Persistent Volume size
+      ##
+      size: 8Gi
+      ## @param master.persistence.annotations Additional custom annotations for the PVC
+      ##
+      annotations: {}
+      ## @param master.persistence.labels Additional custom labels for the PVC
+      ##
+      labels: {}
+      ## @param master.persistence.selector Additional labels to match for the PVC
+      ## e.g:
+      ## selector:
+      ##   matchLabels:
+      ##     app: my-app
+      ##
+      selector: {}
+      ## @param master.persistence.dataSource Custom PVC data source
+      ##
+      dataSource: {}
+      ## @param master.persistence.existingClaim Use a existing PVC which must be created manually before bound
+      ## NOTE: requires master.persistence.enabled: true
+      ##
+      existingClaim: ""
+    ## persistentVolumeClaimRetentionPolicy
+    ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention
+    ## @param master.persistentVolumeClaimRetentionPolicy.enabled Controls if and how PVCs are deleted during the lifecycle of a StatefulSet
+    ## @param master.persistentVolumeClaimRetentionPolicy.whenScaled Volume retention behavior when the replica count of the StatefulSet is reduced
+    ## @param master.persistentVolumeClaimRetentionPolicy.whenDeleted Volume retention behavior that applies when the StatefulSet is deleted
+    ##
+    persistentVolumeClaimRetentionPolicy:
+      enabled: false
+      whenScaled: Retain
+      whenDeleted: Retain
+
+  replica:
+    ## @param replica.kind Use either DaemonSet or StatefulSet (default)
+    ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/
+    ##
+    kind: StatefulSet
+    ## @param replica.replicaCount Number of Redis&reg; replicas to deploy
+    ##
+    replicaCount: 1
+
+    ## Persistence Parameters
+    ## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+    ##
+    persistence:
+      ## @param replica.persistence.enabled Enable persistence on Redis&reg; replicas nodes using Persistent Volume Claims
+      ##
+      enabled: true
+      ## @param replica.persistence.medium Provide a medium for `emptyDir` volumes.
+      ##
+      medium: ""
+      ## @param replica.persistence.sizeLimit Set this to enable a size limit for `emptyDir` volumes.
+      ##
+      sizeLimit: ""
+      ##  @param replica.persistence.path The path the volume will be mounted at on Redis&reg; replicas containers
+      ## NOTE: Useful when using different Redis&reg; images
+      ##
+      path: /data
+      ## @param replica.persistence.subPath The subdirectory of the volume to mount on Redis&reg; replicas containers
+      ## NOTE: Useful in dev environments
+      ##
+      subPath: ""
+      ## @param replica.persistence.subPathExpr Used to construct the subPath subdirectory of the volume to mount on Redis&reg; replicas containers
+      ##
+      subPathExpr: ""
+      ## @param replica.persistence.storageClass Persistent Volume storage class
+      ## If defined, storageClassName: <storageClass>
+      ## If set to "-", storageClassName: "", which disables dynamic provisioning
+      ## If undefined (the default) or set to null, no storageClassName spec is set, choosing the default provisioner
+      ##
+      storageClass: ""
+      ## @param replica.persistence.accessModes Persistent Volume access modes
+      ##
+      accessModes:
+        - ReadWriteOnce
+      ## @param replica.persistence.size Persistent Volume size
+      ##
+      size: 8Gi
+      ## @param replica.persistence.annotations Additional custom annotations for the PVC
+      ##
+      annotations: {}
+      ## @param replica.persistence.labels Additional custom labels for the PVC
+      ##
+      labels: {}
+      ## @param replica.persistence.selector Additional labels to match for the PVC
+      ## e.g:
+      ## selector:
+      ##   matchLabels:
+      ##     app: my-app
+      ##
+      selector: {}
+      ## @param replica.persistence.dataSource Custom PVC data source
+      ##
+      dataSource: {}
+      ## @param replica.persistence.existingClaim Use a existing PVC which must be created manually before bound
+      ## NOTE: requires replica.persistence.enabled: true
+      ##
+      existingClaim: ""
+    ## persistentVolumeClaimRetentionPolicy
+    ## ref: https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/#persistentvolumeclaim-retention
+    ## @param replica.persistentVolumeClaimRetentionPolicy.enabled Controls if and how PVCs are deleted during the lifecycle of a StatefulSet
+    ## @param replica.persistentVolumeClaimRetentionPolicy.whenScaled Volume retention behavior when the replica count of the StatefulSet is reduced
+    ## @param replica.persistentVolumeClaimRetentionPolicy.whenDeleted Volume retention behavior that applies when the StatefulSet is deleted
+    ##
+    persistentVolumeClaimRetentionPolicy:
+      enabled: false
+      whenScaled: Retain
+      whenDeleted: Retain
+
+# This uses the bitnami helm chart for full values please visit
+# https://github.com/bitnami/charts/tree/main/bitnami/elasticsearch
+elasticsearch:
+  create: true
+
+  ## @param fullnameOverride String to fully override common.names.fullname
+  ##
+  fullnameOverride: "elasticsearch"
+
+  ## @section Master-elegible nodes parameters
+  master:
+    ## @param master.masterOnly Deploy the Elasticsearch master-elegible nodes as master-only nodes. Recommended for high-demand deployments.
+    masterOnly: true
+    ## @param master.replicaCount Number of master-elegible replicas to deploy
+    ##
+    replicaCount: 1
+
+  ## @section Data-only nodes parameters
+  data:
+    ## @param data.replicaCount Number of data-only replicas to deploy
+    ##
+    replicaCount: 1
+
+  ## @section Coordinating-only nodes parameters
+  coordinating:
+    ## @param coordinating.replicaCount Number of coordinating-only replicas to deploy
+    ##
+    replicaCount: 1
+
+  ## @section Ingest-only nodes parameters
+  ingest:
+    ## @param ingest.enabled Enable ingest nodes
+    ##
+    enabled: false
+    ## @param ingest.replicaCount Number of ingest-only replicas to deploy
+    ##
+    replicaCount: 1
+
+# This uses the bitnami helm chart for full values please visit
+# https://github.com/bitnami/charts/tree/main/bitnami/minio
+minio:
+  create: false
+  ## @param fullnameOverride String to fully override common.names.fullname
+  ##
+  fullnameOverride: "minio"
+  ## @param mode MinIO&reg; server mode (`standalone` or `distributed`)
+  ## ref: https://docs.minio.io/docs/distributed-minio-quickstart-guide
+  ##
+  mode: standalone
+
+  auth:
+    ## @param auth.rootUser MinIO&reg; root username
+    ##
+    rootUser: admin
+    ## @param auth.rootPassword Password for MinIO&reg; root user
+    ##
+    rootPassword: "admin"
+    ## @param auth.existingSecret Use existing secret for credentials details (`auth.rootUser` and `auth.rootPassword` will be ignored and picked up from this secret).
+    ##
+    existingSecret: ""
+    ## @param auth.rootUserSecretKey Key where the MINIO_ROOT_USER username is being stored inside the existing secret `auth.existingSecret`
+    ##
+    rootUserSecretKey: ""
+    ## @param auth.rootPasswordSecretKey Key where the MINIO_ROOT_USER password is being stored inside the existing secret `auth.existingSecret`
+    ##
+    rootPasswordSecretKey: ""
+    ## @param auth.forcePassword Force users to specify required passwords
+    ##
+    forcePassword: false
+    ## @param auth.useCredentialsFiles Mount credentials as a files instead of using an environment variable
+    ##
+    useCredentialsFiles: false
+    ## @param auth.useSecret Uses a secret to mount the credential files.
+    ##
+    useSecret: true
+    ## @param auth.forceNewKeys Force root credentials (user and password) to be reconfigured every time they change in the secrets
+    ##
+    forceNewKeys: false
+
+  ## Enable persistence using Persistent Volume Claims
+  ## ref: https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+  ##
+  persistence:
+    ## @param persistence.enabled Enable MinIO&reg; data persistence using PVC. If false, use emptyDir
+    ##
+    enabled: true
+    ## @param persistence.storageClass PVC Storage Class for MinIO&reg; data volume
+    ## If defined, storageClassName: <storageClass>
+    ## If set to "-", storageClassName: "", which disables dynamic provisioning
+    ## If undefined (the default) or set to null, no storageClassName spec is
+    ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
+    ##   GKE, AWS & OpenStack)
+    ##
+    storageClass: ""
+    ## @param persistence.mountPath Data volume mount path
+    ##
+    mountPath: /bitnami/minio/data
+    ## @param persistence.accessModes PVC Access Modes for MinIO&reg; data volume
+    ##
+    accessModes:
+      - ReadWriteOnce
+    ## @param persistence.size PVC Storage Request for MinIO&reg; data volume
+    ##
+    size: 8Gi
+    ## @param persistence.annotations Annotations for the PVC
+    ##
+    annotations: {}
+    ## @param persistence.existingClaim Name of an existing PVC to use (only in `standalone` mode)
+    ##
+    existingClaim: ""
+    ## @param persistence.selector Configure custom selector for existing Persistent Volume. (only in `distributed` mode)
+    ## selector:
+    ##   matchLabels:
+    ##     volume:
+    ##
+    selector: {}
