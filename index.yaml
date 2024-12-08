@@ -570,17 +570,6 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/kutt-0.1.0/kutt-0.1.0.tgz
     version: 0.1.0
-  label-studio:
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2022-12-05T10:29:42.386682838Z"
-    description: A Helm chart for Kubernetes
-    digest: ebad13cba5df542118678783a6c2a550b4048ae51696472530b9064eef1846bb
-    name: label-studio
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/label-studio-0.1.0/label-studio-0.1.0.tgz
-    version: 0.1.0
   mastodon:
   - apiVersion: v2
     appVersion: v4.2.12
@@ -767,26 +756,6 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/monk-0.1.0/monk-0.1.0.tgz
     version: 0.1.0
-  nuxt:
-  - apiVersion: v2
-    appVersion: 1.0.0
-    created: "2021-11-22T15:08:26.907804716Z"
-    description: Chart for Nuxt.js applications
-    digest: 5fead68c9a1afaca9b4c8d2ca30e7c7bb9de1f40fe098f25af9a1072a3fad428
-    home: https://github.com/jordanopensource/charts
-    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
-    keywords:
-    - vue.js
-    - Nuxt.js
-    - javascript
-    - node
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: nuxt
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/nuxt-1.0.0/nuxt-1.0.0.tgz
-    version: 1.0.0
   safepass:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -924,17 +893,6 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/tor-service-1.0.0/tor-service-1.0.0.tgz
     version: 1.0.0
-  twenty-forty-eight:
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2022-06-05T14:14:33.885795126Z"
-    description: A Helm chart for Kubernetes
-    digest: 09b2e727092cc1898a7aa62ea5a2412b3be5faf66d14b5ba632c368c9b2f5c91
-    name: twenty-forty-eight
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/twenty-forty-eight-0.1.0/twenty-forty-eight-0.1.0.tgz
-    version: 0.1.0
   uptime:
   - apiVersion: v2
     appVersion: 1.11.4
