@@ -16,20 +16,21 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-
       - name: Set up Helm
         uses: azure/setup-helm@v3
         with:
           version: v3.12.1
-
       - uses: actions/setup-python@v4
         with:
           python-version: "3.10"
           check-latest: true
-
+      - name: Add Repositories
+        run: |
+          helm repo add josa https://charts.josa.ngo/
+          helm repo add bitnami https://charts.bitnami.com/bitnami
+          helm repo update
       - name: Set up chart-testing
         uses: helm/chart-testing-action@v2.6.0
-
       - name: Run chart-testing (list-changed)
         id: list-changed
         run: |
@@ -37,15 +38,12 @@ jobs:
           if [[ -n "$changed" ]]; then
             echo "changed=true" >> "$GITHUB_OUTPUT"
           fi
-
       - name: Run chart-testing (lint)
         if: steps.list-changed.outputs.changed == 'true'
         run: ct lint --target-branch ${{ github.event.repository.default_branch }}
-
       - name: Create kind cluster
         if: steps.list-changed.outputs.changed == 'true'
         uses: helm/kind-action@v1.8.0
-
       - name: Run chart-testing (install)
         if: steps.list-changed.outputs.changed == 'true'
         run: ct install --target-branch ${{ github.event.repository.default_branch }}

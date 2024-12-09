@@ -22,8 +22,9 @@ jobs:
           git config user.email "$GITHUB_ACTOR@users.noreply.github.com"
       - name: Install Helm
         uses: azure/setup-helm@v3
-      - name: Add Bitnami repository
+      - name: Add Repositories
         run: |
+          helm repo add josa https://charts.josa.ngo/
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo update
       - name: Run chart-releaser
