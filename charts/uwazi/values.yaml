@@ -190,7 +190,7 @@ uwazi:
       httpGet:
         path: /
         port: http
-      initialDelaySeconds: 150
+      initialDelaySeconds: 120
       periodSeconds: 10
       timeoutSeconds: 3
       failureThreshold: 3
@@ -201,7 +201,7 @@ uwazi:
       httpGet:
         path: /
         port: http
-      initialDelaySeconds: 150
+      initialDelaySeconds: 120
       periodSeconds: 10
       timeoutSeconds: 3
       failureThreshold: 3
