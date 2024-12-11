@@ -1,18 +1,18 @@
 dependencies:
 - name: base
   repository: https://charts.josa.ngo
-  version: 1.2.0
+  version: 1.2.1
 - name: mongodb
   repository: https://charts.bitnami.com/bitnami
-  version: 16.3.1
+  version: 16.3.3
 - name: redis
   repository: https://charts.bitnami.com/bitnami
-  version: 20.4.0
+  version: 20.4.1
 - name: minio
   repository: https://charts.bitnami.com/bitnami
-  version: 14.8.5
+  version: 14.8.6
 - name: elasticsearch
   repository: https://charts.bitnami.com/bitnami
   version: 21.3.26
-digest: sha256:1cc25a26c5aa08bef6431383974910f02afd7569d2003321dddd5c0c89835b57
-generated: "2024-12-03T14:57:43.716193377+03:00"
+digest: sha256:2e18c8f9201573606e3e55852500bc8a02d387884d2b08ce0c256529ec8de3a1
+generated: "2024-12-11T14:26:12.916614973+03:00"
