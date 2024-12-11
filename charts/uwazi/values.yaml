@@ -87,8 +87,8 @@ uwazi:
     ## Check this link for the whole environment variables and configurations
     ## https://github.com/jordanopensource/uwazi/blob/main/app/api/config.ts
     env:
-      - name: DATABASE_HOST
-        value: mongo-headless
+      - name: MONGO_URI
+        value: mongodb://mongo-headless
       - name: DATABASE_NAME
         value: uwazi_development
       - name: ELASTICSEARCH_URL
