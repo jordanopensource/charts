@@ -9,8 +9,8 @@ keywords:
   - cms
   - headless
 maintainers:
-  - email: admin@josa.ngo
-    name: Jordan Open Source Association
+  - name: JOSA
+    url: https://github.com/jordanopensource/charts/
 name: strapi
 version: 1.0.1
 icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
