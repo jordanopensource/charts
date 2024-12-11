@@ -942,6 +942,47 @@ entries:
       category: Applications
     apiVersion: v2
     appVersion: 0.1.0
+    created: "2024-12-11T12:36:18.314365533Z"
+    dependencies:
+    - alias: uwazi
+      name: base
+      repository: https://charts.josa.ngo
+      version: ~1.2.0
+    - condition: mongodb.create
+      name: mongodb
+      repository: https://charts.bitnami.com/bitnami
+      version: ~16.3.0
+    - condition: redis.create
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: ~20.4.0
+    - condition: minio.create
+      name: minio
+      repository: https://charts.bitnami.com/bitnami
+      version: ~14.8.5
+    - condition: elasticsearch.create
+      name: elasticsearch
+      repository: https://charts.bitnami.com/bitnami
+      version: ~21.3.26
+    description: Uwazi helm chart
+    digest: 8c4fabef2c1264a7fb47ac113e47d3a89e6fb13af62c3c5aa892cb6873bb6847
+    home: https://josa.ngo
+    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+    keywords:
+    - uwazi
+    maintainers:
+    - name: JOSA
+      url: https://github.com/jordanopensource/charts/
+    name: uwazi
+    sources:
+    - https://github.com/jordanopensource/charts/tree/main/charts/uwazi
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/uwazi-1.0.1/uwazi-1.0.1.tgz
+    version: 1.0.1
+  - annotations:
+      category: Applications
+    apiVersion: v2
+    appVersion: 0.1.0
     created: "2024-12-11T11:43:24.276127105Z"
     dependencies:
     - alias: uwazi
@@ -1161,4 +1202,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2024-12-11T11:43:24.276234775Z"
+generated: "2024-12-11T12:36:18.31447066Z"
