@@ -85,7 +85,7 @@ spec:
             - name: app-data
               mountPath: {{ .Values.workload.persistence.path }}
               {{- if .Values.workload.persistence.subPath }}
-              subPath: {{ .Values.master.persistence.subPath }}
+              subPath: {{ .Values.workload.persistence.subPath }}
               {{- end }}
             {{- if .Values.workload.volumeMounts }}
             {{- include "base.tplvalues.render" ( dict "value" .Values.workload.volumeMounts "context" $) | nindent 12 }}
@@ -96,19 +96,18 @@ spec:
           {{- include "base.tplvalues.render" ( dict "value" .Values.workload.volumeMounts "context" $) | nindent 12 }}
           {{- end }}
           {{- end }}
-      {{- if .Values.workload.volumes }}
-      volumes: {{- include "base.tplvalues.render" ( dict "value" .Values.workload.volumes "context" $) | nindent 8 }}
-      {{- end }}
-  {{- if .Values.workload.persistence.enabled }}
+  {{- if or .Values.workload.persistence.enabled .Values.workload.volumes }}
       volumes:
+      {{- if .Values.workload.persistence.enabled }}
       {{- if .Values.workload.persistence.existingClaim }}
         - name: app-data
           persistentVolumeClaim:
-            claimName: {{ .Values.workload.persistence.existingClaim . }}
+            claimName: {{ .Values.workload.persistence.existingClaim }}
       {{- else }}
         - name: app-data
           persistentVolumeClaim:
             claimName: {{ include "base.names.fullname" . }}
+      {{- end }}
       {{- end }}
       {{- if .Values.workload.volumes }}
       {{- include "base.tplvalues.render" ( dict "value" .Values.workload.volumes "context" $) | nindent 8 }}
