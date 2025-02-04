@@ -1,0 +1,24 @@
+name: schedule-milestones
+
+on:
+  schedule:
+    - cron: 0 0 * * SUN # Run every Sunday at midnight
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Schedule Milestones
+        uses: readmeio/scheduled-milestones@v1.1.1
+        id: scheduled
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: 'S-'
+          days: Thursday
+          count: 4
+          format: YYYY-MM-DD
+
+      - name: Created Milestones
+        run: echo ${{ steps.scheduled.outputs.milestones }}
