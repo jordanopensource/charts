@@ -170,18 +170,17 @@ workload:
     #   cpu: 100m
     #   memory: 128Mi
 
+  ## @param workload.startupProbe define the startupProbe for the pod
+  ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+  startupProbe: {}
+
   ## @param workload.livenessProbe define the livenessProbe for the pod
   ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
-  livenessProbe:
-    httpGet:
-      path: /
-      port: http
+  livenessProbe: {}
+
   ## @param workload.readinessProbe define the readinessProbe for the pod
   ## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
-  readinessProbe:
-    httpGet:
-      path: /
-      port: http
+  readinessProbe: {}
 
   ## Autoscaling parameters
   autoscaling:

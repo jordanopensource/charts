@@ -1,6 +1,6 @@
 # base
 
-![Version: 0.1.0](https://img.shields.io/badge/Version-0.1.0-informational?style=flat-square) ![AppVersion: 0.1.0](https://img.shields.io/badge/AppVersion-0.1.0-informational?style=flat-square)
+![Version: 1.3.0](https://img.shields.io/badge/Version-1.3.0-informational?style=flat-square) ![AppVersion: 1.0.0](https://img.shields.io/badge/AppVersion-1.0.0-informational?style=flat-square)
 
 A general helm chart for any container
 
@@ -10,7 +10,7 @@ A general helm chart for any container
 
 | Name | Email | Url |
 | ---- | ------ | --- |
-| Jordan open source association |  | <https://github.com/jordanopensource/charts/> |
+| JOSA |  | <https://github.com/jordanopensource/charts/> |
 
 ## Source Code
 
@@ -26,16 +26,21 @@ A general helm chart for any container
 | nameOverride | string | `""` |  |
 | namespaceOverride | string | `""` |  |
 | workload.affinity | object | `{}` |  |
+| workload.args | list | `[]` |  |
 | workload.autoscaling.enabled | bool | `false` |  |
 | workload.autoscaling.maxReplicas | int | `100` |  |
 | workload.autoscaling.minReplicas | int | `1` |  |
 | workload.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | workload.autoscaling.targetMemoryUtilizationPercentage | int | `80` |  |
+| workload.command | list | `[]` |  |
+| workload.containerPorts[0].containerPort | int | `80` |  |
+| workload.containerPorts[0].name | string | `"http"` |  |
+| workload.containerPorts[0].protocol | string | `"TCP"` |  |
 | workload.env | list | `[]` |  |
 | workload.envFrom | list | `[]` |  |
 | workload.image.pullPolicy | string | `"IfNotPresent"` |  |
-| workload.image.repository | string | `"REPOSITORY_NAME/DOCKER_IMAGE_NAME"` |  |
-| workload.image.tag | string | `""` |  |
+| workload.image.repository | string | `"josaorg/whoami"` |  |
+| workload.image.tag | string | `"latest"` |  |
 | workload.imagePullSecrets | list | `[]` |  |
 | workload.ingress.annotations | object | `{}` |  |
 | workload.ingress.className | string | `""` |  |
@@ -43,10 +48,10 @@ A general helm chart for any container
 | workload.ingress.hosts[0].host | string | `"chart-example.local"` |  |
 | workload.ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | workload.ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
+| workload.ingress.servicePort | int | `80` |  |
 | workload.ingress.tls | list | `[]` |  |
 | workload.initContainers | list | `[]` |  |
-| workload.livenessProbe.httpGet.path | string | `"/"` |  |
-| workload.livenessProbe.httpGet.port | string | `"http"` |  |
+| workload.livenessProbe | object | `{}` |  |
 | workload.nodeAffinityPreset.key | string | `""` |  |
 | workload.nodeAffinityPreset.type | string | `""` |  |
 | workload.nodeAffinityPreset.values | list | `[]` |  |
@@ -70,20 +75,24 @@ A general helm chart for any container
 | workload.podAntiAffinityPreset | string | `"soft"` |  |
 | workload.podLabels | object | `{}` |  |
 | workload.podSecurityContext | object | `{}` |  |
-| workload.readinessProbe.httpGet.path | string | `"/"` |  |
-| workload.readinessProbe.httpGet.port | string | `"http"` |  |
+| workload.readinessProbe | object | `{}` |  |
 | workload.replicaCount | int | `1` |  |
 | workload.resources | object | `{}` |  |
 | workload.resourcesPreset | string | `"micro"` |  |
 | workload.securityContext | object | `{}` |  |
 | workload.service.annotations | object | `{}` |  |
-| workload.service.port | int | `3000` |  |
+| workload.service.create | bool | `true` |  |
+| workload.service.ports[0].name | string | `"http"` |  |
+| workload.service.ports[0].port | int | `80` |  |
+| workload.service.ports[0].protocol | string | `"TCP"` |  |
+| workload.service.ports[0].targetPort | int | `80` |  |
 | workload.service.type | string | `"ClusterIP"` |  |
 | workload.serviceAccount.annotations | object | `{}` |  |
 | workload.serviceAccount.automount | bool | `true` |  |
 | workload.serviceAccount.create | bool | `true` |  |
 | workload.serviceAccount.name | string | `""` |  |
 | workload.sideCars | list | `[]` |  |
+| workload.startupProbe | object | `{}` |  |
 | workload.tolerations | list | `[]` |  |
 | workload.type | string | `"Deployment"` |  |
 | workload.volumeMounts | list | `[]` |  |
