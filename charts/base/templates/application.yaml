@@ -69,6 +69,9 @@ spec:
           {{- if .Values.workload.containerPorts }}
           ports: {{- include "base.tplvalues.render" (dict "value" .Values.workload.containerPorts "context" $) | nindent 12 }}
           {{- end }}
+          {{- if .Values.workload.startupProbe }}
+          startupProbe: {{- include "base.tplvalues.render" (dict "value" .Values.workload.startupProbe "context" $) | nindent 12 }}
+          {{- end }}
           {{- if .Values.workload.livenessProbe }}
           livenessProbe: {{- include "base.tplvalues.render" (dict "value" .Values.workload.livenessProbe "context" $) | nindent 12 }}
           {{- end }}
