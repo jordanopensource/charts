@@ -87,10 +87,6 @@ existingSecret:
   # Enable if you want to use an existing secret and not create one from the values in the listmonk section.
   enabled: true
   secretName: monk-secrets
-  # this will overwrite the username in the adminCredentials section.
-  adminUsernameKey: admin_username
-  # this will overwrite the password in the adminCredentials section.
-  adminPasswordKey: admin_password
   # this will overwrite the password in the database credentials section.
   databasePasswordKey: db_password
 

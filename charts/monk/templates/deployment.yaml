@@ -70,16 +70,6 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           {{- if .Values.existingSecret.enabled}}
           env:
-            - name: LISTMONK_app__admin_username
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.existingSecret.secretName }}
-                  key: {{ .Values.existingSecret.adminUsernameKey }}
-            - name: LISTMONK_app__admin_password
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.existingSecret.secretName }}
-                  key: {{ .Values.existingSecret.adminPasswordKey }}
             - name: LISTMONK_db__password
               valueFrom:
                 secretKeyRef:
