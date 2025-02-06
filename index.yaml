@@ -771,6 +771,16 @@ entries:
     version: 1.0.0
   monk:
   - apiVersion: v2
+    appVersion: v4.1.0
+    created: "2025-02-06T10:35:52.542336805Z"
+    description: A Helm chart for listmonk
+    digest: 87ff0a23e77a910d59c5185d9782cb2fc53c2b2168fa44b715a60a2dc8ddd528
+    name: monk
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/monk-2.3.0/monk-2.3.0.tgz
+    version: 2.3.0
+  - apiVersion: v2
     appVersion: 2.4.0
     created: "2023-03-30T13:02:41.157359046Z"
     description: A Helm chart for listmonk
@@ -1235,4 +1245,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2025-02-05T11:07:16.080559117Z"
+generated: "2025-02-06T10:35:52.54250578Z"
