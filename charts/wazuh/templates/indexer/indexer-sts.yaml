@@ -75,6 +75,8 @@ spec:
                   fieldPath: metadata.name
             - name: DISCOVERY_SERVICE
               value: {{ include "wazuh.fullname" . }}-indexer
+            - name: SECURITY_AUTHCZ_ADMIN_DN
+              value: {{ .Values.tls.certManager.commonName }}
             - name: KUBERNETES_NAMESPACE
               valueFrom:
                 fieldRef:
