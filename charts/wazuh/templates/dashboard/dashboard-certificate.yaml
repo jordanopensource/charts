@@ -11,6 +11,8 @@ spec:
   commonName: {{ .Values.tls.certManager.commonName }}
   duration: {{ .Values.tls.certManager.duration }}
   renewBefore: {{ .Values.tls.certManager.renewBefore }}
+  privateKey:
+    encoding: "PKCS8"
   dnsNames:
     {{- range .Values.tls.certManager.dnsNames }}
     - {{ . }}
