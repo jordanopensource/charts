@@ -18,7 +18,7 @@ plugins.security.ssl.http.enabled: ${HTTP_SSL_ENABLED}
 plugins.security.ssl.transport.enforce_hostname_verification: false
 plugins.security.ssl.transport.resolve_hostname: false
 plugins.security.authcz.admin_dn:
-  - ${SECURITY_AUTHCZ_ADMIN_DN}
+  - CN=${SECURITY_AUTHCZ_ADMIN_DN}
 plugins.security.check_snapshot_restore_write_privileges: true
 plugins.security.enable_snapshot_restore_privilege: true
 plugins.security.nodes_dn:
