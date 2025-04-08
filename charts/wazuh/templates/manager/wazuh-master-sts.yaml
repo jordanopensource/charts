@@ -31,6 +31,9 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      {{- if .Values.manager.priorityClassName }}
+      priorityClassName: {{ .Values.manager.priorityClassName }}
+      {{- end }}
       serviceAccountName: {{ include "wazuh.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.manager.master.podSecurityContext | nindent 8 }}
@@ -47,6 +50,10 @@ spec:
             {{- else }}
             - secretRef:
                 name: {{ include "wazuh.fullname" . }}-manager
+            {{- end }}
+            {{- if .Values.manager.config.envFromConfigMap }}
+            - configMapRef:
+                name: {{ .Values.manager.config.envFromConfigMap }}
             {{- end }}
           env:
             - name: INDEXER_URL
@@ -70,7 +77,34 @@ spec:
               containerPort: 55000
               protocol: TCP
           resources:
-            {{- toYaml .Values.manager.master.resources | nindent 12 }}
+            {{- if .Values.manager.resourceValidation.enabled }}
+            {{- $resources := .Values.manager.master.resources }}
+            {{- if $resources.requests }}
+              {{- if $resources.requests.memory }}
+                {{- if lt (regexReplaceAll "[^0-9]" $resources.requests.memory "") (regexReplaceAll "[^0-9]" .Values.manager.resourceValidation.master.minMemory "") }}
+                  {{- fail (printf "Master memory request (%s) is below minimum allowed (%s)" $resources.requests.memory .Values.manager.resourceValidation.master.minMemory) }}
+                {{- end }}
+              {{- end }}
+              {{- if $resources.requests.cpu }}
+                {{- if lt (regexReplaceAll "[^0-9]" $resources.requests.cpu "") (regexReplaceAll "[^0-9]" .Values.manager.resourceValidation.master.minCPU "") }}
+                  {{- fail (printf "Master CPU request (%s) is below minimum allowed (%s)" $resources.requests.cpu .Values.manager.resourceValidation.master.minCPU) }}
+                {{- end }}
+              {{- end }}
+            {{- end }}
+            {{- if $resources.limits }}
+              {{- if $resources.limits.memory }}
+                {{- if gt (regexReplaceAll "[^0-9]" $resources.limits.memory "") (regexReplaceAll "[^0-9]" .Values.manager.resourceValidation.master.maxMemory "") }}
+                  {{- fail (printf "Master memory limit (%s) is above maximum allowed (%s)" $resources.limits.memory .Values.manager.resourceValidation.master.maxMemory) }}
+                {{- end }}
+              {{- end }}
+              {{- if $resources.limits.cpu }}
+                {{- if gt (regexReplaceAll "[^0-9]" $resources.limits.cpu "") (regexReplaceAll "[^0-9]" .Values.manager.resourceValidation.master.maxCPU "") }}
+                  {{- fail (printf "Master CPU limit (%s) is above maximum allowed (%s)" $resources.limits.cpu .Values.manager.resourceValidation.master.maxCPU) }}
+                {{- end }}
+              {{- end }}
+            {{- end }}
+            {{- end }}
+            {{- toYaml .Values.manager.master.resources | nindent 14 }}
           volumeMounts:
             - name: config
               mountPath: /wazuh-config-mount/etc/ossec.conf

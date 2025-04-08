@@ -181,6 +181,23 @@ manager:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "4.10.2"
 
+  # Priority class for the manager pods
+  priorityClassName: ""
+
+  # Resource limits and requests validation
+  resourceValidation:
+    enabled: false
+    master:
+      minMemory: "2Gi"
+      maxMemory: "32Gi"
+      minCPU: "500m"
+      maxCPU: "8"
+    worker:
+      minMemory: "1Gi"
+      maxMemory: "16Gi"
+      minCPU: "250m"
+      maxCPU: "4"
+
   imagePullSecrets: []
 
   config:
@@ -190,6 +207,8 @@ manager:
     # Must have following keys
     # 'master.conf', 'worker.conf'
     customManagerConfig: ""
+    # ConfigMap name for environment variables
+    envFromConfigMap: ""
 
     secrets:
       # If you provide an existing secret name those values will be ignored
