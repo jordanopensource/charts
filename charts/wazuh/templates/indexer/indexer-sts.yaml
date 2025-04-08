@@ -63,6 +63,73 @@ spec:
             - vm.max_map_count=262144
           securityContext:
             {{- toYaml .Values.indexer.initContainers.securityContext | nindent 12 }}
+        - name: security-admin
+          securityContext:
+            {{- toYaml .Values.indexer.securityContext | nindent 12 }}
+          image: "{{ .Values.indexer.image.repository }}:{{ .Values.indexer.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.indexer.image.pullPolicy }}
+          command:
+            - sh
+            - -c
+            - |
+              # Run security admin
+              export JAVA_HOME=/usr/share/wazuh-indexer/jdk/ && \
+              bash /usr/share/wazuh-indexer/plugins/opensearch-security/tools/securityadmin.sh \
+                -f /usr/share/wazuh-indexer/opensearch-security/config.yml \
+                -icl \
+                -key /usr/share/wazuh-indexer/certs/admin-key.pem \
+                -cert /usr/share/wazuh-indexer/certs/admin.pem \
+                -cacert /usr/share/wazuh-indexer/certs/root-ca.pem \
+                -nhnv
+          env:
+            - name: OPENSEARCH_JAVA_OPTS
+              value: {{ .Values.indexer.config.javaOpts | quote }}
+            - name: CLUSTER_NAME
+              value: {{ include "wazuh.fullname" . }}
+            - name: NETWORK_HOST
+              value: {{ .Values.indexer.config.networkHost | quote }}
+            - name: NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: DISCOVERY_SERVICE
+              value: {{ include "wazuh.fullname" . }}-indexer
+            - name: SECURITY_AUTHCZ_ADMIN_DN
+              value: {{ .Values.tls.certManager.commonName }}
+            - name: KUBERNETES_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: HTTP_SSL_ENABLED
+              value: {{ .Values.indexer.config.sslEnabled | quote }}
+            - name: DISABLE_INSTALL_DEMO_CONFIG
+              value: "true"
+          volumeMounts:
+            - name: wazuh-indexer
+              mountPath: /var/lib/wazuh-indexer
+            - name: indexer-certs
+              mountPath: /usr/share/wazuh-indexer/certs/admin-key.pem
+              subPath: admin-key.pem
+              readOnly: true
+            - name: indexer-certs
+              mountPath: /usr/share/wazuh-indexer/certs/admin.pem
+              subPath: admin.pem
+              readOnly: true
+            - name: indexer-certs
+              mountPath: /usr/share/wazuh-indexer/certs/root-ca.pem
+              subPath: root-ca.pem
+              readOnly: true
+            - name: indexer-conf
+              mountPath: /usr/share/wazuh-indexer/opensearch.yml
+              subPath: opensearch.yml
+              readOnly: true
+            - name: indexer-users
+              mountPath: /usr/share/wazuh-indexer/opensearch-security/internal_users.yml
+              subPath: internal_users.yml
+              readOnly: true
+            {{- with .Values.indexer.volumeMounts }}
+              {{- toYaml . | nindent 12 }}
+            {{- end }}
       containers:
         - name: {{ include "wazuh.fullname" . }}-indexer
           securityContext:
