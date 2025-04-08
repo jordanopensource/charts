@@ -394,6 +394,8 @@ dashboard:
     # The configmap name that includes the dashboard custom config file
     # Must have the key 'opensearch_dashboards.yml'
     dashboardCustomConfig: ""
+    # ConfigMap name for environment variables
+    envFromConfigMap: ""
 
     secrets:
       # If you provide an existing secret name those values will be ignored

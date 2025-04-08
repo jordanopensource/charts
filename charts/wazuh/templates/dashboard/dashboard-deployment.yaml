@@ -51,6 +51,10 @@ spec:
             - secretRef:
                 name: {{ include "wazuh.fullname" . }}-manager
             {{- end }}
+            {{- if .Values.dashboard.config.envFromConfigMap }}
+            - configMapRef:
+                name: {{ .Values.dashboard.config.envFromConfigMap }}
+            {{- end }}
           env:
             - name: INDEXER_URL
               value: {{ .Values.global.indexerUrl | quote  }}
