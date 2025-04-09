@@ -81,11 +81,19 @@ Create a name for the indexer readiness check init container
     - name: INDEXER_USERNAME
       valueFrom:
         secretKeyRef:
+          {{- if .Values.manager.config.secrets.existingSecretName }}
+          name: {{ .Values.manager.config.secrets.existingSecretName }}
+          {{- else }}
           name: {{ include "wazuh.fullname" . }}-manager
+          {{- end }}
           key: INDEXER_USERNAME
     - name: INDEXER_PASSWORD
       valueFrom:
         secretKeyRef:
+          {{- if .Values.manager.config.secrets.existingSecretName }}
+          name: {{ .Values.manager.config.secrets.existingSecretName }}
+          {{- else }}
           name: {{ include "wazuh.fullname" . }}-manager
+          {{- end }}
           key: INDEXER_PASSWORD
 {{- end }}
