@@ -30,6 +30,8 @@ spec:
       serviceAccountName: {{ include "wazuh.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.dashboard.podSecurityContext | nindent 8 }}
+      initContainers:
+        {{- include "wazuh.indexerReadinessCheck" . | nindent 8 }}
       containers:
         - name: {{ include "wazuh.fullname" . }}-dashboard
           securityContext:

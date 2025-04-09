@@ -60,3 +60,40 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create a name for the indexer readiness check init container
+*/}}
+{{- define "wazuh.indexerReadinessCheck" -}}
+- name: wait-for-indexer
+  image: curlimages/curl:latest
+  command:
+    - sh
+    - -c
+    - |
+      until curl -k -u $INDEXER_USERNAME:$INDEXER_PASSWORD "https://$INDEXER_SERVICE:9200/_cluster/health?wait_for_status=green&timeout=50s"; do
+        echo "Waiting for indexer to be ready with green status..."
+        sleep 10
+      done
+  env:
+    - name: INDEXER_SERVICE
+      value: {{ include "wazuh.fullname" . }}-indexer
+    - name: INDEXER_USERNAME
+      valueFrom:
+        secretKeyRef:
+          {{- if .Values.manager.config.secrets.existingSecretName }}
+          name: {{ .Values.manager.config.secrets.existingSecretName }}
+          {{- else }}
+          name: {{ include "wazuh.fullname" . }}-manager
+          {{- end }}
+          key: INDEXER_USERNAME
+    - name: INDEXER_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          {{- if .Values.manager.config.secrets.existingSecretName }}
+          name: {{ .Values.manager.config.secrets.existingSecretName }}
+          {{- else }}
+          name: {{ include "wazuh.fullname" . }}-manager
+          {{- end }}
+          key: INDEXER_PASSWORD
+{{- end }}
