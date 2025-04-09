@@ -1096,6 +1096,17 @@ entries:
   wazuh:
   - apiVersion: v2
     appVersion: 4.11.2
+    created: "2025-04-09T12:31:39.506094538Z"
+    description: A Helm chart for Wazuh the open source security platform that unifies
+      XDR and SIEM protection for endpoints and cloud workloads.
+    digest: 200c120c385ffc668de9a3b8743911a0db87f331ee1e1d597c14ffaf87598000
+    name: wazuh
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/wazuh-2.1.0/wazuh-2.1.0.tgz
+    version: 2.1.0
+  - apiVersion: v2
+    appVersion: 4.11.2
     created: "2025-04-09T11:26:29.592819137Z"
     description: A Helm chart for Wazuh the open source security platform that unifies
       XDR and SIEM protection for endpoints and cloud workloads.
@@ -1300,4 +1311,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
     version: 0.3.2
-generated: "2025-04-09T11:26:29.59297079Z"
+generated: "2025-04-09T12:31:39.506257834Z"
