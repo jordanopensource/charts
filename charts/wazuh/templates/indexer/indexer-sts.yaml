@@ -211,6 +211,7 @@ spec:
             {{- with .Values.indexer.volumeMounts }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
+        {{- if .Values.indexer.config.reloadSecurityConfig }}
         - name: reload-security-config
           securityContext:
             {{- toYaml .Values.indexer.securityContext | nindent 12 }}
@@ -313,6 +314,7 @@ spec:
             {{- with .Values.indexer.volumeMounts }}
               {{- toYaml . | nindent 12 }}
             {{- end }}
+        {{- end }}
       volumes:
         {{- if .Values.tls.certManager.enabled }}
         - name: indexer-certs
