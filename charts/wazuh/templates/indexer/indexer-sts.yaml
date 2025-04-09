@@ -237,8 +237,8 @@ spec:
                 -cacert /usr/share/wazuh-indexer/certs/root-ca.pem \
                 -nhnv
               
-              # Exit after completing the security config reload
-              exit 0
+              # Keep container running with sleep infinity
+              sleep infinity
           env:
             - name: OPENSEARCH_JAVA_OPTS
               value: {{ .Values.indexer.config.javaOpts | quote }}
