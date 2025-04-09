@@ -175,6 +175,8 @@ spec:
           {{- with .Values.manager.workers.volumeMounts }}
             {{- toYaml . | nindent 12 }}
           {{- end }}
+      initContainers:
+        {{- include "wazuh.indexerReadinessCheck" . | nindent 8 }}
       volumes:
         {{- if .Values.tls.certManager.enabled }}
         - name: filebeat-certs
