@@ -1,0 +1,76 @@
+{{- if .Values.tls.certManager.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "wazuh.fullname" . }}-tls-validation
+  annotations:
+    "helm.sh/hook": pre-install,pre-upgrade
+    "helm.sh/hook-weight": "-10"
+    "helm.sh/hook-delete-policy": hook-succeeded,hook-failed
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: tls-validator
+        image: busybox
+        command:
+        - sh
+        - -c
+        - |
+          echo "Validating TLS certificates..."
+          # Check CA certificate
+          if [ ! -f /certs/root-ca.pem ]; then
+            echo "Missing root-ca.pem"
+            exit 1
+          fi
+          # Check admin certificates
+          if [ ! -f /certs/admin.pem ] || [ ! -f /certs/admin-key.pem ]; then
+            echo "Missing admin certificates"
+            exit 1
+          fi
+          # Check node certificates
+          if [ ! -f /certs/node.pem ] || [ ! -f /certs/node-key.pem ]; then
+            echo "Missing node certificates"
+            exit 1
+          fi
+          # Check filebeat certificates
+          if [ ! -f /certs/filebeat.pem ] || [ ! -f /certs/filebeat-key.pem ]; then
+            echo "Missing filebeat certificates"
+            exit 1
+          fi
+          echo "All required certificates are present"
+        volumeMounts:
+        - name: certs
+          mountPath: /certs
+      volumes:
+      - name: certs
+        projected:
+          sources:
+          - secret:
+              name: {{ .Values.tls.certManager.caCrtSecretName }}
+              items:
+                - key: ca.crt
+                  path: root-ca.pem
+          - secret:
+              name: admin-tls
+              items:
+                - key: tls.crt
+                  path: admin.pem
+                - key: tls.key
+                  path: admin-key.pem
+          - secret:
+              name: node-tls
+              items:
+                - key: tls.crt
+                  path: node.pem
+                - key: tls.key
+                  path: node-key.pem
+          - secret:
+              name: filebeat-tls
+              items:
+                - key: tls.crt
+                  path: filebeat.pem
+                - key: tls.key
+                  path: filebeat-key.pem
+{{- end }} 

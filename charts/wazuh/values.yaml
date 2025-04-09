@@ -50,13 +50,60 @@ indexer:
     repository: wazuh/wazuh-indexer
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.10.2"
+    tag: "4.11.2"
+
+  # Probe configurations
+  # Note: Uses exec probe with curl
+  probes:
+    liveness:
+      enabled: true
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
+    readiness:
+      enabled: true
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      timeoutSeconds: 5
+      failureThreshold: 3
+
+  # Priority class for the indexer pods
+  priorityClassName: ""
+  
+  # Resource limits and requests validation
+  resourceValidation:
+    enabled: false
+    minMemory: "2Gi"
+    maxMemory: "32Gi"
+    minCPU: "500m"
+    maxCPU: "8"
+
+  # Init container configurations
+  initContainers:
+    resources:
+      requests:
+        cpu: 50m
+        memory: 128Mi
+      limits:
+        cpu: 100m
+        memory: 256Mi
+    securityContext:
+      privileged: true
+    runAsUser: 1000
+    runAsGroup: 1000
 
   config:
     sslEnabled: true
+    # Java options for the indexer
+    javaOpts: "-Xms2g -Xmx2g -Dlog4j2.formatMsgNoLookups=true"
+    # Network host configuration
+    networkHost: "0.0.0.0"
     # The name of the configmap that includes the custom indexer config
     # Must have the following key "opensearch.yml"
     indexerCustomConfig: ""
+    # ConfigMap name for environment variables
+    envFromConfigMap: ""
     # **IMPORTANT** Do not change the usernames unless you know what you are doing
     # * as the usernames are reserved and used in many config files across the stack
     # * Make sure to not use the default passwords for production,
@@ -132,7 +179,24 @@ manager:
     repository: wazuh/wazuh-manager
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.10.2"
+    tag: "4.11.2"
+
+  # Priority class for the manager pods
+  priorityClassName: ""
+
+  # Resource limits and requests validation
+  resourceValidation:
+    enabled: false
+    master:
+      minMemory: "2Gi"
+      maxMemory: "32Gi"
+      minCPU: "500m"
+      maxCPU: "8"
+    worker:
+      minMemory: "1Gi"
+      maxMemory: "16Gi"
+      minCPU: "250m"
+      maxCPU: "4"
 
   imagePullSecrets: []
 
@@ -143,6 +207,8 @@ manager:
     # Must have following keys
     # 'master.conf', 'worker.conf'
     customManagerConfig: ""
+    # ConfigMap name for environment variables
+    envFromConfigMap: ""
 
     secrets:
       # If you provide an existing secret name those values will be ignored
@@ -320,7 +386,7 @@ dashboard:
     repository: wazuh/wazuh-dashboard
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.10.2"
+    tag: "4.11.2"
 
   config:
     ServerSSL: true
@@ -328,6 +394,8 @@ dashboard:
     # The configmap name that includes the dashboard custom config file
     # Must have the key 'opensearch_dashboards.yml'
     dashboardCustomConfig: ""
+    # ConfigMap name for environment variables
+    envFromConfigMap: ""
 
     secrets:
       # If you provide an existing secret name those values will be ignored
