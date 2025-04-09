@@ -99,6 +99,9 @@ indexer:
     javaOpts: "-Xms2g -Xmx2g -Dlog4j2.formatMsgNoLookups=true"
     # Network host configuration
     networkHost: "0.0.0.0"
+    # Set to true when you make changes to OpenSearch security configuration files
+    # (opensearch-security/config.yml, internal_users.yml, etc.) to reload the security settings
+    reloadSecurityConfig: false
     # The name of the configmap that includes the custom indexer config
     # Must have the following key "opensearch.yml"
     indexerCustomConfig: ""
