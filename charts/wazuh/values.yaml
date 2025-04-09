@@ -50,7 +50,7 @@ indexer:
     repository: wazuh/wazuh-indexer
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.10.2"
+    tag: "4.11.2"
 
   # Probe configurations
   # Note: Uses exec probe with curl
@@ -179,7 +179,7 @@ manager:
     repository: wazuh/wazuh-manager
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.10.2"
+    tag: "4.11.2"
 
   # Priority class for the manager pods
   priorityClassName: ""
@@ -386,7 +386,7 @@ dashboard:
     repository: wazuh/wazuh-dashboard
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.10.2"
+    tag: "4.11.2"
 
   config:
     ServerSSL: true
