@@ -4,7 +4,7 @@ Kubernetes standard labels
 */}}
 {{- define "base.labels.standard" -}}
 {{- if and (hasKey . "customLabels") (hasKey . "context") -}}
-{{- $default := dict "app.kubernetes.io/name" (include "base.names.name" .context) "helm.sh/chart" (include "base.names.chart" .context) "app.kubernetes.io/instance" .context.Release.Name "app.kubernetes.io/managed-by" .context.Release.Service -}}
+{{- $default := dict "app.kubernetes.io/name" (include "base.names.fullname" .context) "helm.sh/chart" (include "base.names.chart" .context) "app.kubernetes.io/instance" .context.Release.Name "app.kubernetes.io/managed-by" .context.Release.Service -}}
 {{- with .context.Chart.AppVersion -}}
 {{- $_ := set $default "app.kubernetes.io/version" . -}}
 {{- end -}}
