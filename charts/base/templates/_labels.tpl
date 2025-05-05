@@ -31,7 +31,7 @@ overwrote them on metadata.labels fields.
 */}}
 {{- define "base.labels.matchLabels" -}}
 {{- if and (hasKey . "customLabels") (hasKey . "context") -}}
-{{ merge (pick (include "base.tplvalues.render" (dict "value" .customLabels "context" .context) | fromYaml) "app.kubernetes.io/name" "app.kubernetes.io/instance") (dict "app.kubernetes.io/name" (include "base.names.name" .context) "app.kubernetes.io/instance" .context.Release.Name ) | toYaml }}
+{{ merge (pick (include "base.tplvalues.render" (dict "value" .customLabels "context" .context) | fromYaml) "app.kubernetes.io/name" "app.kubernetes.io/instance") (dict "app.kubernetes.io/name" (include "base.names.fullname" .context) "app.kubernetes.io/instance" .context.Release.Name ) | toYaml }}
 {{- else -}}
 app.kubernetes.io/name: {{ include "base.names.fullname" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
