@@ -1,5 +1,5 @@
 default_stages:
-  - commit
+  - pre-commit
 repos:
   - repo: meta
     hooks:
