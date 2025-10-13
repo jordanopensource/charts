@@ -89,9 +89,8 @@ indexer:
         cpu: 100m
         memory: 256Mi
     securityContext:
-      privileged: true
-    runAsUser: 1000
-    runAsGroup: 1000
+      runAsUser: 1000 # Match Docker image UID (wazuh-indexer user)
+      runAsGroup: 1000 # Match Docker image GID
 
   config:
     sslEnabled: true
@@ -128,12 +127,19 @@ indexer:
 
   podLabels: {}
 
-  podSecurityContext: {}
-  # fsGroup: 2000
+  podSecurityContext:
+    fsGroup: 1000 # Match Docker image user group
+    runAsUser: 1000 # Match Docker image UID (wazuh-indexer user)
+    runAsGroup: 1000 # Match Docker image GID
+    runAsNonRoot: true # Docker image runs as non-root user
 
   securityContext:
+    runAsUser: 1000 # Match Docker image UID (wazuh-indexer user)
+    runAsGroup: 1000 # Match Docker image GID
+    runAsNonRoot: true # Docker image runs as non-root user
+    allowPrivilegeEscalation: false # Security hardening
     capabilities:
-      add: ["SYS_CHROOT"]
+      add: ["SYS_CHROOT"] # Required for OpenSearch/Elasticsearch
   # capabilities:
   #   drop:
   #   - ALL
@@ -244,16 +250,22 @@ manager:
 
   master:
     podSecurityContext:
-      fsGroup: 101
-      # fsGroup: 2000
+      fsGroup: 101 # Wazuh group GID (matches Docker image wazuh group)
+      runAsUser: 0 # Docker image runs as root (no USER directive)
+      runAsGroup: 0 # Root group
+      runAsNonRoot: false # Docker image runs as root
 
     podAnnotations: {}
 
     podLabels: {}
 
     securityContext:
+      runAsUser: 0 # Docker image runs as root (no USER directive)
+      runAsGroup: 0 # Root group
+      runAsNonRoot: false # Docker image runs as root
+      allowPrivilegeEscalation: false # Security hardening
       capabilities:
-        add: ["SYS_CHROOT"]
+        add: ["SYS_CHROOT"] # Required for Wazuh manager
     # capabilities:
     #   drop:
     #   - ALL
@@ -315,16 +327,22 @@ manager:
     replicaCount: 1
 
     podSecurityContext:
-      fsGroup: 101
-      # fsGroup: 2000
+      fsGroup: 101 # Wazuh group GID (matches Docker image wazuh group)
+      runAsUser: 0 # Docker image runs as root (no USER directive)
+      runAsGroup: 0 # Root group
+      runAsNonRoot: false # Docker image runs as root
 
     podAnnotations: {}
 
     podLabels: {}
 
     securityContext:
+      runAsUser: 0 # Docker image runs as root (no USER directive)
+      runAsGroup: 0 # Root group
+      runAsNonRoot: false # Docker image runs as root
+      allowPrivilegeEscalation: false # Security hardening
       capabilities:
-        add: ["SYS_CHROOT"]
+        add: ["SYS_CHROOT"] # Required for Wazuh manager
     # capabilities:
     #   drop:
     #   - ALL
@@ -434,10 +452,17 @@ dashboard:
 
   podLabels: {}
 
-  podSecurityContext: {}
-  # fsGroup: 2000
+  podSecurityContext:
+    fsGroup: 1000 # Match Docker image user group
+    runAsUser: 1000 # Match Docker image UID (wazuh-dashboard user)
+    runAsGroup: 1000 # Match Docker image GID
+    runAsNonRoot: true # Docker image runs as non-root user
 
-  securityContext: {}
+  securityContext:
+    runAsUser: 1000 # Match Docker image UID (wazuh-dashboard user)
+    runAsGroup: 1000 # Match Docker image GID
+    runAsNonRoot: true # Docker image runs as non-root user
+    allowPrivilegeEscalation: false # Security hardening
   # capabilities:
   #   drop:
   #   - ALL
