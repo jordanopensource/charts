@@ -50,7 +50,7 @@ indexer:
     repository: wazuh/wazuh-indexer
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.11.2"
+    tag: "4.13.1"
 
   # Probe configurations
   # Note: Uses exec probe with curl
@@ -70,7 +70,7 @@ indexer:
 
   # Priority class for the indexer pods
   priorityClassName: ""
-  
+
   # Resource limits and requests validation
   resourceValidation:
     enabled: false
@@ -182,7 +182,7 @@ manager:
     repository: wazuh/wazuh-manager
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.11.2"
+    tag: "4.13.1"
 
   # Priority class for the manager pods
   priorityClassName: ""
@@ -389,7 +389,7 @@ dashboard:
     repository: wazuh/wazuh-dashboard
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
-    tag: "4.11.2"
+    tag: "4.13.1"
 
   config:
     ServerSSL: true
@@ -416,16 +416,14 @@ dashboard:
   ingress:
     enabled: false
     className: nginx
-    annotations:
-      {}
+    annotations: {}
       # cert-manager.io/cluster-issuer: letsencrypt
     hosts:
       - host: chart-example.local
         paths:
           - path: /
             pathType: ImplementationSpecific
-    tls:
-      []
+    tls: []
       # - secretName: chart-example.local-tls
       #   hosts:
       #     - chart-example.local
