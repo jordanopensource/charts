@@ -41,17 +41,16 @@ spec:
             {{- toYaml .Values.indexer.initContainers.resources | nindent 12 }}
           env:
             - name: RUN_AS_USER
-              value: {{ .Values.indexer.initContainers.runAsUser | quote }}
+              value: {{ .Values.indexer.initContainers.securityContext.runAsUser | quote }}
             - name: RUN_AS_GROUP
-              value: {{ .Values.indexer.initContainers.runAsGroup | quote }}
+              value: {{ .Values.indexer.initContainers.securityContext.runAsGroup | quote }}
           command:
             - sh
             - '-c'
             - |
               chown -R $RUN_AS_USER:$RUN_AS_GROUP /var/lib/wazuh-indexer
           securityContext:
-            runAsUser: {{ .Values.indexer.initContainers.runAsUser }}
-            runAsGroup: {{ .Values.indexer.initContainers.runAsGroup }}
+            {{- toYaml .Values.indexer.initContainers.securityContext | nindent 12 }}
           volumeMounts:
             - name: wazuh-indexer
               mountPath: /var/lib/wazuh-indexer
