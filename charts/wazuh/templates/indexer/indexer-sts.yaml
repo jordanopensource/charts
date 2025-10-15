@@ -39,18 +39,11 @@ spec:
           image: busybox
           resources:
             {{- toYaml .Values.indexer.initContainers.resources | nindent 12 }}
-          env:
-            - name: RUN_AS_USER
-              value: {{ .Values.indexer.initContainers.securityContext.runAsUser | quote }}
-            - name: RUN_AS_GROUP
-              value: {{ .Values.indexer.initContainers.securityContext.runAsGroup | quote }}
           command:
             - sh
             - '-c'
             - |
-              chown -R $RUN_AS_USER:$RUN_AS_GROUP /var/lib/wazuh-indexer
-          securityContext:
-            {{- toYaml .Values.indexer.initContainers.securityContext | nindent 12 }}
+              chown -R 1000:1000 /var/lib/wazuh-indexer
           volumeMounts:
             - name: wazuh-indexer
               mountPath: /var/lib/wazuh-indexer
@@ -61,7 +54,7 @@ spec:
             - -w
             - vm.max_map_count=262144
           securityContext:
-            {{- toYaml .Values.indexer.initContainers.securityContext | nindent 12 }}
+            privileged: true
       containers:
         - name: {{ include "wazuh.fullname" . }}-indexer
           securityContext:
