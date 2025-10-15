@@ -88,9 +88,6 @@ indexer:
       limits:
         cpu: 100m
         memory: 256Mi
-    securityContext:
-      runAsUser: 1000 # Match Docker image UID (wazuh-indexer user)
-      runAsGroup: 1000 # Match Docker image GID
 
   config:
     sslEnabled: true
@@ -129,15 +126,10 @@ indexer:
 
   podSecurityContext:
     fsGroup: 1000 # Match Docker image user group
-    runAsUser: 1000 # Match Docker image UID (wazuh-indexer user)
-    runAsGroup: 1000 # Match Docker image GID
-    runAsNonRoot: true # Docker image runs as non-root user
 
   securityContext:
     runAsUser: 1000 # Match Docker image UID (wazuh-indexer user)
     runAsGroup: 1000 # Match Docker image GID
-    runAsNonRoot: true # Docker image runs as non-root user
-    allowPrivilegeEscalation: false # Security hardening
     capabilities:
       add: ["SYS_CHROOT"] # Required for OpenSearch/Elasticsearch
   # capabilities:
@@ -251,19 +243,12 @@ manager:
   master:
     podSecurityContext:
       fsGroup: 101 # Wazuh group GID (matches Docker image wazuh group)
-      runAsUser: 0 # Docker image runs as root (no USER directive)
-      runAsGroup: 0 # Root group
-      runAsNonRoot: false # Docker image runs as root
 
     podAnnotations: {}
 
     podLabels: {}
 
     securityContext:
-      runAsUser: 0 # Docker image runs as root (no USER directive)
-      runAsGroup: 0 # Root group
-      runAsNonRoot: false # Docker image runs as root
-      allowPrivilegeEscalation: false # Security hardening
       capabilities:
         add: ["SYS_CHROOT"] # Required for Wazuh manager
     # capabilities:
@@ -328,19 +313,12 @@ manager:
 
     podSecurityContext:
       fsGroup: 101 # Wazuh group GID (matches Docker image wazuh group)
-      runAsUser: 0 # Docker image runs as root (no USER directive)
-      runAsGroup: 0 # Root group
-      runAsNonRoot: false # Docker image runs as root
 
     podAnnotations: {}
 
     podLabels: {}
 
     securityContext:
-      runAsUser: 0 # Docker image runs as root (no USER directive)
-      runAsGroup: 0 # Root group
-      runAsNonRoot: false # Docker image runs as root
-      allowPrivilegeEscalation: false # Security hardening
       capabilities:
         add: ["SYS_CHROOT"] # Required for Wazuh manager
     # capabilities:
