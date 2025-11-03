@@ -2,17 +2,28 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+# Number of replicas for the deployments
 replicaCount: 1
 
 image:
   repository: tootsuite/mastodon
+  # Image pull policy. Options: Always, Never, IfNotPresent
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v4.2.10"
 
+# Secrets used to pull images from private registries
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+# Global node selector for all pods (jobs, cronjobs will always use this)
+# (deployments will use this unless overridden)
+nodeSelector: {}
+
+# Global tolerations for all pods (jobs, cronjobs will always use this)
+# (deployments will use this unless overridden)
+tolerations: []
 
 mastodon:
   # Please look at https://docs.joinmastodon.org/admin/config/ for the full documentation.
@@ -23,13 +34,17 @@ mastodon:
   logLevel: debug
 
   sidekiq:
+    # Number of concurrent threads for Sidekiq worker
     concurrency: 25
 
+    # Node selector for Sidekiq (This takes precedence over the global nodeSelector)
     nodeSelector:
       doks.digitalocean.com/node-pool: josa-cloud-np
 
-    resources:
-      {}
+    # Tolerations for Sidekiq (This takes precedence over the global tolerations)
+    tolerations: []
+
+    resources: {}
       # limits:
       #   cpu: 100m
       #   memory: 128Mi
@@ -60,11 +75,14 @@ mastodon:
       successThreshold: 1
       failureThreshold: 3
 
+    # Node selector for streaming (This takes precedence over the global nodeSelector)
     nodeSelector:
       doks.digitalocean.com/node-pool: josa-cloud-np
 
-    resources:
-      {}
+    # Tolerations for streaming (This takes precedence over the global tolerations)
+    tolerations: []
+
+    resources: {}
       # limits:
       #   cpu: 100m
       #   memory: 128Mi
@@ -89,10 +107,13 @@ mastodon:
       successThreshold: 1
       failureThreshold: 3
 
+    # Node selector for web (This takes precedence over the global nodeSelector)
     nodeSelector: {}
 
-    resources:
-      {}
+    # Tolerations for web (This takes precedence over the global tolerations)
+    tolerations: []
+
+    resources: {}
       # limits:
       #   cpu: 100m
       #   memory: 128Mi
@@ -101,9 +122,10 @@ mastodon:
       #   memory: 128Mi
 
   cron:
-    # run `tootctl media remove` every week
     removeMedia:
+      # Enable the media removal cron job
       enabled: true
+      # Cron schedule for media removal (runs `tootctl media remove` every week by default)
       schedule: "0 0 * * 0"
 
   secrets:
@@ -219,14 +241,15 @@ serviceAccount:
   # If not set and create is true, a name is generated using the fullname template
   name: "mastodon-sa"
 
+# Annotations to add to all pods
 podAnnotations: {}
 
-podSecurityContext:
-  {}
+# Security context for all pods
+podSecurityContext: {}
   # fsGroup: 2000
 
-securityContext:
-  {}
+# Security context for containers
+securityContext: {}
   # capabilities:
   #   drop:
   #   - ALL
@@ -249,14 +272,12 @@ ingress:
       paths:
         - path: /
           pathType: ImplementationSpecific
-  tls:
-    []
+  tls: []
     # - secretName: josa.social-tls
     #   hosts:
     #     - example.com
 
-resources:
-  {}
+resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little
   # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -275,11 +296,8 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-nodeSelector: {}
-
-tolerations: []
-
 # The annotations set with jobAnnotations will be added to all job pods.
 jobAnnotations: {}
 
+# Affinity rules for pod scheduling
 affinity: {}

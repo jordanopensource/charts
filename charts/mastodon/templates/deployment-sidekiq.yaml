@@ -106,13 +106,17 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.mastodon.sidekiq.resources | nindent 12 }}
-      {{- with .Values.mastodon.sidekiq.nodeSelector }}
+      {{- $nodeSelector := merge .Values.nodeSelector .Values.mastodon.sidekiq.nodeSelector }}
+      {{- with $nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
+      {{- if and .Values.mastodon.sidekiq.tolerations (gt (len .Values.mastodon.sidekiq.tolerations) 0) }}
       tolerations:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml .Values.mastodon.sidekiq.tolerations | nindent 8 }}
+      {{- else if .Values.tolerations }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}
       {{- end }}
       {{- if .Values.postgres.credentials.certificateSecret }}
       volumes:

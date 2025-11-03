@@ -97,17 +97,21 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.mastodon.streaming.resources | nindent 12 }}
-      {{- with .Values.mastodon.streaming.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       {{- with .Values.affinity }}
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
+      {{- $nodeSelector := merge .Values.nodeSelector .Values.mastodon.streaming.nodeSelector }}
+      {{- with $nodeSelector }}
+      nodeSelector:
         {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- if and .Values.mastodon.streaming.tolerations (gt (len .Values.mastodon.streaming.tolerations) 0) }}
+      tolerations:
+        {{- toYaml .Values.mastodon.streaming.tolerations | nindent 8 }}
+      {{- else if .Values.tolerations }}
+      tolerations:
+        {{- toYaml .Values.tolerations | nindent 8 }}
       {{- end }}
       {{- if .Values.postgres.credentials.certificateSecret }}
       volumes:
