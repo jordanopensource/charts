@@ -122,10 +122,12 @@ spec:
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- $nodeSelector := merge .Values.nodeSelector .Values.mastodon.web.nodeSelector }}
-      {{- with $nodeSelector }}
+      {{- $globalSelector := .Values.nodeSelector | default dict }}
+      {{- $workloadSelector := .Values.mastodon.web.nodeSelector | default dict }}
+      {{- $nodeSelector := mergeOverwrite $globalSelector $workloadSelector }}
+      {{- if $nodeSelector }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml $nodeSelector | nindent 8 }}
       {{- end }}
       {{- if and .Values.mastodon.web.tolerations (gt (len .Values.mastodon.web.tolerations) 0) }}
       tolerations:
