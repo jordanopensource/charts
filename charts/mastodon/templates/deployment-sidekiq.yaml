@@ -106,10 +106,12 @@ spec:
           {{- end }}
           resources:
             {{- toYaml .Values.mastodon.sidekiq.resources | nindent 12 }}
-      {{- $nodeSelector := merge .Values.nodeSelector .Values.mastodon.sidekiq.nodeSelector }}
-      {{- with $nodeSelector }}
+      {{- $globalSelector := .Values.nodeSelector | default dict }}
+      {{- $workloadSelector := .Values.mastodon.sidekiq.nodeSelector | default dict }}
+      {{- $nodeSelector := mergeOverwrite $globalSelector $workloadSelector }}
+      {{- if $nodeSelector }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml $nodeSelector | nindent 8 }}
       {{- end }}
       {{- if and .Values.mastodon.sidekiq.tolerations (gt (len .Values.mastodon.sidekiq.tolerations) 0) }}
       tolerations:

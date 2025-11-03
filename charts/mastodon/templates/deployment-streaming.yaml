@@ -101,10 +101,12 @@ spec:
       affinity:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- $nodeSelector := merge .Values.nodeSelector .Values.mastodon.streaming.nodeSelector }}
-      {{- with $nodeSelector }}
+      {{- $globalSelector := .Values.nodeSelector | default dict }}
+      {{- $workloadSelector := .Values.mastodon.streaming.nodeSelector | default dict }}
+      {{- $nodeSelector := mergeOverwrite $globalSelector $workloadSelector }}
+      {{- if $nodeSelector }}
       nodeSelector:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml $nodeSelector | nindent 8 }}
       {{- end }}
       {{- if and .Values.mastodon.streaming.tolerations (gt (len .Values.mastodon.streaming.tolerations) 0) }}
       tolerations:
