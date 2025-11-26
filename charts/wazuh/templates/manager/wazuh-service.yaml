@@ -1,3 +1,4 @@
+{{- if .Values.manager.service.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -11,6 +12,9 @@ metadata:
   {{- end }}
 spec:
   type: {{ .Values.manager.service.type }}
+  {{- if .Values.manager.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.manager.service.externalTrafficPolicy }}
+  {{- end }}
   ports:
     - port: 1515
       targetPort: 1515
@@ -27,3 +31,4 @@ spec:
   selector:
     app: {{ include "wazuh.fullname" . }}-manager
     {{- include "wazuh.selectorLabels" . | nindent 4 }}
+{{- end }}

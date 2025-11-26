@@ -1,3 +1,4 @@
+{{- if .Values.manager.master.service.enabled }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -5,8 +6,15 @@ metadata:
   labels:
     app: {{ include "wazuh.fullname" . }}-manager
     {{- include "wazuh.labels" . | nindent 4 }}
+  {{- with .Values.manager.master.service.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
-  type: ClusterIP
+  type: {{ .Values.manager.master.service.type }}
+  {{- if .Values.manager.master.service.externalTrafficPolicy }}
+  externalTrafficPolicy: {{ .Values.manager.master.service.externalTrafficPolicy }}
+  {{- end }}
   ports:
     - port: 1515
       targetPort: 1515
@@ -20,3 +28,4 @@ spec:
     app: {{ include "wazuh.fullname" . }}-manager
     node-type: master
     {{- include "wazuh.selectorLabels" . | nindent 4 }}
+{{- end }}
