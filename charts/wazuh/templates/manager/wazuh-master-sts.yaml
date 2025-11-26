@@ -15,6 +15,7 @@ spec:
       {{- include "wazuh.selectorLabels" . | nindent 6 }}
   template:
     metadata:
+      name: {{ include "wazuh.fullname" . }}-manager-master
       {{- with .Values.manager.master.podAnnotations }}
       annotations:
         {{- toYaml . | nindent 8 }}
@@ -113,26 +114,6 @@ spec:
             - name: wazuh-authd-pass
               mountPath: /wazuh-config-mount/etc/authd.pass
               subPath: authd.pass
-              readOnly: true
-            - name: manager-certs
-              mountPath: /wazuh-config-mount/etc/sslmanager.cert
-              subPath: server.cert
-              readOnly: true
-            - name: manager-certs
-              mountPath: /wazuh-config-mount/etc/sslmanager.key
-              subPath: server.key
-              readOnly: true
-            - name: manager-certs
-              mountPath: /wazuh-config-mount/api/configuration/ssl/server.crt
-              subPath: server.cert
-              readOnly: true
-            - name: manager-certs
-              mountPath: /wazuh-config-mount/api/configuration/ssl/server.key
-              subPath: server.key
-              readOnly: true
-            - name: filebeat-certs
-              mountPath: /wazuh-config-mount/api/configuration/ssl/ca.crt
-              subPath: root-ca.pem
               readOnly: true
             - name: wazuh-manager-master
               mountPath: /var/ossec/api/configuration

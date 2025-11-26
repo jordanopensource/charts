@@ -81,6 +81,8 @@ spec:
               value: {{ include "wazuh.fullname" . }}-indexer
             - name: SECURITY_AUTHCZ_ADMIN_DN
               value: {{ .Values.tls.certManager.commonName }}
+            - name: SECURITY_NODES_DN
+              value: {{ .Values.indexer.config.nodesDN | default (printf "*.%s" (include "wazuh.fullname" .)) }}
             - name: KUBERNETES_NAMESPACE
               valueFrom:
                 fieldRef:
@@ -246,6 +248,8 @@ spec:
               value: {{ include "wazuh.fullname" . }}-indexer
             - name: SECURITY_AUTHCZ_ADMIN_DN
               value: {{ .Values.tls.certManager.commonName }}
+            - name: SECURITY_NODES_DN
+              value: {{ .Values.indexer.config.nodesDN | default (printf "*.%s" (include "wazuh.fullname" .)) }}
             - name: KUBERNETES_NAMESPACE
               valueFrom:
                 fieldRef:
