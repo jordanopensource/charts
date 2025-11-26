@@ -115,6 +115,14 @@ indexer:
     # Must have the key "internal_users.yml"
     # Please read https://documentation.wazuh.com/current/deployment-options/docker/wazuh-container.html#change-the-password-of-wazuh-users
     indexerInternalUsersSecretName: ""
+    # Distinguished Name (DN) pattern for node certificates in plugins.security.nodes_dn
+    # This whitelist controls which certificates are trusted for node-to-node communication.
+    # Must match the CN (Common Name) in your node certificates issued by cert-manager.
+    # Default: "*.{release-name}" (e.g., "*.wazuh" for release "wazuh")
+    # Example: If your cert-manager issues certs with CN=wazuh, set this to "wazuh"
+    # Example: If your cert-manager issues certs with CN=*.wazuh-indexer, set this to "*.wazuh-indexer"
+    # Leave empty to auto-generate based on release name
+    nodesDN: ""
 
   imagePullSecrets: []
 
@@ -234,11 +242,14 @@ manager:
       # authd.pass
       existingSecretName: ""
 
-  ## The manager service that is going to be responsible for the agent registration
-  ## and the agent events
+  ## Exposes the whole manager stack (master and workers) to agents and users under a single service.
+  ## Port 1515 registers agents (master pods), port 55000 serves the Wazuh API (master pods)
+  ## and port 1514 receives agent events (worker pods)
   service:
+    enabled: true
     type: LoadBalancer
     annotations: {}
+    externalTrafficPolicy: Cluster
 
   master:
     podSecurityContext:
@@ -307,6 +318,12 @@ manager:
       storageClassName: ""
       size: "25Gi"
       existingClaim: ""
+
+    service:
+      enabled: true
+      type: ClusterIP
+      annotations: {}
+      externalTrafficPolicy: ""
 
   workers:
     replicaCount: 1
@@ -377,6 +394,12 @@ manager:
       storageClassName: ""
       size: "25Gi"
       existingClaim: ""
+
+    service:
+      enabled: true
+      type: ClusterIP
+      annotations: {}
+      externalTrafficPolicy: ""
 
 dashboard:
   replicaCount: 1
