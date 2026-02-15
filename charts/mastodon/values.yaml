@@ -162,10 +162,17 @@ postgres:
     ## NOTE: Must contain key `DB_USER`
     ## NOTE: Must contain key `DB_PASS`
     secretName: "database-secret"
-    ## The Secret name containing the certificate for postgres.
-    ## NOTE: Must contain key `db-certificate.crt`
-    ## NOTE: Leave empty if your database ssl mode is disable or allow or prefer
-    certificateSecret: "database-cert"
+    ## CA certificate for postgres SSL. Set either secret or configMap.
+    ## Leave unset if your database ssl mode is disable, allow, or prefer.
+    certificate:
+      ## From a Secret (key defaults to ca.crt)
+      secret:
+        name: "postgres-ca"
+        key: "ca.crt"
+      # ## From a ConfigMap (key defaults to ca.crt)
+      # configMap:
+      #   name: "postgres-ca"
+      #   key: "ca.crt"
 
 redis:
   # namespaces all Redis keys
