@@ -60,3 +60,35 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Whether postgres CA certificate is configured (from Secret or ConfigMap).
+*/}}
+{{- define "mastodon.postgresCertificateEnabled" -}}
+{{- $creds := .Values.postgres.credentials -}}
+{{- if and $creds.certificate (or $creds.certificate.secret $creds.certificate.configMap) -}}
+true
+{{- end -}}
+{{- end -}}
+
+{{/*
+Postgres CA certificate volume (Secret or ConfigMap). Mount as root.crt in .postgresql.
+*/}}
+{{- define "mastodon.postgresCertificateVolume" -}}
+{{- $c := .Values.postgres.credentials.certificate -}}
+{{- if $c.secret -}}
+- name: certificates
+  secret:
+    secretName: {{ $c.secret.name | quote }}
+    items:
+    - key: {{ default "db-certificate.crt" $c.secret.key | quote }}
+      path: root.crt
+{{- else if $c.configMap -}}
+- name: certificates
+  configMap:
+    name: {{ $c.configMap.name | quote }}
+    items:
+    - key: {{ default "ca.crt" $c.configMap.key | quote }}
+      path: root.crt
+{{- end -}}
+{{- end }}
