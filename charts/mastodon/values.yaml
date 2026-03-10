@@ -10,7 +10,7 @@ image:
   # Image pull policy. Options: Always, Never, IfNotPresent
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v4.2.10"
+  tag: "v4.5.7"
 
 # Secrets used to pull images from private registries
 imagePullSecrets: []
@@ -53,6 +53,10 @@ mastodon:
       #   memory: 128Mi
 
   streaming:
+    image:
+      repository: tootsuite/mastodon-streaming
+      tag: "4.5.7"
+      pullPolicy: IfNotPresent
     port: 4000
     # this should be set manually since os.cpus() returns the number of CPUs on
     # the node running the pod, which is unrelated to the resources allocated to
@@ -131,6 +135,9 @@ mastodon:
   secrets:
     ## The Secret name containing the secrets for mastodon.
     ## NOTE: Must contain key `SECRET_KEY_BASE`
+    ## NOTE: Must contain key `ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY`
+    ## NOTE: Must contain key `ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT`
+    ## NOTE: Must contain key `ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT`
     ## NOTE: Must contain key `OTP_SECRET` for otp
     ## NOTE: Must contain key `VAPID_PRIVATE_KEY` for push notification
     ## NOTE: Must contain key `VAPID_PUBLIC_KEY` for push notification
@@ -175,9 +182,6 @@ postgres:
       #   key: "ca.crt"
 
 redis:
-  # namespaces all Redis keys
-  # This allows sharing the same Redis database between different projects
-  namespace: mastodon
   ## The Secret name containing the url for redis.
   # Example value: redis://user:password@localhost:6379
   ## NOTE: Must contain key `REDIS_URL`
