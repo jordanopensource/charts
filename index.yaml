@@ -1,1466 +1,1016 @@
 apiVersion: v1
 entries:
   base:
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 1.0.0
-    created: "2025-05-05T10:59:08.768100572Z"
-    description: A general helm chart for any container
-    digest: d721608bab4db0d19dcc6f95b03a5e7da2d523337c5b211991ea93543462aa03
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - base
-    - general
-    - containers
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: base
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/base
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/base-1.3.1/base-1.3.1.tgz
-    version: 1.3.1
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 1.0.0
-    created: "2025-02-05T11:07:16.080415249Z"
-    description: A general helm chart for any container
-    digest: d04c451b4022eb8833d073f39877b7366dda6216246bdb772a5787585c4c1f07
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - base
-    - general
-    - containers
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: base
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/base
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/base-1.3.0/base-1.3.0.tgz
-    version: 1.3.0
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 1.0.1
-    created: "2024-12-11T11:23:39.852237337Z"
-    description: A general helm chart for any container
-    digest: ee1669127d74a55b5363c0c0980c1991ae954b6a5ce9b266af6ff4a30b2616aa
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - base
-    - general
-    - containers
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: base
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/base
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/base-1.2.1/base-1.2.1.tgz
-    version: 1.2.1
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 1.0.1
-    created: "2024-10-28T11:54:03.508080873Z"
-    description: A general helm chart for any container
-    digest: a752a20d1de9e081ef0ebbc6a0f9b22e64a7ca92fe2850f163c6ace51cdaa3a5
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - base
-    - general
-    - containers
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: base
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/base
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/base-1.2.0/base-1.2.0.tgz
-    version: 1.2.0
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 1.0.1
-    created: "2024-10-28T09:21:42.882435318Z"
-    description: A general helm chart for any container
-    digest: 7606bd37c8454586499deb79e5f348c56afa6d3f8148ce4ee77a5a1ada3ecd67
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - base
-    - general
-    - containers
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: base
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/base
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/base-1.1.0/base-1.1.0.tgz
-    version: 1.1.0
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 1.0.1
-    created: "2024-10-22T14:34:10.165564929Z"
-    description: A general helm chart for any container
-    digest: cad3d2625e2cde72acd6168bfb0b23d884fef7414aa70ac365fa41248212ed80
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - base
-    - general
-    - containers
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: base
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/base
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/base-1.0.4/base-1.0.4.tgz
-    version: 1.0.4
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 1.0.1
-    created: "2024-10-07T10:15:12.894629343Z"
-    description: A general helm chart for any container
-    digest: e9d35827c334a2bfd8e6833ec83e79313a48c387a4b47fbe286111803fa44d9c
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - base
-    - general
-    - containers
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: base
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/base
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/base-1.0.3/base-1.0.3.tgz
-    version: 1.0.3
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 1.0.1
-    created: "2024-09-29T13:25:45.771365094Z"
-    description: A general helm chart for any container
-    digest: 6c1621764884ea617464355ca59eb2e69538cbb44086b2a968c80fb8b6a88bff
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - base
-    - general
-    - containers
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: base
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/base
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/base-1.0.2/base-1.0.2.tgz
-    version: 1.0.2
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 1.0.1
-    created: "2024-09-29T13:21:16.265875674Z"
-    description: A general helm chart for any container
-    digest: 105b008888e1e874280151dd98e4a1c80a2f3f13bfb4aa388f4df6901e423546
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - base
-    - general
-    - containers
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: base
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/base
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/base-1.0.1/base-1.0.1.tgz
-    version: 1.0.1
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 1.0.0
-    created: "2024-09-29T08:37:41.108689198Z"
-    description: A general helm chart for any container
-    digest: 16bfc35ae439c95255d7ecf58a90231f3fbfc82ab3749a685bb0dc2d9e60fcfc
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - base
-    - general
-    - containers
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: base
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/base
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/base-1.0.0/base-1.0.0.tgz
-    version: 1.0.0
-  etherpad:
-  - apiVersion: v2
-    appVersion: 1.8.18
-    created: "2024-07-18T07:17:25.139367477Z"
-    dependencies:
-    - condition: postgresql.create
-      name: postgresql
-      repository: https://charts.bitnami.com/bitnami
-      version: ~11.9.13
-    description: A Helm chart for Kubernetes
-    digest: 7ff0f4c3e91732317b14b89887e3e84eb5bd86bd68397bb1a3d35236094d710d
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-      url: https://charts.josa.ngo
-    name: etherpad
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/etherpad-0.1.6/etherpad-0.1.6.tgz
-    version: 0.1.6
-  - apiVersion: v2
-    appVersion: 1.8.18
-    created: "2024-07-17T08:50:34.273898504Z"
-    dependencies:
-    - condition: postgresql.create
-      name: postgresql
-      repository: https://charts.bitnami.com/bitnami
-      version: ~11.9.13
-    description: A Helm chart for Kubernetes
-    digest: ef0be4867dcf063d8bc9bffa1220dbd72302c22a13bc0fb198aedc11b84e4f98
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-      url: https://charts.josa.ngo
-    name: etherpad
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/etherpad-0.1.5/etherpad-0.1.5.tgz
-    version: 0.1.5
-  - apiVersion: v2
-    appVersion: 1.8.18
-    created: "2022-06-22T14:29:04.755047219Z"
-    dependencies:
-    - condition: postgresql.create
-      name: postgresql
-      repository: https://charts.bitnami.com/bitnami
-      version: ~11.5.0
-    description: A Helm chart for Kubernetes
-    digest: 970f01aae4152f52caeafd5f0a0828df1d6b7608d4bb9671a52ae7a40d043324
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-      url: https://charts.josa.ngo
-    name: etherpad
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/etherpad-0.1.3/etherpad-0.1.3.tgz
-    version: 0.1.3
-  - apiVersion: v2
-    appVersion: 1.8.18
-    created: "2022-06-05T14:11:46.903540192Z"
-    dependencies:
-    - condition: postgresql.create
-      name: postgresql
-      repository: https://charts.bitnami.com/bitnami
-      version: ~11.5.0
-    description: A Helm chart for Kubernetes
-    digest: 81cd30fc52dbd131cced169fae43eb6a1424b1045d7adacd8a46fcabf3fa1813
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-      url: https://charts.josa.ngo
-    name: etherpad
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/etherpad-0.1.2/etherpad-0.1.2.tgz
-    version: 0.1.2
-  - apiVersion: v2
-    appVersion: 1.8.18
-    created: "2022-06-05T12:02:04.093499247Z"
-    dependencies:
-    - condition: postgresql.create
-      name: postgresql
-      repository: https://charts.bitnami.com/bitnami
-      version: ~11.5.0
-    description: A Helm chart for Kubernetes
-    digest: b6b62d833c8d52d476f82c840c84f1c8d723eaec4f4fcec76745ff5777befd51
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-      url: https://charts.josa.ngo
-    name: etherpad
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/etherpad-0.1.1/etherpad-0.1.1.tgz
-    version: 0.1.1
-  - apiVersion: v2
-    appVersion: 1.8.18
-    created: "2022-05-30T15:20:56.337188398Z"
-    dependencies:
-    - condition: postgresql.create
-      name: postgresql
-      repository: https://charts.bitnami.com/bitnami
-      version: ~11.5.0
-    description: A Helm chart for Kubernetes
-    digest: 4d476b461ad7193224bad303ebfb0a757e8a0b4f196b665bd7f8141e1804db75
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-      url: https://charts.josa.ngo
-    name: etherpad
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/etherpad-0.1.0/etherpad-0.1.0.tgz
-    version: 0.1.0
-  formbricks:
-  - apiVersion: v2
-    appVersion: 1.3.5
-    created: "2023-12-19T12:26:09.86048845Z"
-    description: A Helm chart for deploying frombricks on kubernetes
-    digest: 686d177f4e3e991573449bef2b05f013df9177d4b55ef1b03e8ccc7fab3645b3
-    name: formbricks
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/formbricks-0.1.1/formbricks-0.1.1.tgz
-    version: 0.1.1
-  - apiVersion: v2
-    appVersion: 1.3.5
-    created: "2023-12-19T12:18:47.207351177Z"
-    description: A Helm chart for deploying frombricks on kubernetes
-    digest: cf7f43335105001872322291b64a5f668dcc1222a97439550cc576af1d5867eb
-    name: formbricks
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/formbricks-0.1.0/formbricks-0.1.0.tgz
-    version: 0.1.0
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 1.0.0
+      created: "2025-05-05T10:59:08.768100572Z"
+      description: A general helm chart for any container
+      digest: d721608bab4db0d19dcc6f95b03a5e7da2d523337c5b211991ea93543462aa03
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - base
+        - general
+        - containers
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: base
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/base
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/base-1.3.1/base-1.3.1.tgz
+      version: 1.3.1
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 1.0.0
+      created: "2025-02-05T11:07:16.080415249Z"
+      description: A general helm chart for any container
+      digest: d04c451b4022eb8833d073f39877b7366dda6216246bdb772a5787585c4c1f07
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - base
+        - general
+        - containers
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: base
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/base
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/base-1.3.0/base-1.3.0.tgz
+      version: 1.3.0
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 1.0.1
+      created: "2024-12-11T11:23:39.852237337Z"
+      description: A general helm chart for any container
+      digest: ee1669127d74a55b5363c0c0980c1991ae954b6a5ce9b266af6ff4a30b2616aa
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - base
+        - general
+        - containers
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: base
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/base
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/base-1.2.1/base-1.2.1.tgz
+      version: 1.2.1
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 1.0.1
+      created: "2024-10-28T11:54:03.508080873Z"
+      description: A general helm chart for any container
+      digest: a752a20d1de9e081ef0ebbc6a0f9b22e64a7ca92fe2850f163c6ace51cdaa3a5
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - base
+        - general
+        - containers
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: base
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/base
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/base-1.2.0/base-1.2.0.tgz
+      version: 1.2.0
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 1.0.1
+      created: "2024-10-28T09:21:42.882435318Z"
+      description: A general helm chart for any container
+      digest: 7606bd37c8454586499deb79e5f348c56afa6d3f8148ce4ee77a5a1ada3ecd67
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - base
+        - general
+        - containers
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: base
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/base
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/base-1.1.0/base-1.1.0.tgz
+      version: 1.1.0
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 1.0.1
+      created: "2024-10-22T14:34:10.165564929Z"
+      description: A general helm chart for any container
+      digest: cad3d2625e2cde72acd6168bfb0b23d884fef7414aa70ac365fa41248212ed80
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - base
+        - general
+        - containers
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: base
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/base
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/base-1.0.4/base-1.0.4.tgz
+      version: 1.0.4
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 1.0.1
+      created: "2024-10-07T10:15:12.894629343Z"
+      description: A general helm chart for any container
+      digest: e9d35827c334a2bfd8e6833ec83e79313a48c387a4b47fbe286111803fa44d9c
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - base
+        - general
+        - containers
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: base
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/base
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/base-1.0.3/base-1.0.3.tgz
+      version: 1.0.3
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 1.0.1
+      created: "2024-09-29T13:25:45.771365094Z"
+      description: A general helm chart for any container
+      digest: 6c1621764884ea617464355ca59eb2e69538cbb44086b2a968c80fb8b6a88bff
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - base
+        - general
+        - containers
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: base
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/base
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/base-1.0.2/base-1.0.2.tgz
+      version: 1.0.2
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 1.0.1
+      created: "2024-09-29T13:21:16.265875674Z"
+      description: A general helm chart for any container
+      digest: 105b008888e1e874280151dd98e4a1c80a2f3f13bfb4aa388f4df6901e423546
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - base
+        - general
+        - containers
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: base
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/base
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/base-1.0.1/base-1.0.1.tgz
+      version: 1.0.1
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 1.0.0
+      created: "2024-09-29T08:37:41.108689198Z"
+      description: A general helm chart for any container
+      digest: 16bfc35ae439c95255d7ecf58a90231f3fbfc82ab3749a685bb0dc2d9e60fcfc
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - base
+        - general
+        - containers
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: base
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/base
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/base-1.0.0/base-1.0.0.tgz
+      version: 1.0.0
   gophish:
-  - apiVersion: v2
-    appVersion: latest
-    created: "2024-09-04T08:09:22.957263935Z"
-    description: gophish helm chart for Kubernetes
-    digest: 80544f3a102984d04c4bc82f8de594dd247cd4c0fb18125b1d15998fe52ecdb6
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.15/gophish-1.2.15.tgz
-    version: 1.2.15
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-04-29T10:26:37.96373232Z"
-    description: gophish helm chart for Kubernetes
-    digest: 5ace94e2085e4c2de7cdcfe06a7ff69558782a61d89f21b8cef5c5e25e14cdd7
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.14/gophish-1.2.14.tgz
-    version: 1.2.14
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-04-17T12:01:42.428125444Z"
-    description: gophish helm chart for Kubernetes
-    digest: 7cb9ea086ae710636c09848e047267a43e60381b92e81d84de2a198001d5b60e
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.13/gophish-1.2.13.tgz
-    version: 1.2.13
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-04-16T12:14:29.36962789Z"
-    description: gophish helm chart for Kubernetes
-    digest: fa0b54d09a72ea4b51608df65ef6200d1ba51886d5c795d27e6c53dcf51c5cba
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.12/gophish-1.2.12.tgz
-    version: 1.2.12
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-04-16T11:46:26.699399115Z"
-    description: gophish helm chart for Kubernetes
-    digest: 016d904cd39ab7923598c694575f3811072becb43468c3ef2b443cd6323211e9
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.11/gophish-1.2.11.tgz
-    version: 1.2.11
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-04-16T11:14:02.354801175Z"
-    description: gophish helm chart for Kubernetes
-    digest: 4d3e12610db1c34da70c40f539d0cd8167e5176ea34ca52617bb83b9f39df0cb
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.10/gophish-1.2.10.tgz
-    version: 1.2.10
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-04-16T09:00:55.271377546Z"
-    description: gophish helm chart for Kubernetes
-    digest: 2552fe6666c7db20894d2be78173b644cd98d21fa70b9ac3cbc384b0666337fd
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.9/gophish-1.2.9.tgz
-    version: 1.2.9
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-04-03T11:45:51.968634504Z"
-    description: gophish helm chart for Kubernetes
-    digest: c21656da47097ac6ca22e03370931954966523a8782ab5a45847faea5e692c9b
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.8/gophish-1.2.8.tgz
-    version: 1.2.8
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-04-03T10:44:34.594754092Z"
-    description: gophish helm chart for Kubernetes
-    digest: 5860cefa19dd58cecf83555800ecc8ee5ad0b895205e668c93a177896f500812
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.7/gophish-1.2.7.tgz
-    version: 1.2.7
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-03-31T11:50:48.050604579Z"
-    description: gophish helm chart for Kubernetes
-    digest: 2c16382c4f640ace0aed20410ee28a40f0cf663b44430f296c87907de7f64920
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.6/gophish-1.2.6.tgz
-    version: 1.2.6
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-03-28T12:55:12.060111138Z"
-    description: gophish helm chart for Kubernetes
-    digest: 1293c8746a88d87f1d0a67bfae01aa537c427c272e899e9f26c95aa7e666f82e
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.5/gophish-1.2.5.tgz
-    version: 1.2.5
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-03-28T12:47:17.015690701Z"
-    description: gophish helm chart for Kubernetes
-    digest: ed3da1e87fc235c8123f14d1cccf40a6a195594638a82060288a0bec5cad800f
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.4/gophish-1.2.4.tgz
-    version: 1.2.4
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-03-27T09:34:29.218538968Z"
-    description: gophish helm chart for Kubernetes
-    digest: d2f5c1a4bd80d815aaccc21cdf54e6a6b261f529aa5fec6f3a2d404d53271e91
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.3/gophish-1.2.3.tgz
-    version: 1.2.3
-  - apiVersion: v2
-    appVersion: 0.12.1
-    created: "2024-03-27T09:30:28.656320033Z"
-    description: gophish helm chart for Kubernetes
-    digest: 32bbc0cb58ddc488402e20170be0c8c10b8655f50f340a133549c368a1930363
-    maintainers:
-    - email: admin@josa.ngo
-      name: JOSA
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.2/gophish-1.2.2.tgz
-    version: 1.2.2
-  - apiVersion: v2
-    appVersion: 0.12.0
-    created: "2023-11-06T10:53:15.727142986Z"
-    description: gophish helm chart for Kubernetes
-    digest: a9ec5bfe7df74c898fdcd95758bfd50f46b64bd875f147acb44e405593e7b93e
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.0.4/gophish-1.0.4.tgz
-    version: 1.0.4
-  - apiVersion: v2
-    appVersion: 0.9.0
-    created: "2022-01-24T13:19:21.838653525Z"
-    description: gophish helm chart for Kubernetes
-    digest: 83312e733338d7a680375c829b0a487225cbf209475bbf36fefdf46361a424c2
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.0.3/gophish-1.0.3.tgz
-    version: 1.0.3
-  - apiVersion: v2
-    appVersion: 0.9.0
-    created: "2021-12-21T11:56:22.384135333Z"
-    description: gophish helm chart for Kubernetes
-    digest: 60cc5bdf7ef2f01e5c66bad89cd285eb734d6f1196337f4bc487c9b5b96772a8
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.0.2/gophish-1.0.2.tgz
-    version: 1.0.2
-  - apiVersion: v2
-    appVersion: 0.9.0
-    created: "2021-12-15T16:18:52.3147267Z"
-    description: gophish helm chart for Kubernetes
-    digest: 9a8eba2b669622ab9c7dcf941fa86909e5d0d90b4188558d91c105d41496779e
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.0.1/gophish-1.0.1.tgz
-    version: 1.0.1
-  - apiVersion: v2
-    appVersion: 0.9.0
-    created: "2021-12-15T15:34:17.818712203Z"
-    description: gophish helm chart for Kubernetes
-    digest: f517726e58ad3322c73503f1b6b54ecb041a63182e5b233a875ac515e45fa123
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: gophish
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/gophish-1.0.0/gophish-1.0.0.tgz
-    version: 1.0.0
-  kutt:
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2024-03-20T11:40:38.936458363Z"
-    description: A Helm chart for kutt.it link shortener
-    digest: 0bc173cf88e5d65b805fe2d9ff291721e70ba24d2ab66c7ab1c6f33318bc6e03
-    name: kutt
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/kutt-0.2.1/kutt-0.2.1.tgz
-    version: 0.2.1
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2023-06-19T11:18:30.85084709Z"
-    description: A Helm chart for kutt.it link shortener
-    digest: 121f70474bf7601cbd167a673516932083d4a10292d6151723aff253698ed304
-    name: kutt
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/kutt-0.2.0/kutt-0.2.0.tgz
-    version: 0.2.0
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2022-08-25T15:36:12.024332322Z"
-    description: A Helm chart for kutt.it link shortener
-    digest: bd8eaf98f954dd7fb4c4c2c2d3141c13c0deb0916d25202616153f29ea1d1c90
-    name: kutt
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/kutt-0.1.0/kutt-0.1.0.tgz
-    version: 0.1.0
+    - apiVersion: v2
+      appVersion: latest
+      created: "2024-09-04T08:09:22.957263935Z"
+      description: gophish helm chart for Kubernetes
+      digest: 80544f3a102984d04c4bc82f8de594dd247cd4c0fb18125b1d15998fe52ecdb6
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.15/gophish-1.2.15.tgz
+      version: 1.2.15
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-04-29T10:26:37.96373232Z"
+      description: gophish helm chart for Kubernetes
+      digest: 5ace94e2085e4c2de7cdcfe06a7ff69558782a61d89f21b8cef5c5e25e14cdd7
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.14/gophish-1.2.14.tgz
+      version: 1.2.14
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-04-17T12:01:42.428125444Z"
+      description: gophish helm chart for Kubernetes
+      digest: 7cb9ea086ae710636c09848e047267a43e60381b92e81d84de2a198001d5b60e
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.13/gophish-1.2.13.tgz
+      version: 1.2.13
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-04-16T12:14:29.36962789Z"
+      description: gophish helm chart for Kubernetes
+      digest: fa0b54d09a72ea4b51608df65ef6200d1ba51886d5c795d27e6c53dcf51c5cba
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.12/gophish-1.2.12.tgz
+      version: 1.2.12
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-04-16T11:46:26.699399115Z"
+      description: gophish helm chart for Kubernetes
+      digest: 016d904cd39ab7923598c694575f3811072becb43468c3ef2b443cd6323211e9
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.11/gophish-1.2.11.tgz
+      version: 1.2.11
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-04-16T11:14:02.354801175Z"
+      description: gophish helm chart for Kubernetes
+      digest: 4d3e12610db1c34da70c40f539d0cd8167e5176ea34ca52617bb83b9f39df0cb
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.10/gophish-1.2.10.tgz
+      version: 1.2.10
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-04-16T09:00:55.271377546Z"
+      description: gophish helm chart for Kubernetes
+      digest: 2552fe6666c7db20894d2be78173b644cd98d21fa70b9ac3cbc384b0666337fd
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.9/gophish-1.2.9.tgz
+      version: 1.2.9
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-04-03T11:45:51.968634504Z"
+      description: gophish helm chart for Kubernetes
+      digest: c21656da47097ac6ca22e03370931954966523a8782ab5a45847faea5e692c9b
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.8/gophish-1.2.8.tgz
+      version: 1.2.8
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-04-03T10:44:34.594754092Z"
+      description: gophish helm chart for Kubernetes
+      digest: 5860cefa19dd58cecf83555800ecc8ee5ad0b895205e668c93a177896f500812
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.7/gophish-1.2.7.tgz
+      version: 1.2.7
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-03-31T11:50:48.050604579Z"
+      description: gophish helm chart for Kubernetes
+      digest: 2c16382c4f640ace0aed20410ee28a40f0cf663b44430f296c87907de7f64920
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.6/gophish-1.2.6.tgz
+      version: 1.2.6
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-03-28T12:55:12.060111138Z"
+      description: gophish helm chart for Kubernetes
+      digest: 1293c8746a88d87f1d0a67bfae01aa537c427c272e899e9f26c95aa7e666f82e
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.5/gophish-1.2.5.tgz
+      version: 1.2.5
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-03-28T12:47:17.015690701Z"
+      description: gophish helm chart for Kubernetes
+      digest: ed3da1e87fc235c8123f14d1cccf40a6a195594638a82060288a0bec5cad800f
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.4/gophish-1.2.4.tgz
+      version: 1.2.4
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-03-27T09:34:29.218538968Z"
+      description: gophish helm chart for Kubernetes
+      digest: d2f5c1a4bd80d815aaccc21cdf54e6a6b261f529aa5fec6f3a2d404d53271e91
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.3/gophish-1.2.3.tgz
+      version: 1.2.3
+    - apiVersion: v2
+      appVersion: 0.12.1
+      created: "2024-03-27T09:30:28.656320033Z"
+      description: gophish helm chart for Kubernetes
+      digest: 32bbc0cb58ddc488402e20170be0c8c10b8655f50f340a133549c368a1930363
+      maintainers:
+        - email: admin@josa.ngo
+          name: JOSA
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.2.2/gophish-1.2.2.tgz
+      version: 1.2.2
+    - apiVersion: v2
+      appVersion: 0.12.0
+      created: "2023-11-06T10:53:15.727142986Z"
+      description: gophish helm chart for Kubernetes
+      digest: a9ec5bfe7df74c898fdcd95758bfd50f46b64bd875f147acb44e405593e7b93e
+      maintainers:
+        - email: admin@josa.ngo
+          name: Jordan Open Source Association
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.0.4/gophish-1.0.4.tgz
+      version: 1.0.4
+    - apiVersion: v2
+      appVersion: 0.9.0
+      created: "2022-01-24T13:19:21.838653525Z"
+      description: gophish helm chart for Kubernetes
+      digest: 83312e733338d7a680375c829b0a487225cbf209475bbf36fefdf46361a424c2
+      maintainers:
+        - email: admin@josa.ngo
+          name: Jordan Open Source Association
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.0.3/gophish-1.0.3.tgz
+      version: 1.0.3
+    - apiVersion: v2
+      appVersion: 0.9.0
+      created: "2021-12-21T11:56:22.384135333Z"
+      description: gophish helm chart for Kubernetes
+      digest: 60cc5bdf7ef2f01e5c66bad89cd285eb734d6f1196337f4bc487c9b5b96772a8
+      maintainers:
+        - email: admin@josa.ngo
+          name: Jordan Open Source Association
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.0.2/gophish-1.0.2.tgz
+      version: 1.0.2
+    - apiVersion: v2
+      appVersion: 0.9.0
+      created: "2021-12-15T16:18:52.3147267Z"
+      description: gophish helm chart for Kubernetes
+      digest: 9a8eba2b669622ab9c7dcf941fa86909e5d0d90b4188558d91c105d41496779e
+      maintainers:
+        - email: admin@josa.ngo
+          name: Jordan Open Source Association
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.0.1/gophish-1.0.1.tgz
+      version: 1.0.1
+    - apiVersion: v2
+      appVersion: 0.9.0
+      created: "2021-12-15T15:34:17.818712203Z"
+      description: gophish helm chart for Kubernetes
+      digest: f517726e58ad3322c73503f1b6b54ecb041a63182e5b233a875ac515e45fa123
+      maintainers:
+        - email: admin@josa.ngo
+          name: Jordan Open Source Association
+      name: gophish
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/gophish-1.0.0/gophish-1.0.0.tgz
+      version: 1.0.0
   mastodon:
-  - apiVersion: v2
-    appVersion: v4.2.12
-    created: "2026-02-15T11:11:29.075744454Z"
-    description: A Helm chart for Mastodon, Mastodon is a free open-source social
-      network server based on ActivityPub.
-    digest: bb6a28c0560152c624f576aebcc8c90d6b609500e2ecdde28ce1a15cae84ba87
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: mastodon
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/mastodon
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/mastodon-0.4.3/mastodon-0.4.3.tgz
-    version: 0.4.3
-  - apiVersion: v2
-    appVersion: v4.2.12
-    created: "2026-01-25T08:57:08.567452073Z"
-    description: A Helm chart for Mastodon, Mastodon is a free open-source social
-      network server based on ActivityPub.
-    digest: 85ad3aa5fd24e057e39e8d8cadf5b8d50ebdf9d348e229266f67900253f0e15d
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: mastodon
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/mastodon
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/mastodon-0.4.2/mastodon-0.4.2.tgz
-    version: 0.4.2
-  - apiVersion: v2
-    appVersion: v4.2.12
-    created: "2025-11-03T13:54:18.257773016Z"
-    description: A Helm chart for Mastodon, Mastodon is a free open-source social
-      network server based on ActivityPub.
-    digest: 7ed8601ddd344f0880fc2957408fd4f608e3661fe5e45e570a80002894477ea5
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: mastodon
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/mastodon
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/mastodon-0.4.1/mastodon-0.4.1.tgz
-    version: 0.4.1
-  - apiVersion: v2
-    appVersion: v4.2.12
-    created: "2025-11-03T13:25:05.188377909Z"
-    description: A Helm chart for Mastodon, Mastodon is a free open-source social
-      network server based on ActivityPub.
-    digest: 83bc4653684968da8382708c196f80ce6394c1733fc066cbc02f1803828f4bec
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: mastodon
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/mastodon
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/mastodon-0.4.0/mastodon-0.4.0.tgz
-    version: 0.4.0
-  - apiVersion: v2
-    appVersion: v4.2.12
-    created: "2024-09-29T13:28:09.153771171Z"
-    description: A Helm chart for Mastodon, Mastodon is a free open-source social
-      network server based on ActivityPub.
-    digest: 60cf4c06cd83397f90b87a1d05da030866b4e0b5f74e9f8b05e0f014c6b4beaa
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: mastodon
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/mastodon
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/mastodon-0.3.1/mastodon-0.3.1.tgz
-    version: 0.3.1
-  - apiVersion: v2
-    appVersion: v4.2.10
-    created: "2024-07-18T07:21:21.805811655Z"
-    description: A Helm chart for Mastodon, Mastodon is a free open-source social
-      network server based on ActivityPub.
-    digest: 98f234c287f19e03273b4681e4f3d0be527ea2d3d87976e0776a7b35b3652094
-    name: mastodon
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/mastodon-0.2.1/mastodon-0.2.1.tgz
-    version: 0.2.1
-  - apiVersion: v2
-    appVersion: v3.5.3
-    created: "2022-12-05T13:55:52.50912342Z"
-    description: A Helm chart for Mastodon, Mastodon is a free open-source social
-      network server based on ActivityPub.
-    digest: 38f7547b779b5415475641b09363d6616f5b78f69c2a7a91b22bfbe5a9127852
-    name: mastodon
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/mastodon-0.1.1/mastodon-0.1.1.tgz
-    version: 0.1.1
-  - apiVersion: v2
-    appVersion: v3.5.3
-    created: "2022-12-01T11:05:14.634401071Z"
-    description: A Helm chart for Mastodon, Mastodon is a free open-source social
-      network server based on ActivityPub.
-    digest: 151731f3ddcdec2ff571dd25782c89ba8909ea933b76940f57c6be7f847481c9
-    name: mastodon
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/mastodon-0.1.0/mastodon-0.1.0.tgz
-    version: 0.1.0
-  monica:
-  - apiVersion: v2
-    appVersion: 3.4.0
-    created: "2021-11-15T14:36:00.067639903Z"
-    dependencies:
-    - condition: mysql.enabled
-      name: mysql
-      repository: https://charts.bitnami.com/bitnami
-      version: 8.8.6
-    description: Personal CRM. Remember everything about your friends, family and
-      business relationships.
-    digest: 11e4cb9ab82c95d528f5003559f7e08d34990a0c0be73e00339f2fa594431037
-    home: https://www.monicahq.com
-    icon: https://www.monicahq.com/img/logo_vertical.png
-    keywords:
-    - social
-    - crm
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: monica
-    sources:
-    - https://github.com/monicahq/monica
-    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/monica-1.0.3/monica-1.0.3.tgz
-    version: 1.0.3
-  - apiVersion: v2
-    appVersion: "3.2"
-    created: "2021-09-14T18:57:25.266042384Z"
-    dependencies:
-    - condition: mysql.enabled
-      name: mysql
-      repository: https://charts.bitnami.com/bitnami
-      version: 8.8.6
-    description: Personal CRM. Remember everything about your friends, family and
-      business relationships.
-    digest: 2261e9c54c7dc5b070d05d83dda5f14f91a7a1e1aa42f52cd1ff0f68fb2a8a72
-    home: https://www.monicahq.com
-    icon: https://www.monicahq.com/img/logo_vertical.png
-    keywords:
-    - social
-    - crm
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: monica
-    sources:
-    - https://github.com/monicahq/monica
-    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/monica-1.0.2/monica-1.0.2.tgz
-    version: 1.0.2
-  - apiVersion: v2
-    appVersion: "3.2"
-    created: "2021-09-12T14:18:27.239587222Z"
-    dependencies:
-    - condition: mysql.enabled
-      name: mysql
-      repository: https://charts.bitnami.com/bitnami
-      version: 8.8.6
-    description: Personal CRM. Remember everything about your friends, family and
-      business relationships.
-    digest: 35e1f7279c69db8125ccdb2c5042f5985ce76c1236fd361ae0b8d7574c1dfece
-    home: https://www.monicahq.com
-    icon: https://www.monicahq.com/img/logo_vertical.png
-    keywords:
-    - social
-    - crm
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: monica
-    sources:
-    - https://github.com/monicahq/monica
-    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/monica-1.0.1/monica-1.0.1.tgz
-    version: 1.0.1
-  - apiVersion: v2
-    appVersion: "3.2"
-    created: "2021-09-09T14:32:35.557813682Z"
-    dependencies:
-    - condition: mysql.enabled
-      name: mysql
-      repository: https://charts.bitnami.com/bitnami
-      version: 8.8.6
-    description: Personal CRM. Remember everything about your friends, family and
-      business relationships.
-    digest: 8cc2db79b3172f2c56736321d54e02e08b86728dea218ac2a8a4b409a764d248
-    home: https://www.monicahq.com
-    icon: https://www.monicahq.com/img/logo_vertical.png
-    keywords:
-    - social
-    - crm
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: monica
-    sources:
-    - https://github.com/monicahq/monica
-    - https://github.com/bitnami/charts/tree/master/bitnami/mysql
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/monica-1.0.0/monica-1.0.0.tgz
-    version: 1.0.0
+    - apiVersion: v2
+      appVersion: v4.2.12
+      created: "2026-02-15T11:11:29.075744454Z"
+      description:
+        A Helm chart for Mastodon, Mastodon is a free open-source social
+        network server based on ActivityPub.
+      digest: bb6a28c0560152c624f576aebcc8c90d6b609500e2ecdde28ce1a15cae84ba87
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: mastodon
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/mastodon
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/mastodon-0.4.3/mastodon-0.4.3.tgz
+      version: 0.4.3
+    - apiVersion: v2
+      appVersion: v4.2.12
+      created: "2026-01-25T08:57:08.567452073Z"
+      description:
+        A Helm chart for Mastodon, Mastodon is a free open-source social
+        network server based on ActivityPub.
+      digest: 85ad3aa5fd24e057e39e8d8cadf5b8d50ebdf9d348e229266f67900253f0e15d
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: mastodon
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/mastodon
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/mastodon-0.4.2/mastodon-0.4.2.tgz
+      version: 0.4.2
+    - apiVersion: v2
+      appVersion: v4.2.12
+      created: "2025-11-03T13:54:18.257773016Z"
+      description:
+        A Helm chart for Mastodon, Mastodon is a free open-source social
+        network server based on ActivityPub.
+      digest: 7ed8601ddd344f0880fc2957408fd4f608e3661fe5e45e570a80002894477ea5
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: mastodon
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/mastodon
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/mastodon-0.4.1/mastodon-0.4.1.tgz
+      version: 0.4.1
+    - apiVersion: v2
+      appVersion: v4.2.12
+      created: "2025-11-03T13:25:05.188377909Z"
+      description:
+        A Helm chart for Mastodon, Mastodon is a free open-source social
+        network server based on ActivityPub.
+      digest: 83bc4653684968da8382708c196f80ce6394c1733fc066cbc02f1803828f4bec
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: mastodon
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/mastodon
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/mastodon-0.4.0/mastodon-0.4.0.tgz
+      version: 0.4.0
+    - apiVersion: v2
+      appVersion: v4.2.12
+      created: "2024-09-29T13:28:09.153771171Z"
+      description:
+        A Helm chart for Mastodon, Mastodon is a free open-source social
+        network server based on ActivityPub.
+      digest: 60cf4c06cd83397f90b87a1d05da030866b4e0b5f74e9f8b05e0f014c6b4beaa
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: mastodon
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/mastodon
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/mastodon-0.3.1/mastodon-0.3.1.tgz
+      version: 0.3.1
+    - apiVersion: v2
+      appVersion: v4.2.10
+      created: "2024-07-18T07:21:21.805811655Z"
+      description:
+        A Helm chart for Mastodon, Mastodon is a free open-source social
+        network server based on ActivityPub.
+      digest: 98f234c287f19e03273b4681e4f3d0be527ea2d3d87976e0776a7b35b3652094
+      name: mastodon
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/mastodon-0.2.1/mastodon-0.2.1.tgz
+      version: 0.2.1
+    - apiVersion: v2
+      appVersion: v3.5.3
+      created: "2022-12-05T13:55:52.50912342Z"
+      description:
+        A Helm chart for Mastodon, Mastodon is a free open-source social
+        network server based on ActivityPub.
+      digest: 38f7547b779b5415475641b09363d6616f5b78f69c2a7a91b22bfbe5a9127852
+      name: mastodon
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/mastodon-0.1.1/mastodon-0.1.1.tgz
+      version: 0.1.1
+    - apiVersion: v2
+      appVersion: v3.5.3
+      created: "2022-12-01T11:05:14.634401071Z"
+      description:
+        A Helm chart for Mastodon, Mastodon is a free open-source social
+        network server based on ActivityPub.
+      digest: 151731f3ddcdec2ff571dd25782c89ba8909ea933b76940f57c6be7f847481c9
+      name: mastodon
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/mastodon-0.1.0/mastodon-0.1.0.tgz
+      version: 0.1.0
   monk:
-  - apiVersion: v2
-    appVersion: v4.1.0
-    created: "2025-02-06T10:35:52.542336805Z"
-    description: A Helm chart for listmonk
-    digest: 87ff0a23e77a910d59c5185d9782cb2fc53c2b2168fa44b715a60a2dc8ddd528
-    name: monk
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/monk-2.3.0/monk-2.3.0.tgz
-    version: 2.3.0
-  - apiVersion: v2
-    appVersion: 2.4.0
-    created: "2023-03-30T13:02:41.157359046Z"
-    description: A Helm chart for listmonk
-    digest: e43310ff274eca7fc4982b8dc920504aab01167779623766aaec28aec06cc2ed
-    name: monk
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/monk-2.2.1/monk-2.2.1.tgz
-    version: 2.2.1
-  - apiVersion: v2
-    appVersion: 2.2.0
-    created: "2022-08-13T09:50:16.116548503Z"
-    description: A Helm chart for listmonk
-    digest: 8e1687423b2352c33d559b0bcfe6d33552610ad8176b9ed859de23e88b28c16f
-    name: monk
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/monk-2.2.0/monk-2.2.0.tgz
-    version: 2.2.0
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2022-04-10T13:50:19.317598414Z"
-    description: A Helm chart for Kubernetes
-    digest: 5cfc02bd89fb64a7b0a527a792a3219b09c98b8024f7cb75e61f0c4012dd3455
-    name: monk
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/monk-0.1.0/monk-0.1.0.tgz
-    version: 0.1.0
+    - apiVersion: v2
+      appVersion: v4.1.0
+      created: "2025-02-06T10:35:52.542336805Z"
+      description: A Helm chart for listmonk
+      digest: 87ff0a23e77a910d59c5185d9782cb2fc53c2b2168fa44b715a60a2dc8ddd528
+      name: monk
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/monk-2.3.0/monk-2.3.0.tgz
+      version: 2.3.0
+    - apiVersion: v2
+      appVersion: 2.4.0
+      created: "2023-03-30T13:02:41.157359046Z"
+      description: A Helm chart for listmonk
+      digest: e43310ff274eca7fc4982b8dc920504aab01167779623766aaec28aec06cc2ed
+      name: monk
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/monk-2.2.1/monk-2.2.1.tgz
+      version: 2.2.1
+    - apiVersion: v2
+      appVersion: 2.2.0
+      created: "2022-08-13T09:50:16.116548503Z"
+      description: A Helm chart for listmonk
+      digest: 8e1687423b2352c33d559b0bcfe6d33552610ad8176b9ed859de23e88b28c16f
+      name: monk
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/monk-2.2.0/monk-2.2.0.tgz
+      version: 2.2.0
+    - apiVersion: v2
+      appVersion: 1.16.0
+      created: "2022-04-10T13:50:19.317598414Z"
+      description: A Helm chart for Kubernetes
+      digest: 5cfc02bd89fb64a7b0a527a792a3219b09c98b8024f7cb75e61f0c4012dd3455
+      name: monk
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/monk-0.1.0/monk-0.1.0.tgz
+      version: 0.1.0
   safepass:
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2022-10-05T13:46:44.480539755Z"
-    description: A Helm chart for Kubernetes
-    digest: b392af5b6120146ee5e163730ad09c3c1b4b00dd79294b3fd2f632ecd3658d25
-    name: safepass
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/safepass-0.1.0/safepass-0.1.0.tgz
-    version: 0.1.0
-  snowflake:
-  - apiVersion: v2
-    appVersion: 1.16.0
-    created: "2022-10-30T16:33:10.77581154Z"
-    description: A Helm chart for Snowflake
-    digest: 1afc0bb509381e40de7f6da7b885e0eaa3e94df91f87a779b437c0b7c2ac7f77
-    name: snowflake
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/snowflake-0.1.0/snowflake-0.1.0.tgz
-    version: 0.1.0
+    - apiVersion: v2
+      appVersion: 1.16.0
+      created: "2022-10-05T13:46:44.480539755Z"
+      description: A Helm chart for Kubernetes
+      digest: b392af5b6120146ee5e163730ad09c3c1b4b00dd79294b3fd2f632ecd3658d25
+      name: safepass
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/safepass-0.1.0/safepass-0.1.0.tgz
+      version: 0.1.0
   spiderfoot:
-  - apiVersion: v2
-    appVersion: 3.3.0
-    created: "2023-11-30T13:50:33.738686788Z"
-    description: A Helm chart for spiderfoot
-    digest: f1c739686ced05d9ead342f9dc61ba86322214c1918f118a2b75017122a4133a
-    name: spiderfoot
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/spiderfoot-2.0.1/spiderfoot-2.0.1.tgz
-    version: 2.0.1
-  - apiVersion: v2
-    appVersion: 3.3.0
-    created: "2023-11-30T13:27:09.272973969Z"
-    description: A Helm chart for spiderfoot
-    digest: d551892327ae2e4eabe48c88255fc8bc8f5844955f8a4e82c9d478951519fe7c
-    name: spiderfoot
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/spiderfoot-2.0.0/spiderfoot-2.0.0.tgz
-    version: 2.0.0
-  - apiVersion: v2
-    appVersion: 3.3.0
-    created: "2021-12-14T11:27:10.421568326Z"
-    description: Spiderfoot helm chart for Kubernetes
-    digest: 5ef0f72e66e4cbe1a5a36b44bf5464f0f6017556f060367fa2edd22143cfc3ac
-    name: spiderfoot
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/spiderfoot-1.0.1/spiderfoot-1.0.1.tgz
-    version: 1.0.1
-  - apiVersion: v2
-    appVersion: 3.3.0
-    created: "2021-12-13T15:17:09.600786505Z"
-    description: Spiderfoot helm chart for Kubernetes
-    digest: da15a720b200f799994f0e066d8e582498ca93a07a818c251124992e6e728d49
-    name: spiderfoot
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/spiderfoot-1.0.0/spiderfoot-1.0.0.tgz
-    version: 1.0.0
-  strapi:
-  - apiVersion: v2
-    appVersion: 3.6.5
-    created: "2021-08-08T01:25:06.261592797Z"
-    description: An open-source headless CMS to build powerful APIs.
-    digest: c34a551c5c42781a6576bb62221695defd0e19451a9cfc411fe79cc15305ddc7
-    home: https://github.com/strapi/strapi
-    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
-    keywords:
-    - strapi
-    - javascript
-    - api
-    - cms
-    - headless
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: strapi
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/strapi-1.0.1/strapi-1.0.1.tgz
-    version: 1.0.1
-  - apiVersion: v2
-    appVersion: 3.6.5
-    created: "2021-08-04T15:39:43.341442426Z"
-    description: An open-source headless CMS to build powerful APIs.
-    digest: 88b9255bc16d1a259ef24b2b6e83b06750b26fb0f5c04dfc9c77d2c517530236
-    home: https://github.com/strapi/strapi
-    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
-    keywords:
-    - strapi
-    - javascript
-    - api
-    - cms
-    - headless
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: strapi
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/strapi-1.0.0/strapi-1.0.0.tgz
-    version: 1.0.0
-  tor-service:
-  - apiVersion: v2
-    created: "2021-12-13T14:52:53.651196951Z"
-    digest: 45f68ed656a4c901fe579ea4a825c31ec9e83ca23d2d22dace8778476517bb94
-    home: https://github.com/jordanopensource/crypto-web
-    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
-    keywords:
-    - nginx
-    - tor
-    - onion
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: tor-service
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/tor-service-1.0.1/tor-service-1.0.1.tgz
-    version: 1.0.1
-  - apiVersion: v2
-    created: "2021-11-23T15:52:53.734182811Z"
-    digest: 8248de3de14b2e67fda184190a15593ea504bc07e183f30bccdb8b2fb1baf416
-    home: https://github.com/jordanopensource/crypto-web
-    icon: https://d2zv2ciw0ln4h1.cloudfront.net/uploads/hp-logo-hero_c94026101f.svg
-    keywords:
-    - nginx
-    - tor
-    - onion
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: tor-service
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/tor-service-1.0.0/tor-service-1.0.0.tgz
-    version: 1.0.0
-  uptime:
-  - apiVersion: v2
-    appVersion: 1.11.4
-    created: "2022-02-14T13:08:14.020418702Z"
-    description: A fancy self-hosted monitoring tool.
-    digest: b1842fb131c1d9e9e5af107724257ab3e17ef275d4a1f07d0e4525e35d043875
-    home: https://github.com/louislam/uptime-kuma
-    icon: https://github.com/louislam/uptime-kuma/blob/master/public/icon.png
-    keywords:
-    - monitoring
-    - uptime
-    - uptime-kuma
-    - healthcheck
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: uptime
-    sources:
-    - https://github.com/louislam/uptime-kuma
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/uptime-1.0.2/uptime-1.0.2.tgz
-    version: 1.0.2
+    - apiVersion: v2
+      appVersion: 3.3.0
+      created: "2023-11-30T13:50:33.738686788Z"
+      description: A Helm chart for spiderfoot
+      digest: f1c739686ced05d9ead342f9dc61ba86322214c1918f118a2b75017122a4133a
+      name: spiderfoot
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/spiderfoot-2.0.1/spiderfoot-2.0.1.tgz
+      version: 2.0.1
+    - apiVersion: v2
+      appVersion: 3.3.0
+      created: "2023-11-30T13:27:09.272973969Z"
+      description: A Helm chart for spiderfoot
+      digest: d551892327ae2e4eabe48c88255fc8bc8f5844955f8a4e82c9d478951519fe7c
+      name: spiderfoot
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/spiderfoot-2.0.0/spiderfoot-2.0.0.tgz
+      version: 2.0.0
+    - apiVersion: v2
+      appVersion: 3.3.0
+      created: "2021-12-14T11:27:10.421568326Z"
+      description: Spiderfoot helm chart for Kubernetes
+      digest: 5ef0f72e66e4cbe1a5a36b44bf5464f0f6017556f060367fa2edd22143cfc3ac
+      name: spiderfoot
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/spiderfoot-1.0.1/spiderfoot-1.0.1.tgz
+      version: 1.0.1
+    - apiVersion: v2
+      appVersion: 3.3.0
+      created: "2021-12-13T15:17:09.600786505Z"
+      description: Spiderfoot helm chart for Kubernetes
+      digest: da15a720b200f799994f0e066d8e582498ca93a07a818c251124992e6e728d49
+      name: spiderfoot
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/spiderfoot-1.0.0/spiderfoot-1.0.0.tgz
+      version: 1.0.0
   uwazi:
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 0.1.0
-    created: "2024-12-11T12:36:18.314365533Z"
-    dependencies:
-    - alias: uwazi
-      name: base
-      repository: https://charts.josa.ngo
-      version: ~1.2.0
-    - condition: mongodb.create
-      name: mongodb
-      repository: https://charts.bitnami.com/bitnami
-      version: ~16.3.0
-    - condition: redis.create
-      name: redis
-      repository: https://charts.bitnami.com/bitnami
-      version: ~20.4.0
-    - condition: minio.create
-      name: minio
-      repository: https://charts.bitnami.com/bitnami
-      version: ~14.8.5
-    - condition: elasticsearch.create
-      name: elasticsearch
-      repository: https://charts.bitnami.com/bitnami
-      version: ~21.3.26
-    description: Uwazi helm chart
-    digest: 8c4fabef2c1264a7fb47ac113e47d3a89e6fb13af62c3c5aa892cb6873bb6847
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - uwazi
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: uwazi
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/uwazi
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/uwazi-1.0.1/uwazi-1.0.1.tgz
-    version: 1.0.1
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 0.1.0
-    created: "2024-12-11T11:43:24.276127105Z"
-    dependencies:
-    - alias: uwazi
-      name: base
-      repository: https://charts.josa.ngo
-      version: ~1.2.0
-    - condition: mongodb.create
-      name: mongodb
-      repository: https://charts.bitnami.com/bitnami
-      version: ~16.3.0
-    - condition: redis.create
-      name: redis
-      repository: https://charts.bitnami.com/bitnami
-      version: ~20.4.0
-    - condition: minio.create
-      name: minio
-      repository: https://charts.bitnami.com/bitnami
-      version: ~14.8.5
-    - condition: elasticsearch.create
-      name: elasticsearch
-      repository: https://charts.bitnami.com/bitnami
-      version: ~21.3.26
-    description: Uwazi helm chart
-    digest: 4ca43fef28ee0f1aea47dd21a5818abe6a05b13b713574e705aeb2f29fcce4f8
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - uwazi
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: uwazi
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/uwazi
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/uwazi-1.0.0/uwazi-1.0.0.tgz
-    version: 1.0.0
-  - annotations:
-      category: Applications
-    apiVersion: v2
-    appVersion: 0.1.0
-    created: "2024-12-09T09:47:01.287637332Z"
-    dependencies:
-    - alias: uwazi
-      name: base
-      repository: https://charts.josa.ngo
-      version: ~1.2.0
-    - condition: mongodb.create
-      name: mongodb
-      repository: https://charts.bitnami.com/bitnami
-      version: ~16.3.0
-    - condition: redis.create
-      name: redis
-      repository: https://charts.bitnami.com/bitnami
-      version: ~20.4.0
-    - condition: minio.create
-      name: minio
-      repository: https://charts.bitnami.com/bitnami
-      version: ~14.8.5
-    - condition: elasticsearch.create
-      name: elasticsearch
-      repository: https://charts.bitnami.com/bitnami
-      version: ~21.3.26
-    description: Uwazi helm chart
-    digest: 0570f5d1588d86174d2db5f2e425a07221efe4c267b1f562087850d281bd95e9
-    home: https://josa.ngo
-    icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
-    keywords:
-    - uwazi
-    maintainers:
-    - name: JOSA
-      url: https://github.com/jordanopensource/charts/
-    name: uwazi
-    sources:
-    - https://github.com/jordanopensource/charts/tree/main/charts/uwazi
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/uwazi-0.1.0/uwazi-0.1.0.tgz
-    version: 0.1.0
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 0.1.0
+      created: "2024-12-11T12:36:18.314365533Z"
+      dependencies:
+        - alias: uwazi
+          name: base
+          repository: https://charts.josa.ngo
+          version: ~1.2.0
+        - condition: mongodb.create
+          name: mongodb
+          repository: https://charts.bitnami.com/bitnami
+          version: ~16.3.0
+        - condition: redis.create
+          name: redis
+          repository: https://charts.bitnami.com/bitnami
+          version: ~20.4.0
+        - condition: minio.create
+          name: minio
+          repository: https://charts.bitnami.com/bitnami
+          version: ~14.8.5
+        - condition: elasticsearch.create
+          name: elasticsearch
+          repository: https://charts.bitnami.com/bitnami
+          version: ~21.3.26
+      description: Uwazi helm chart
+      digest: 8c4fabef2c1264a7fb47ac113e47d3a89e6fb13af62c3c5aa892cb6873bb6847
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - uwazi
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: uwazi
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/uwazi
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/uwazi-1.0.1/uwazi-1.0.1.tgz
+      version: 1.0.1
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 0.1.0
+      created: "2024-12-11T11:43:24.276127105Z"
+      dependencies:
+        - alias: uwazi
+          name: base
+          repository: https://charts.josa.ngo
+          version: ~1.2.0
+        - condition: mongodb.create
+          name: mongodb
+          repository: https://charts.bitnami.com/bitnami
+          version: ~16.3.0
+        - condition: redis.create
+          name: redis
+          repository: https://charts.bitnami.com/bitnami
+          version: ~20.4.0
+        - condition: minio.create
+          name: minio
+          repository: https://charts.bitnami.com/bitnami
+          version: ~14.8.5
+        - condition: elasticsearch.create
+          name: elasticsearch
+          repository: https://charts.bitnami.com/bitnami
+          version: ~21.3.26
+      description: Uwazi helm chart
+      digest: 4ca43fef28ee0f1aea47dd21a5818abe6a05b13b713574e705aeb2f29fcce4f8
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - uwazi
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: uwazi
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/uwazi
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/uwazi-1.0.0/uwazi-1.0.0.tgz
+      version: 1.0.0
+    - annotations:
+        category: Applications
+      apiVersion: v2
+      appVersion: 0.1.0
+      created: "2024-12-09T09:47:01.287637332Z"
+      dependencies:
+        - alias: uwazi
+          name: base
+          repository: https://charts.josa.ngo
+          version: ~1.2.0
+        - condition: mongodb.create
+          name: mongodb
+          repository: https://charts.bitnami.com/bitnami
+          version: ~16.3.0
+        - condition: redis.create
+          name: redis
+          repository: https://charts.bitnami.com/bitnami
+          version: ~20.4.0
+        - condition: minio.create
+          name: minio
+          repository: https://charts.bitnami.com/bitnami
+          version: ~14.8.5
+        - condition: elasticsearch.create
+          name: elasticsearch
+          repository: https://charts.bitnami.com/bitnami
+          version: ~21.3.26
+      description: Uwazi helm chart
+      digest: 0570f5d1588d86174d2db5f2e425a07221efe4c267b1f562087850d281bd95e9
+      home: https://josa.ngo
+      icon: https://assets.josacdn.net/brand/josa/logos/abbreviated/josa-logo-only.png
+      keywords:
+        - uwazi
+      maintainers:
+        - name: JOSA
+          url: https://github.com/jordanopensource/charts/
+      name: uwazi
+      sources:
+        - https://github.com/jordanopensource/charts/tree/main/charts/uwazi
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/uwazi-0.1.0/uwazi-0.1.0.tgz
+      version: 0.1.0
   wazuh:
-  - apiVersion: v2
-    appVersion: 4.14.3
-    created: "2026-03-12T10:26:00.955283916Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: e17f57e123d23def5b61bb623bfe7351e15e02460a417801d1c09398d1bf742f
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-2.3.1/wazuh-2.3.1.tgz
-    version: 2.3.1
-  - apiVersion: v2
-    appVersion: 4.13.1
-    created: "2025-11-26T12:25:48.686355393Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: a7a48e1cf29a23f4ec76af86c24b121022dcf683bf6f9cf3828b37b864e69d97
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-2.3.0/wazuh-2.3.0.tgz
-    version: 2.3.0
-  - apiVersion: v2
-    appVersion: 4.13.1
-    created: "2025-10-15T10:29:02.682377456Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 6f04a6188afaa971b58fb16a7ab04693b09d3a45e1b6ec00f7be18c237f9b5b4
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-2.2.1/wazuh-2.2.1.tgz
-    version: 2.2.1
-  - apiVersion: v2
-    appVersion: 4.13.1
-    created: "2025-10-14T09:11:10.952300422Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 19ea9ab3967b5ece883ff9c99a482193095c77758b114f5c52beea2d247936d8
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-2.2.0/wazuh-2.2.0.tgz
-    version: 2.2.0
-  - apiVersion: v2
-    appVersion: 4.11.2
-    created: "2025-04-09T13:58:22.799730118Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 439d7a699094585eedca58b0be82c9e953d31df1baae1873bb0cf0c05690cf6c
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-2.1.2/wazuh-2.1.2.tgz
-    version: 2.1.2
-  - apiVersion: v2
-    appVersion: 4.11.2
-    created: "2025-04-09T13:33:09.24991407Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: e2911372a6fb8e5ef0ba9a983e45bd504a766087bf2607fc6400297ff08a754d
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-2.1.1/wazuh-2.1.1.tgz
-    version: 2.1.1
-  - apiVersion: v2
-    appVersion: 4.11.2
-    created: "2025-04-09T12:31:39.506094538Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 200c120c385ffc668de9a3b8743911a0db87f331ee1e1d597c14ffaf87598000
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-2.1.0/wazuh-2.1.0.tgz
-    version: 2.1.0
-  - apiVersion: v2
-    appVersion: 4.11.2
-    created: "2025-04-09T11:26:29.592819137Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: b6f52b46f1872d1efb0553e04d905173c217246e478475746c4af0cfe9557646
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-2.0.0/wazuh-2.0.0.tgz
-    version: 2.0.0
-  - apiVersion: v2
-    appVersion: 4.10.2
-    created: "2025-04-07T14:48:46.698131321Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 5bc0f6c8c4a26bde639237ccfa75899e3843e7837146d4d3cb5273ccf44fe1f8
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-1.2.4/wazuh-1.2.4.tgz
-    version: 1.2.4
-  - apiVersion: v2
-    appVersion: 4.10.2
-    created: "2025-04-07T14:03:29.980740528Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 1e7756f03d95c829e066b95a7a83383a9d44b9045f1171ec080bdae9267a76da
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-1.2.3/wazuh-1.2.3.tgz
-    version: 1.2.3
-  - apiVersion: v2
-    appVersion: 4.10.2
-    created: "2025-04-07T13:39:28.05559973Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 5030c3784be516cbe9529dc228e337bb550ea4ea8e862b2baa6a1680af24914c
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-1.2.2/wazuh-1.2.2.tgz
-    version: 1.2.2
-  - apiVersion: v2
-    appVersion: 4.10.2
-    created: "2025-04-07T12:58:49.259767337Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 3e48a1e10f10f17824cb942bdffffbf995b21187b6c5be9e2017a42f53f995eb
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-1.2.1/wazuh-1.2.1.tgz
-    version: 1.2.1
-  - apiVersion: v2
-    appVersion: 4.10.2
-    created: "2025-01-20T09:52:08.637188163Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 69512198fb3e3cf772757456986bba805dd43865d1a0566b363de57e888273b6
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-1.2.0/wazuh-1.2.0.tgz
-    version: 1.2.0
-  - apiVersion: v2
-    appVersion: 4.9.2
-    created: "2024-11-12T09:40:45.318560526Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 14620b74b04247ab229b8282c7f63fa963aebb3325efdd177424705751772171
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-1.1.0/wazuh-1.1.0.tgz
-    version: 1.1.0
-  - apiVersion: v2
-    appVersion: 4.8.3
-    created: "2024-10-14T10:01:26.142123159Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 583931b7c1eed186020f559327c1c2fb0f8c1a215dc7ca2567713c71b82133a9
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-1.0.3/wazuh-1.0.3.tgz
-    version: 1.0.3
-  - apiVersion: v2
-    appVersion: 4.8.2
-    created: "2024-08-29T12:42:34.687175691Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 477fa373a2c68642acfe8f1ab719bfe0f9f0ce14e47bbcb2b89e9fd4d428a5b8
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-1.0.2/wazuh-1.0.2.tgz
-    version: 1.0.2
-  - apiVersion: v2
-    appVersion: 4.8.1
-    created: "2024-07-30T13:29:40.431672206Z"
-    description: A Helm chart for Wazuh the open source security platform that unifies
-      XDR and SIEM protection for endpoints and cloud workloads.
-    digest: 37bb9de6a29f48b429e5e30819dfecbd796819f84f9f68328388254deb12e1b6
-    name: wazuh
-    type: application
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/wazuh-1.0.0/wazuh-1.0.0.tgz
-    version: 1.0.0
-  whoami:
-  - apiVersion: v2
-    appVersion: v1.8.6
-    created: "2023-09-18T08:27:16.837159908Z"
-    description: Tiny Go webserver that prints os information and HTTP request to
-      output
-    digest: c49989827896557fac7787d9ac951fe27064253f331926e3e79c50f72af18172
-    home: https://github.com/traefik/whoami
-    icon: https://raw.githubusercontent.com/stackrox/kube-linter/main/images/logo/KubeLinter-vertical.svg
-    keywords:
-    - golang
-    - go
-    - whoami
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: whoami
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/whoami-1.2.1/whoami-1.2.1.tgz
-    version: 1.2.1
-  - apiVersion: v2
-    appVersion: v1.8.6
-    created: "2023-09-14T13:50:19.66135345Z"
-    description: Tiny Go webserver that prints os information and HTTP request to
-      output
-    digest: 7f645443771bc40c2de508ffb11e29f881386e024eae78d8e84c5187269e2cc5
-    home: https://github.com/traefik/whoami
-    icon: https://raw.githubusercontent.com/stackrox/kube-linter/main/images/logo/KubeLinter-vertical.svg
-    keywords:
-    - golang
-    - go
-    - whoami
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: whoami
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/whoami-1.2.0/whoami-1.2.0.tgz
-    version: 1.2.0
-  - apiVersion: v2
-    appVersion: v1.8.6
-    created: "2022-09-26T10:56:32.805298178Z"
-    description: Tiny Go webserver that prints os information and HTTP request to
-      output
-    digest: 2df4bb619126803fbdf2e00d986cf0199bbdb76ebc4c63848ae2035fb2e0694a
-    home: https://github.com/containous/whoami
-    icon: https://raw.githubusercontent.com/stackrox/kube-linter/main/images/logo/KubeLinter-vertical.svg
-    keywords:
-    - golang
-    - go
-    - whoami
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: whoami
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/whoami-1.1.0/whoami-1.1.0.tgz
-    version: 1.1.0
-  - apiVersion: v2
-    appVersion: v1.5.0
-    created: "2021-06-27T13:13:37.730150522Z"
-    description: Tiny Go webserver that prints os information and HTTP request to
-      output
-    digest: d87d86bcf24b8d0bae2fb4895d1bc11f78f77f70c0401d85a896499d257bd48a
-    home: https://github.com/containous/whoami
-    keywords:
-    - golang
-    - go
-    - whoami
-    maintainers:
-    - email: admin@josa.ngo
-      name: Jordan Open Source Association
-    name: whoami
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/whoami-1.0.0/whoami-1.0.0.tgz
-    version: 1.0.0
-  - apiVersion: v1
-    appVersion: v1.4.0
-    created: "2021-06-20T09:27:35.012771178Z"
-    description: Tiny Go webserver that prints os information and HTTP request to
-      output
-    digest: 638908567ba55050cdcd3e365d2080fdfaec7caa8e69aacb68c629b914a06182
-    home: https://github.com/containous/whoami
-    keywords:
-    - golang
-    - go
-    - whoami
-    maintainers:
-    - email: helm@gavinmogan.com
-      name: Gavin Mogan
-    name: whoami
-    sources:
-    - https://github.com/containous/whoami
-    urls:
-    - https://github.com/jordanopensource/charts/releases/download/whoami-0.3.2/whoami-0.3.2.tgz
-    version: 0.3.2
+    - apiVersion: v2
+      appVersion: 4.14.3
+      created: "2026-03-12T10:26:00.955283916Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: e17f57e123d23def5b61bb623bfe7351e15e02460a417801d1c09398d1bf742f
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-2.3.1/wazuh-2.3.1.tgz
+      version: 2.3.1
+    - apiVersion: v2
+      appVersion: 4.13.1
+      created: "2025-11-26T12:25:48.686355393Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: a7a48e1cf29a23f4ec76af86c24b121022dcf683bf6f9cf3828b37b864e69d97
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-2.3.0/wazuh-2.3.0.tgz
+      version: 2.3.0
+    - apiVersion: v2
+      appVersion: 4.13.1
+      created: "2025-10-15T10:29:02.682377456Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 6f04a6188afaa971b58fb16a7ab04693b09d3a45e1b6ec00f7be18c237f9b5b4
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-2.2.1/wazuh-2.2.1.tgz
+      version: 2.2.1
+    - apiVersion: v2
+      appVersion: 4.13.1
+      created: "2025-10-14T09:11:10.952300422Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 19ea9ab3967b5ece883ff9c99a482193095c77758b114f5c52beea2d247936d8
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-2.2.0/wazuh-2.2.0.tgz
+      version: 2.2.0
+    - apiVersion: v2
+      appVersion: 4.11.2
+      created: "2025-04-09T13:58:22.799730118Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 439d7a699094585eedca58b0be82c9e953d31df1baae1873bb0cf0c05690cf6c
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-2.1.2/wazuh-2.1.2.tgz
+      version: 2.1.2
+    - apiVersion: v2
+      appVersion: 4.11.2
+      created: "2025-04-09T13:33:09.24991407Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: e2911372a6fb8e5ef0ba9a983e45bd504a766087bf2607fc6400297ff08a754d
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-2.1.1/wazuh-2.1.1.tgz
+      version: 2.1.1
+    - apiVersion: v2
+      appVersion: 4.11.2
+      created: "2025-04-09T12:31:39.506094538Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 200c120c385ffc668de9a3b8743911a0db87f331ee1e1d597c14ffaf87598000
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-2.1.0/wazuh-2.1.0.tgz
+      version: 2.1.0
+    - apiVersion: v2
+      appVersion: 4.11.2
+      created: "2025-04-09T11:26:29.592819137Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: b6f52b46f1872d1efb0553e04d905173c217246e478475746c4af0cfe9557646
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-2.0.0/wazuh-2.0.0.tgz
+      version: 2.0.0
+    - apiVersion: v2
+      appVersion: 4.10.2
+      created: "2025-04-07T14:48:46.698131321Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 5bc0f6c8c4a26bde639237ccfa75899e3843e7837146d4d3cb5273ccf44fe1f8
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-1.2.4/wazuh-1.2.4.tgz
+      version: 1.2.4
+    - apiVersion: v2
+      appVersion: 4.10.2
+      created: "2025-04-07T14:03:29.980740528Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 1e7756f03d95c829e066b95a7a83383a9d44b9045f1171ec080bdae9267a76da
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-1.2.3/wazuh-1.2.3.tgz
+      version: 1.2.3
+    - apiVersion: v2
+      appVersion: 4.10.2
+      created: "2025-04-07T13:39:28.05559973Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 5030c3784be516cbe9529dc228e337bb550ea4ea8e862b2baa6a1680af24914c
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-1.2.2/wazuh-1.2.2.tgz
+      version: 1.2.2
+    - apiVersion: v2
+      appVersion: 4.10.2
+      created: "2025-04-07T12:58:49.259767337Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 3e48a1e10f10f17824cb942bdffffbf995b21187b6c5be9e2017a42f53f995eb
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-1.2.1/wazuh-1.2.1.tgz
+      version: 1.2.1
+    - apiVersion: v2
+      appVersion: 4.10.2
+      created: "2025-01-20T09:52:08.637188163Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 69512198fb3e3cf772757456986bba805dd43865d1a0566b363de57e888273b6
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-1.2.0/wazuh-1.2.0.tgz
+      version: 1.2.0
+    - apiVersion: v2
+      appVersion: 4.9.2
+      created: "2024-11-12T09:40:45.318560526Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 14620b74b04247ab229b8282c7f63fa963aebb3325efdd177424705751772171
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-1.1.0/wazuh-1.1.0.tgz
+      version: 1.1.0
+    - apiVersion: v2
+      appVersion: 4.8.3
+      created: "2024-10-14T10:01:26.142123159Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 583931b7c1eed186020f559327c1c2fb0f8c1a215dc7ca2567713c71b82133a9
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-1.0.3/wazuh-1.0.3.tgz
+      version: 1.0.3
+    - apiVersion: v2
+      appVersion: 4.8.2
+      created: "2024-08-29T12:42:34.687175691Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 477fa373a2c68642acfe8f1ab719bfe0f9f0ce14e47bbcb2b89e9fd4d428a5b8
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-1.0.2/wazuh-1.0.2.tgz
+      version: 1.0.2
+    - apiVersion: v2
+      appVersion: 4.8.1
+      created: "2024-07-30T13:29:40.431672206Z"
+      description:
+        A Helm chart for Wazuh the open source security platform that unifies
+        XDR and SIEM protection for endpoints and cloud workloads.
+      digest: 37bb9de6a29f48b429e5e30819dfecbd796819f84f9f68328388254deb12e1b6
+      name: wazuh
+      type: application
+      urls:
+        - https://github.com/jordanopensource/charts/releases/download/wazuh-1.0.0/wazuh-1.0.0.tgz
+      version: 1.0.0
 generated: "2026-03-12T10:26:00.955502351Z"
