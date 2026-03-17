@@ -6,7 +6,7 @@
 replicaCount: 1
 
 image:
-  repository: tootsuite/mastodon
+  repository: ghcr.io/mastodon/mastodon
   # Image pull policy. Options: Always, Never, IfNotPresent
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
@@ -54,8 +54,8 @@ mastodon:
 
   streaming:
     image:
-      repository: tootsuite/mastodon-streaming
-      tag: "4.5.7"
+      repository: ghcr.io/mastodon/mastodon-streaming
+      tag: "v4.5.7"
       pullPolicy: IfNotPresent
     port: 4000
     # this should be set manually since os.cpus() returns the number of CPUs on
@@ -137,7 +137,7 @@ mastodon:
     ## NOTE: Must contain key `SECRET_KEY_BASE`
     ## NOTE: Must contain key `ACTIVE_RECORD_ENCRYPTION_DETERMINISTIC_KEY`
     ## NOTE: Must contain key `ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT`
-    ## NOTE: Must contain key `ACTIVE_RECORD_ENCRYPTION_KEY_DERIVATION_SALT`
+    ## NOTE: Must contain key `ACTIVE_RECORD_ENCRYPTION_PRIMARY_KEY`
     ## NOTE: Must contain key `OTP_SECRET` for otp
     ## NOTE: Must contain key `VAPID_PRIVATE_KEY` for push notification
     ## NOTE: Must contain key `VAPID_PUBLIC_KEY` for push notification
@@ -192,6 +192,7 @@ elasticsearch:
   host: elasticsearch-coordinating-only.elasticsearch.svc.cluster.local
   port: 9200
   prefix: mastodon
+  ssl: true
 
   ## This is optional
   credentials:
@@ -257,7 +258,7 @@ podAnnotations: {}
 
 # Security context for all pods
 podSecurityContext: {}
-  # fsGroup: 2000
+  # fsGroup: 991
 
 # Security context for containers
 securityContext: {}
@@ -266,7 +267,7 @@ securityContext: {}
   #   - ALL
   # readOnlyRootFilesystem: true
   # runAsNonRoot: true
-  # runAsUser: 1000
+  # runAsUser: 991
 
 service:
   type: ClusterIP
