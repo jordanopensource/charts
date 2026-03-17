@@ -15,12 +15,16 @@ data:
   DB_NAME: {{ .Values.postgres.name | quote }}
   DB_PORT: {{ .Values.postgres.port | quote }}
   DB_SSLMODE: {{ .Values.postgres.sslMode | quote}}
+  # Redis
+  REDIS_HOST: {{ .Values.redis.host | quote }}
+  REDIS_PORT: {{ .Values.redis.port | default "6379" | quote }}
   # ElasticSearch
 {{- if .Values.elasticsearch.enabled }}
   ES_ENABLED: {{ .Values.elasticsearch.enabled | quote }}
   ES_HOST: {{ .Values.elasticsearch.host | quote }}
   ES_PORT: {{ .Values.elasticsearch.port | quote }}
   ES_PREFIX: {{ .Values.elasticsearch.prefix | quote }}
+  ES_SSL: {{ .Values.elasticsearch.ssl | quote }}
 {{- end }}
   # SMTP
   SMTP_SERVER: {{ .Values.smtp.server | quote }}
