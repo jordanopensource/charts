@@ -24,7 +24,6 @@ data:
   ES_HOST: {{ .Values.elasticsearch.host | quote }}
   ES_PORT: {{ .Values.elasticsearch.port | quote }}
   ES_PREFIX: {{ .Values.elasticsearch.prefix | quote }}
-  ES_SSL: {{ .Values.elasticsearch.ssl | quote }}
 {{- end }}
   # SMTP
   SMTP_SERVER: {{ .Values.smtp.server | quote }}

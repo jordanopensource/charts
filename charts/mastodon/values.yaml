@@ -192,7 +192,6 @@ elasticsearch:
   host: elasticsearch-coordinating-only.elasticsearch.svc.cluster.local
   port: 9200
   prefix: mastodon
-  ssl: true
 
   ## This is optional
   credentials:
