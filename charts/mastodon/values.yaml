@@ -120,17 +120,6 @@ mastodon:
       type: ClusterIP
       port: 80
       annotations: {}
-      # Example annotations for Teleport. Uncomment and set the values if you want to use Teleport to access the web service.
-      # annotations:
-      #   teleport.dev/name: "mastodon-web"
-      #   teleport.dev/public-addr: "mastodon-web-example.com"
-      #   teleport.dev/ignore: "false"
-      #   teleport.dev/app-rewrite: |
-      #     headers:
-      #     - name: "Origin"
-      #       value: "https://mastodon-web-example.com"
-      #     - name: "Host"
-      #       value: "mastodon-web-example.com"
 
     # Node selector for web (This takes precedence over the global nodeSelector)
     nodeSelector: {}
