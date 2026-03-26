@@ -4,10 +4,14 @@ metadata:
   name: {{ include "mastodon.fullname" . }}-streaming
   labels:
     {{- include "mastodon.labels" . | nindent 4 }}
+  annotations:
+  {{- with .Values.mastodon.streaming.service.annotations }}
+  {{- toYaml . | nindent 4 }}
+  {{- end }}
 spec:
-  type: {{ .Values.service.type }}
+  type: {{ .Values.mastodon.streaming.service.type }}
   ports:
-    - port: {{ .Values.mastodon.streaming.port }}
+    - port: {{ .Values.mastodon.streaming.service.port }}
       targetPort: streaming
       protocol: TCP
       name: streaming

@@ -16,7 +16,8 @@ data:
   DB_PORT: {{ .Values.postgres.port | quote }}
   DB_SSLMODE: {{ .Values.postgres.sslMode | quote}}
   # Redis
-  REDIS_NAMESPACE: {{ .Values.redis.namespace | quote }}
+  REDIS_HOST: {{ .Values.redis.host | quote }}
+  REDIS_PORT: {{ .Values.redis.port | default "6379" | quote }}
   # ElasticSearch
 {{- if .Values.elasticsearch.enabled }}
   ES_ENABLED: {{ .Values.elasticsearch.enabled | quote }}

@@ -33,11 +33,11 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          image: "{{ .Values.mastodon.streaming.image.repository }}:{{ .Values.mastodon.streaming.image.tag | default .Values.mastodon.streaming.image.tag }}"
+          imagePullPolicy: {{ .Values.mastodon.streaming.image.pullPolicy }}
           command:
             - node
-            - ./streaming
+            - ./streaming/index.js
           envFrom:
             - configMapRef:
                 name: {{ include "mastodon.fullname" . }}-config
