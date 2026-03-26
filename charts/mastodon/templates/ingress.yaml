@@ -1,7 +1,7 @@
 {{- if .Values.ingress.enabled -}}
 {{- $fullName := include "mastodon.fullname" . -}}
-{{- $webPort := .Values.mastodon.web.port -}}
-{{- $streamingPort := .Values.mastodon.streaming.port -}}
+{{- $webPort := .Values.mastodon.web.service.port -}}
+{{- $streamingPort := .Values.mastodon.streaming.service.port -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
