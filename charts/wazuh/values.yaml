@@ -36,7 +36,13 @@ tls:
       kind: "ClusterIssuer"
     # The use of the common name field has been deprecated since 2000 and is
     # discouraged from being used.
-    commonName: wazuh.example.com
+    commonName:
+      dashboard: dashboard.wazuh.example.com
+      manager: manager.wazuh.example.com
+      filebeat: filebeat.wazuh.example.com
+      indexer:
+        admin: admin.indexer.wazuh.example.com
+        node: node.indexer.wazuh.example.com
     # At least one of commonName (possibly through literalSubject), dnsNames, uris, emailAddresses, ipAddresses or otherNames is required.
     dnsNames:
       - wazuh.example.com
