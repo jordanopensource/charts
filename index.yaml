@@ -633,6 +633,16 @@ entries:
     version: 0.1.0
   monk:
   - apiVersion: v2
+    appVersion: v6.2.0
+    created: "2026-06-29T14:23:22.305346484Z"
+    description: A Helm chart for listmonk
+    digest: c6a4bd20219072724b9d6d6600b6de278a0d0c376dad2ca5eb3a974a195d8687
+    name: monk
+    type: application
+    urls:
+    - https://github.com/jordanopensource/charts/releases/download/monk-2.4.0/monk-2.4.0.tgz
+    version: 2.4.0
+  - apiVersion: v2
     appVersion: v4.1.0
     created: "2025-02-06T10:35:52.542336805Z"
     description: A Helm chart for listmonk
@@ -1058,4 +1068,4 @@ entries:
     urls:
     - https://github.com/jordanopensource/charts/releases/download/wazuh-1.0.0/wazuh-1.0.0.tgz
     version: 1.0.0
-generated: "2026-04-28T09:14:15.192782176Z"
+generated: "2026-06-29T14:23:22.305531048Z"
