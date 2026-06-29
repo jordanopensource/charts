@@ -27,62 +27,31 @@ spec:
       serviceAccountName: {{ include "monk.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
-      {{- if .Values.listmonk.freshInstall}}
       initContainers:
-        - name: init-db
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          command: ["./listmonk", "--install", "--yes"]
+        - name: db-check
+          image: {{ include "monk.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.existingSecret.enabled}}
+          command: ["/bin/sh", "-c"]
+          args:
+            - "./listmonk --install --idempotent --yes --config '' && ./listmonk --upgrade --yes --config ''"
+          {{- with include "monk.secretEnv" . | trim }}
           env:
-            - name: LISTMONK_app__admin_username
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.existingSecret.secretName }}
-                  key: {{ .Values.existingSecret.adminUsernameKey }}
-            - name: LISTMONK_app__admin_password
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.existingSecret.secretName }}
-                  key: {{ .Values.existingSecret.adminPasswordKey }}
-            - name: LISTMONK_db__password
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.existingSecret.secretName }}
-                  key: {{ .Values.existingSecret.databasePasswordKey }}
+            {{- . | nindent 12 }}
           {{- end }}
           envFrom:
-            - configMapRef:
-                name: {{ include "monk.fullname" . }}
-          {{- if not .Values.existingSecret.enabled }}
-            - secretRef:
-                name: {{ include "monk.fullname" . }}
-          {{- end }}
-          {{- end }}
+            {{- include "monk.envFrom" . | nindent 12 }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          {{- if .Values.listmonk.upgrade}}
-          command: ["./listmonk", "--upgrade", "--yes"]
-          {{- end }}
+          image: {{ include "monk.image" . | quote }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          {{- if .Values.existingSecret.enabled}}
+          {{- with include "monk.secretEnv" . | trim }}
           env:
-            - name: LISTMONK_db__password
-              valueFrom:
-                secretKeyRef:
-                  name: {{ .Values.existingSecret.secretName }}
-                  key: {{ .Values.existingSecret.databasePasswordKey }}
+            {{- . | nindent 12 }}
           {{- end }}
           envFrom:
-            - configMapRef:
-                name: {{ include "monk.fullname" . }}
-            {{- if not .Values.existingSecret.enabled }}
-            - secretRef:
-                name: {{ include "monk.fullname" . }}
-            {{- end }}
+            {{- include "monk.envFrom" . | nindent 12 }}
           ports:
             - name: http
               containerPort: 9090
