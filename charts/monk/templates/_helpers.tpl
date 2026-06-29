@@ -60,3 +60,49 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Container image reference.
+*/}}
+{{- define "monk.image" -}}
+{{- printf "%s:%s" .Values.image.repository (.Values.image.tag | default .Chart.AppVersion) -}}
+{{- end }}
+
+{{/*
+Shared envFrom for the init and main containers.
+*/}}
+{{- define "monk.envFrom" -}}
+- configMapRef:
+    name: {{ include "monk.fullname" . }}
+{{- if not .Values.existingSecret.enabled }}
+- secretRef:
+    name: {{ include "monk.fullname" . }}
+{{- end }}
+{{- end }}
+
+{{/*
+Environment variables when using an existing Secret.
+*/}}
+{{- define "monk.secretEnv" -}}
+{{- if .Values.existingSecret.enabled }}
+{{- if .Values.existingSecret.adminUsernameKey }}
+- name: LISTMONK_app__admin_username
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.existingSecret.secretName }}
+      key: {{ .Values.existingSecret.adminUsernameKey }}
+{{- end }}
+{{- if .Values.existingSecret.adminPasswordKey }}
+- name: LISTMONK_app__admin_password
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.existingSecret.secretName }}
+      key: {{ .Values.existingSecret.adminPasswordKey }}
+{{- end }}
+- name: LISTMONK_db__password
+  valueFrom:
+    secretKeyRef:
+      name: {{ .Values.existingSecret.secretName }}
+      key: {{ .Values.existingSecret.databasePasswordKey }}
+{{- end }}
+{{- end }}
