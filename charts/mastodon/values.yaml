@@ -8,9 +8,9 @@ replicaCount: 1
 image:
   repository: ghcr.io/mastodon/mastodon
   # Image pull policy. Options: Always, Never, IfNotPresent
-  pullPolicy: Always
+  pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v4.5.7"
+  tag: ""
 
 # Secrets used to pull images from private registries
 imagePullSecrets: []
@@ -55,8 +55,8 @@ mastodon:
   streaming:
     image:
       repository: ghcr.io/mastodon/mastodon-streaming
-      tag: "v4.5.7"
       pullPolicy: IfNotPresent
+      tag: ""
     port: 4000
     # this should be set manually since os.cpus() returns the number of CPUs on
     # the node running the pod, which is unrelated to the resources allocated to
