@@ -33,7 +33,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.mastodon.streaming.image.repository }}:{{ .Values.mastodon.streaming.image.tag | default .Values.mastodon.streaming.image.tag }}"
+          image: "{{ .Values.mastodon.streaming.image.repository }}:{{ .Values.mastodon.streaming.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.mastodon.streaming.image.pullPolicy }}
           command:
             - node
