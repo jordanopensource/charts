@@ -28,7 +28,7 @@ steps:
       - |
         set -eu
         if [ "$${CI_COMMIT_BRANCH:-}" = "main" ] && [ "$${CI_PIPELINE_EVENT:-}" = "push" ]; then
-          ct lint --config ct.yaml --since HEAD~1
+          ct lint --config ct.yaml --since HEAD~1 --check-version-increment=false
         else
           ct lint --config ct.yaml
         fi
