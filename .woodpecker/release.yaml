@@ -3,6 +3,16 @@ when:
   - event: [pull_request]
     evaluate: 'CI_COMMIT_TARGET_BRANCH == "main"'
 
+clone:
+  git:
+    image: woodpeckerci/plugin-git
+    settings:
+      partial: false
+      depth: 0
+      fetch-target-branch: true
+      lfs: false
+      recursive: false
+
 steps:
   - name: run-pre-commit-hooks
     image: registry.cloud.josa.ngo/library/pre-commit-runner
@@ -14,13 +24,13 @@ steps:
     image: quay.io/helmpack/chart-testing:v3.15.0
     commands:
       - git config --global --add safe.directory "$$(pwd)"
-      - git fetch --no-tags origin "+refs/heads/main:refs/heads/main"
+      - git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
       - |
         set -eu
         if [ "$${CI_COMMIT_BRANCH:-}" = "main" ] && [ "$${CI_PIPELINE_EVENT:-}" = "push" ]; then
           ct lint --config ct.yaml --since HEAD~1
         else
-          ct lint --config ct.yaml --target-branch main
+          ct lint --config ct.yaml
         fi
     depends_on:
       - run-pre-commit-hooks
@@ -43,9 +53,7 @@ steps:
       - |
         set -eu
         apk add --no-cache git >/dev/null
-
         git config --global --add safe.directory "$$(pwd)"
-        git fetch --no-tags origin "+refs/heads/main:refs/heads/main"
 
         mkdir -p /tmp/packages .ci
         : > .ci/pushed-charts
