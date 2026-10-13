@@ -1,0 +1,187 @@
+when:
+  - event: [push, manual]
+  - event: [pull_request]
+    evaluate: 'CI_COMMIT_TARGET_BRANCH == "main"'
+
+clone:
+  git:
+    image: woodpeckerci/plugin-git
+    settings:
+      partial: false
+      depth: 0
+      fetch-target-branch: true
+      lfs: false
+      recursive: false
+
+steps:
+  - name: run-pre-commit-hooks
+    image: registry.cloud.josa.ngo/library/pre-commit-runner
+    settings:
+      args: "--all-files"
+      skip: "helmlint"
+
+  - name: lint-charts
+    image: quay.io/helmpack/chart-testing:v3.15.0
+    commands:
+      - git config --global --add safe.directory "$$(pwd)"
+      - git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
+      - |
+        set -eu
+        if [ "$${CI_COMMIT_BRANCH:-}" = "main" ] && [ "$${CI_PIPELINE_EVENT:-}" = "push" ]; then
+          ct lint --config ct.yaml --since HEAD~1
+        else
+          ct lint --config ct.yaml
+        fi
+    depends_on:
+      - run-pre-commit-hooks
+
+  - name: publish-charts
+    image: alpine/helm:3.22.0
+    when:
+      - event: [push, manual]
+        branch: [main]
+    depends_on:
+      - lint-charts
+    environment:
+      REGISTRY_HOST: registry.cloud.josa.ngo
+      REGISTRY_PROJECT: oci://registry.cloud.josa.ngo/charts
+      REGISTRY_USERNAME:
+        from_secret: REGISTRY_USERNAME
+      REGISTRY_SECRET:
+        from_secret: REGISTRY_SECRET
+    commands:
+      - |
+        set -eu
+        apk add --no-cache git >/dev/null
+        git config --global --add safe.directory "$$(pwd)"
+
+        mkdir -p /tmp/packages .ci
+        : > .ci/pushed-charts
+        : > .ci/failed-charts
+
+        if ! echo "$${REGISTRY_SECRET}" | helm registry login "$${REGISTRY_HOST}" \
+          -u "$${REGISTRY_USERNAME}" --password-stdin; then
+          echo "registry-login" >> .ci/failed-charts
+          exit 1
+        fi
+
+        helm repo add josa https://charts.josa.ngo >/dev/null
+        helm repo add bitnami https://charts.bitnami.com/bitnami >/dev/null
+        helm repo update >/dev/null
+
+        # Push: only charts touched in this commit. Manual: all charts (seed missing versions).
+        if [ "$${CI_PIPELINE_EVENT:-}" = "manual" ]; then
+          charts=""
+          for chart_dir in charts/*/; do
+            [ -f "$${chart_dir}Chart.yaml" ] || continue
+            charts="$${charts} $$(basename "$${chart_dir}")"
+          done
+        else
+          charts="$$(git diff --name-only --diff-filter=ACMR HEAD~1 HEAD -- charts \
+            | awk -F/ 'NF>=2 {print $$2}' | sort -u | tr '\n' ' ')"
+        fi
+
+        charts="$$(echo "$${charts}" | xargs)"
+        if [ -z "$${charts}" ]; then
+          echo "no charts to publish"
+          exit 0
+        fi
+
+        echo "charts detected: $${charts}"
+
+        for name in $${charts}; do
+          chart_dir="charts/$${name}"
+          [ -f "$${chart_dir}/Chart.yaml" ] || continue
+
+          version="$$(awk '/^version:/ {print $$2; exit}' "$${chart_dir}/Chart.yaml" | tr -d '"')"
+          if [ -z "$${version}" ]; then
+            echo "ERROR: no version in $${chart_dir}/Chart.yaml"
+            echo "$${name}" >> .ci/failed-charts
+            continue
+          fi
+
+          if helm show chart "$${REGISTRY_PROJECT}/$${name}" --version "$${version}" >/dev/null 2>&1; then
+            echo "skip $${name}:$${version} (already in Harbor)"
+            continue
+          fi
+
+          echo "package $${name}:$${version}"
+          if grep -q '^dependencies:' "$${chart_dir}/Chart.yaml"; then
+            if ! helm dependency build "$${chart_dir}"; then
+              echo "ERROR: helm dependency build failed for $${name}"
+              echo "$${name}" >> .ci/failed-charts
+              continue
+            fi
+          fi
+          if ! helm package "$${chart_dir}" -d /tmp/packages; then
+            echo "ERROR: helm package failed for $${name}"
+            echo "$${name}" >> .ci/failed-charts
+            continue
+          fi
+
+          tgz="/tmp/packages/$${name}-$${version}.tgz"
+          if [ ! -f "$${tgz}" ]; then
+            echo "ERROR: expected package missing: $${tgz}"
+            echo "$${name}" >> .ci/failed-charts
+            continue
+          fi
+
+          echo "push $${tgz} -> $${REGISTRY_PROJECT}"
+          if helm push "$${tgz}" "$${REGISTRY_PROJECT}"; then
+            echo "$${name}:$${version}" >> .ci/pushed-charts
+          else
+            echo "ERROR: helm push failed for $${name}:$${version}"
+            echo "$${name}" >> .ci/failed-charts
+          fi
+        done
+
+        echo "pushed:"
+        cat .ci/pushed-charts
+        if [ -s .ci/failed-charts ]; then
+          echo "failed:"
+          cat .ci/failed-charts
+          exit 1
+        fi
+
+  # I want to show what charts were pushed and their versions in the slack message.
+  # And plugins/slack templates only see build.* vars, not workspace files.
+  # Steps share the workspace, so i read .ci/pushed-charts and POST once.
+  - name: notify-slack
+    image: alpine:3.22
+    when:
+      - event: [push, manual]
+        branch: [main]
+        status: [success, failure]
+    depends_on:
+      - publish-charts
+    environment:
+      SLACK_WEBHOOK:
+        from_secret: SLACK_WEBHOOK
+    commands:
+      - |
+        set -eu
+        apk add --no-cache curl jq >/dev/null
+
+        pushed="none"
+        if [ -s .ci/pushed-charts ]; then
+          pushed="$$(tr '\n' ' ' < .ci/pushed-charts)"
+        fi
+
+        if [ "$${CI_PIPELINE_STATUS:-}" = "failure" ] || [ -s .ci/failed-charts ]; then
+          title="FAILED - Charts Release"
+        else
+          title="SUCCESS - Charts Release"
+        fi
+
+        sha="$$(printf '%s' "$${CI_COMMIT_SHA:-}" | cut -c1-8)"
+        text="$${title}
+        Pushed: $${pushed}
+        Repository: $${CI_REPO:-}
+        Branch: $${CI_COMMIT_BRANCH:-}
+        Commit: $${sha}
+        Author: $${CI_COMMIT_AUTHOR:-}
+        Build: $${CI_PIPELINE_URL:-}"
+
+        jq -n --arg t "$${text}" '{text: $$t}' \
+          | curl -sS -X POST -H 'Content-type: application/json' --data-binary @- "$${SLACK_WEBHOOK}" \
+          >/dev/null
