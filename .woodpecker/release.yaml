@@ -8,6 +8,7 @@ steps:
     image: registry.cloud.josa.ngo/library/pre-commit-runner
     settings:
       args: "--all-files"
+      skip: "helmlint"
 
   - name: lint-charts
     image: quay.io/helmpack/chart-testing:v3.15.0
