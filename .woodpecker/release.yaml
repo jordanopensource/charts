@@ -14,7 +14,7 @@ steps:
     image: quay.io/helmpack/chart-testing:v3.15.0
     commands:
       - git config --global --add safe.directory "$$(pwd)"
-      - git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
+      - git fetch --no-tags origin "+refs/heads/main:refs/heads/main"
       - |
         set -eu
         if [ "$${CI_COMMIT_BRANCH:-}" = "main" ] && [ "$${CI_PIPELINE_EVENT:-}" = "push" ]; then
@@ -45,7 +45,7 @@ steps:
         apk add --no-cache git >/dev/null
 
         git config --global --add safe.directory "$$(pwd)"
-        git fetch --no-tags origin "+refs/heads/main:refs/remotes/origin/main"
+        git fetch --no-tags origin "+refs/heads/main:refs/heads/main"
 
         mkdir -p /tmp/packages .ci
         : > .ci/pushed-charts
