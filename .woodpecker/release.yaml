@@ -162,26 +162,31 @@ steps:
         set -eu
         apk add --no-cache curl jq >/dev/null
 
-        pushed="none"
         if [ -s .ci/pushed-charts ]; then
-          pushed="$$(tr '\n' ' ' < .ci/pushed-charts)"
+          pushed="$$(awk 'NF {print $$0}' .ci/pushed-charts)"
+        else
+          pushed="none"
         fi
 
         if [ "$${CI_PIPELINE_STATUS:-}" = "failure" ] || [ -s .ci/failed-charts ]; then
           title="FAILED - Charts Release"
+          color="danger"
         else
           title="SUCCESS - Charts Release"
+          color="good"
         fi
 
         sha="$$(printf '%s' "$${CI_COMMIT_SHA:-}" | cut -c1-8)"
-        text="$${title}
-        Pushed: $${pushed}
-        Repository: $${CI_REPO:-}
-        Branch: $${CI_COMMIT_BRANCH:-}
-        Commit: $${sha}
-        Author: $${CI_COMMIT_AUTHOR:-}
-        Build: $${CI_PIPELINE_URL:-}"
+        text="*$${title}*
+        *Pushed:*
+        $${pushed}
+        *Repository:* $${CI_REPO:-}
+        *Branch:* $${CI_COMMIT_BRANCH:-}
+        *Commit:* $${sha}
+        *Author:* $${CI_COMMIT_AUTHOR:-}
+        *Build:* $${CI_PIPELINE_URL:-}"
 
-        jq -n --arg t "$${text}" '{text: $$t}' \
+        jq -n --arg t "$${text}" --arg c "$${color}" \
+          '{attachments: [{color: $$c, mrkdwn_in: ["text"], text: $$t}]}' \
           | curl -sS -X POST -H 'Content-type: application/json' --data-binary @- "$${SLACK_WEBHOOK}" \
           >/dev/null
