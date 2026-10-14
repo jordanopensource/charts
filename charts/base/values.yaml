@@ -92,7 +92,7 @@ workload:
     ## @param workload.serviceAccount.create Enable creation of a ServiceAccount
     create: true
     ## @param workload.serviceAccount.automount Automatically mount a ServiceAccount's API credentials?
-    automount: true
+    automount: false
     ## @param workload.serviceAccount.annotations Annotations to add to the service account
     annotations: {}
     ## @param workload.serviceAccount.name The name of the service account to use.
@@ -106,18 +106,19 @@ workload:
 
   ## @param workload.podSecurityContext define the security context for the pod
   podSecurityContext:
-    {}
-    # fsGroup: 2000
+    runAsNonRoot: true
+    runAsUser: 1000
+    runAsGroup: 1000
+    fsGroup: 1000
 
   ## @param workload.securityContext define the security context for the container
   securityContext:
-    {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+    privileged: false
+    allowPrivilegeEscalation: false
+    readOnlyRootFilesystem: true
+    capabilities:
+      drop:
+        - ALL
 
   service:
     ## @param workload.service.create if you want the service to be created
